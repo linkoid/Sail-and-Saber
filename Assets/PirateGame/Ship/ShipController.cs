@@ -177,6 +177,8 @@ public class ShipController : MonoBehaviour
 		return false;
 	}
 
+    
+
 	Vector3 GetMovement()
 	{
 		Vector3 up = -Physics.gravity.normalized;
@@ -192,5 +194,11 @@ public class ShipController : MonoBehaviour
 			var movement = direction * magnitude;
 			return movement;
 	}
+
+
+    public void ContextEnter(ActionContext A , PlayerController P){
+        P.enabled = false;
+        this.enabled = true;
+    }
 }
 }
