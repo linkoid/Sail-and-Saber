@@ -6,6 +6,9 @@ using UnityEngine;
 using UnityEngine.CustomUtils;
 
 namespace PirateGame.Ships{
+
+    
+[RequireComponent(typeof(Rigidbody))]
 public class ShipController : MonoBehaviour
 {
 	public Vector3 Movement => m_Movement;
@@ -53,6 +56,9 @@ public class ShipController : MonoBehaviour
     
     void OnThrottle(InputValue input){
         //m_RelativeMovement = Input.Get<Vector2>();
+        
+		rotationValue = input.Get<float>();
+
     }
 
 	void FixedUpdate()
