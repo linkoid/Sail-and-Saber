@@ -229,6 +229,8 @@ GameObject:
   - component: {fileID: 898574245}
   - component: {fileID: 898574244}
   - component: {fileID: 898574243}
+  - component: {fileID: 898574248}
+  - component: {fileID: 898574247}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -314,6 +316,61 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &898574247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898574242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 9210d58e30231fd488adf54b1446eca9, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 0e062fc8-5a95-4329-8693-23b74f63d91d
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &898574248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898574242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d89e69828f72ff48b5b5bea73179f7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Camera: {fileID: 963194227}
+  m_Speed: 10
+  m_Acceleration: 50
+  m_Movement: {x: 0, y: 0, z: 0}
+  m_RelativeMovement: {x: 0, y: 0}
+  m_RelativeRotation: {x: 0, y: 0}
+  rotationValue: 0
+  m_IsMoveTo: 0
+  m_MoveTo: {x: 0, y: 0, z: 0}
+  m_GroundVelocity: {x: 0, y: 0, z: 0}
+  m_PrevGroundVelocity: {x: 0, y: 0, z: 0}
+  m_IsGrounded: 0
+  m_GroundColliders: []
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,9 +468,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ffea49ccc72cc44ba89ff910c0d1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 1828575147}
+  Target: {fileID: 898574246}
   Distance: 5
-  Height: 3
+  Height: 20
   TranslationPower: 0.9
   RotationPower: 0.9
   OrbitPower: 0.123
@@ -640,10 +697,5 @@ Transform:
 --- !u!1 &1828575138 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2957725983535273880, guid: b0bbaa4f4cf441c45b072e9a02b3a853, type: 3}
-  m_PrefabInstance: {fileID: 1332049353}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1828575147 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2957725983535273876, guid: b0bbaa4f4cf441c45b072e9a02b3a853, type: 3}
   m_PrefabInstance: {fileID: 1332049353}
   m_PrefabAsset: {fileID: 0}
