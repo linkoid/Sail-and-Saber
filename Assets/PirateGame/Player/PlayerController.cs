@@ -268,6 +268,7 @@ namespace PirateGame
 
 		void OnTriggerEnter(Collider collider)
 		{
+			Debug.Log(collider);
 			if (collider.TryGetComponent(out ActionContext context))
 			{
 				if (m_ActionContexts.Contains(context)) return;

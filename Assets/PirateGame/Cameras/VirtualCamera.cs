@@ -14,7 +14,8 @@ namespace PirateGame.Cameras
 			FieldOfView = FieldOfView,
 		};
 
-		public float FieldOfView;
+		[Range(1e-05f, 179f)]
+		public float FieldOfView = 60;
 	}
 
 	public struct CameraState
