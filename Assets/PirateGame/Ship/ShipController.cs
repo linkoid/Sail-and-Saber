@@ -24,7 +24,7 @@ public class ShipController : MonoBehaviour
     
 	[SerializeField, ReadOnly] private Vector2 m_RelativeRotation = Vector2.zero;
 
-    [SerializeField, ReadOnly] private float rotationValue;
+    [SerializeField, ReadOnly] private float rotationValue,positionValue;
 
 	[SerializeField, ReadOnly] private bool    m_IsMoveTo = false;
 	[SerializeField, ReadOnly] private Vector3 m_MoveTo = Vector3.zero;
@@ -57,20 +57,25 @@ public class ShipController : MonoBehaviour
     void OnThrottle(InputValue input){
         //m_RelativeMovement = Input.Get<Vector2>();
         
-		rotationValue = input.Get<float>();
+		positionValue = input.Get<float>();
 
     }
 
 	void FixedUpdate()
     {
-		addThrottleForce();
+		
         addSteerForce();
+		addThrottleForce();
 		m_PrevGroundVelocity = m_GroundVelocity;
 	}
 
 	void addThrottleForce()
 	{
-		m_Movement = GetMovement();
+		//Rigidbody.velocity = new Vector3(positionValue ,0f,positionValue);
+
+		Vector3 movement = transform.forward *((positionValue >0) ? positionValue : positionValue/10)  *  m_Speed * Time.deltaTime;
+        Rigidbody.velocity = movement;
+		
 		//Rigidbody.AddForce(deltaV, ForceMode.VelocityChange);
 	}
 
@@ -81,7 +86,7 @@ public class ShipController : MonoBehaviour
 
 		// add axis to the rotation of the object slowly
         // might need rotation speed 
-        Rigidbody.angularVelocity = new Vector3(0f,rotationValue,0f);
+        Rigidbody.angularVelocity = new Vector3(0f,rotationValue,0f).normalized;
 
 	}
 
