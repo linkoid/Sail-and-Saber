@@ -17,6 +17,10 @@ public class ShipController : MonoBehaviour
 	[SerializeField] public Camera m_Camera;
 
 	[SerializeField] private float m_Speed = 10;
+	
+	[SerializeField] private float spinSpeed = 10f;
+	
+	[SerializeField] private float spinAcceleration = 10f;
 	[SerializeField] private float m_Acceleration = 50;
 
 	[SerializeField, ReadOnly] private Vector3 m_Movement = Vector3.zero;
@@ -71,23 +75,35 @@ public class ShipController : MonoBehaviour
 
 	void addThrottleForce()
 	{
-		//Rigidbody.velocity = new Vector3(positionValue ,0f,positionValue);
+		Vector3 CurrentVelocity = Rigidbody.velocity;
+		Vector3 TargetVel = transform.forward *((positionValue >0) ? positionValue : positionValue/10)  *  m_Speed * Time.deltaTime;
+		Vector3 Difference = TargetVel- CurrentVelocity;
 
-		Vector3 movement = transform.forward *((positionValue >0) ? positionValue : positionValue/10)  *  m_Speed * Time.deltaTime;
-        Rigidbody.velocity = movement;
+		Vector3 AddVel = Difference.normalized * m_Acceleration * Time.fixedDeltaTime;
+		if(AddVel.magnitude > Difference.magnitude){
+			AddVel = Difference;
+		}
+
+        Rigidbody.AddForce(AddVel);
 		
-		//Rigidbody.AddForce(deltaV, ForceMode.VelocityChange);
 	}
 
     
 	void addSteerForce()
 	{
-        //get axis of movement  
 
-		// add axis to the rotation of the object slowly
-        // might need rotation speed 
-        Rigidbody.angularVelocity = new Vector3(0f,rotationValue,0f).normalized;
+		Vector3 CurrentSpin = Rigidbody.angularVelocity;
 
+		Vector3 TargetSpin = new Vector3(0f,rotationValue,0f).normalized * spinSpeed;
+
+		Vector3 DeltaSpin = TargetSpin - CurrentSpin;
+
+		Vector3 AddSpin = DeltaSpin.normalized * spinAcceleration * Time.fixedDeltaTime;
+
+		if(AddSpin.magnitude > DeltaSpin.magnitude){
+				AddSpin = DeltaSpin;
+		}
+		Rigidbody.AddTorque(AddSpin,ForceMode.VelocityChange);
 	}
 
 

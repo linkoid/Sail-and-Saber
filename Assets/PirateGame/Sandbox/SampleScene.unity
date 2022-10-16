@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 898574247}
   - component: {fileID: 898574249}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,6 +362,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 963194227}
   m_Speed: 200
+  spinSpeed: 0.5
+  spinAcceleration: 0.2
   m_Acceleration: 50
   m_Movement: {x: 0, y: 0, z: 0}
   m_RelativeMovement: {x: 0, y: 0}
