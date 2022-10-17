@@ -216,6 +216,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ExitContext",
+                    "type": "Button",
+                    "id": "0a5d14f0-ff80-4305-85ad-ef3a8abbdf70",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -306,6 +315,17 @@
                     "action": "Throttle ",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "54e5b538-03f4-4ef5-9827-986e20cefe59",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitContext",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

@@ -51,6 +51,17 @@ public class ShipController : MonoBehaviour
 		{
 			Debug.LogWarning($"Camera not assigned to PlayerController", this);
 		}
+		gameObject.GetComponent<PlayerInput>().enabled = true;
+	}
+
+	void OnDisable()
+	{
+		if (m_Camera == null)
+		{
+			Debug.LogWarning($"Camera not assigned to PlayerController", this);
+		}
+		gameObject.GetComponent<PlayerInput>().enabled = false;
+				
 	}
 
     void OnSteer(InputValue input){
@@ -216,10 +227,25 @@ public class ShipController : MonoBehaviour
 			return movement;
 	}
 
-
+ActionContext Ac;
     public void ContextEnter(ActionContext A , PlayerController P){
         P.enabled = false;
+		m_Camera =  P.m_Camera;
         this.enabled = true;
+		Ac = A;
     }
+
+	public void OnExitContext(InputValue input)
+		{
+			if (input.isPressed)
+			{
+				Debug.Log("E");
+				
+				Ac.ActivePlayer.enabled = true;
+        		this.enabled = false;
+				Ac.Exit(Ac.ActivePlayer);
+			}
+		}
+	
 }
 }
