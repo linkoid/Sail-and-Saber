@@ -19,7 +19,7 @@ namespace PirateGame.Cameras
 			ActiveVCam.State.ApplyTo(Camera);
 		}
 
-		void SetVCam(VirtualCamera camera)
+		public void SetVCam(VirtualCamera camera)
 		{
 			ActiveVCam = camera;
 		}

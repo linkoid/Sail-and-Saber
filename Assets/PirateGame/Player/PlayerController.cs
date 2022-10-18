@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.CustomUtils;
 using PirateGame;
+using PirateGame.Cameras;
 
 namespace PirateGame
 {
@@ -15,7 +16,10 @@ namespace PirateGame
 		public Vector3 Movement => m_Movement;
 		public Rigidbody Rigidbody => GetComponent<Rigidbody>();
 
+
 		[SerializeField] public Camera m_Camera;
+		[SerializeField] private VirtualCamera m_ThirdPersonCamera;
+		public CameraController CameraController => m_Camera.GetComponent<CameraController>();
 
 		[SerializeField] private float m_Speed = 10;
 		[SerializeField] private float m_Acceleration = 50;
@@ -47,6 +51,10 @@ namespace PirateGame
 			if (m_Camera == null)
 			{
 				Debug.LogWarning($"Camera not assigned to PlayerController", this);
+			}
+			else
+			{
+				CameraController.SetVCam(m_ThirdPersonCamera);
 			}
 		}
 
