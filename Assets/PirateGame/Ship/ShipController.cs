@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.CustomUtils;
+using PirateGame.Cameras;
 
 namespace PirateGame.Ships{
 
@@ -15,6 +16,9 @@ public class ShipController : MonoBehaviour
 	public Rigidbody Rigidbody => GetComponent<Rigidbody>();
 
 	[SerializeField] public Camera m_Camera;
+
+	
+	[SerializeField] public VirtualCamera VirtualCamera;
 
 	[SerializeField] private float m_Speed = 10;
 	
@@ -50,6 +54,8 @@ public class ShipController : MonoBehaviour
 		if (m_Camera == null)
 		{
 			Debug.LogWarning($"Camera not assigned to PlayerController", this);
+		}else {
+			m_Camera.GetComponent<CameraController>().SetVCam(VirtualCamera);
 		}
 		gameObject.GetComponent<PlayerInput>().enabled = true;
 	}

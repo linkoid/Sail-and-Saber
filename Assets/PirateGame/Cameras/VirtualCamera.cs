@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
+
 namespace PirateGame.Cameras
 {
 	public class VirtualCamera : MonoBehaviour
