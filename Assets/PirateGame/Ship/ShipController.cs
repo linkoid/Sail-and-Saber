@@ -83,7 +83,7 @@ namespace PirateGame.Ships
 				AddVel = Difference;
 			}
 
-			Rigidbody.AddForce(AddVel);
+			Rigidbody.AddForce(AddVel, ForceMode.VelocityChange);
 		
 		}
 
