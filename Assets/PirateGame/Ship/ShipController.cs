@@ -14,7 +14,7 @@ namespace PirateGame.Ships
 		public Vector3 Movement => m_Movement;
 		public Rigidbody Rigidbody => GetComponent<Rigidbody>();
 
-		[SerializeField] public Camera m_Camera;
+        [SerializeField] public Camera m_Camera;
 
 	
 		[SerializeField] public VirtualCamera VirtualCamera;
@@ -30,8 +30,15 @@ namespace PirateGame.Ships
 
 		[SerializeField, ReadOnly] private float rotationValue,m_Throttle;
 
+        //Model and its animator
+        [SerializeField] private GameObject model;
+        public Animator Animator => model.GetComponent<Animator>();
 
-		void Awake()
+        //Animator Parameters
+        int rotationHash = Animator.StringToHash("rotation");
+
+
+        void Awake()
 		{
 		}
 
@@ -57,7 +64,10 @@ namespace PirateGame.Ships
 
 		void OnSteer(InputValue input){
 			rotationValue = input.Get<float>();
-		}
+
+            //Set Animator Parameter
+            Animator.SetFloat(rotationHash, rotationValue);
+        }
 
 		void OnThrottle(InputValue input){
 			//m_RelativeMovement = Input.Get<Vector2>();
