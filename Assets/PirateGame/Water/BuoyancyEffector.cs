@@ -135,8 +135,7 @@ namespace PirateGame.Water
 			}
 			else if (collider is MeshCollider meshCollider)
 			{
-				bool wasConvex = meshCollider.convex;
-				meshCollider.convex = true;
+				if (!meshCollider.convex) return;
 
 				var mesh = meshCollider.sharedMesh;
 
@@ -145,9 +144,8 @@ namespace PirateGame.Water
 				for (int i = 0; i < points.Length; i++)
 				{
 					points[i] = meshCollider.transform.TransformPoint(vertices[i]);
+					//Debug.Log(points[i]);
 				}
-
-				meshCollider.convex = wasConvex;
 			}
 
 			if (points.Length <= 0) return;
@@ -157,6 +155,13 @@ namespace PirateGame.Water
 			float minHeight = points.Min((v) => Vector3.Dot(v, -Physics.gravity.normalized));
 			float maxHeight = points.Max((v) => Vector3.Dot(v, -Physics.gravity.normalized));
 			float submersionDepth = maxHeight - minHeight;
+			
+			if (submersionDepth <= 0)
+			{
+				Debug.LogWarning($"submersion depth is <= 0 for {collider}", collider);
+				return;
+			}
+
 			float[] weights = new float[points.Length];
 			for (int i=0; i < points.Length; i++)
 			{
