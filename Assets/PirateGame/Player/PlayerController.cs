@@ -11,14 +11,11 @@ namespace PirateGame
 	[RequireComponent(typeof(PlayerInput), typeof(PlayerHumanoid))]
 	public class PlayerController : MonoBehaviour
 	{
-
-
 		public PlayerHumanoid Humanoid => gameObject.GetComponent<PlayerHumanoid>();
+		public CameraController CameraController => m_Camera.GetComponent<CameraController>();
 
-		[SerializeField] Vector3 Movement;
 		[SerializeField] public Camera m_Camera;
 		[SerializeField] private VirtualCamera m_ThirdPersonCamera;
-		public CameraController CameraController => m_Camera.GetComponent<CameraController>();
 		[SerializeField, ReadOnly] private Vector2 m_RelativeMovement = Vector2.zero;
 		[SerializeField, ReadOnly] private bool m_IsMoveTo = false;
 		[SerializeField, ReadOnly] private Vector3 m_MoveTo = Vector3.zero;
@@ -26,8 +23,8 @@ namespace PirateGame
 
 		private void FixedUpdate()
 		{
+			// Every fixed update, set the humanoid's movement using m_RelativeMovement
 			Humanoid.Movement = GetMovement();
-
 		}
 
 		void OnEnable()
@@ -121,7 +118,7 @@ namespace PirateGame
 
 		void OnTriggerEnter(Collider collider)
 		{
-			Debug.Log(collider);
+			// Keep track of all nearby action contexts
 			if (collider.TryGetComponent(out ActionContext context))
 			{
 				if (m_ActionContexts.Contains(context)) return;
@@ -131,6 +128,7 @@ namespace PirateGame
 
 		void OnTriggerExit(Collider collider)
 		{
+			// Stop keeping track of the action context after leaving it's area
 			if (collider.TryGetComponent(out ActionContext context))
 			{
 				if (!m_ActionContexts.Contains(context)) return;
@@ -142,6 +140,7 @@ namespace PirateGame
 		{
 			if (input.isPressed && m_ActionContexts.Count > 0)
 			{
+				// TODO Find the best action context if there is more than one nearby
 				m_ActionContexts[0].Enter(this);
 			}
 		}
