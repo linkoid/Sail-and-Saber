@@ -1,9 +1,11 @@
 ﻿using Mono.Cecil.Cil;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 using static UnityEngine.UI.GridLayoutGroup;
 
 namespace PirateGame.Water
@@ -11,6 +13,8 @@ namespace PirateGame.Water
 	[RequireComponent(typeof(Collider))]
 	public class BuoyancyEffector : MonoBehaviour
 	{
+		[SerializeField] private float WaveAmplitude = 1;
+
 		[Tooltip("Density of the fluid in kg/m³")]
 		[SerializeField] private float m_FluidDensity = 1000f;
 
@@ -60,6 +64,16 @@ namespace PirateGame.Water
 			}
 		}
 
+		void OnValidate()
+		{
+			
+		}
+
+		void UpdateWaveParameters()
+		{
+			Shader.SetGlobalFloat("WaveAmplitude", WaveAmplitude);
+		}
+
 		private void AddWaterForceAtCollider(Rigidbody rigidbody, Collider collider)
 		{
 			Vector4[] points = new Vector4[0];
@@ -67,20 +81,24 @@ namespace PirateGame.Water
 			//var submersionDepth = m_DefaultSubmersionDepth;
 			if (collider is SphereCollider sphereCollider)
 			{
-				points = new Vector4[3];
-				var point = sphereCollider.transform.TransformPoint(sphereCollider.center);
-				points[0] = point;
+				volume = GetSphereVolume(sphereCollider.transform, sphereCollider.center, sphereCollider.radius, out points);
+			}
+			else if (collider is CapsuleCollider capsuleCollider)
+			{
+				float centerOffset = Mathf.Max(0, capsuleCollider.height - capsuleCollider.radius) / 2;
 
-				var lossyScale = sphereCollider.transform.lossyScale;
-				var radius = sphereCollider.radius * Mathf.Max(lossyScale.x, lossyScale.y, lossyScale.z);
-				point.y -= Mathf.Abs(radius);
-				points[1] = point;
+				Vector3 center0 = capsuleCollider.center + Vector3.up   * centerOffset;
+				Vector3 center1 = capsuleCollider.center + Vector3.down * centerOffset;
 
-				point.y += Mathf.Abs(radius) * 2;
-				points[2] = point;
+				float sphereVolume = GetSphereVolume(capsuleCollider.transform, center0, capsuleCollider.radius, out Vector4[] points0);
+				                     GetSphereVolume(capsuleCollider.transform, center1, capsuleCollider.radius, out Vector4[] points1);
 
-				// V = (4/3) * π * r³ 
-				volume = (4 / 3.0f) * Mathf.PI * Mathf.Pow(radius, 3);
+				points = new Vector4[points0.Length + points1.Length];
+				points0.CopyTo(points, 0);
+				points1.CopyTo(points, points0.Length);
+
+				float cylinderVolume = 0; // TODO find cylinder volume
+				volume = sphereVolume + cylinderVolume;
 			}
 			else if (collider is BoxCollider boxCollider)
 			{
@@ -115,6 +133,22 @@ namespace PirateGame.Water
 				corners.CopyTo(points, 1);
 				faces  .CopyTo(points, 1+8);
 			}
+			else if (collider is MeshCollider meshCollider)
+			{
+				bool wasConvex = meshCollider.convex;
+				meshCollider.convex = true;
+
+				var mesh = meshCollider.sharedMesh;
+
+				var vertices = mesh.vertices;
+				points = new Vector4[mesh.vertices.Length];
+				for (int i = 0; i < points.Length; i++)
+				{
+					points[i] = meshCollider.transform.TransformPoint(vertices[i]);
+				}
+
+				meshCollider.convex = wasConvex;
+			}
 
 			if (points.Length <= 0) return;
 
@@ -135,6 +169,25 @@ namespace PirateGame.Water
 				float pointVolumeFactor = point.weight / weightsSum;
 				AddWaterForceAtPoint(rigidbody, point.pos, volume * pointVolumeFactor, pointAreaFactor, submersionDepth);
 			}
+		}
+
+		private float GetSphereVolume(Transform localTransform, Vector3 localCenter, float localRadius, out Vector4[] points)
+		{
+			points = new Vector4[3];
+			var point = localTransform.TransformPoint(localCenter);
+			points[0] = point;
+
+			var lossyScale = localTransform.lossyScale;
+			var radius = localRadius * Mathf.Max(lossyScale.x, lossyScale.y, lossyScale.z);
+			point.y -= Mathf.Abs(radius);
+			points[1] = point;
+
+			point.y += Mathf.Abs(radius) * 2;
+			points[2] = point;
+
+			// V = (4/3) * π * r³ 
+			float volume = (4 / 3.0f) * Mathf.PI * Mathf.Pow(radius, 3);
+			return volume;
 		}
 
 
@@ -286,13 +339,13 @@ namespace PirateGame.Water
 		
 		float GetWaterHeight(Vector3 pos)
 		{
-			return Mathf.Sin(pos.x + pos.z + m_FixedTime);
+			return Mathf.Sin(pos.x + pos.z + m_FixedTime) * WaveAmplitude;
 		}
 
 		Vector3 GetWaterNormal(Vector3 pos)
 		{
-			Vector3 xTangent = new Vector3(1, Mathf.Cos(pos.x + pos.z + m_FixedTime), 0);
-			Vector3 zTangent = new Vector3(0, Mathf.Cos(pos.x + pos.z + m_FixedTime), 1);
+			Vector3 xTangent = new Vector3(1, Mathf.Cos(pos.x + pos.z + m_FixedTime) * WaveAmplitude, 0);
+			Vector3 zTangent = new Vector3(0, Mathf.Cos(pos.x + pos.z + m_FixedTime) * WaveAmplitude, 1);
 			return Vector3.Cross(zTangent.normalized, xTangent.normalized).normalized;
 		}
 
