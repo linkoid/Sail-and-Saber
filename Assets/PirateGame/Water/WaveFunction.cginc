@@ -1,9 +1,18 @@
 #ifndef WAVEFUNCTION_INCLUDE
 #define WAVEFUNCTION_INCLUDE
 
-static float WaveAmplitude = 1; 
-static float WaveDistance = 10;
-static float WaveSpeed = 5;
+#include "HLSLSupport.cginc"
+
+// TODO Considering including this and using _Time instead of requiring time as an argument
+//#include "UnityShaderVariables.cginc"
+
+CBUFFER_START(PirateGameWaves)
+
+float WaveAmplitude = 1; 
+float WaveDistance = 10;
+float WaveSpeed = 5;
+
+CBUFFER_END
 
 void WavePosition_float(in float time, in float3 worldPos,
     out float3 newPos) 

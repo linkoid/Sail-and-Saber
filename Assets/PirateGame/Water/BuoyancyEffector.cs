@@ -13,8 +13,8 @@ namespace PirateGame.Water
 	public class BuoyancyEffector : MonoBehaviour
 	{
 		[SerializeField] private float WaveAmplitude = 1;
-		[SerializeField] private float WaveDistance = 10;
-		[SerializeField] private float WaveSpeed = 5;
+		[SerializeField] private float WaveDistance  = 10;
+		[SerializeField] private float WaveSpeed     = 5;
 
 		[Tooltip("Density of the fluid in kg/m³")]
 		[SerializeField] private float m_FluidDensity = 1000f;
@@ -29,6 +29,7 @@ namespace PirateGame.Water
 
 		public void OnEnable()
 		{
+			UpdateWaveParameters();
 			//Physics.ContactModifyEvent += OnContactModifyEvent;
 			//Physics.ContactModifyEventCCD += OnContactModifyEventCCD;
 		}
@@ -62,12 +63,14 @@ namespace PirateGame.Water
 
 		void OnValidate()
 		{
-			
+			UpdateWaveParameters();
 		}
 
 		void UpdateWaveParameters()
 		{
 			Shader.SetGlobalFloat("WaveAmplitude", WaveAmplitude);
+			Shader.SetGlobalFloat("WaveDistance" , WaveDistance );
+			Shader.SetGlobalFloat("WaveSpeed"    , WaveSpeed    );
 		}
 
 		private void AddWaterForceAtCollider(Rigidbody rigidbody, Collider collider)
