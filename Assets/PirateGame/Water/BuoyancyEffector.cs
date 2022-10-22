@@ -40,32 +40,14 @@ namespace PirateGame.Water
 			//Physics.ContactModifyEventCCD -= OnContactModifyEventCCD;
 		}
 
-		void FixedUpdate()
-		{
-			m_RawContacts.Clear();
-			m_Contacts.Clear();
-			m_IgnoredPoints.Clear();
-			m_Positions.Clear();
-			m_OtherPositions.Clear();
-			m_FixedTime = Time.fixedTime;
-			m_FixedDeltaTime = Time.fixedDeltaTime;
-
-			var pos = this.transform.position;
-			pos.y = 0;
-			var colliders = Physics.OverlapBox(pos, new Vector3(100, 10, 100));
-			foreach (Collider collider in colliders)
-			{
-				if (collider.attachedRigidbody == null) continue;
-
-				AddWaterForceAtCollider(collider.attachedRigidbody, collider);
-			}
-		}
-
 		void OnValidate()
 		{
 			UpdateWaveParameters();
 		}
 
+		/// <summary>
+		/// Updates parameters in shader
+		/// </summary>
 		void UpdateWaveParameters()
 		{
 			Shader.SetGlobalFloat("WaveAmplitude", WaveAmplitude);
@@ -73,6 +55,31 @@ namespace PirateGame.Water
 			Shader.SetGlobalFloat("WaveSpeed"    , WaveSpeed    );
 		}
 
+
+		void FixedUpdate()
+		{
+			// debug stuff
+			m_RawContacts.Clear();
+			m_Contacts.Clear();
+			m_IgnoredPoints.Clear();
+			m_Positions.Clear();
+			m_OtherPositions.Clear();
+
+
+			m_FixedTime = Time.fixedTime;
+			m_FixedDeltaTime = Time.fixedDeltaTime;
+
+			var pos = this.transform.position;
+			pos.y = 0;
+			Collider[] colliders = Physics.OverlapBox(pos, new Vector3(1000, 10, 1000));
+			foreach (Collider collider in colliders)
+			{
+				if (collider.attachedRigidbody == null) continue;
+
+				AddWaterForceAtCollider(collider.attachedRigidbody, collider);
+			}
+		}
+		
 		private void AddWaterForceAtCollider(Rigidbody rigidbody, Collider collider)
 		{
 			Vector4[] points = new Vector4[0];
@@ -167,6 +174,7 @@ namespace PirateGame.Water
 				float depth = (maxHeight - points[i].y) / submersionDepth;
 				weights[i] = depth <= 0.5f ? 1 : depth * 2;
 			}
+
 			float weightsSum = weights.Sum();
 			foreach (var point in points.Zip(weights, (pos, weight) => new { pos, weight }))
 			{
@@ -200,7 +208,7 @@ namespace PirateGame.Water
 			float waterHeight = GetWaterHeight(point);
 			if (waterHeight < point.y)
 			{
-				m_IgnoredPoints.Add(point);
+				m_IgnoredPoints.Add(point); // for debug
 				return;
 			}
 
