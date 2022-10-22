@@ -10,10 +10,11 @@ using static UnityEngine.UI.GridLayoutGroup;
 
 namespace PirateGame.Water
 {
-	[RequireComponent(typeof(Collider))]
 	public class BuoyancyEffector : MonoBehaviour
 	{
 		[SerializeField] private float WaveAmplitude = 1;
+		[SerializeField] private float WaveDistance  = 10;
+		[SerializeField] private float WaveSpeed     = 5;
 
 		[Tooltip("Density of the fluid in kg/m³")]
 		[SerializeField] private float m_FluidDensity = 1000f;
@@ -22,17 +23,13 @@ namespace PirateGame.Water
 		[SerializeField] private float m_MinimumDrag = 0.01f;
 		[SerializeField] private float m_FloatForce = 1000f;
 
-		[SerializeField, ReadOnly] private Collider m_Collider;
 		[SerializeField, ReadOnly] private int m_ColliderID;
 		[SerializeField, ReadOnly] private float m_FixedTime;
 		[SerializeField, ReadOnly] private float m_FixedDeltaTime;
 
 		public void OnEnable()
 		{
-			m_Collider = this.GetComponent<Collider>();
-			m_ColliderID = m_Collider.GetInstanceID();
-			m_Collider.hasModifiableContacts = true;
-			m_Collider.contactOffset = 10;
+			UpdateWaveParameters();
 			//Physics.ContactModifyEvent += OnContactModifyEvent;
 			//Physics.ContactModifyEventCCD += OnContactModifyEventCCD;
 		}
@@ -43,19 +40,38 @@ namespace PirateGame.Water
 			//Physics.ContactModifyEventCCD -= OnContactModifyEventCCD;
 		}
 
+		void OnValidate()
+		{
+			UpdateWaveParameters();
+		}
+
+		/// <summary>
+		/// Updates parameters in shader
+		/// </summary>
+		void UpdateWaveParameters()
+		{
+			Shader.SetGlobalFloat("WaveAmplitude", WaveAmplitude);
+			Shader.SetGlobalFloat("WaveDistance" , WaveDistance );
+			Shader.SetGlobalFloat("WaveSpeed"    , WaveSpeed    );
+		}
+
+
 		void FixedUpdate()
 		{
+			// debug stuff
 			m_RawContacts.Clear();
 			m_Contacts.Clear();
 			m_IgnoredPoints.Clear();
 			m_Positions.Clear();
 			m_OtherPositions.Clear();
+
+
 			m_FixedTime = Time.fixedTime;
 			m_FixedDeltaTime = Time.fixedDeltaTime;
 
 			var pos = this.transform.position;
 			pos.y = 0;
-			var colliders = Physics.OverlapBox(pos, new Vector3(100, 10, 100));
+			Collider[] colliders = Physics.OverlapBox(pos, new Vector3(1000, 10, 1000));
 			foreach (Collider collider in colliders)
 			{
 				if (collider.attachedRigidbody == null) continue;
@@ -63,17 +79,7 @@ namespace PirateGame.Water
 				AddWaterForceAtCollider(collider.attachedRigidbody, collider);
 			}
 		}
-
-		void OnValidate()
-		{
-			
-		}
-
-		void UpdateWaveParameters()
-		{
-			Shader.SetGlobalFloat("WaveAmplitude", WaveAmplitude);
-		}
-
+		
 		private void AddWaterForceAtCollider(Rigidbody rigidbody, Collider collider)
 		{
 			Vector4[] points = new Vector4[0];
@@ -135,8 +141,7 @@ namespace PirateGame.Water
 			}
 			else if (collider is MeshCollider meshCollider)
 			{
-				bool wasConvex = meshCollider.convex;
-				meshCollider.convex = true;
+				if (!meshCollider.convex) return;
 
 				var mesh = meshCollider.sharedMesh;
 
@@ -145,9 +150,8 @@ namespace PirateGame.Water
 				for (int i = 0; i < points.Length; i++)
 				{
 					points[i] = meshCollider.transform.TransformPoint(vertices[i]);
+					//Debug.Log(points[i]);
 				}
-
-				meshCollider.convex = wasConvex;
 			}
 
 			if (points.Length <= 0) return;
@@ -157,12 +161,20 @@ namespace PirateGame.Water
 			float minHeight = points.Min((v) => Vector3.Dot(v, -Physics.gravity.normalized));
 			float maxHeight = points.Max((v) => Vector3.Dot(v, -Physics.gravity.normalized));
 			float submersionDepth = maxHeight - minHeight;
+			
+			if (submersionDepth <= 0)
+			{
+				Debug.LogWarning($"submersion depth is <= 0 for {collider}", collider);
+				return;
+			}
+
 			float[] weights = new float[points.Length];
 			for (int i=0; i < points.Length; i++)
 			{
 				float depth = (maxHeight - points[i].y) / submersionDepth;
 				weights[i] = depth <= 0.5f ? 1 : depth * 2;
 			}
+
 			float weightsSum = weights.Sum();
 			foreach (var point in points.Zip(weights, (pos, weight) => new { pos, weight }))
 			{
@@ -196,7 +208,7 @@ namespace PirateGame.Water
 			float waterHeight = GetWaterHeight(point);
 			if (waterHeight < point.y)
 			{
-				m_IgnoredPoints.Add(point);
+				m_IgnoredPoints.Add(point); // for debug
 				return;
 			}
 
@@ -212,8 +224,12 @@ namespace PirateGame.Water
 
 		Vector3 AddBuoyancyAtPoint(Rigidbody rigidbody, Vector3 point, float displacedVolume)
 		{
+			Vector3 waveNormal = GetWaterNormal(point);
+
 			// Buoyancy B = ρ_f * V_disp * -g
-			Vector3 buoyancy = m_FluidDensity * displacedVolume * -Physics.gravity;
+			Vector3 buoyancy = m_FluidDensity * displacedVolume * (-Physics.gravity + waveNormal);
+
+			
 			rigidbody.AddForceAtPosition(buoyancy, point, ForceMode.Force);
 			return buoyancy;
 		}
@@ -339,14 +355,14 @@ namespace PirateGame.Water
 		
 		float GetWaterHeight(Vector3 pos)
 		{
-			return Mathf.Sin(pos.x + pos.z + m_FixedTime) * WaveAmplitude;
+			return Mathf.Sin((pos.x + pos.z + m_FixedTime * WaveSpeed) / WaveDistance) * WaveAmplitude;
 		}
 
 		Vector3 GetWaterNormal(Vector3 pos)
 		{
-			Vector3 xTangent = new Vector3(1, Mathf.Cos(pos.x + pos.z + m_FixedTime) * WaveAmplitude, 0);
-			Vector3 zTangent = new Vector3(0, Mathf.Cos(pos.x + pos.z + m_FixedTime) * WaveAmplitude, 1);
-			return Vector3.Cross(zTangent.normalized, xTangent.normalized).normalized;
+			Vector3 xTangent = new Vector3(1, Mathf.Cos((pos.x + pos.z + m_FixedTime * WaveSpeed) / WaveDistance) * WaveAmplitude, 0);
+			Vector3 zTangent = new Vector3(0, Mathf.Cos((pos.x + pos.z + m_FixedTime * WaveSpeed) / WaveDistance) * WaveAmplitude, 1);
+			return Vector3.Cross(zTangent.normalized, xTangent.normalized);
 		}
 
 
@@ -388,8 +404,8 @@ namespace PirateGame.Water
 			}
 
 			Gizmos.color = Color.blue;
-			var collider = m_Collider != null ? m_Collider : this.GetComponent<Collider>();
-			Vector3 scale = collider != null ? collider.bounds.size : this.transform.localScale;
+			//var collider = m_Collider != null ? m_Collider : this.GetComponent<Collider>();
+			Vector3 scale = this.transform.lossyScale * 10;
 			int resolution = 20;
 			int size = resolution * resolution;
 			//var verts = new Vector3[size];
@@ -399,7 +415,7 @@ namespace PirateGame.Water
 				float z = ((i / resolution) / (float)resolution - 0.5f) * scale.z;
 				Vector3 pos = new Vector3(x, 0, z);
 				pos.y = GetWaterHeight(pos);
-				Gizmos.DrawWireSphere(pos, 0.1f);
+				Gizmos.DrawWireSphere(pos, 0.1f * this.transform.lossyScale.magnitude);
 			}
 		}
 	}

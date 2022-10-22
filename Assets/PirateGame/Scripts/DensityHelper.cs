@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class DensityHelper : MonoBehaviour
 {
-    [SerializeField] public float Density = 1000;
+
+	[SerializeField] public Transform CenterOfMass;
+	[SerializeField] public float Density = 1000;
 	[SerializeField, ReadOnly] public float m_Mass = 1000;
 
 	// Start is called before the first frame update
@@ -21,21 +23,39 @@ public class DensityHelper : MonoBehaviour
 
     void OnEnable()
     {
-        UpdateDensity();
+        UpdateRigidbody();
 	}
 
     void OnValidate()
 	{
-		UpdateDensity();
+		UpdateRigidbody();
 	}
 
-    public void UpdateDensity()
-    {
-		if (this.TryGetComponent(out Rigidbody rigidbody))
+    public void UpdateRigidbody()
+	{
+		if (!this.TryGetComponent(out Rigidbody rigidbody)) return;
+
+		MeshCollider[] colliders = rigidbody.GetComponentsInChildren<MeshCollider>();
+		bool[] wasConvex = new bool[colliders.Length];
+		
+		for (int i = 0; i < colliders.Length; i++)
 		{
-			rigidbody.SetDensity(Density);
-            m_Mass = rigidbody.mass;
-			rigidbody.mass = rigidbody.mass;
+			wasConvex[i] = colliders[i].convex;
+			colliders[i].convex = true;
+		}
+
+		rigidbody.SetDensity(Density);
+        m_Mass = rigidbody.mass;
+		rigidbody.mass = rigidbody.mass;
+
+		for (int i = 0; i < colliders.Length; i++)
+		{
+			colliders[i].convex = wasConvex[i];
+		}
+
+		if (CenterOfMass != null)
+		{
+			rigidbody.centerOfMass = rigidbody.transform.InverseTransformPoint(CenterOfMass.position);
 		}
 	}
 }
