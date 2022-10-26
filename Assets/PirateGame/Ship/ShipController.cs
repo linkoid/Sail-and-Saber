@@ -8,15 +8,19 @@ using PirateGame.Cameras;
 
 namespace PirateGame.Ships
 {
-	[RequireComponent(typeof(Rigidbody))]
+	[RequireComponent(typeof(PlayerInput))]
 	public class ShipController : MonoBehaviour
 	{
 		public Vector3 Movement => m_Movement;
-		public Rigidbody Rigidbody => GetComponent<Rigidbody>();
+		public Ship Ship => this.GetComponentInParent<Ship>();
+		public Rigidbody Rigidbody => Ship.Rigidbody;
+		public PlayerInput PlayerInput => this.GetComponentInParent<PlayerInput>();
+
+
+		private ShipInternal ShipInternal => Ship.Internal;
+
 
         [SerializeField] public Camera m_Camera;
-
-	
 		[SerializeField] public VirtualCamera VirtualCamera;
 
 		[SerializeField] private float m_Speed = 10;
@@ -28,29 +32,29 @@ namespace PirateGame.Ships
 
 		[SerializeField, ReadOnly] private Vector3 m_Movement = Vector3.zero;
 
-		[SerializeField, ReadOnly] private float rotationValue,m_Throttle;
-
-        //Model and its animator
-        [SerializeField] private GameObject model;
-        public Animator Animator => model.GetComponent<Animator>();
-
-        //Animator Parameters
-        int rotationHash = Animator.StringToHash("rotation");
+		[SerializeField, ReadOnly] private float m_Throttle;
 
 
         void Awake()
 		{
+			PlayerInput.enabled = this.enabled;
 		}
 
 		void OnEnable()
 		{
+			if (Ship == null)
+			{
+				Debug.LogWarning($"Could not find any Ship component in parents", this);
+			}
+
 			if (m_Camera == null)
 			{
-				Debug.LogWarning($"Camera not assigned to PlayerController", this);
+				Debug.LogWarning($"Camera not assigned to {this.GetType().Name}", this);
 			}else {
-				m_Camera.GetComponent<CameraController>().SetVCam(VirtualCamera);
+				m_Camera.GetComponent<CameraController>()?.SetVCam(VirtualCamera);
 			}
-			gameObject.GetComponent<PlayerInput>().enabled = true;
+
+			PlayerInput.enabled = true;
 		}
 
 		void OnDisable()
@@ -59,21 +63,18 @@ namespace PirateGame.Ships
 			{
 				Debug.LogWarning($"Camera not assigned to PlayerController", this);
 			}
-			gameObject.GetComponent<PlayerInput>().enabled = false;
+
+			PlayerInput.enabled = false;
 		}
 
 		void OnSteer(InputValue input){
-			rotationValue = input.Get<float>();
-
-            //Set Animator Parameter
-            Animator.SetFloat(rotationHash, rotationValue);
+			ShipInternal.Steering = input.Get<float>();
         }
 
 		void OnThrottle(InputValue input){
 			//m_RelativeMovement = Input.Get<Vector2>();
 		
 			m_Throttle = input.Get<float>();
-
 		}
 
 		void FixedUpdate()
@@ -99,10 +100,9 @@ namespace PirateGame.Ships
 
 		void AddSteerForce()
 		{
-
 			Vector3 CurrentSpin = Rigidbody.angularVelocity;
 
-			Vector3 TargetSpin = new Vector3(0f,rotationValue,0f).normalized * spinSpeed;
+			Vector3 TargetSpin = new Vector3(0f, ShipInternal.Steering, 0f).normalized * spinSpeed;
 
 			Vector3 DeltaSpin = TargetSpin - CurrentSpin;
 

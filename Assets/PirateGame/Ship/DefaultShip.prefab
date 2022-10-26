@@ -29,8 +29,53 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8090241698980888338}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7642559480127144759
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7079359823330078488}
+  - component: {fileID: 7033954409502104734}
+  m_Layer: 0
+  m_Name: ShipAnimator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7079359823330078488
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7642559480127144759}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8090241698980888338}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7033954409502104734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7642559480127144759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50891de8826d6d441a20ddb55f23a776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Model: {fileID: 8361051245137612442}
 --- !u!1 &8090241698687097030
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,13 +101,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8090241698687097030}
-  m_LocalRotation: {x: 0.25666794, y: -0.00018057213, z: 0.000047953537, w: 0.9664996}
-  m_LocalPosition: {x: 0.012960434, y: 20, z: -34.999996}
+  m_LocalRotation: {x: 0.25666794, y: -0.00000036210662, z: 0.000000096162644, w: 0.9664997}
+  m_LocalPosition: {x: 0.000026226044, y: 20, z: -35}
   m_LocalScale: {x: 0.5, y: 1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8090241698980888338}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8090241698687097031
 MonoBehaviour:
@@ -110,14 +155,13 @@ GameObject:
   - component: {fileID: 8090241698980888338}
   - component: {fileID: 8090241698980888337}
   - component: {fileID: 8090241698980888336}
-  - component: {fileID: 940271510387720258}
-  - component: {fileID: 8090241698980888343}
-  - component: {fileID: 8090241698980888348}
-  - component: {fileID: 8090241698980888339}
   - component: {fileID: 8090241698980888349}
+  - component: {fileID: 940271510387720258}
+  - component: {fileID: 5599276631097861054}
+  - component: {fileID: 6848248783945582144}
   - component: {fileID: 5053016825790913288}
   m_Layer: 0
-  m_Name: AmirPrefabTEST
+  m_Name: DefaultShip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,8 +179,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8090241698687097025}
   - {fileID: 8090241700366826467}
+  - {fileID: 7079359823330078488}
+  - {fileID: 8090241698687097025}
   - {fileID: 9170379302782604320}
   - {fileID: 6857494341586506667}
   m_Father: {fileID: 0}
@@ -192,6 +237,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &8090241698980888349
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8090241698980888342}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0.1
+  m_AngularDrag: 0.1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!95 &940271510387720258
 Animator:
   serializedVersion: 4
@@ -212,87 +273,30 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &8090241698980888343
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8090241698980888342}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.106216, z: 1}
-  m_Center: {x: 0, y: 0.053107977, z: 0}
---- !u!114 &8090241698980888348
+--- !u!114 &5599276631097861054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8090241698980888342}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d89e69828f72ff48b5b5bea73179f7a, type: 3}
+  m_Script: {fileID: 11500000, guid: 126a3791df2458c47b8f33c0a4f9acd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Camera: {fileID: 0}
-  VirtualCamera: {fileID: 8090241698687097031}
-  m_Speed: 200
-  spinSpeed: 0.5
-  spinAcceleration: 0.2
-  m_Acceleration: 5
-  m_Movement: {x: 0, y: 0, z: 0}
-  rotationValue: 0
-  m_Throttle: 0
-  model: {fileID: 8361051245137612442}
---- !u!114 &8090241698980888339
+--- !u!114 &6848248783945582144
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8090241698980888342}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Script: {fileID: 11500000, guid: 2528c398a957c2a4981287475d06db15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 9210d58e30231fd488adf54b1446eca9, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Ship
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!54 &8090241698980888349
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8090241698980888342}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0.1
-  m_AngularDrag: 0.1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &5053016825790913288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,6 +323,8 @@ GameObject:
   - component: {fileID: 8090241700366826467}
   - component: {fileID: 8090241700366826477}
   - component: {fileID: 8090241700366826476}
+  - component: {fileID: 7678746238217357793}
+  - component: {fileID: 2024040042307528302}
   m_Layer: 0
   m_Name: ShipContext
   m_TagString: Untagged
@@ -339,7 +345,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8090241698980888338}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &8090241700366826477
 SphereCollider:
@@ -370,7 +376,7 @@ MonoBehaviour:
   OnEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8090241698980888348}
+      - m_Target: {fileID: 2024040042307528302}
         m_TargetAssemblyTypeName: PirateGame.Ships.ShipController, Assembly-CSharp
         m_MethodName: ContextEnter
         m_Mode: 0
@@ -385,6 +391,93 @@ MonoBehaviour:
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7678746238217357793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8090241700366826466}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 9210d58e30231fd488adf54b1446eca9, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8b44f23d-9f7c-4aaf-8566-8dc7a8c5b893
+    m_ActionName: Movement/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6fe17d30-3f5b-4d3f-81dc-18b17e7f0323
+    m_ActionName: Movement/MoveToX[/Mouse/leftButton,/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 45e1b189-101f-47bc-9eeb-147b12df99b2
+    m_ActionName: Movement/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 631d5e15-11e1-4f50-8aa7-5df6a0d9d57f
+    m_ActionName: Movement/Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 151f35df-dc2e-4ea0-b812-d0cd1c88d50b
+    m_ActionName: Movement/Die[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c17bc4f2-64e6-4187-af13-30b6d7b1407b
+    m_ActionName: Movement/ContextAction[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bf951b87-3c6f-4f7e-8e96-3f450debf15f
+    m_ActionName: Ship/Steer[/Keyboard/d,/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 491fbb36-6d14-4239-a5c2-017a52f7b323
+    m_ActionName: Ship/Throttle [/Keyboard/s,/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0a5d14f0-ff80-4305-85ad-ef3a8abbdf70
+    m_ActionName: Ship/ExitContext[/Keyboard/e]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Ship
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &2024040042307528302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8090241700366826466}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d89e69828f72ff48b5b5bea73179f7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Camera: {fileID: 0}
+  VirtualCamera: {fileID: 8090241698687097031}
+  m_Speed: 200
+  spinSpeed: 0.5
+  spinAcceleration: 0.2
+  m_Acceleration: 5
+  m_Movement: {x: 0, y: 0, z: 0}
+  m_Steering: 0
+  m_Throttle: 0
 --- !u!1001 &8703490086556070859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -394,7 +487,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b9388fdd9135355469036802cfaa2d41, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b9388fdd9135355469036802cfaa2d41, type: 3}
       propertyPath: m_LocalPosition.x

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.CustomUtils;
+using Cinemachine;
 
 namespace PirateGame.Cameras
 {
