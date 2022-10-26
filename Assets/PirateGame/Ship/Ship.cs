@@ -9,11 +9,15 @@ namespace PirateGame.Ships
 	/// If you need something from a ship from outside a ship script, use this class.
 	/// </summary>
 	[RequireComponent(typeof(Rigidbody), typeof(ShipInternal))]
-	public class Ship : MonoBehaviour
+	public partial class Ship : MonoBehaviour
 	{
 		public Rigidbody Rigidbody => this.GetComponent<Rigidbody>();
-		internal ShipInternal Internal => this.GetComponent<ShipInternal>();
+		public ShipInternal Internal => this.GetComponent<ShipInternal>();
 
+		void Awake()
+		{
+			this.gameObject.AddComponent<ShipInternal>();
+		}
 	}
 }
 

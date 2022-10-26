@@ -29,8 +29,58 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8090241698980888338}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2855227776446148782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3970355616768418931}
+  - component: {fileID: 6933811606593722530}
+  m_Layer: 0
+  m_Name: ShipPhysics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3970355616768418931
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2855227776446148782}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8090241698980888338}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6933811606593722530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2855227776446148782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c875b62419eb245b40719eede567a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Speed: 200
+  m_Acceleration: 5
+  m_SpinSpeed: 0.5
+  m_SpinAcceleration: 0.2
+  Steering: 0
+  Throttle: 0
 --- !u!1 &7642559480127144759
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,7 +111,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8090241698980888338}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7033954409502104734
 MonoBehaviour:
@@ -107,7 +157,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8090241698980888338}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8090241698687097031
 MonoBehaviour:
@@ -158,7 +208,6 @@ GameObject:
   - component: {fileID: 8090241698980888349}
   - component: {fileID: 940271510387720258}
   - component: {fileID: 5599276631097861054}
-  - component: {fileID: 6848248783945582144}
   - component: {fileID: 5053016825790913288}
   m_Layer: 0
   m_Name: DefaultShip
@@ -180,6 +229,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8090241700366826467}
+  - {fileID: 3970355616768418931}
   - {fileID: 7079359823330078488}
   - {fileID: 8090241698687097025}
   - {fileID: 9170379302782604320}
@@ -283,18 +333,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 126a3791df2458c47b8f33c0a4f9acd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6848248783945582144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8090241698980888342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2528c398a957c2a4981287475d06db15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &5053016825790913288
@@ -471,12 +509,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 0}
   VirtualCamera: {fileID: 8090241698687097031}
-  m_Speed: 200
-  spinSpeed: 0.5
-  spinAcceleration: 0.2
-  m_Acceleration: 5
   m_Movement: {x: 0, y: 0, z: 0}
-  m_Steering: 0
   m_Throttle: 0
 --- !u!1001 &8703490086556070859
 PrefabInstance:
@@ -487,7 +520,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b9388fdd9135355469036802cfaa2d41, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b9388fdd9135355469036802cfaa2d41, type: 3}
       propertyPath: m_LocalPosition.x

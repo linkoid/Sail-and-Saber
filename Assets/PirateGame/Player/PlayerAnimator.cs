@@ -38,6 +38,5 @@ public class PlayerAnimator : MonoBehaviour
 		{
 			Humanoid.Rigidbody.MoveRotation(Quaternion.LookRotation(Humanoid.Movement, -Physics.gravity.normalized));
 		}
-		
 	}
 }

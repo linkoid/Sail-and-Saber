@@ -4,16 +4,20 @@ using UnityEngine;
 
 namespace PirateGame.Ships
 {
-	/// <summary>
-	/// Functions for internal use by Ship scripts
-	/// </summary>
-	[RequireComponent(typeof(Ship))]
-	internal class ShipInternal : MonoBehaviour
+	partial class Ship
 	{
-		public Ship Ship => this.GetComponent<Ship>();
+		/// <summary>
+		/// Functions for internal use by Ship scripts
+		/// </summary>
+		[RequireComponent(typeof(Ship))]
+		public class ShipInternal : Component
+		{
+			public ShipPhysics Physics => this.GetComponentInChildren<ShipPhysics>();
 
-		public float Steering;
+			public ShipAnimator Animator => this.GetComponentInChildren<ShipAnimator>();
 
+			public ShipCombat Combat => this.GetComponentInChildren<ShipCombat>();
+		}
 	}
 }
 
