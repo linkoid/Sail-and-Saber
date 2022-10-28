@@ -12,8 +12,7 @@ namespace PirateGame.Ships
 		private float TargetRangeSqr => TargetRange * TargetRange;
 
 
-		[SerializeField] private Vector2 m_BroadsideAngle = new Vector2(90, 30);
-		[SerializeField] private float m_BroadsideRange = 50;
+		public CannonGroup BroadsideCannons;
 
 
 
@@ -25,6 +24,7 @@ namespace PirateGame.Ships
 		void FixedUpdate()
 		{
 			TargetNearestShip();
+			FireBroadsideCannons();
 		}
 
 
@@ -67,28 +67,22 @@ namespace PirateGame.Ships
 		}
 
 
-
-
-
-		
-		void OnDrawGizmos()
+		/// <summary>
+		/// Figure out which side to use and if the target is close enough
+		/// </summary>
+		public void FireBroadsideCannons()
 		{
-			Matrix4x4 rightMatrix = Matrix4x4.LookAt(Vector3.zero, Vector3.right, Vector3.up);
-			Matrix4x4 leftMatrix  = Matrix4x4.LookAt(Vector3.zero, Vector3.left , Vector3.up);
-
-			Gizmos.color = Color.yellow;
-
-			Gizmos.matrix = Ship.transform.localToWorldMatrix * rightMatrix;
-			Gizmos.DrawFrustum(Vector3.zero, m_BroadsideAngle.y, m_BroadsideRange, 0, m_BroadsideAngle.x / m_BroadsideAngle.y);
-			
-			Gizmos.matrix = Ship.transform.localToWorldMatrix * leftMatrix;
-			Gizmos.DrawFrustum(Vector3.zero, m_BroadsideAngle.y, m_BroadsideRange, 0, m_BroadsideAngle.x / m_BroadsideAngle.y);
-
-			if (Target != null)
+			foreach (var cannon in BroadsideCannons.GetAllInRange(Target.Rigidbody.position))
 			{
-				Gizmos.color = Color.red;
-				Gizmos.DrawRay(Ship.Rigidbody.position, Target.Rigidbody.position);
+				cannon.Fire(Target.Rigidbody.position);
 			}
+		}
+
+		void OnDrawGizmosSelected()
+		{
+			if (Target == null) return;
+			
+			Gizmos.DrawRay(Ship.Rigidbody.position, Target.Rigidbody.position);
 		}
 	}
 }

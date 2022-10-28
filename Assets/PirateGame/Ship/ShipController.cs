@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.CustomUtils;
+using Cinemachine;
 using PirateGame.Cameras;
 
 namespace PirateGame.Ships
@@ -12,13 +13,12 @@ namespace PirateGame.Ships
 	public class ShipController : Ship.ShipBehaviour
 	{
 		public Vector3 Movement => m_Movement;
-		public Ship Ship => this.GetComponentInParent<Ship>();
 		public Rigidbody Rigidbody => Ship.Rigidbody;
-		public PlayerInput PlayerInput => this.GetComponentInParent<PlayerInput>();
+		public PlayerInput PlayerInput => this.GetComponent<PlayerInput>();
 
 
         [SerializeField] public Camera m_Camera;
-		[SerializeField] public VirtualCamera VirtualCamera;
+		[SerializeField] public CinemachineVirtualCameraBase VirtualCamera;
 
 		[SerializeField, ReadOnly] private Vector3 m_Movement = Vector3.zero;
 
@@ -37,11 +37,14 @@ namespace PirateGame.Ships
 				Debug.LogWarning($"Could not find any Ship component in parents", this);
 			}
 
-			if (m_Camera == null)
+			if (m_Camera == null || VirtualCamera == null)
 			{
-				Debug.LogWarning($"Camera not assigned to {this.GetType().Name}", this);
-			}else {
-				m_Camera.GetComponent<CameraController>()?.SetVCam(VirtualCamera);
+				Debug.LogWarning($"Camera & VirtualCamera not assigned to {this.GetType().Name}", this);
+			} 
+			else 
+			{
+				//m_Camera.GetComponent<CameraController>()?.SetVCam(VirtualCamera);
+				VirtualCamera.enabled = true;
 			}
 
 			PlayerInput.enabled = true;

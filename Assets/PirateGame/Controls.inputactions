@@ -229,18 +229,7 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "52e00e25-7255-4d4e-961d-b0a22d0bca28",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Steer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "1D Axis",
+                    "name": "Keyboard A/D",
                     "id": "330218d2-dad0-4a3d-ac14-e665dbbb3289",
                     "path": "1DAxis",
                     "interactions": "",
@@ -253,7 +242,7 @@
                 {
                     "name": "negative",
                     "id": "6920a36a-1a0b-4f67-8d8e-18bbd68cafda",
-                    "path": "<Keyboard>/d",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -264,7 +253,7 @@
                 {
                     "name": "positive",
                     "id": "2a83c84d-b2af-41fd-b7dd-9d17e48d6948",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -273,18 +262,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "22973010-85c7-4798-91af-252b05d17574",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Throttle ",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "1D Axis",
+                    "name": "Keyboard S/W",
                     "id": "358e0f14-6e1f-4712-9996-483868b7e76b",
                     "path": "1DAxis",
                     "interactions": "",
@@ -326,6 +304,98 @@
                     "action": "ExitContext",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Camera",
+            "id": "7220749c-c0c7-48b3-8b9f-7aff07e06db0",
+            "actions": [
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "0a2854ba-781a-4d06-a411-2c9843d594e5",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Orbit",
+                    "type": "Value",
+                    "id": "e364c5b7-3400-4d84-b5dc-564e13081e46",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "02eb9c05-0399-454d-8483-4c60a3edbbc3",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "27e11692-1ee7-4eb4-be3e-5367b6fa6945",
+                    "path": "<Pointer>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "72ce84d3-8912-4a6b-8ccf-c56093152ed4",
+                    "path": "<Joystick>/{Hatswitch}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Mouse Click & Drag",
+                    "id": "5be949a7-e1e5-4858-bbda-19611aa8d8c5",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "InvertVector2,ScaleVector2(x=0.5,y=0.5)",
+                    "groups": "",
+                    "action": "Orbit",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "2dc35781-4ae4-4899-8acf-9d3f57b46996",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Orbit",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "412fedd8-17d2-4efa-b8f4-836b02518b8f",
+                    "path": "<Pointer>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Orbit",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
