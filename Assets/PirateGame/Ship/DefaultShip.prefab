@@ -1,5 +1,55 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &258962463414083427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5342405332962831387}
+  - component: {fileID: 5580524772929958071}
+  m_Layer: 0
+  m_Name: ShipCombat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5342405332962831387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258962463414083427}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8090241698980888338}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5580524772929958071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258962463414083427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb672179b8d4074e960770c5197d333, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetRange: 100
+  m_BroadsideAngleWidth: 90
+  m_BroadsideAngleHeight: 30
+  m_BroadsideRange: 50
+  Target: {fileID: 0}
+  NearbyShips: []
 --- !u!1 &678295677824197191
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +206,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8090241698980888338}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1596999292339248442
 GameObject:
@@ -187,7 +237,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8090241698980888338}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2205329693060748663
 GameObject:
@@ -602,7 +652,7 @@ Transform:
   - {fileID: 8132647834158879941}
   - {fileID: 5744954241080969284}
   m_Father: {fileID: 8090241698980888338}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5407800946371343324
 MonoBehaviour:
@@ -787,6 +837,7 @@ Transform:
   - {fileID: 8090241700366826467}
   - {fileID: 3970355616768418931}
   - {fileID: 7079359823330078488}
+  - {fileID: 5342405332962831387}
   - {fileID: 8090241698687097025}
   - {fileID: 9170379302782604320}
   - {fileID: 6857494341586506667}
@@ -1282,7 +1333,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b9388fdd9135355469036802cfaa2d41, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b9388fdd9135355469036802cfaa2d41, type: 3}
       propertyPath: m_LocalPosition.x

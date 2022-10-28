@@ -10,7 +10,7 @@ namespace PirateGame.Ships
 		/// Functions for internal use by Ship scripts
 		/// </summary>
 		[RequireComponent(typeof(Ship))]
-		public class ShipInternal : Component
+		internal class ShipInternal : MonoBehaviour
 		{
 			public ShipPhysics Physics => this.GetComponentInChildren<ShipPhysics>();
 

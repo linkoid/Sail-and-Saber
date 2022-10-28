@@ -12,7 +12,7 @@ namespace PirateGame.Ships
 	public partial class Ship : MonoBehaviour
 	{
 		public Rigidbody Rigidbody => this.GetComponent<Rigidbody>();
-		public ShipInternal Internal => this.GetComponent<ShipInternal>();
+		internal ShipInternal Internal => this.GetComponent<ShipInternal>();
 
 		void Awake()
 		{
