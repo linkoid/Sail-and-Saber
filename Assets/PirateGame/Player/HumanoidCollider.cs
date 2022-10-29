@@ -70,7 +70,7 @@ namespace PirateGame
 
 		public void OnCollisionEnter(Collision collision)
 		{
-			Debug.Log($"{collision.collider} {collision.rigidbody}");
+			//Debug.Log($"{collision.collider} {collision.rigidbody}");
 			var hitRigidbody = collision.rigidbody;
 			if (hitRigidbody != null)
 			{
@@ -151,7 +151,7 @@ namespace PirateGame
 			}
 			else
 			{
-				Debug.Log("Not grounding!");
+				//Debug.Log("Not grounding!");
 				if (m_GroundColliders.Contains(collision.collider))
 				{
 					// XXX If the player has more than one collider, this doesn't work.
@@ -275,7 +275,7 @@ namespace PirateGame
 					Vector3 normal = pair.GetNormal(i) * flip;
 
 					float slopeFactor = Vector3.Dot(normal, -Physics.gravity.normalized);
-					Debug.Log(slopeFactor);
+					//wwDebug.Log(slopeFactor);
 
 					var targetVelocity = TargetVelocity * flip * slopeFactor;
 					if (slopeFactor > 0.5)

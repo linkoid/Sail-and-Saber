@@ -11,8 +11,9 @@ namespace PirateGame.Ships
 		public float TargetRange = 100;
 		private float TargetRangeSqr => TargetRange * TargetRange;
 
+		public CannonGroup BroadsideCannons { get => _BroadsideCannons; private set => _BroadsideCannons = value; }
+		[SerializeField] private CannonGroup _BroadsideCannons;
 
-		public CannonGroup BroadsideCannons;
 
 
 
@@ -21,10 +22,12 @@ namespace PirateGame.Ships
 		[ReadOnly] public List<Ship> NearbyShips = new List<Ship>();
 
 
+
 		void FixedUpdate()
 		{
 			TargetNearestShip();
 			FireBroadsideCannons();
+			CheckCanRaid();
 		}
 
 
@@ -76,6 +79,48 @@ namespace PirateGame.Ships
 			{
 				cannon.Fire(Target.Rigidbody.position);
 			}
+		}
+
+		#region Track Radiable Ships
+		[System.Serializable]
+		public class ShipCollidersDictionary : UnityDictionary<Ship, List<Collider>> { }
+
+		[SerializeField, UnityDictionary("Ship", "Colliders")]
+		private ShipCollidersDictionary m_RaidableShips = new ShipCollidersDictionary();
+
+		void OnTriggerEnter(Collider other)
+		{
+			if (other.isTrigger || other.attachedRigidbody == null) return;
+			if (!other.attachedRigidbody.TryGetComponent(out Ship otherShip)) return;
+			if (otherShip == Ship) return;
+
+			if (!m_RaidableShips.TryGetValue(otherShip, out List<Collider> colliderList))
+			{
+				colliderList = new List<Collider>();
+				m_RaidableShips[otherShip] = colliderList;
+			}
+			colliderList.Add(other);
+		}
+		void OnTriggerExit(Collider other)
+		{
+			if (other.isTrigger || other.attachedRigidbody == null) return;
+			if (!other.attachedRigidbody.TryGetComponent(out Ship otherShip)) return;
+			if (otherShip == Ship) return;
+
+			var list = m_RaidableShips[otherShip];
+			list.Remove(other);
+			if (list.Count <= 0)
+			{
+				m_RaidableShips.Remove(otherShip);
+			}
+		}
+		#endregion // Track Raidable Ships
+
+		[SerializeField, ReadOnly] private bool m_CanRaid = false;
+		public bool CheckCanRaid()
+		{
+			m_CanRaid = m_RaidableShips.ContainsKey(Target);
+			return m_CanRaid;
 		}
 
 		void OnDrawGizmosSelected()

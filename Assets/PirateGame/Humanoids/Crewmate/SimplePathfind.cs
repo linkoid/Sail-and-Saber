@@ -9,15 +9,16 @@ namespace PirateGame.Humanoids
 	public class SimplePathfind : MonoBehaviour
 	{
 		public Transform Goal;
-
+		private NavMeshLinkInstance NavMeshLinkInstance;
 		private NavMeshAgent Agent => this.GetComponent<NavMeshAgent>();
 
 		// Update is called once per frame
 		void FixedUpdate()
 		{
 			if (Goal == null) return;
+			if (!Goal.gameObject.activeInHierarchy) return;
 
-
+			Agent.SetDestination(Goal.position);
 		}
 	}
 }
