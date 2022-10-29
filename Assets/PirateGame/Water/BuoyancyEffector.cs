@@ -71,23 +71,46 @@ namespace PirateGame.Water
 
 			var pos = this.transform.position;
 			pos.y = 0;
-			Collider[] colliders = Physics.OverlapBox(pos, new Vector3(1000, 10, 1000));
+			var rot = this.transform.rotation;
+			Collider[] colliders = Physics.OverlapBox(pos, new Vector3(1000, 10, 1000), rot, GetIgnoreLayerCollisionMask());
 			foreach (Collider collider in colliders)
 			{
 				if (collider.attachedRigidbody == null) continue;
+				if (collider.attachedRigidbody.isKinematic) continue;
+				if (collider.attachedRigidbody.isKinematic) continue;
 
 				AddWaterForceAtCollider(collider.attachedRigidbody, collider);
 			}
 		}
+
+		private int GetIgnoreLayerCollisionMask()
+		{
+			int layerMask = int.MaxValue;
+			for (int i=0; i < 32; i++)
+			{
+				if (Physics.GetIgnoreLayerCollision(this.gameObject.layer, i))
+				{
+					layerMask ^= 1 << i;
+				}
+			}
+			return layerMask;
+		}
+
+		struct VolumeTensor
+		{
+			public Vector3 point;
+			public Vector3 normal;
+			public float   weight;
+		}
 		
 		private void AddWaterForceAtCollider(Rigidbody rigidbody, Collider collider)
 		{
-			Vector4[] points = new Vector4[0];
+			VolumeTensor[] tensors = new VolumeTensor[0];
 			float volume = collider.transform.lossyScale.x * collider.transform.lossyScale.y * collider.transform.lossyScale.z;
 			//var submersionDepth = m_DefaultSubmersionDepth;
 			if (collider is SphereCollider sphereCollider)
 			{
-				volume = GetSphereVolume(sphereCollider.transform, sphereCollider.center, sphereCollider.radius, out points);
+				volume = GetSphereVolume(sphereCollider.transform, sphereCollider.center, sphereCollider.radius, out tensors);
 			}
 			else if (collider is CapsuleCollider capsuleCollider)
 			{
@@ -96,19 +119,19 @@ namespace PirateGame.Water
 				Vector3 center0 = capsuleCollider.center + Vector3.up   * centerOffset;
 				Vector3 center1 = capsuleCollider.center + Vector3.down * centerOffset;
 
-				float sphereVolume = GetSphereVolume(capsuleCollider.transform, center0, capsuleCollider.radius, out Vector4[] points0);
-				                     GetSphereVolume(capsuleCollider.transform, center1, capsuleCollider.radius, out Vector4[] points1);
+				float sphereVolume = GetSphereVolume(capsuleCollider.transform, center0, capsuleCollider.radius, out VolumeTensor[] points0);
+				                     GetSphereVolume(capsuleCollider.transform, center1, capsuleCollider.radius, out VolumeTensor[] points1);
 
-				points = new Vector4[points0.Length + points1.Length];
-				points0.CopyTo(points, 0);
-				points1.CopyTo(points, points0.Length);
+				tensors = new VolumeTensor[points0.Length + points1.Length];
+				points0.CopyTo(tensors, 0);
+				points1.CopyTo(tensors, points0.Length);
 
 				float cylinderVolume = 0; // TODO find cylinder volume
 				volume = sphereVolume + cylinderVolume;
 			}
 			else if (collider is BoxCollider boxCollider)
 			{
-				Vector4[] corners = new Vector4[8];
+				VolumeTensor[] corners = new VolumeTensor[8];
 				for (int i = 0; i < corners.Length; i++)
 				{
 					Vector3 cornerPolarity = Vector3.one;
@@ -116,28 +139,32 @@ namespace PirateGame.Water
 					cornerPolarity.y = (i % 4 < 2) ? 1 : -1;
 					cornerPolarity.z = (i % 2 < 1) ? 1 : -1;
 
-					corners[i] = boxCollider.transform.TransformPoint(
+					corners[i].point = boxCollider.transform.TransformPoint(
 						boxCollider.center + Vector3.Scale(boxCollider.size, cornerPolarity) * 0.5f);
+
+					corners[i].normal = boxCollider.transform.TransformDirection(cornerPolarity);
 				}
-				float length = (corners[0] - corners[1]).magnitude;
-				float width  = (corners[0] - corners[2]).magnitude;
-				float height = (corners[0] - corners[4]).magnitude;
+				float length = (corners[0].point - corners[1].point).magnitude;
+				float width  = (corners[0].point - corners[2].point).magnitude;
+				float height = (corners[0].point - corners[4].point).magnitude;
 				volume = length * width * height;
 
-				Vector4[] faces = new Vector4[6];
+				VolumeTensor[] faces = new VolumeTensor[6];
 				for (int i = 0; i < faces.Length; i++)
 				{
 					Vector3 facePolarity = Vector3.zero;
 					facePolarity[i/2] = (i % 2 < 1) ? 1 : -1;
 
-					faces[i] = boxCollider.transform.TransformPoint(
+					faces[i].point = boxCollider.transform.TransformPoint(
 						boxCollider.center + Vector3.Scale(boxCollider.size, facePolarity) * 0.5f);
+
+					faces[i].normal = boxCollider.transform.TransformDirection(facePolarity);
 				}
 
-				points = new Vector4[1+8+6];
-				points[0] = boxCollider.transform.TransformPoint(boxCollider.center);
-				corners.CopyTo(points, 1);
-				faces  .CopyTo(points, 1+8);
+				tensors = new VolumeTensor[1+8+6];
+				tensors[0].point = boxCollider.transform.TransformPoint(boxCollider.center);
+				corners.CopyTo(tensors, 1);
+				faces  .CopyTo(tensors, 1+8);
 			}
 			else if (collider is MeshCollider meshCollider)
 			{
@@ -146,20 +173,24 @@ namespace PirateGame.Water
 				var mesh = meshCollider.sharedMesh;
 
 				var vertices = mesh.vertices;
-				points = new Vector4[mesh.vertices.Length];
-				for (int i = 0; i < points.Length; i++)
+				var normals = mesh.normals;
+				if (vertices.Length != normals.Length)
+					Debug.LogError(($"vert[{vertices.Length}] != norm[{normals.Length}]"));
+				tensors = new VolumeTensor[mesh.vertices.Length];
+				for (int i = 0; i < tensors.Length; i++)
 				{
-					points[i] = meshCollider.transform.TransformPoint(vertices[i]);
+					tensors[i].point = meshCollider.transform.TransformPoint(vertices[i]);
+					tensors[i].normal = meshCollider.transform.TransformDirection(normals[i]);
 					//Debug.Log(points[i]);
 				}
 			}
 
-			if (points.Length <= 0) return;
+			if (tensors.Length <= 0) return;
 
-			float pointVolume = volume / points.Length;
-			float pointAreaFactor = 1.0f / points.Length;
-			float minHeight = points.Min((v) => Vector3.Dot(v, -Physics.gravity.normalized));
-			float maxHeight = points.Max((v) => Vector3.Dot(v, -Physics.gravity.normalized));
+			float pointVolume = volume / tensors.Length;
+			float pointAreaFactor = 1.0f / tensors.Length;
+			float minHeight = tensors.Min((t) => Vector3.Dot(t.point, -Physics.gravity.normalized));
+			float maxHeight = tensors.Max((t) => Vector3.Dot(t.point, -Physics.gravity.normalized));
 			float submersionDepth = maxHeight - minHeight;
 			
 			if (submersionDepth <= 0)
@@ -168,34 +199,36 @@ namespace PirateGame.Water
 				return;
 			}
 
-			float[] weights = new float[points.Length];
-			for (int i=0; i < points.Length; i++)
+			for (int i=0; i < tensors.Length; i++)
 			{
-				float depth = (maxHeight - points[i].y) / submersionDepth;
-				weights[i] = depth <= 0.5f ? 1 : depth * 2;
+				float depth = (maxHeight - tensors[i].point.y) / submersionDepth;
+				tensors[i].weight = depth <= 0.5f ? 1 : depth * 2;
 			}
 
-			float weightsSum = weights.Sum();
-			foreach (var point in points.Zip(weights, (pos, weight) => new { pos, weight }))
+			float weightsSum = tensors.Sum((t) => t.weight);
+			foreach (var tensor in tensors)
 			{
-				float pointVolumeFactor = point.weight / weightsSum;
-				AddWaterForceAtPoint(rigidbody, point.pos, volume * pointVolumeFactor, pointAreaFactor, submersionDepth);
+				float pointVolumeFactor = tensor.weight / weightsSum;
+				AddWaterForceAtPoint(rigidbody, tensor, volume * pointVolumeFactor, pointAreaFactor, submersionDepth);
 			}
 		}
 
-		private float GetSphereVolume(Transform localTransform, Vector3 localCenter, float localRadius, out Vector4[] points)
+		private float GetSphereVolume(Transform localTransform, Vector3 localCenter, float localRadius, out VolumeTensor[] contacts)
 		{
-			points = new Vector4[3];
+			contacts = new VolumeTensor[3];
 			var point = localTransform.TransformPoint(localCenter);
-			points[0] = point;
+			contacts[0].point = point;
+			contacts[0].normal = Vector3.zero;
 
 			var lossyScale = localTransform.lossyScale;
 			var radius = localRadius * Mathf.Max(lossyScale.x, lossyScale.y, lossyScale.z);
 			point.y -= Mathf.Abs(radius);
-			points[1] = point;
+			contacts[1].point = point;
+			contacts[1].normal = Vector3.zero;
 
 			point.y += Mathf.Abs(radius) * 2;
-			points[2] = point;
+			contacts[2].point = point;
+			contacts[2].normal = Vector3.zero;
 
 			// V = (4/3) * π * r³ 
 			float volume = (4 / 3.0f) * Mathf.PI * Mathf.Pow(radius, 3);
@@ -203,8 +236,9 @@ namespace PirateGame.Water
 		}
 
 
-		void AddWaterForceAtPoint(Rigidbody rigidbody, Vector3 point, float pointVolume, float pointAreaFactor, float submersionDepth)
+		void AddWaterForceAtPoint(Rigidbody rigidbody, VolumeTensor tensor, float pointVolume, float pointAreaFactor, float submersionDepth)
 		{
+			Vector3 point = tensor.point;
 			float waterHeight = GetWaterHeight(point);
 			if (waterHeight < point.y)
 			{
@@ -216,22 +250,30 @@ namespace PirateGame.Water
 			float submersionFactor = Mathf.Clamp01(submersion / submersionDepth);
 
 			float displacedVolume = submersionFactor * pointVolume;
-			Vector3 buoyancy = AddBuoyancyAtPoint(rigidbody, point, displacedVolume);
+			Vector3 buoyancy = AddBuoyancyAtPoint(rigidbody, tensor, displacedVolume);
 			Vector3 drag = AddDragAtPoint(rigidbody, point, pointAreaFactor);
 
 			m_Contacts.Add(new Ray(point, buoyancy));
 		}
 
-		Vector3 AddBuoyancyAtPoint(Rigidbody rigidbody, Vector3 point, float displacedVolume)
+		Vector3 AddBuoyancyAtPoint(Rigidbody rigidbody, VolumeTensor tensor, float displacedVolume)
 		{
-			Vector3 waveNormal = GetWaterNormal(point);
+			Vector3 waveNormal = GetWaterNormal(tensor.point);
 
 			// Buoyancy B = ρ_f * V_disp * -g
-			Vector3 buoyancy = m_FluidDensity * displacedVolume * (-Physics.gravity + waveNormal);
-
-			
-			rigidbody.AddForceAtPosition(buoyancy, point, ForceMode.Force);
-			return buoyancy;
+			float adjust = Physics.gravity.magnitude - 1;
+			Vector3 buoyancy = m_FluidDensity * displacedVolume * (-Physics.gravity * adjust + waveNormal);
+			Vector3 buoyantForce = Vector3.zero;
+			if (tensor.normal.sqrMagnitude == 0)
+			{
+				buoyantForce = buoyancy;
+			}
+			else if (Vector3.Dot(buoyancy.normalized, -tensor.normal.normalized) > 0)
+			{
+				buoyantForce = Vector3.Project(buoyancy, -tensor.normal);
+			}
+			rigidbody.AddForceAtPosition(buoyantForce, tensor.point, ForceMode.Force);
+			return buoyantForce;
 		}
 
 		const float k_AirDensity = 1.204f; // kg/m³

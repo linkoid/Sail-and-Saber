@@ -35,24 +35,10 @@ public class DensityHelper : MonoBehaviour
 	{
 		if (!this.TryGetComponent(out Rigidbody rigidbody)) return;
 
-		MeshCollider[] colliders = rigidbody.GetComponentsInChildren<MeshCollider>();
-		bool[] wasConvex = new bool[colliders.Length];
-		
-		for (int i = 0; i < colliders.Length; i++)
-		{
-			wasConvex[i] = colliders[i].convex;
-			colliders[i].convex = true;
-		}
-
 		rigidbody.SetDensity(Density);
         m_Mass = rigidbody.mass;
 		rigidbody.mass = rigidbody.mass;
-
-		for (int i = 0; i < colliders.Length; i++)
-		{
-			colliders[i].convex = wasConvex[i];
-		}
-
+		
 		if (CenterOfMass != null)
 		{
 			rigidbody.centerOfMass = rigidbody.transform.InverseTransformPoint(CenterOfMass.position);
