@@ -123,6 +123,11 @@ namespace PirateGame.Ships
 			return m_CanRaid;
 		}
 
+		protected override void OnShipCollisionEnter(Collision collision)
+		{
+			Debug.Log("RAM!", this);
+		}
+
 		void OnDrawGizmosSelected()
 		{
 			if (Target == null) return;
