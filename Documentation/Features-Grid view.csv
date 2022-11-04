@@ -1,0 +1,125 @@
+﻿Name,Order,Organized,Importance,Cool Factor,Phase,Notes,Status,Tasks,Deadline,Assignee
+Player Controller,1,checked,Needed to Pass,,Phase 1,"Run
+Walk 
+Shift
+Attack
+Jump
+In Vehicle
+
+Swimming
+",Implemented,"Run,Movement,Jump,Health,Humanoid Platform Code",10/7/2022,linkoid Polirend
+Ship Controller ,10,checked,Required,,Phase 1,"_*_Tank controls
+Sails Controls
+Player Standing on Ship",Incomplete,"Ship Movement,docking,Ship Speed Control",,David Kozdra
+Camera,2,checked,Needed to Pass,,Phase 1,Third Person / Optional First Person,Incomplete,"first person,third person,follow player,Implement Cinemachine",10/7/2022,linkoid Polirend
+"Waves 
+Islands",3,checked,Required,,Phase 1,"water and land
+Wave Physics 
+deco
+High and low tide ",Incomplete,"water,land",,linkoid Polirend
+Structures,4,checked,If Time,,Phase 1,"Shipwrecks,
+Castles,
+Sea monster lairs,
+Villages with shops,
+
+Decorations:	
+Seaweed,
+Sea foam,
+Barnacles,
+Trees,
+Coconuts,
+Vines,
+Rocks,
+Seagulls (boids),
+Fish (boids)
+",,"Castles,Sea monster lairs,Villages with shops,Shipwrecks",,Amir Gonzalez
+Deco,5,checked,Good Idea,Needed to Win,Phase 1,"
+Decorations	
+Seaweed,
+Sea foam,
+Barnacles,
+Trees,
+Coconuts,
+Vines,
+Rocks,
+Seagulls (boids),
+Fish (boids)",,"seaweed,sea foam,barnacles,trees,coconuts,vines,rocks,seagulls,fish",,David Kozdra
+Enemies,6,checked,If Time,Needed to Win,Phase 1,"skeleton , pirates, crabs, giant squid
+
+On islands 
+Nav mesh 
+
+pirates fight skeletons and squids
+ ",Not Implemented,"skeleton,pirates,crabs,giant squid",,David Kozdra
+Character Combat,7,checked,Needed to Pass,Needed to Win,Phase 1,"
+Status Effects
+
+Ship Combat:
+Cannons
+Ramming",Not Implemented,status effects,,
+Win Condition,8,checked,Needed to Pass,Needed to Win,Phase 1,Main Quest / King of Pirates,Not Implemented,"Boss,Boss Reward,Quest",,
+Sound Effects,9,checked,Needed to Pass,,Phase 1,"hurt sound, killed sound, victory sound, running, walking
+",Not Implemented,"Hit sound,death sound,running sound,eat sound",,David Kozdra
+Ship Enemies,11,checked,Good Idea,Needed to Win,Phase 1,"Nav mesh swimming through sea
+random distance to player then set sails
+",Not Implemented,,,"David Kozdra,linkoid Polirend"
+Ship Combat,12,checked,Good Idea,Needed to Win,Phase 1,"Player or Crew can action manager to cannon
+Shoot
+rotate up or down
+shoot in arc toward the forward vector",Not Implemented,"cannons,ramming,raiding,Ship Combat Dynamics",,
+Shop,38,checked,Critical,Super Cool,Phase 1,"Buy button
+while not in combat
+",,,,
+Crew System,25,checked,Needed to Pass,Needed to Win,Phase 1,"Commands run, kill this, fire,",,RTS Commands,,
+Loot,13,checked,Critical,Needed to Win,Phase 2,"juicy falls has real world physics
+click to pick up? 
+particles ? 
+loot table ",,,,David Kozdra
+Wave Shaders,35,checked,Good Idea,Polish,Phase 2,"Noise Bubbles 
+blue",,,,David Kozdra
+   Wave system and water physics sims,14,checked,Good Idea,Super Cool,Phase 2,,,,,linkoid Polirend
+Pause Menu,15,checked,If Time,Polish,Phase 2,"Volume
+tabs 
+screen size
+add player button 
+Animated
+
+Resume
+Options
+Quit 
+",,,,David Kozdra
+Options,16,checked,Good Idea,Polish,Phase 2,"Tabbulated. Music controls change track volume, Quality etc, Quit, Save, Quit without saving
+
+",,,,David Kozdra
+Music ,17,checked,If Time,Polish,Phase 2,,,Sea Shanty,,linkoid Polirend
+Allies,18,checked,If Time,Super Cool,Phase 2,,,,,
+Inventory system,19,checked,Good Idea,Needed to Win,Phase 2,"Items
+
+Map,
+Compass - Adds compass to the HUD
+Swords,
+Pistols,
+Beer/ Mead
+",,,,
+   Procedurals system,20,checked,Good Idea,Polish,Phase 2,,,,,David Kozdra
+  Map system ,22,checked,Good Idea,Super Cool,Phase 2,"Way points,
+Markers for gold, 
+Etc.",,,,David Kozdra
+ Local multiplayer,24,checked,If Time,Needed to Win,Phase 2,(Split screen),,,,David Kozdra
+Action context Highlight,37,,,,Phase 2,,,,,
+    save/ load ,21,checked,If Time,Not Expo Apreciable,Phase 3,"(to save and load in webGL we might need to map to local storage not 100% sure this is possible)
+https://answers.unity.com/questions/1095407/saving-webgl.html ",,"Save Player Location,Save Invetory,Save Structure and World Data",,David Kozdra
+Day Night,34,checked,Good Idea,,Phase 3,"Rotation of main light
+Time system
+Game state manager knows if its day or night 
+Wave/ weather system 
+",Not Implemented,Day/Night Cycle,,David Kozdra
+Context Based Music,23,checked,If Time,Not Expo Apreciable,Phase 3,,,,,
+Ship Stats,26,checked,Good Idea,Polish,Phase 3,"Size /hull strength (amount of people/ cargo), Cannon amount",,"Ship Stats: Speed,Ship Stats: Cargo,Ship Stats: Cannons,Ship Stats: Hull Strength",,
+WebGL Support,27,checked,If Time,Not Expo Apreciable,Phase 3,,,,,David Kozdra
+Shop System,28,checked,If Time,Super Cool,Phase 3,Buy ships (give them custom names),,,,
+Dialog System,29,checked,If Time,Super Cool,Phase 3,,,,,
+Fishing,30,checked,If Time,Super Cool,Phase 3,,,,,David Kozdra
+Crew Manage & Recuruitment,31,checked,If Time,Not Expo Apreciable,Phase 3,,,,,
+Chunk Files,32,checked,Good Idea,Not Expo Apreciable,Phase 3,Worlds builds like mine craft,,,,
+Multiple Ships,36,checked,If Time,Super Cool,Phase 3,,,,,
