@@ -1097,6 +1097,9 @@
     },
     "m_Slots": [
         {
+            "m_Id": "c2935759a6494562b2b4b6222b3a33d0"
+        },
+        {
             "m_Id": "79e8e40b98194d9a8a9bc2c4e9438e67"
         },
         {
@@ -1173,7 +1176,8 @@
         "2ca4bbe4-5bff-4efa-a2b7-aba67c15b4bc",
         "9972fb09-b893-4bb1-b660-dd466a2aa235",
         "ae40b1ff-5258-4b61-bb77-e4401e738d17",
-        "b9704c63-18ae-4b97-870c-d3796fe3c056"
+        "b9704c63-18ae-4b97-870c-d3796fe3c056",
+        "d11fbb52-c87b-4d11-9a21-b40be54aa82c"
     ],
     "m_PropertyIds": [
         -2092231185,
@@ -1186,7 +1190,8 @@
         2017542853,
         -1581512378,
         -1303845118,
-        -571163867
+        -571163867,
+        -1156442026
     ],
     "m_Dropdowns": [],
     "m_DropdownSelectedEntries": []
@@ -2853,6 +2858,31 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
+    "m_ObjectId": "6768bbb871b94872a80664fc61d6c6d3",
+    "m_Id": -1156442026,
+    "m_DisplayName": "BaseColor",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "_BaseColor",
+    "m_StageCapability": 2,
+    "m_Value": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0,
+        "w": 1.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.BlockNode",
     "m_ObjectId": "67d53b47e7a144d2843202b33cd19250",
     "m_Group": {
@@ -4153,6 +4183,31 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
+    "m_ObjectId": "a369da98e0dd4aaaab8f6d3c895de68f",
+    "m_Id": -1156442026,
+    "m_DisplayName": "BaseColor",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "_BaseColor",
+    "m_StageCapability": 2,
+    "m_Value": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0,
+        "w": 1.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.BlockNode",
     "m_ObjectId": "a462153927a94c91ae32cf478d884e16",
     "m_Group": {
@@ -4203,6 +4258,9 @@
         }
     },
     "m_Slots": [
+        {
+            "m_Id": "6768bbb871b94872a80664fc61d6c6d3"
+        },
         {
             "m_Id": "7d5629004f2646029f19a8a42bb44cbe"
         },
@@ -4280,7 +4338,8 @@
         "2ca4bbe4-5bff-4efa-a2b7-aba67c15b4bc",
         "9972fb09-b893-4bb1-b660-dd466a2aa235",
         "ae40b1ff-5258-4b61-bb77-e4401e738d17",
-        "b9704c63-18ae-4b97-870c-d3796fe3c056"
+        "b9704c63-18ae-4b97-870c-d3796fe3c056",
+        "d11fbb52-c87b-4d11-9a21-b40be54aa82c"
     ],
     "m_PropertyIds": [
         -2092231185,
@@ -4293,7 +4352,8 @@
         2017542853,
         -1581512378,
         -1303845118,
-        -571163867
+        -571163867,
+        -1156442026
     ],
     "m_Dropdowns": [],
     "m_DropdownSelectedEntries": []
@@ -4756,6 +4816,31 @@
     "m_StageCapability": 2,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
+    "m_ObjectId": "c2935759a6494562b2b4b6222b3a33d0",
+    "m_Id": -1156442026,
+    "m_DisplayName": "BaseColor",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "_BaseColor",
+    "m_StageCapability": 2,
+    "m_Value": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0,
+        "w": 1.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
     "m_Labels": []
 }
 
@@ -5557,6 +5642,9 @@
     },
     "m_Slots": [
         {
+            "m_Id": "a369da98e0dd4aaaab8f6d3c895de68f"
+        },
+        {
             "m_Id": "9bb46de5e0bc410f83b3caa1dee07d90"
         },
         {
@@ -5633,7 +5721,8 @@
         "2ca4bbe4-5bff-4efa-a2b7-aba67c15b4bc",
         "9972fb09-b893-4bb1-b660-dd466a2aa235",
         "ae40b1ff-5258-4b61-bb77-e4401e738d17",
-        "b9704c63-18ae-4b97-870c-d3796fe3c056"
+        "b9704c63-18ae-4b97-870c-d3796fe3c056",
+        "d11fbb52-c87b-4d11-9a21-b40be54aa82c"
     ],
     "m_PropertyIds": [
         -2092231185,
@@ -5646,7 +5735,8 @@
         2017542853,
         -1581512378,
         -1303845118,
-        -571163867
+        -571163867,
+        -1156442026
     ],
     "m_Dropdowns": [],
     "m_DropdownSelectedEntries": []
