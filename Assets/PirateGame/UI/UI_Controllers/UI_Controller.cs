@@ -10,27 +10,28 @@ public class UI_Controller : MonoBehaviour
 {
     [SerializeField] StatsManager StatsManager;
     public Slider HealthBar;
-    public TMP_Text Loot_Text,Crew_Text;
+    public TMP_Text Loot_Text,Crew_Text,Too_Poor;
     
-
-    public void Buy(int cost){
-        StatsManager.Gold  = (StatsManager.Gold > cost) ? StatsManager.Gold- cost : StatsManager.Gold;
+    public bool Buy(int cost){
+        int value = StatsManager.Gold;
+        StatsManager.Gold  = (StatsManager.Gold >= cost) ? StatsManager.Gold- cost : StatsManager.Gold;
+        return value >= cost;
     }
 
     public void RepairShip(){
-        Buy(5);
-        StatsManager.Health = StatsManager.MaxHealth;
+        if(StatsManager.Health == StatsManager.MaxHealth){
+            return;
+        }
+        StatsManager.Health = Buy(3) ? StatsManager.MaxHealth : StatsManager.Health;
     }
 
     public void AddCrew(){
-        Buy(1);
-        StatsManager.Crew += 1;
+        StatsManager.Crew += Buy(5) ? 1 :0 ;
     }
 
     
     public void AddSpeed(){
-        Buy(20);
-        StatsManager.SpeedMod += 1;
+        StatsManager.SpeedMod +=  Buy(20) ? 1 :0 ;;
     }
 
     // Start is called before the first frame update
