@@ -6,7 +6,10 @@ public class StatsManager : MonoBehaviour
 {
     public int Health;
     public int MaxHealth;
-    public int Score;
+    public int Gold;
+    public int Crew;
+
+    public int SpeedMod = 0;
     // Start is called before the first frame update
     void Start()
     {
