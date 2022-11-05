@@ -6,7 +6,7 @@ public class Toggler : MonoBehaviour
 {
 
     public void Toggle(GameObject TargetObject){
-        Debug.Log("ERROR");
+        Debug.Log("Click");
         TargetObject.SetActive(!TargetObject.activeSelf);
     }
 
