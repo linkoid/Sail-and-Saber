@@ -2,23 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatsManager : MonoBehaviour
+public class Camera_Follow : MonoBehaviour
 {
-    public int Health;
-    public int MaxHealth;
-    public int Gold;
-    public int Crew;
+    public Transform ToFollow;
 
-    public int SpeedMod = 0;
+    
+    public Vector3 Offset;
+
     // Start is called before the first frame update
     void Start()
     {
-        Health = MaxHealth;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        gameObject.transform.position = ToFollow.position + Offset;
         
+        //ToFollow.rotation += Offset.rotation;
     }
 }
