@@ -17,7 +17,10 @@ public class Scene_Transfer : MonoBehaviour
     {
         
     }
-
+    public void Q()
+    {
+        Application.Quit();
+    }
     
     public void TargetScene(string SceneToTransfer){
         if(SceneInBuild(SceneToTransfer)){
