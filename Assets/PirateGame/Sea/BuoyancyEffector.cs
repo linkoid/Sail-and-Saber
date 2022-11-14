@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using static UnityEngine.UI.GridLayoutGroup;
 
-namespace PirateGame.Water
+namespace PirateGame.Sea
 {
 	public class BuoyancyEffector : MonoBehaviour
 	{

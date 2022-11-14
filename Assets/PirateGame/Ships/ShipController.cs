@@ -72,7 +72,7 @@ namespace PirateGame.Ships
 
 
 		ActionContext Ac;
-		public void ContextEnter(ActionContext A , PlayerController P){
+		public void ContextEnter(ActionContext A , HumanoidController P){
 			P.enabled = false;
 			m_Camera =  P.m_Camera;
 			this.enabled = true;

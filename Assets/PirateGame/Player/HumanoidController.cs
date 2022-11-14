@@ -9,7 +9,7 @@ using PirateGame.Cameras;
 namespace PirateGame
 {
 	[RequireComponent(typeof(PlayerInput), typeof(PlayerHumanoid))]
-	public class PlayerController : MonoBehaviour
+	public class HumanoidController : MonoBehaviour
 	{
 		public PlayerHumanoid Humanoid => gameObject.GetComponent<PlayerHumanoid>();
 		public CameraController CameraController => m_Camera.GetComponent<CameraController>();
@@ -31,7 +31,7 @@ namespace PirateGame
 		{
 			if (m_Camera == null)
 			{
-				Debug.LogWarning($"Camera not assigned to PlayerController", this);
+				Debug.LogWarning($"Camera not assigned to HumanoidController", this);
 			}
 			else
 			{

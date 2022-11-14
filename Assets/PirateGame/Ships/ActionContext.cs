@@ -9,13 +9,13 @@ namespace PirateGame
 	[RequireComponent(typeof(Collider))]
 	public class ActionContext : MonoBehaviour
 	{
-		public PlayerController ActivePlayer { get => _acivePlayer; private set => _acivePlayer = value; }
-		[SerializeField, ReadOnly] private PlayerController _acivePlayer;
+		public HumanoidController ActivePlayer { get => _acivePlayer; private set => _acivePlayer = value; }
+		[SerializeField, ReadOnly] private HumanoidController _acivePlayer;
 
-		public UnityEvent<ActionContext, PlayerController> OnEnter;
-		public UnityEvent<ActionContext, PlayerController> OnExit;
+		public UnityEvent<ActionContext, HumanoidController> OnEnter;
+		public UnityEvent<ActionContext, HumanoidController> OnExit;
 
-		public bool Enter(PlayerController player)
+		public bool Enter(HumanoidController player)
 		{
 			if (ActivePlayer != null) return false;
 			ActivePlayer = player;
@@ -27,7 +27,7 @@ namespace PirateGame
 			return true;
 		}
 
-		public bool Exit(PlayerController player)
+		public bool Exit(HumanoidController player)
 		{
 			if (player != ActivePlayer) return false;
 
