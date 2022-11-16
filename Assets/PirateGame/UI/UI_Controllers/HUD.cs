@@ -21,11 +21,16 @@ namespace PirateGame.UI
 
 		public void RepairShip()
 		{
-			if (m_Player.Health == m_Player.MaxHealth)
+			if (!ShipCheck()) return;
+
+			if (m_Player.Ship.Health == m_Player.Ship.MaxHealth)
 			{
 				return;
 			}
-			m_Player.Health = Buy(3) ? m_Player.MaxHealth : m_Player.Health;
+			if (Buy(3))
+			{
+				m_Player.Ship.Repair(Mathf.Infinity);
+			}
 		}
 
 		public void AddCrew()
@@ -36,13 +41,14 @@ namespace PirateGame.UI
 
 		public void AddSpeed()
 		{
-			m_Player.SpeedMod += Buy(20) ? 1 : 0; ;
+			if (!ShipCheck()) return;
+
+			m_Player.SpeedMod += Buy(20) ? 1 : 0;
 		}
 
 		// Start is called before the first frame update
 		void Start()
 		{
-
 			HealthBar.minValue = 0;
 		}
 
@@ -54,12 +60,33 @@ namespace PirateGame.UI
 
 			Crew_Text.text = m_Player.CrewCount.ToString();
 
-			if (HealthBar.maxValue != m_Player.MaxHealth)
+			UpdateHealthBar();
+		}
+
+		private void UpdateHealthBar()
+		{
+			if (m_Player.Ship == null)
 			{
-				HealthBar.maxValue = m_Player.MaxHealth;
+				// Maybe hide the health bar?
+				return;
 			}
-			float valueDif = m_Player.Health - HealthBar.value;
+
+			if (HealthBar.maxValue != m_Player.Ship.MaxHealth)
+			{
+				HealthBar.maxValue = m_Player.Ship.MaxHealth;
+			}
+			float valueDif = m_Player.Ship.Health - HealthBar.value;
 			HealthBar.value += valueDif * .01f;
+		}
+
+		private bool ShipCheck()
+		{
+			if (m_Player == null)
+			{
+				Debug.LogWarning("Player has no ship to repair");
+				return false;
+			}
+			return true;
 		}
 	}
 }

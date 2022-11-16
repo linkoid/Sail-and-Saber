@@ -8,11 +8,8 @@ namespace PirateGame
 {
     public class Player : MonoBehaviour
     {
-        public int Health;
-        public int MaxHealth;
         public long Gold { get => Stats.Gold; set => Stats.Gold = value; }
         public long CrewCount { get => Stats.CrewCount; set => Stats.CrewCount = value; }
-
 
 
 
@@ -28,8 +25,6 @@ namespace PirateGame
         // Start is called before the first frame update
         void Start()
         {
-            Health = MaxHealth;
-
             // Create Commander Here?
         }
 

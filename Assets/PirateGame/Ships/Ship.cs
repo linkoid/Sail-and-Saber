@@ -12,12 +12,43 @@ namespace PirateGame.Ships
 	[RequireComponent(typeof(Rigidbody), typeof(ShipInternal))]
 	public partial class Ship : MonoBehaviour
 	{
+		public float MaxHealth { get => _maxHealth; protected set => _maxHealth = value; }
+		public float Health { get => _health; protected set => _health = value; }
+
+		[SerializeField] private float _health;
+		[SerializeField] private float _maxHealth;
+
+
 		public Rigidbody Rigidbody => this.GetComponent<Rigidbody>();
 		internal ShipInternal Internal => this.GetComponent<ShipInternal>();
 
 		void Awake()
 		{
 			this.gameObject.AddComponent<ShipInternal>();
+		}
+
+		public void TakeDamage(float damage)
+		{
+			Health -= damage;
+			if (Health < 0)
+			{
+				Health = 0;
+				OnSink();
+			}
+		}
+
+		public void Repair(float amount)
+		{
+			Health += amount;
+			if (Health > MaxHealth)
+			{
+				Health = MaxHealth;
+			}
+		}
+
+		protected virtual void OnSink()
+		{
+			// sink the ship
 		}
 
 
