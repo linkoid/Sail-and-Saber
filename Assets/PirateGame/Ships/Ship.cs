@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PirateGame.Crew;
 
 namespace PirateGame.Ships
 {
@@ -14,9 +15,13 @@ namespace PirateGame.Ships
 	{
 		public float MaxHealth { get => _maxHealth; protected set => _maxHealth = value; }
 		public float Health { get => _health; protected set => _health = value; }
+		public float SpeedModifier { get => _speedModifier; protected set => _speedModifier = value; }
+		public CrewDirector Crew { get => _crew; protected set => _crew = value; }
 
-		[SerializeField] private float _health;
-		[SerializeField] private float _maxHealth;
+		[SerializeField] private float _health = 100;
+		[SerializeField] private float _maxHealth = 100;
+		[SerializeField] private float _speedModifier = 1;
+		[SerializeField] private CrewDirector _crew;
 
 
 		public Rigidbody Rigidbody => this.GetComponent<Rigidbody>();
@@ -25,6 +30,11 @@ namespace PirateGame.Ships
 		void Awake()
 		{
 			this.gameObject.AddComponent<ShipInternal>();
+		}
+
+		void Start()
+		{
+			Health = MaxHealth;
 		}
 
 		public void TakeDamage(float damage)
@@ -44,6 +54,16 @@ namespace PirateGame.Ships
 			{
 				Health = MaxHealth;
 			}
+		}
+
+		public void IncreaseSpeedModifier(float factor)
+		{
+			SpeedModifier += factor;
+		}
+
+		public void AssignCrew(CrewDirector crew)
+		{
+			Crew = crew;
 		}
 
 		protected virtual void OnSink()

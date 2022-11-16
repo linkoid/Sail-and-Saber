@@ -43,7 +43,10 @@ namespace PirateGame.UI
 		{
 			if (!ShipCheck()) return;
 
-			m_Player.SpeedMod += Buy(20) ? 1 : 0;
+			if (Buy(20))
+			{
+				m_Player.Ship.IncreaseSpeedModifier(0.1f);
+			}
 		}
 
 		// Start is called before the first frame update

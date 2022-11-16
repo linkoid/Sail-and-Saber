@@ -10,8 +10,7 @@ namespace PirateGame
     {
         public long Gold { get => Stats.Gold; set => Stats.Gold = value; }
         public long CrewCount { get => Stats.CrewCount; set => Stats.CrewCount = value; }
-
-
+        
 
 		public PlayerStats Stats;
         public Ships.Ship Ship;
@@ -19,9 +18,7 @@ namespace PirateGame
 
         public Commander Commander { get => _commander; private set => _commander = value; }
         [SerializeField] private Commander _commander;
-        
 
-        public int SpeedMod = 0;
         // Start is called before the first frame update
         void Start()
         {
@@ -31,10 +28,11 @@ namespace PirateGame
         // Update is called once per frame
         void Update()
         {
-
+            
         }
     }
 
+    [System.Serializable]
     public struct PlayerStats
     {
         public long Gold;
