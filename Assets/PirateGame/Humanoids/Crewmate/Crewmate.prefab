@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2341959339264731807, guid: e05903b0f966f984b92801b8b768f969, type: 3}
       propertyPath: m_Name
-      value: Crewmate Variant
+      value: Crewmate
       objectReference: {fileID: 0}
     - target: {fileID: 6339581465415456991, guid: e05903b0f966f984b92801b8b768f969, type: 3}
       propertyPath: m_LocalRotation.w
@@ -93,6 +93,6 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 1
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
