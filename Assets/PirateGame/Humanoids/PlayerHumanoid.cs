@@ -10,7 +10,8 @@ namespace PirateGame
 	{
 		public bool IsJumping => m_JumpTime > 0;
 		public bool IsGrounded => m_HumanoidCollider.IsGrounded;
-		public Vector3 Movement {get => m_Movement ; set => m_Movement = value ;}
+		public Vector3 Movement {get => m_Movement ; set => m_Movement = value ; }
+		public Vector3 Velocity => Rigidbody.velocity;
 		public Rigidbody Rigidbody => GetComponent<Rigidbody>();
 
 

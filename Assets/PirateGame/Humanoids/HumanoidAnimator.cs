@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Animator), typeof(IHumanoid))]
-public class PlayerAnimator : MonoBehaviour
+[RequireComponent(typeof(Animator))]
+public class HumanoidAnimator : MonoBehaviour
 {
 	Animator Animator => GetComponent<Animator>();
 	IHumanoid Humanoid => GetComponent<IHumanoid>();
@@ -30,13 +30,16 @@ public class PlayerAnimator : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
+		if (Humanoid == null) return;
+
 		Animator.SetBool("IsJumping", Humanoid.IsJumping);
-		Animator.SetBool("IsFalling", !Humanoid.IsGrounded && Humanoid.Rigidbody.velocity.y < 0);
-		Animator.SetBool("IsWalking", Humanoid.IsGrounded && Humanoid.Movement.sqrMagnitude > 0 && Humanoid.Rigidbody.velocity.sqrMagnitude > 0.1);
+		Animator.SetBool("IsFalling", !Humanoid.IsGrounded && Humanoid.Velocity.y < 0);
+		Animator.SetBool("IsWalking", Humanoid.IsGrounded && Humanoid.Movement.sqrMagnitude > 0 && Humanoid.Velocity.sqrMagnitude > 0.1);
 
 		if (Humanoid.Movement.sqrMagnitude > 0)
 		{
-			Humanoid.Rigidbody.MoveRotation(Quaternion.LookRotation(Humanoid.Movement, -Physics.gravity.normalized));
+			var lookDirection = Quaternion.LookRotation(Humanoid.Movement, -Physics.gravity.normalized);
+			Humanoid.Rigidbody.MoveRotation(lookDirection);
 		}
 	}
 }

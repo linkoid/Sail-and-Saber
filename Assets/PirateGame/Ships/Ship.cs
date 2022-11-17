@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PirateGame.Crew;
+using Unity.AI.Navigation;
 
 namespace PirateGame.Ships
 {
@@ -13,6 +14,9 @@ namespace PirateGame.Ships
 	[RequireComponent(typeof(Rigidbody), typeof(ShipInternal))]
 	public partial class Ship : MonoBehaviour
 	{
+		public NavMeshSurface NavMeshSurface => this.GetComponent<NavMeshSurface>();
+
+
 		public float MaxHealth { get => _maxHealth; protected set => _maxHealth = value; }
 		public float Health { get => _health; protected set => _health = value; }
 		public float SpeedModifier { get => _speedModifier; protected set => _speedModifier = value; }
