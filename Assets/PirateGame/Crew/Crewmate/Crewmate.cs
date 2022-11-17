@@ -67,6 +67,7 @@ namespace PirateGame.Crew
 			PathfindGoal.SetParent(ship.transform, true);
 			PathfindGoal.position = standbyObject.transform.position;
 			Humanoid.Goal = PathfindGoal;
+			Humanoid.Agent.Warp(PathfindGoal.position);
 		}
 
 		private Transform CreatePathfindGoal()

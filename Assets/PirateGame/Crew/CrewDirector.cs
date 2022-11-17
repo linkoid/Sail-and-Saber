@@ -1,19 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 namespace PirateGame.Crew
 {
 	public class CrewDirector : MonoBehaviour, IReadOnlyCollection<Crewmate>
 	{
-		private static PrefabList CrewmateVariants => Resources.Load<PrefabList>("CrewmateVariants");
+		public PrefabList CrewmateVariants 
+		{
+			get => (_crewmateVariants != null) ? _crewmateVariants : Resources.Load<PrefabList>("CrewmateVariants");
+			set => _crewmateVariants = value;
+		}
 
 		public Ships.Ship Ship { get => _ship; private set => _ship = value; }
 
 		public int Count { get => m_Crewmates.Count; set => SetCount(value); }
 
 		[SerializeField] private Ships.Ship _ship;
+		[SerializeField] private PrefabList _crewmateVariants;
 
 
 		[SerializeField] List<Crewmate> m_Crewmates = new List<Crewmate>();

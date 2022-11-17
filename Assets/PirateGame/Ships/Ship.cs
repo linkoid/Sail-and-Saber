@@ -11,7 +11,7 @@ namespace PirateGame.Ships
 	/// The object-oriented class for a ship. 
 	/// If you need something from a ship from outside a ship script, use this class.
 	/// </summary>
-	[RequireComponent(typeof(Rigidbody), typeof(ShipInternal))]
+	[RequireComponent(typeof(Rigidbody))]
 	public partial class Ship : MonoBehaviour
 	{
 		public NavMeshSurface NavMeshSurface => this.GetComponent<NavMeshSurface>();
@@ -47,7 +47,7 @@ namespace PirateGame.Ships
 			if (Health < 0)
 			{
 				Health = 0;
-				OnSink();
+				Sink();
 			}
 		}
 
@@ -70,7 +70,12 @@ namespace PirateGame.Ships
 			Crew = crew;
 		}
 
-		protected virtual void OnSink()
+		protected virtual void Raid()
+		{
+			OnRaided();
+		}
+
+		protected virtual void Sink()
 		{
 			// sink the ship
 		}
@@ -112,6 +117,19 @@ namespace PirateGame.Ships
 		{
 			foreach (var shipBehaviour in this.GetComponentsInChildren<IShipBehaviourInternal>())
 				try { shipBehaviour.OnShipCollisionExit(collision); }
+				catch (Exception e) { Debug.LogException(e, shipBehaviour as ShipBehaviour); }
+		}
+
+		void OnRaided()
+		{
+			foreach (var shipBehaviour in this.GetComponentsInChildren<IShipBehaviourInternal>())
+				try { shipBehaviour.OnRaided(); }
+				catch (Exception e) { Debug.LogException(e, shipBehaviour as ShipBehaviour); }
+		}
+		void OnSink()
+		{
+			foreach (var shipBehaviour in this.GetComponentsInChildren<IShipBehaviourInternal>())
+				try { shipBehaviour.OnSink(); }
 				catch (Exception e) { Debug.LogException(e, shipBehaviour as ShipBehaviour); }
 		}
 
