@@ -7,8 +7,10 @@ namespace PirateGame.Ships
 {
 	public class ShipCombat : Ship.ShipBehaviour
 	{
-
+		public float DamagePerCannon = 10;
 		public float TargetRange = 100;
+		public float ReloadDelay = 2;
+
 		private float TargetRangeSqr => TargetRange * TargetRange;
 
 		public CannonGroup BroadsideCannons { get => _BroadsideCannons; private set => _BroadsideCannons = value; }
@@ -21,6 +23,8 @@ namespace PirateGame.Ships
 
 		[ReadOnly] public List<Ship> NearbyShips = new List<Ship>();
 
+
+		private float m_LastFire = 0;
 
 
 		void FixedUpdate()
@@ -75,9 +79,14 @@ namespace PirateGame.Ships
 		/// </summary>
 		public void FireBroadsideCannons()
 		{
+			if ((Time.fixedTime - m_LastFire) < ReloadDelay) return; // Can't fire because not done reloading
+
 			foreach (var cannon in BroadsideCannons.GetAllInRange(Target.Rigidbody.position))
 			{
 				cannon.Fire(Target.Rigidbody.position);
+				// Deal damage based on how many cannons fired
+				Target.TakeDamage(DamagePerCannon);
+				m_LastFire = Time.fixedTime;
 			}
 		}
 
