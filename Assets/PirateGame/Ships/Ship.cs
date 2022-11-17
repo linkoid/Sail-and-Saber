@@ -65,16 +65,27 @@ namespace PirateGame.Ships
 			SpeedModifier += factor;
 		}
 
+		/// <summary>
+		/// Assign the specifed crew to the ship.
+		/// </summary>
+		/// <remarks><see cref="CrewDirector.Board(Ship)"/> should also be called manually.</remarks>
 		public void AssignCrew(CrewDirector crew)
 		{
 			Crew = crew;
 		}
 
-		protected virtual void Raid()
+		/// <summary>
+		/// Call this function when this ship is being raided.
+		/// Should prevent the ship from moving and spawn enemy crew.
+		/// </summary>
+		protected virtual void Raided()
 		{
 			OnRaided();
 		}
 
+		/// <summary>
+		/// Will cause the ship to sink.
+		/// </summary>
 		protected virtual void Sink()
 		{
 			// sink the ship
