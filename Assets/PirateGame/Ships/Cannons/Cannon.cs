@@ -100,7 +100,11 @@ namespace PirateGame.Ships
 		{
 			Gizmos.color = Color.yellow;
 			Gizmos.matrix = m_RangeOrigin.localToWorldMatrix;
-			Gizmos.DrawFrustum(Vector3.zero, Angle.y, Range, 0, Angle.x / Angle.y);
+			float angle = Mathf.Max(Angle.x, Angle.y);
+			float range = angle > 180 ? -Range : Range;
+			float ratio = Mathf.Tan(Mathf.Deg2Rad*Angle.x/2) / Mathf.Tan(Mathf.Deg2Rad*Angle.y/2);
+			Gizmos.DrawFrustum(Vector3.zero, Angle.y, range, 0, ratio);
+			//Gizmos.DrawFrustum(Vector3.zero, Angle.y, Angle.y > 180 ? -Range : Range, 0, 0);
 		}
 
 		Vector3 m_FireGizmoTarget = Vector3.positiveInfinity;
@@ -113,7 +117,7 @@ namespace PirateGame.Ships
 
 			float dist = Vector3.Distance(m_FireGizmoTarget, m_RangeOrigin.position);
 			Gizmos.matrix = Matrix4x4.LookAt(m_RangeOrigin.position, m_FireGizmoTarget, m_RangeOrigin.up);
-			Gizmos.DrawFrustum(Vector3.zero, Angle.y / 10, dist, 0, Angle.x / Angle.y);
+			Gizmos.DrawFrustum(Vector3.zero, Angle.x / 10, dist, 0, Angle.x / Angle.y);
 		}
 	}
 }

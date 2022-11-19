@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using PirateGame.UI;
 
 namespace PirateGame.Crew
 {
@@ -9,24 +10,38 @@ namespace PirateGame.Crew
 		public Player Player { get => _player; private set => _player = value; }
 		[SerializeField] Player _player;
 
-		public CrewDirector Crew { get => _crew; private set => _crew = value; }
-		[SerializeField] CrewDirector _crew;
+		public CrewDirector Crew => Player.Crew;
+		public Ships.Ship Target => Player.Target;
 
-        public GameObject Target { get => _Target; private set => _Target = value; }
-        [SerializeField] GameObject _Target;
+		[SerializeField] List<Command> m_Command = new List<Command>();
 
-        [SerializeField] List<Command> m_Command = new List<Command>();
-
-        private GameObject CommandBG;
+		private GameObject CommandBG;
 
 
-        void Start()
-        {
-            CommandBG = transform.GetChild(0).gameObject;
-            for (int i = 0; i < m_Command.Count; i++)
-            {
-                Button.Instantiate(m_Command[i], CommandBG.transform);
-            }
-        }
-    }
+		void Start()
+		{
+			FindPlayer();
+
+			CommandBG = transform.GetChild(0).gameObject;
+			for (int i = 0; i < m_Command.Count; i++)
+			{
+				Button.Instantiate(m_Command[i], CommandBG.transform);
+			}
+		}
+
+		/// <summary>
+		/// Automatically try to find the player if someone forgot to assign one manually.
+		/// Only works if the commander script is a child of the HUD.
+		/// </summary>
+		private void FindPlayer()
+		{
+			var hud = this.GetComponentInParent<HUD>();
+			if (hud == null) return;
+
+			if (Player == null)
+			{
+				Player = hud.Player;
+			}
+		}
+	}
 }
