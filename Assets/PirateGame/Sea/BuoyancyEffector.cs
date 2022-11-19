@@ -21,23 +21,17 @@ namespace PirateGame.Sea
 
 		[SerializeField] private float m_DefaultSubmersionDepth = 1f;
 		[SerializeField] private float m_MinimumDrag = 0.01f;
-		[SerializeField] private float m_FloatForce = 1000f;
 
 		[SerializeField, ReadOnly] private int m_ColliderID;
 		[SerializeField, ReadOnly] private float m_FixedTime;
-		[SerializeField, ReadOnly] private float m_FixedDeltaTime;
 
 		public void OnEnable()
 		{
 			UpdateWaveParameters();
-			//Physics.ContactModifyEvent += OnContactModifyEvent;
-			//Physics.ContactModifyEventCCD += OnContactModifyEventCCD;
 		}
 
 		public void OnDisable()
 		{
-			//Physics.ContactModifyEvent -= OnContactModifyEvent;
-			//Physics.ContactModifyEventCCD -= OnContactModifyEventCCD;
 		}
 
 		void OnValidate()
@@ -67,7 +61,6 @@ namespace PirateGame.Sea
 
 
 			m_FixedTime = Time.fixedTime;
-			m_FixedDeltaTime = Time.fixedDeltaTime;
 
 			var pos = this.transform.position;
 			pos.y = 0;
@@ -182,6 +175,11 @@ namespace PirateGame.Sea
 					tensors[i].point = meshCollider.transform.TransformPoint(vertices[i]);
 					tensors[i].normal = meshCollider.transform.TransformDirection(normals[i]);
 					//Debug.Log(points[i]);
+				}
+
+				if (meshCollider.TryGetComponent(out MeshVolume meshVolume))
+				{
+					volume = meshVolume.Volume;
 				}
 			}
 
@@ -325,76 +323,6 @@ namespace PirateGame.Sea
 		[SerializeField, ReadOnly] private List<Vector3> m_Positions = new List<Vector3>();
 		[SerializeField, ReadOnly] private List<Vector3> m_OtherPositions = new List<Vector3>();
 
-		void OnContactModifyEvent(PhysicsScene scene, NativeArray<ModifiableContactPair> pairs)
-		{
-			// For each contact pair
-			for (int j = 0; j < pairs.Length; j++)
-			{
-				var pair = pairs[j];
-				bool isCollider      = (pair.colliderInstanceID      == m_ColliderID);
-				bool isOtherCollider = (pair.otherColliderInstanceID == m_ColliderID);
-				if (!isCollider && !isOtherCollider) continue;
-
-				m_Positions.Add(pair.position);
-				m_OtherPositions.Add(pair.otherPosition);
-
-				var thisPosition = isOtherCollider ? pair.otherPosition : pair.position;
-
-				for (int i = 0; i < pair.contactCount; ++i)
-				{
-					var contactPoint = pair.GetPoint(i);
-					m_RawContacts.Add(new Ray(contactPoint, pair.GetNormal(i)));
-
-					if ((contactPoint.y - thisPosition.y) < 1)
-					{
-						// The contact is on the water plane, so move it to the other collider.
-						contactPoint.y += pair.GetSeparation(i);
-					} 
-
-					var waterHeight = GetWaterHeight(contactPoint);
-					if (contactPoint.y > waterHeight) 
-					{
-						pair.IgnoreContact(i);
-						m_IgnoredPoints.Add(contactPoint);
-						continue;
-					}
-					var offset = contactPoint.y - waterHeight;
-					pair.SetSeparation(i, offset);
-					
-					pair.SetBounciness(i, 0);
-
-					var normal = GetWaterNormal(contactPoint);
-					if (!isOtherCollider)
-					{
-						normal *= -1;
-					}
-					pair.SetNormal(i, normal);
-
-					float submersion = Mathf.Clamp01(-offset / m_DefaultSubmersionDepth);
-					float drag = submersion * m_MinimumDrag;
-
-					pair.SetMaxImpulse(i, m_DefaultSubmersionDepth * m_FloatForce);
-
-					//ModifiableMassProperties massProperties = pair.massProperties;
-					//if (isOtherCollider)
-					//{
-					//	massProperties.inverseMassScale = submersion;
-					//	massProperties.inverseInertiaScale = 1 - drag;
-					//}
-					//else
-					//{
-					//	massProperties.otherInverseMassScale = submersion;
-					//	massProperties.otherInverseInertiaScale = 1 - drag;
-					//}
-					//pair.massProperties = massProperties;
-					//contactPoint.y = waterHeight;
-					//pair.SetPoint(i, contactPoint);
-					m_Contacts.Add(new Ray(contactPoint, normal));
-				}
-			}
-		}
-
-		
 		float GetWaterHeight(Vector3 pos)
 		{
 			return Mathf.Sin((pos.x + pos.z + m_FixedTime * WaveSpeed) / WaveDistance) * WaveAmplitude;

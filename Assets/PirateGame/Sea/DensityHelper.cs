@@ -37,7 +37,7 @@ public class DensityHelper : MonoBehaviour
 
 		rigidbody.SetDensity(Density);
         m_Mass = rigidbody.mass;
-		rigidbody.mass = rigidbody.mass;
+		rigidbody.mass = m_Mass;
 		
 		if (CenterOfMass != null)
 		{
