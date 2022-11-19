@@ -8,14 +8,16 @@ namespace PirateGame.UI
 {
 	public class HUD : MonoBehaviour
 	{
-		[SerializeField] Player m_Player;
+		public Player Player { get => m_Player; private set => m_Player = value; }
+
+		[SerializeField] private Player m_Player;
 		public Slider HealthBar;
 		public TMP_Text Loot_Text, Crew_Text, Too_Poor;
 
 		public bool Buy(int cost)
 		{
-			var value = m_Player.Gold;
-			m_Player.Gold = m_Player.Gold >= cost ? m_Player.Gold - cost : m_Player.Gold;
+			var value = Player.Gold;
+			Player.Gold = Player.Gold >= cost ? Player.Gold - cost : Player.Gold;
 			return value >= cost;
 		}
 
@@ -23,19 +25,19 @@ namespace PirateGame.UI
 		{
 			if (!ShipCheck()) return;
 
-			if (m_Player.Ship.Health == m_Player.Ship.MaxHealth)
+			if (Player.Ship.Health == Player.Ship.MaxHealth)
 			{
 				return;
 			}
 			if (Buy(3))
 			{
-				m_Player.Ship.Repair(Mathf.Infinity);
+				Player.Ship.Repair(Mathf.Infinity);
 			}
 		}
 
 		public void AddCrew()
 		{
-			m_Player.CrewCount += Buy(5) ? 1 : 0;
+			Player.CrewCount += Buy(5) ? 1 : 0;
 		}
 
 
@@ -45,7 +47,7 @@ namespace PirateGame.UI
 
 			if (Buy(20))
 			{
-				m_Player.Ship.IncreaseSpeedModifier(0.1f);
+				Player.Ship.IncreaseSpeedModifier(0.1f);
 			}
 		}
 
@@ -59,32 +61,32 @@ namespace PirateGame.UI
 		void Update()
 		{
 
-			Loot_Text.text = m_Player.Gold.ToString();
+			Loot_Text.text = Player.Gold.ToString();
 
-			Crew_Text.text = m_Player.CrewCount.ToString();
+			Crew_Text.text = Player.CrewCount.ToString();
 
 			UpdateHealthBar();
 		}
 
 		private void UpdateHealthBar()
 		{
-			if (m_Player.Ship == null)
+			if (Player.Ship == null)
 			{
 				// Maybe hide the health bar?
 				return;
 			}
 
-			if (HealthBar.maxValue != m_Player.Ship.MaxHealth)
+			if (HealthBar.maxValue != Player.Ship.MaxHealth)
 			{
-				HealthBar.maxValue = m_Player.Ship.MaxHealth;
+				HealthBar.maxValue = Player.Ship.MaxHealth;
 			}
-			float valueDif = m_Player.Ship.Health - HealthBar.value;
+			float valueDif = Player.Ship.Health - HealthBar.value;
 			HealthBar.value += valueDif * .01f;
 		}
 
 		private bool ShipCheck()
 		{
-			if (m_Player == null)
+			if (Player == null)
 			{
 				Debug.LogWarning("Player has no ship to repair");
 				return false;
