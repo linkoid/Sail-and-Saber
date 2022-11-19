@@ -2,6 +2,7 @@ using PirateGame.Crew;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace PirateGame.Crew.Commands
 {
@@ -12,12 +13,17 @@ namespace PirateGame.Crew.Commands
 		public Fire(Commander commander) :
 			base(commander)
 		{
-
-		}
+            
+        }
 
 		public override bool Poll()
 		{
-			throw new System.NotImplementedException();
+			//throw new System.NotImplementedException();
+            if(Commander.Target != Commander.Player)
+            {
+                return true;
+            }
+            return false;
 		}
 
 		public override void OnExecute()
@@ -27,7 +33,10 @@ namespace PirateGame.Crew.Commands
 
 		public override void Update()
 		{
-			// run command logic here
+			if(Poll())
+            {
+                ButtonObject.interactable = false;
+            }
 		}
 
 		protected override void OnCancel()

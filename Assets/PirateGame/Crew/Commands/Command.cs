@@ -1,25 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace PirateGame.Crew
 {
 	[System.Serializable]
-	public abstract class Command
+	public abstract class Command : MonoBehaviour
 	{
 		public abstract string DisplayName { get; }
 
 		public bool IsActive { get => _isActive; private set => _isActive = value; }
 		[SerializeField, ReadOnly] private bool _isActive;
 
-		public readonly Commander Commander;
+        public Button ButtonObject;
+
+        public readonly Commander Commander;
 
 
 		public Command(Commander commander)
 		{
 			Commander = commander;
 			IsActive = false;
-		}
+            ButtonObject = GetComponentInChildren<Button>();
+        }
 
 		/// <summary>
 		/// Check if the command can be executed in the current context.

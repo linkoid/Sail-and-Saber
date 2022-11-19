@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 namespace PirateGame.Crew
@@ -11,6 +12,21 @@ namespace PirateGame.Crew
 		public CrewDirector Crew { get => _crew; private set => _crew = value; }
 		[SerializeField] CrewDirector _crew;
 
-		private List<Command> m_Commands = new List<Command>();
-	}
+        public GameObject Target { get => _Target; private set => _Target = value; }
+        [SerializeField] GameObject _Target;
+
+        [SerializeField] List<Command> m_Command = new List<Command>();
+
+        private GameObject CommandBG;
+
+
+        void Start()
+        {
+            CommandBG = transform.GetChild(0).gameObject;
+            for (int i = 0; i < m_Command.Count; i++)
+            {
+                Button.Instantiate(m_Command[i], CommandBG.transform);
+            }
+        }
+    }
 }
