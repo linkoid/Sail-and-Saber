@@ -136,7 +136,6 @@ namespace PirateGame
 		}
 		private void OnTargetChanged(Ship oldTarget)
 		{
-
 		}
 	}
 
