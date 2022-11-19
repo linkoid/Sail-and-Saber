@@ -10,6 +10,8 @@ namespace PirateGame.UI
 	{
 		[SerializeField] Player m_Player;
 		public Slider HealthBar;
+		public Slider Volume;
+		public AudioSource musicSource;  
 		public TMP_Text Loot_Text, Crew_Text, Too_Poor;
 
 		public bool Buy(int cost)
@@ -53,16 +55,17 @@ namespace PirateGame.UI
 		void Start()
 		{
 			HealthBar.minValue = 0;
+			Volume.minValue = 0;
+			
 		}
 
 		// Update is called once per frame
 		void Update()
 		{
-
 			Loot_Text.text = m_Player.Gold.ToString();
-
 			Crew_Text.text = m_Player.CrewCount.ToString();
 
+			musicSource.volume = Volume.value;
 			UpdateHealthBar();
 		}
 

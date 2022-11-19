@@ -21,6 +21,24 @@ public class Scene_Transfer : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void TransferTo(string scene) {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(scene));
+    }
+
+    public void TransferTo(int scene) {
+        SceneManager.SetActiveScene(SceneManager.GetSceneAt(scene));
+    }
+
+
+    public void TransferToNext(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+        public void TransferBack(){
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
     
     public void TargetScene(string SceneToTransfer){
         if(SceneInBuild(SceneToTransfer)){
