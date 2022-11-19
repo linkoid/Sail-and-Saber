@@ -50,7 +50,12 @@ namespace PirateGame
 		{
 			if (Application.isPlaying)
 			{
-				Initialize();
+				IEnumerator DoInitialize()
+				{
+					yield return null;
+					Initialize();
+				}
+				StartCoroutine(DoInitialize());
 			}
 		}
 

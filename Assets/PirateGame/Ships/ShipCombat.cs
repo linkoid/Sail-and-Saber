@@ -17,7 +17,8 @@ namespace PirateGame.Ships
 		public CannonGroup BroadsideCannons { get => _BroadsideCannons; private set => _BroadsideCannons = value; }
 		[SerializeField] private CannonGroup _BroadsideCannons;
 
-
+		public CannonGroup DeckCannons { get => _deckCannons; private set => _deckCannons = value; }
+		[SerializeField] private CannonGroup _deckCannons;
 
 
 		[ReadOnly] public Ship Target;
@@ -25,13 +26,9 @@ namespace PirateGame.Ships
 		[ReadOnly] public List<Ship> NearbyShips = new List<Ship>();
 
 
-		private float m_LastFire = 0;
-
-
 		void FixedUpdate()
 		{
 			TargetNearestShip();
-			FireBroadsideCannons();
 			CheckCanRaid();
 		}
 
@@ -74,23 +71,46 @@ namespace PirateGame.Ships
 			}
 		}
 
-
-		/// <summary>
-		/// Figure out which side to use and if the target is close enough
-		/// </summary>
-		public void FireBroadsideCannons()
+		private void FireCannons(CannonGroup cannonGroup)
 		{
 			if (!CheckHasValidTarget()) return;
 
-			if ((Time.fixedTime - m_LastFire) < ReloadDelay) return; // Can't fire because not done reloading
+			if (cannonGroup.IsReloading) return; // Can't fire because not done reloading
 
-			foreach (var cannon in BroadsideCannons.GetAllInRange(Target.Rigidbody.position))
+			foreach (var cannon in cannonGroup.GetAllInRange(Target.Rigidbody.position))
 			{
 				cannon.Fire(Target.Rigidbody.position);
 				// Deal damage based on how many cannons fired
 				Target.TakeDamage(DamagePerCannon);
-				m_LastFire = Time.fixedTime;
 			}
+
+			cannonGroup.Reload(ReloadDelay);
+		}
+
+		/// <summary>
+		/// Fire the boradside cannons at the current target.
+		/// </summary>
+		public void FireBroadsideCannons()
+		{
+			FireCannons(BroadsideCannons);
+		}
+
+		/// <summary>
+		/// Fire the deck cannons at the current target.
+		/// </summary>
+		public void FireDeckCannons()
+		{
+			FireCannons(DeckCannons);
+		}
+
+
+		/// <summary>
+		/// Find which deck cannons are in range of the target.
+		/// Useful for making crewmates man the cannons.
+		/// </summary>
+		public IEnumerable<Cannon> GetDeckCannonsInRange()
+		{
+			return DeckCannons.GetAllInRange(Target.Rigidbody.position);
 		}
 
 		#region Track Radiable Ships
@@ -160,6 +180,12 @@ namespace PirateGame.Ships
 			if (Target == null) return;
 			
 			Gizmos.DrawRay(Ship.Rigidbody.position, Target.Rigidbody.position);
+
+			Gizmos.color = Color.red;
+			foreach (var cannon in DeckCannons.GetAllInRange(Target.Rigidbody.position))
+			{
+				Gizmos.DrawRay(cannon.transform.position, Target.Rigidbody.position - cannon.transform.position);
+			}
 		}
 	}
 }

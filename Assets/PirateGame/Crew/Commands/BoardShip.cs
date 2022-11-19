@@ -14,7 +14,7 @@ namespace PirateGame.Crew.Commands
         {
             throw new System.NotImplementedException();
         }
-		protected override void OnExecute()
+		protected override IEnumerable OnExecute()
         {
             throw new System.NotImplementedException();
         }

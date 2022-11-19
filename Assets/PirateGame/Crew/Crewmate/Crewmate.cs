@@ -19,6 +19,11 @@ namespace PirateGame.Crew
 
 		private AIHumanoid Humanoid => this.GetComponent<AIHumanoid>();
 
+		void Start()
+		{
+			_pathfindGoal = CreatePathfindGoal();
+		}
+
 		/// <summary>
 		/// Raid the specified ship, attacking the specified enemy
 		/// </summary>
@@ -32,7 +37,9 @@ namespace PirateGame.Crew
 		/// </summary>
 		public void Support(Ship ship, GameObject supportObject)
 		{
-			throw new System.NotImplementedException();
+			PathfindGoal.SetParent(ship.transform);
+			PathfindGoal.position = supportObject.transform.position;
+			Humanoid.Goal = PathfindGoal;
 		}
 
 		/// <summary>

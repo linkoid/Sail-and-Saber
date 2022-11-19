@@ -21,7 +21,7 @@ namespace PirateGame.Ships
 
 		void Start()
 		{
-			m_Emitter.Stop(true);
+			//m_Emitter.Stop(true);
 		}
 
 		void OnValidate()
@@ -57,7 +57,7 @@ namespace PirateGame.Ships
 			m_FireGizmoTarget = target;
 
 			// stop any existing fire animations
-			this.StopCoroutine("FireAnimation");
+			//this.StopCoroutine("FireAnimation");
 
 			// start fire animation
 			StartCoroutine(FireAnimation(target, Random.Range(0.1f, 0.5f)));
@@ -81,9 +81,10 @@ namespace PirateGame.Ships
 			Aim(target);
 
 			// Fire the cannon
+			m_Emitter.gameObject.SetActive(true);
 			m_Emitter.Play(true);
 			yield return new WaitForSeconds(m_Emitter.main.duration);
-			m_Emitter.Stop(true);
+			//m_Emitter.Stop(true);
 			m_FireGizmoTarget = Vector3.positiveInfinity;
 
 			// TODO : Maybe slowly return the cannon to neutral position?
@@ -105,6 +106,8 @@ namespace PirateGame.Ships
 			float ratio = Mathf.Tan(Mathf.Deg2Rad*Angle.x/2) / Mathf.Tan(Mathf.Deg2Rad*Angle.y/2);
 			Gizmos.DrawFrustum(Vector3.zero, Angle.y, range, 0, ratio);
 			//Gizmos.DrawFrustum(Vector3.zero, Angle.y, Angle.y > 180 ? -Range : Range, 0, 0);
+
+			Gizmos.matrix = Matrix4x4.identity;
 		}
 
 		Vector3 m_FireGizmoTarget = Vector3.positiveInfinity;
@@ -118,6 +121,8 @@ namespace PirateGame.Ships
 			float dist = Vector3.Distance(m_FireGizmoTarget, m_RangeOrigin.position);
 			Gizmos.matrix = Matrix4x4.LookAt(m_RangeOrigin.position, m_FireGizmoTarget, m_RangeOrigin.up);
 			Gizmos.DrawFrustum(Vector3.zero, Angle.x / 10, dist, 0, Angle.x / Angle.y);
+
+			Gizmos.matrix = Matrix4x4.identity;
 		}
 	}
 }

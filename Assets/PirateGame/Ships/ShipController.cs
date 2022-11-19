@@ -37,9 +37,9 @@ namespace PirateGame.Ships
 				Debug.LogWarning($"Could not find any Ship component in parents", this);
 			}
 
-			if (m_Camera == null || VirtualCamera == null)
+			if (VirtualCamera == null)
 			{
-				Debug.LogWarning($"Camera & VirtualCamera not assigned to {this.GetType().Name}", this);
+				Debug.LogWarning($"VirtualCamera not assigned to {this.GetType().Name}", this);
 			} 
 			else 
 			{

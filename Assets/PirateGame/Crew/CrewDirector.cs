@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Security.Cryptography.X509Certificates;
+using System.Linq;
 using UnityEngine;
 
 namespace PirateGame.Crew
@@ -46,6 +45,21 @@ namespace PirateGame.Crew
 			foreach (var crewmate in m_Crewmates)
 			{
 				crewmate.Support(Ship, supportObject);
+			}
+		}
+
+		/// <summary>
+		/// Have each crewmate man a cannon in the enumerable.
+		/// </summary>
+		public void ManCannons(IEnumerable<Ships.Cannon> cannons)
+		{
+			// TODO : Find better support objects
+			GameObject supportObject = Ship.gameObject;
+
+			var iter = m_Crewmates.Zip(cannons, (a, b) => new { crewmate = a, cannon = b });
+			foreach (var pair in iter)
+			{
+				pair.crewmate.Support(Ship, pair.cannon.gameObject);
 			}
 		}
 

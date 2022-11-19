@@ -15,6 +15,8 @@ namespace PirateGame.Crew
 
         public Button ButtonObject;
 
+		protected Coroutine ActiveExecution;
+
         public Commander Commander
 		{
 			get
@@ -73,8 +75,18 @@ namespace PirateGame.Crew
 				return;
 			}
 
+			ActiveExecution = StartCoroutine(DoExecute());
+		}
+
+		private IEnumerator DoExecute()
+		{
 			IsActive = true;
-			OnExecute();
+			foreach (object response in OnExecute())
+			{
+				yield return response;
+			}
+			IsActive = false;
+			ActiveExecution = null;
 		}
 
 		/// <summary>
@@ -89,7 +101,7 @@ namespace PirateGame.Crew
 		/// <summary>
 		/// What to do when the command is executed.
 		/// </summary>
-		protected abstract void OnExecute();
+		protected abstract IEnumerable OnExecute();
 
 		/// <summary>
 		/// What to do when the command is canceled.
@@ -106,7 +118,7 @@ namespace PirateGame.Crew
 
 		protected virtual void UpdateButtonInteractable()
 		{
-			ButtonObject.interactable = Poll();
+			ButtonObject.interactable = !IsActive && Poll();
 		}
 	}
 }
