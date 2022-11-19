@@ -57,6 +57,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e05903b0f966f984b92801b8b768f969, type: 3}
+--- !u!114 &8439459262341879985 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3321336427804472430, guid: e05903b0f966f984b92801b8b768f969, type: 3}
+  m_PrefabInstance: {fileID: 6559838784175549663}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5f927a2733c2ff4a9efdfb02309937c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8901774790962267712 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2341959339264731807, guid: e05903b0f966f984b92801b8b768f969, type: 3}
@@ -108,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9485326ea35edc143aa02d14184e5009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HumanoidCollider: {fileID: 0}
+  m_HumanoidCollider: {fileID: 8439459262341879985}
   m_Movement: {x: 0, y: 0, z: 0}
   m_Speed: 10
   m_Acceleration: 50

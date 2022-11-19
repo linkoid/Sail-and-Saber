@@ -11,19 +11,40 @@ namespace PirateGame.Crew
 		public abstract string DisplayName { get; }
 
 		public bool IsActive { get => _isActive; private set => _isActive = value; }
-		[SerializeField, ReadOnly] private bool _isActive;
+		[SerializeField, ReadOnly] private bool _isActive = false;
 
         public Button ButtonObject;
 
-        public readonly Commander Commander;
-
-
-		public Command(Commander commander)
+        public Commander Commander
 		{
-			Commander = commander;
+			get
+			{
+				var commander = this.GetComponentInParent<Commander>();
+				if (commander == null)
+				{
+					try
+					{
+						throw new MissingComponentException($"Could not find component {typeof(Commander)} in parents");
+					}
+					catch (MissingComponentException e)
+					{
+						Debug.LogException(e, this);
+					}
+				}
+				return commander;
+			}
+		}
+
+		protected virtual void Awake()
+		{
 			IsActive = false;
-            ButtonObject = GetComponentInChildren<Button>();
-        }
+			ButtonObject = this.GetComponentInChildren<Button>();
+			if (ButtonObject == null)
+			{
+				throw new MissingComponentException($"Could not find component {typeof(Button)} in children");
+			}
+			ButtonObject.onClick.AddListener(Execute);
+		}
 
 		/// <summary>
 		/// Check if the command can be executed in the current context.
@@ -68,7 +89,7 @@ namespace PirateGame.Crew
 		/// <summary>
 		/// What to do when the command is executed.
 		/// </summary>
-		public abstract void OnExecute();
+		protected abstract void OnExecute();
 
 		/// <summary>
 		/// What to do when the command is canceled.
@@ -78,6 +99,14 @@ namespace PirateGame.Crew
 		/// <summary>
 		/// Run on every frame
 		/// </summary>
-		public virtual void Update() { }
+		protected virtual void Update() 
+		{
+			UpdateButtonInteractable();
+		}
+
+		protected virtual void UpdateButtonInteractable()
+		{
+			ButtonObject.interactable = Poll();
+		}
 	}
 }

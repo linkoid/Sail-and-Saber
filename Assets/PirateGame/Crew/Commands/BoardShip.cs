@@ -9,23 +9,19 @@ namespace PirateGame.Crew.Commands
     {
         public override string DisplayName => throw new System.NotImplementedException();
 
-        public BoardShip(Commander commander) :
-            base(commander)
-        {
-
-        }
 
         public override bool Poll()
         {
             throw new System.NotImplementedException();
         }
-        public override void OnExecute()
+		protected override void OnExecute()
         {
             throw new System.NotImplementedException();
         }
 
-        public override void Update()
+		protected override void Update()
         {
+            base.Update();
             // run command logic here
         }
 

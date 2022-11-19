@@ -6,15 +6,10 @@ namespace PirateGame.Crew
 {
     public class Anchor : Command
     {
-        public Anchor(Commander commander) :
-            base(commander)
-        {
-
-        }
 
         public override string DisplayName => throw new System.NotImplementedException();
 
-        public override void OnExecute()
+		protected override void OnExecute()
         {
             throw new System.NotImplementedException();
         }

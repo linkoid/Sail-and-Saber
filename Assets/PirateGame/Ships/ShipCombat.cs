@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using StackTrace = System.Diagnostics.StackTrace;
 
 namespace PirateGame.Ships
 {
@@ -79,6 +80,8 @@ namespace PirateGame.Ships
 		/// </summary>
 		public void FireBroadsideCannons()
 		{
+			if (!CheckHasValidTarget()) return;
+
 			if ((Time.fixedTime - m_LastFire) < ReloadDelay) return; // Can't fire because not done reloading
 
 			foreach (var cannon in BroadsideCannons.GetAllInRange(Target.Rigidbody.position))
@@ -128,6 +131,7 @@ namespace PirateGame.Ships
 		[SerializeField, ReadOnly] private bool m_CanRaid = false;
 		public bool CheckCanRaid()
 		{
+			if (!CheckHasValidTarget()) return false;
 			m_CanRaid = m_RaidableShips.ContainsKey(Target);
 			return m_CanRaid;
 		}
@@ -135,6 +139,20 @@ namespace PirateGame.Ships
 		protected override void OnShipCollisionEnter(Collision collision)
 		{
 			Debug.Log("RAM!", this);
+		}
+
+		private bool CheckHasValidTarget()
+		{
+			StackTrace stackTrace = new StackTrace();
+			string caller = stackTrace.GetFrame(1).GetMethod().Name;
+
+			if (Target == null)
+			{
+				Debug.LogWarning($"{caller}: Target is null\n{stackTrace}", this);
+				return false;
+			}
+
+			return true;
 		}
 
 		void OnDrawGizmosSelected()

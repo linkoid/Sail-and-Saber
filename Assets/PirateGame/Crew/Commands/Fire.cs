@@ -10,33 +10,24 @@ namespace PirateGame.Crew.Commands
 	public class Fire : Command
 	{
 		public override string DisplayName => throw new System.NotImplementedException();
-		public Fire(Commander commander) :
-			base(commander)
-		{
-            
-        }
 
 		public override bool Poll()
 		{
-			//throw new System.NotImplementedException();
-            if(Commander.Target != Commander.Player)
+            if (Commander.Target != Commander.Player)
             {
                 return true;
             }
             return false;
 		}
 
-		public override void OnExecute()
+		protected override void OnExecute()
 		{
 			throw new System.NotImplementedException();
 		}
 
-		public override void Update()
+		protected override void Update()
 		{
-			if(Poll())
-            {
-                ButtonObject.interactable = false;
-            }
+			base.Update();
 		}
 
 		protected override void OnCancel()
