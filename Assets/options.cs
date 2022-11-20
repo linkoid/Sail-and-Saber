@@ -15,14 +15,18 @@ public class options : MonoBehaviour
     {
         musicPlayer.musicSource.volume = VolumeSlider.value;
     }
+    public void Resume(){
+            isPaused = !isPaused;
+            Time.timeScale = (isPaused) ? 0 : 1;
+            Target.SetActive(isPaused);
+    }
+
     void OnPause(InputValue input){
         if(!Target){
             return;
         }
         if(input.isPressed){
-            isPaused = !isPaused;
-            Time.timeScale = (isPaused) ? 0 : 1;
-            Target.SetActive(isPaused);
+            Resume();
         }
 	
     }
