@@ -12,12 +12,21 @@ namespace PirateGame.UI
 
 		[SerializeField] private Player m_Player;
 		public Slider HealthBar;
-		public TMP_Text Loot_Text, Crew_Text, Too_Poor;
+		public TMP_Text Loot_Text, Crew_Text, Error_Text;
+		[SerializeField] float Error_timer = 5f;
+		public GameObject Ship;
+		bool isBuying, isError;
 
-		public bool Buy(int cost)
+		public bool CanBuy(int cost)
 		{
 			var value = Player.Gold;
 			Player.Gold = Player.Gold >= cost ? Player.Gold - cost : Player.Gold;
+			if(value >= cost == false){
+				Error("Too Poor Need " + (cost - Player.Gold)+ " More Gold");
+			}else{
+				isError = false;
+			}
+
 			return value >= cost;
 		}
 
@@ -29,15 +38,43 @@ namespace PirateGame.UI
 			{
 				return;
 			}
-			if (Buy(3))
+			if (CanBuy(3))
 			{
 				Player.Ship.Repair(Mathf.Infinity);
 			}
 		}
 
+    private void OnMouseUp()
+    {
+        RaycastHit hit;
+        if (!isBuying)
+        {
+            return;
+        }
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0)), out hit))
+        {
+            if (hit.collider == null)
+			{
+				GameObject.Instantiate(Ship,hit.transform);
+				isBuying = false;
+			}
+        }
+    }
+
+		
+		public void BuyShip()
+		{
+
+			if (CanBuy(20))
+			{
+				isBuying =true;
+
+			}
+		}
+
 		public void AddCrew()
 		{
-			Player.CrewCount += Buy(5) ? 1 : 0;
+			Player.CrewCount += CanBuy(5) ? 1 : 0;
 		}
 
 
@@ -45,7 +82,7 @@ namespace PirateGame.UI
 		{
 			if (!ShipCheck()) return;
 
-			if (Buy(20))
+			if (CanBuy(20))
 			{
 				Player.Ship.IncreaseSpeedModifier(0.1f);
 			}
@@ -66,6 +103,25 @@ namespace PirateGame.UI
 			Crew_Text.text = Player.CrewCount.ToString();
 
 			UpdateHealthBar();
+
+
+			Error_Text.gameObject.SetActive(isError);
+			//change opasity with time 
+			if(isError ){
+				Error_timer -= Time.deltaTime;
+			}
+
+			if(Error_timer <= 0){
+				isError = false;
+				Error_timer = 5f;
+			}
+			
+		}
+
+		void Error(string error){
+			Error_Text.text = error;
+			Error_timer = 5f;
+			isError = true;
 		}
 
 		private void UpdateHealthBar()
@@ -82,6 +138,7 @@ namespace PirateGame.UI
 			}
 			float valueDif = Player.Ship.Health - HealthBar.value;
 			HealthBar.value += valueDif * .01f;
+			
 		}
 
 		private bool ShipCheck()
