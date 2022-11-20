@@ -13,6 +13,9 @@ namespace PirateGame.Ships
 		public Vector2 SharedAngle = new Vector2(90, 30);
 		public float SharedRange = 50;
 
+		public bool IsReloading => Time.fixedTime < m_ReloadingUntil;
+		[SerializeField, ReadOnly] private float m_ReloadingUntil = 0;
+
 
 		[SerializeField, ReadOnly] private List<Cannon> m_CannonList = new List<Cannon>();
 		
@@ -69,6 +72,11 @@ namespace PirateGame.Ships
 				return cannon;
 			}
 			return null;
+		}
+
+		public void Reload(float delay)
+		{
+			m_ReloadingUntil = Time.fixedTime + delay;
 		}
 
 

@@ -9,6 +9,10 @@ namespace PirateGame.Crew.Commands
 	[System.Serializable]
 	public class Fire : Command
 	{
+		// Shortcuts because I was tired of typing this out so much
+		protected Ships.Ship Ship => Commander.Crew.Ship;
+		protected Ships.ShipCombat Combat => Ship.Internal.Combat;
+
 		public override string DisplayName => throw new System.NotImplementedException();
 
 		public override bool Poll()
@@ -20,15 +24,31 @@ namespace PirateGame.Crew.Commands
 			if (Commander.Target == Commander.Player.Ship) return false;
 
 			// Must have a ship
-			if (Commander.Player.Ship == null) return false;
+			if (Ship == null) return false;
+
+			// Can't be reloading
+			if (Combat.BroadsideCannons.IsReloading) return false;
+			if (Combat.DeckCannons.IsReloading) return false;
 
 			// else
 			return true;
 		}
 
-		protected override void OnExecute()
+		protected override IEnumerable OnExecute()
 		{
-			throw new System.NotImplementedException();
+			var crew = Commander.Crew;
+			var ship = Commander.Crew.Ship;
+
+			ship.Internal.Combat.Target = Commander.Target;
+			ship.Internal.Combat.FireBroadsideCannons();
+
+			var cannons = ship.Internal.Combat.GetDeckCannonsInRange();
+			crew.ManCannons(cannons);
+
+			// Wait a bit to let them get to the cannons
+			yield return new WaitForSeconds(1);
+
+			ship.Internal.Combat.FireDeckCannons();
 		}
 
 		protected override void Update()
