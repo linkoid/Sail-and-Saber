@@ -44,31 +44,12 @@ namespace PirateGame.UI
 			}
 		}
 
-    private void OnMouseUp()
-    {
-        RaycastHit hit;
-        if (!isBuying)
-        {
-            return;
-        }
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0)), out hit))
-        {
-            if (hit.collider == null)
-			{
-				GameObject.Instantiate(Ship,hit.transform);
-				isBuying = false;
-			}
-        }
-    }
-
 		
-		public void BuyShip()
+		public void BuyShipType(int cost,GameObject ShipType)
 		{
-
-			if (CanBuy(20))
+			if (CanBuy(cost))
 			{
-				isBuying =true;
-
+				Instantiate(ShipType,Player.transform);
 			}
 		}
 
