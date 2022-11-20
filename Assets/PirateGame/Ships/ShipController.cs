@@ -52,11 +52,6 @@ namespace PirateGame.Ships
 
 		void OnDisable()
 		{
-			if (m_Camera == null)
-			{
-				Debug.LogWarning($"Camera not assigned to PlayerController", this);
-			}
-
 			PlayerInput.enabled = false;
 		}
 

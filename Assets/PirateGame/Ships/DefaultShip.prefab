@@ -66,6 +66,7 @@ Transform:
   - {fileID: 6622383279678117177}
   - {fileID: 2212008432124260603}
   - {fileID: 9123811031359249402}
+  - {fileID: 5415963961114133260}
   m_Father: {fileID: 8090241698980888338}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -118,7 +119,7 @@ GameObject:
   - component: {fileID: 7433770275375635901}
   - component: {fileID: 6551111137906505392}
   m_Layer: 0
-  m_Name: InterShipLink FR (Helm)
+  m_Name: InterShipLink FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,8 +137,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8090241698980888338}
-  m_RootOrder: 13
+  m_Father: {fileID: 5775929034414455225}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!114 &6551111137906505392
 MonoBehaviour:
@@ -152,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
-  m_StartPoint: {x: -0.0000002193824, y: 0, z: -4.777665}
+  m_StartPoint: {x: 0, y: 0, z: -2.3888326}
   m_EndPoint: {x: 0, y: -0.75, z: 0.5}
   m_Width: 1.97
   m_CostModifier: -1
@@ -455,9 +456,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Speed: 200
+  m_ReverseFactor: 0.5
   m_Acceleration: 5
-  m_SpinSpeed: 0.5
-  m_SpinAcceleration: 0.2
+  m_SpinSpeed: 1
+  m_SpinAcceleration: 0.5
   Steering: 0
   Throttle: 0
 --- !u!1 &3625386782763724285
@@ -484,7 +486,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3625386782763724285}
-  m_LocalRotation: {x: -0.1749085, y: -0.3255186, z: 0.112136185, w: 0.9224263}
+  m_LocalRotation: {x: -0.17594904, y: -0.31023207, z: 0.106883116, w: 0.92810243}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 1.2452109, z: 2.5193796}
   m_ConstrainProportionsScale: 0
@@ -549,7 +551,7 @@ GameObject:
   - component: {fileID: 1638388118705596945}
   - component: {fileID: 7015909007413020615}
   m_Layer: 0
-  m_Name: InterShipLink L (Helm)
+  m_Name: InterShipLink L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -567,8 +569,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8090241698980888338}
-  m_RootOrder: 12
+  m_Father: {fileID: 5775929034414455225}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -75, z: 0}
 --- !u!114 &7015909007413020615
 MonoBehaviour:
@@ -590,6 +592,58 @@ MonoBehaviour:
   m_Bidirectional: 0
   m_AutoUpdatePosition: 1
   m_Area: 2
+--- !u!1 &5539676834525857517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 266765330247584359}
+  - component: {fileID: 4644007946125052626}
+  m_Layer: 0
+  m_Name: InterShipLink HR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &266765330247584359
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5539676834525857517}
+  m_LocalRotation: {x: -0, y: 0.6087605, z: -0, w: 0.7933541}
+  m_LocalPosition: {x: 2.4928746, y: 0.9131565, z: 6.2557554}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5775929034414455225}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 75, z: 0}
+--- !u!114 &4644007946125052626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5539676834525857517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 0, y: 0, z: -1.5}
+  m_EndPoint: {x: 0, y: 0, z: 0.5}
+  m_Width: 1.97
+  m_CostModifier: -1
+  m_Bidirectional: 0
+  m_AutoUpdatePosition: 1
+  m_Area: 2
 --- !u!1 &5798523959384451168
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,7 +655,7 @@ GameObject:
   - component: {fileID: 3126090769586320859}
   - component: {fileID: 1426671204073588567}
   m_Layer: 0
-  m_Name: InterShipLink F (Helm)
+  m_Name: InterShipLink F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -619,8 +673,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8090241698980888338}
-  m_RootOrder: 10
+  m_Father: {fileID: 5775929034414455225}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1426671204073588567
 MonoBehaviour:
@@ -952,7 +1006,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6923580006628999614}
-  m_LocalRotation: {x: -0.11036551, y: -0.31693634, z: 0.13449244, w: 0.9323533}
+  m_LocalRotation: {x: -0.11100894, y: -0.30205196, z: 0.1281895, w: 0.93808806}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 1.2452109, z: 2.5193796}
   m_ConstrainProportionsScale: 0
@@ -1144,7 +1198,7 @@ GameObject:
   - component: {fileID: 217671566376721341}
   - component: {fileID: 7367560020546717327}
   m_Layer: 0
-  m_Name: InterShipLink FL (Helm)
+  m_Name: InterShipLink FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1162,8 +1216,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8090241698980888338}
-  m_RootOrder: 14
+  m_Father: {fileID: 5775929034414455225}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
 --- !u!114 &7367560020546717327
 MonoBehaviour:
@@ -1178,7 +1232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
-  m_StartPoint: {x: -0.0000002193824, y: 0, z: -4.777665}
+  m_StartPoint: {x: 0, y: 0, z: -2.3888326}
   m_EndPoint: {x: 0, y: -0.75, z: 0.5}
   m_Width: 1.97
   m_CostModifier: -1
@@ -1196,7 +1250,7 @@ GameObject:
   - component: {fileID: 8772309296032221323}
   - component: {fileID: 4605018563633513589}
   m_Layer: 0
-  m_Name: InterShipLink R (Helm)
+  m_Name: InterShipLink R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1214,8 +1268,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8090241698980888338}
-  m_RootOrder: 11
+  m_Father: {fileID: 5775929034414455225}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 75, z: 0}
 --- !u!114 &4605018563633513589
 MonoBehaviour:
@@ -1335,6 +1389,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Model: {fileID: 550135521209776144}
+--- !u!1 &7802767451711339863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5415963961114133260}
+  - component: {fileID: 4150220212849215594}
+  m_Layer: 0
+  m_Name: FrontRaidZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5415963961114133260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7802767451711339863}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 8.125}
+  m_LocalScale: {x: 6.78, y: 1, z: 5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5342405332962831387}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4150220212849215594
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7802767451711339863}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7915493105829815732
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,7 +1514,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8090241698687097030}
   m_LocalRotation: {x: 0.25666794, y: -0.00000035552353, z: 0.00000009441441, w: 0.9664997}
-  m_LocalPosition: {x: 12.803512, y: 7.5, z: -15.3645735}
+  m_LocalPosition: {x: 12.274008, y: 7.5, z: -15.790781}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1629,11 +1728,7 @@ Transform:
   - {fileID: 6857494341586506667}
   - {fileID: 5347278636044700558}
   - {fileID: 5615061374001992584}
-  - {fileID: 3126090769586320859}
-  - {fileID: 8772309296032221323}
-  - {fileID: 1638388118705596945}
-  - {fileID: 7433770275375635901}
-  - {fileID: 217671566376721341}
+  - {fileID: 5775929034414455225}
   - {fileID: 930461693978878634}
   - {fileID: 9170379302782604320}
   - {fileID: 7511241172488722203}
@@ -1672,6 +1767,8 @@ MonoBehaviour:
   _maxHealth: 100
   _speedModifier: 1
   _crew: {fileID: 0}
+  _isRaided: 0
+  _isPlundered: 0
 --- !u!114 &5053016825790913288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1968,7 +2065,7 @@ GameObject:
   - component: {fileID: 9123811031359249402}
   - component: {fileID: 8714278748614607575}
   m_Layer: 0
-  m_Name: RaidZone
+  m_Name: SideRaidZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1982,8 +2079,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8449920219284633026}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 3.375}
-  m_LocalScale: {x: 7, y: 4, z: 12.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0.125}
+  m_LocalScale: {x: 8.3, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5342405332962831387}
@@ -2002,6 +2099,44 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8979307484287088366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5775929034414455225}
+  m_Layer: 0
+  m_Name: Helm NavMeshLinks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5775929034414455225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8979307484287088366}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3126090769586320859}
+  - {fileID: 8772309296032221323}
+  - {fileID: 266765330247584359}
+  - {fileID: 1638388118705596945}
+  - {fileID: 5204888917643763671}
+  - {fileID: 7433770275375635901}
+  - {fileID: 217671566376721341}
+  m_Father: {fileID: 8090241698980888338}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9092077103568546672
 GameObject:
   m_ObjectHideFlags: 3
@@ -2026,7 +2161,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9092077103568546672}
-  m_LocalRotation: {x: -0.1428803, y: -0.32144278, z: 0.12333459, w: 0.92792696}
+  m_LocalRotation: {x: -0.14372376, y: -0.3063472, z: 0.11755563, w: 0.9336357}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 1.2452109, z: 2.5193796}
   m_ConstrainProportionsScale: 0
@@ -2112,7 +2247,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8090241698980888338}
-  m_RootOrder: 17
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &81612911575451221
 MeshFilter:
@@ -2150,6 +2285,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AutoInitialize: 1
   Volume: 135.14499
+--- !u!1 &9202933362180235051
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5204888917643763671}
+  - component: {fileID: 1435760386496609383}
+  m_Layer: 0
+  m_Name: InterShipLink HL
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5204888917643763671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9202933362180235051}
+  m_LocalRotation: {x: -0, y: -0.60876137, z: -0, w: 0.7933534}
+  m_LocalPosition: {x: -2.4928741, y: 0.9131565, z: 6.2557554}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5775929034414455225}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: -75, z: 0}
+--- !u!114 &1435760386496609383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9202933362180235051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 0, y: 0, z: -1.5}
+  m_EndPoint: {x: 0, y: 0, z: 0.5}
+  m_Width: 1.97
+  m_CostModifier: -1
+  m_Bidirectional: 0
+  m_AutoUpdatePosition: 1
+  m_Area: 2
 --- !u!1001 &783529014720497179
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2352,7 +2539,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c0dca8d3defc6ac459dff2b0110fd066, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c0dca8d3defc6ac459dff2b0110fd066, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3480,7 +3667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2585253347051725779, guid: 18fd405f3433b554e8c921c734173c66, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0000008866191
+      value: 0.000000067055225
       objectReference: {fileID: 0}
     - target: {fileID: 2585253347051725779, guid: 18fd405f3433b554e8c921c734173c66, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3573,7 +3760,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b9388fdd9135355469036802cfaa2d41, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b9388fdd9135355469036802cfaa2d41, type: 3}
       propertyPath: m_LocalPosition.x

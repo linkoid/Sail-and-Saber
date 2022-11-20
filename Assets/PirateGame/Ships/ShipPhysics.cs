@@ -10,6 +10,7 @@ namespace PirateGame.Ships
 
 		[Header("Config")]
 		[SerializeField] private float m_Speed = 200f;
+		[SerializeField] private float m_ReverseFactor = 0.5f;
 		[SerializeField] private float m_Acceleration = 5f;
 		[SerializeField] private float m_SpinSpeed = 0.5f;
 		[SerializeField] private float m_SpinAcceleration = 0.2f;
@@ -26,34 +27,38 @@ namespace PirateGame.Ships
 
 		void AddSteerForce()
 		{
-			Vector3 CurrentSpin = Rigidbody.angularVelocity;
+			Vector3 currentSpin = Rigidbody.angularVelocity;
+			Vector3 targetSpin = new Vector3(0f, Steering, 0f).normalized * m_SpinSpeed;
+			Vector3 deltaSpin = targetSpin - currentSpin;
+			deltaSpin = Vector3.Scale(deltaSpin, -Physics.gravity.normalized);
 
-			Vector3 TargetSpin = new Vector3(0f, Steering, 0f).normalized * m_SpinSpeed;
-
-			Vector3 DeltaSpin = TargetSpin - CurrentSpin;
-
-			Vector3 AddSpin = DeltaSpin.normalized * m_SpinAcceleration * Time.fixedDeltaTime;
-
-			if (AddSpin.magnitude > DeltaSpin.magnitude)
+			Vector3 addSpin = deltaSpin.normalized * m_SpinAcceleration * Time.fixedDeltaTime;
+			if (addSpin.magnitude > deltaSpin.magnitude)
 			{
-				AddSpin = DeltaSpin;
+				addSpin = deltaSpin;
 			}
-			Rigidbody.AddTorque(AddSpin, ForceMode.VelocityChange);
+			Rigidbody.AddTorque(addSpin, ForceMode.VelocityChange);
 		}
 
 		void AddThrottleForce()
 		{
-			Vector3 CurrentVelocity = Rigidbody.velocity;
-			Vector3 TargetVel = transform.forward * ((Throttle > 0) ? Throttle : Throttle / 10) * m_Speed * Time.fixedDeltaTime;
-			Vector3 Difference = TargetVel - CurrentVelocity;
-
-			Vector3 AddVel = Difference.normalized * m_Acceleration * Time.fixedDeltaTime;
-			if (AddVel.magnitude > Difference.magnitude)
+			float speed = m_Speed * Throttle;
+			if (Throttle < 0)
 			{
-				AddVel = Difference;
+				speed *= m_ReverseFactor;
+			}
+			Vector3 currentVelocity = Rigidbody.velocity;
+			Vector3 targetVel = transform.forward * speed * Time.fixedDeltaTime;
+			Vector3 deltaVel = targetVel - currentVelocity;
+			deltaVel = Vector3.ProjectOnPlane(deltaVel, -Physics.gravity.normalized);
+
+			Vector3 addVel = deltaVel.normalized * m_Acceleration * Time.fixedDeltaTime;
+			if (addVel.magnitude > deltaVel.magnitude)
+			{
+				addVel = deltaVel;
 			}
 
-			Rigidbody.AddForce(AddVel, ForceMode.VelocityChange);
+			Rigidbody.AddForce(addVel, ForceMode.VelocityChange);
 		}
 	}
 }

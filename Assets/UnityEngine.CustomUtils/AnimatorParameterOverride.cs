@@ -2,57 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-public class AnimatorParameterOverride : MonoBehaviour
+namespace UnityEngine.CustomUtils
 {
-    [System.Serializable]
-    public class FloatDictionary : UnityDictionary<string, float> { }
-
-    [System.Serializable]
-    public class IntDictionary : UnityDictionary<string, int> { }
-
-    [System.Serializable]
-    public class BoolDictionary : UnityDictionary<string, bool> { }
-
-
-    [SerializeField, UnityDictionary("Parameter", "Value")] private FloatDictionary _floatOverrides;
-    [SerializeField, UnityDictionary("Parameter", "Value")] private IntDictionary   _intOverrides  ;
-    [SerializeField, UnityDictionary("Parameter", "Value")] private BoolDictionary  _boolOverrides ;
-
-    private Animator _animator;
-
-
-    void Awake()
-	{
-		_animator = this.GetComponent<Animator>();
-	}
-
-	// Start is called before the first frame update
-	void Start()
+    [RequireComponent(typeof(Animator))]
+    public class AnimatorParameterOverride : MonoBehaviour
     {
-        OnStartOrEnable();
-    }
+        [System.Serializable]
+        public class FloatDictionary : UnityDictionary<string, float> { }
 
-	void OnEnable()
-    {
-        OnStartOrEnable();
-    }
+        [System.Serializable]
+        public class IntDictionary : UnityDictionary<string, int> { }
 
-	void OnStartOrEnable()
-	{
-        foreach (var pair in _floatOverrides)
+        [System.Serializable]
+        public class BoolDictionary : UnityDictionary<string, bool> { }
+
+
+        [SerializeField, UnityDictionary("Parameter", "Value")] private FloatDictionary _floatOverrides;
+        [SerializeField, UnityDictionary("Parameter", "Value")] private IntDictionary _intOverrides;
+        [SerializeField, UnityDictionary("Parameter", "Value")] private BoolDictionary _boolOverrides;
+
+        private Animator _animator;
+
+
+        void Awake()
         {
-            _animator.SetFloat(pair.Key, pair.Value);
+            _animator = GetComponent<Animator>();
         }
 
-        foreach (var pair in _intOverrides)
+        // Start is called before the first frame update
+        void Start()
         {
-            _animator.SetInteger(pair.Key, pair.Value);
+            OnStartOrEnable();
         }
 
-        foreach (var pair in _boolOverrides)
+        void OnEnable()
         {
-            _animator.SetBool(pair.Key, pair.Value);
+            OnStartOrEnable();
+        }
+
+        void OnStartOrEnable()
+        {
+            foreach (var pair in _floatOverrides)
+            {
+                _animator.SetFloat(pair.Key, pair.Value);
+            }
+
+            foreach (var pair in _intOverrides)
+            {
+                _animator.SetInteger(pair.Key, pair.Value);
+            }
+
+            foreach (var pair in _boolOverrides)
+            {
+                _animator.SetBool(pair.Key, pair.Value);
+            }
         }
     }
 }

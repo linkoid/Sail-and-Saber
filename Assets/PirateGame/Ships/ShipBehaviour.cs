@@ -12,8 +12,9 @@ namespace PirateGame.Ships
 			void OnShipCollisionEnter(Collision collision);
 			void OnShipCollisionStay(Collision collision);
 			void OnShipCollisionExit(Collision collision);
-			void OnRaided();
+			void OnRaid();
 			void OnSink();
+			void OnPlunder(Player player);
 		}
 
 		public abstract class ShipBehaviour : MonoBehaviour, IShipBehaviourInternal
@@ -25,12 +26,14 @@ namespace PirateGame.Ships
 			protected virtual void OnShipCollisionStay (Collision collision) { }
 			protected virtual void OnRaided() { }
 			protected virtual void OnSink() { }
+			protected virtual void OnPlunder() { }
 
 			void IShipBehaviourInternal.OnShipCollisionEnter(Collision collision) => OnShipCollisionEnter(collision);
 			void IShipBehaviourInternal.OnShipCollisionExit (Collision collision) => OnShipCollisionExit (collision);
 			void IShipBehaviourInternal.OnShipCollisionStay (Collision collision) => OnShipCollisionStay (collision);
-			void IShipBehaviourInternal.OnRaided() => OnRaided();
+			void IShipBehaviourInternal.OnRaid() => OnRaided();
 			void IShipBehaviourInternal.OnSink() => OnSink();
+			void IShipBehaviourInternal.OnPlunder(Player player) => OnPlunder();
 		}
 	}
 }

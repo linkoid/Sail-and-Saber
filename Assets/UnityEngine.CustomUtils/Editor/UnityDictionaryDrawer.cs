@@ -5,6 +5,7 @@ using System.Reflection;
 using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
+using UnityEngine.CustomUtils;
 
 [CustomPropertyDrawer(typeof(UnityDictionaryAttribute), false)]
 [CustomPropertyDrawer(typeof(UnityDictionary<,>), false)]

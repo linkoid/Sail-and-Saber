@@ -37,6 +37,13 @@ namespace PirateGame.Crew
 			}
 		}
 
+
+		// Shortcuts because I was tired of typing this out so much
+		protected CrewDirector Crew => Commander.Crew;
+		protected Ships.Ship Ship => Crew.Ship;
+		protected Ships.ShipCombat Combat => Ship.Internal.Combat;
+
+
 		protected virtual void Awake()
 		{
 			IsActive = false;

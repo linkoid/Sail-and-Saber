@@ -43,19 +43,19 @@ namespace PirateGame
 		// Update is called once per frame
 		void Update()
 		{
-
+			if (m_DoInitialize)
+			{
+				Initialize();
+				m_DoInitialize = false;
+			}
 		}
 
+		private bool m_DoInitialize = false;
 		void OnValidate()
 		{
 			if (Application.isPlaying)
 			{
-				IEnumerator DoInitialize()
-				{
-					yield return null;
-					Initialize();
-				}
-				StartCoroutine(DoInitialize());
+				m_DoInitialize = true;
 			}
 		}
 

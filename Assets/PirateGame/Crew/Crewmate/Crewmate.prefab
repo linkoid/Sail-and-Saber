@@ -195,6 +195,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Goal: {fileID: 0}
+  m_IsInCombat: 0
+  m_IsStationary: 0
 --- !u!195 &2137331006773663695
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -204,19 +206,19 @@ NavMeshAgent:
   m_GameObject: {fileID: 7342238437241510648}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.25
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.8
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!114 &9155821053849577217
 MonoBehaviour:
   m_ObjectHideFlags: 0

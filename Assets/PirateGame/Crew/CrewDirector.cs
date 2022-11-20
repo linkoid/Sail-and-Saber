@@ -28,9 +28,11 @@ namespace PirateGame.Crew
 		/// </summary>
 		public void Raid(Ships.Ship ship)
 		{
-			foreach (var crewmate in m_Crewmates)
+			var iter = m_Crewmates.Zip(ship.Crew, (a, b) => new { crewmate = a, enemy = b });
+			foreach (var pair in iter)
 			{
-				throw new System.NotImplementedException();
+				pair.crewmate.Raid(ship, pair.enemy);
+				pair.enemy.Defend(ship, pair.crewmate);
 			}
 		}
 
@@ -40,7 +42,7 @@ namespace PirateGame.Crew
 		public void Support()
 		{
 			// TODO : Find better support objects
-			GameObject supportObject = Ship.gameObject;
+			Component supportObject = Ship;
 
 			foreach (var crewmate in m_Crewmates)
 			{
@@ -59,18 +61,7 @@ namespace PirateGame.Crew
 			var iter = m_Crewmates.Zip(cannons, (a, b) => new { crewmate = a, cannon = b });
 			foreach (var pair in iter)
 			{
-				pair.crewmate.Support(Ship, pair.cannon.gameObject);
-			}
-		}
-
-		/// <summary>
-		/// Defend the ship assigned to this crew from the specified enemyCrew
-		/// </summary>
-		public void Defend(CrewDirector enemyCrew)
-		{
-			foreach (var crewmate in m_Crewmates)
-			{
-				throw new System.NotImplementedException();
+				pair.crewmate.Support(Ship, pair.cannon);
 			}
 		}
 

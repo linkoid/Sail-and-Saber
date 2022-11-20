@@ -1,3 +1,5 @@
+using PirateGame.Humanoids;
+using PirateGame.Ships;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,20 +8,26 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Animator))]
 public class HumanoidAnimator : MonoBehaviour
 {
-	Animator Animator => GetComponent<Animator>();
+	public Animator Animator => GetComponent<Animator>();
 	IHumanoid Humanoid => GetComponent<IHumanoid>();
 
 
 	// Start is called before the first frame update
 	void Start()
-    {
+	{
+		Animator.stabilizeFeet = false;
+		Animator.feetPivotActive = 1;
+	}
 
-    }
-
+	public void OnAttack(bool value)
+	{
+		if (value)
+			Animator.SetTrigger("Attack");
+		Animator.SetBool("IsAttacking", value);
+	}
 	public void OnAttack(InputValue input)
 	{
-		Animator.SetTrigger("Attack");
-		Animator.SetBool("IsAttacking", true);
+		OnAttack(input.isPressed);
 	}
 	public void OnDie(InputValue input)
 	{
@@ -32,6 +40,7 @@ public class HumanoidAnimator : MonoBehaviour
     {
 		if (Humanoid == null) return;
 
+
 		Animator.SetBool("IsJumping", Humanoid.IsJumping);
 		Animator.SetBool("IsFalling", !Humanoid.IsGrounded && Humanoid.Velocity.y < 0);
 		Animator.SetBool("IsWalking", Humanoid.IsGrounded && Humanoid.Movement.sqrMagnitude > 0 && Humanoid.Velocity.sqrMagnitude > 0.1);
@@ -41,5 +50,62 @@ public class HumanoidAnimator : MonoBehaviour
 			var lookDirection = Quaternion.LookRotation(Humanoid.Movement, -Physics.gravity.normalized);
 			Humanoid.Rigidbody.MoveRotation(lookDirection);
 		}
+	}
+
+	// Callback for setting up animation IK
+	void OnAnimatorIK(int layerIndex)
+	{
+		if (TryGetTarget(out Component target))
+		{
+			LookAt(target);
+		}
+		else
+		{
+			Animator.SetLookAtWeight(0);
+		}
+	}
+
+	private bool TryGetTarget(out Component target)
+	{
+		target = null;
+		if (Humanoid is AIHumanoid ai)
+		{
+			target = ai.Goal;
+		}
+		else
+		{
+			
+		}
+
+		return target != null;
+	}
+
+	private void LookAt(Component target)
+	{
+		Vector3 position = target.transform.position;
+		if (target is Transform transform)
+		{
+			// Don't look at pure transform objects
+			Animator.SetLookAtWeight(0);
+		}
+		else if (target.TryGetComponent(out Animator animator) && animator.isHuman)
+		{
+			Transform head = animator.GetBoneTransform(HumanBodyBones.Head);
+			if (head != null)
+			{
+				position = head.position;
+				Animator.SetLookAtWeight(1, 0.25f, 0.75f, 1.0f, 0.5f);
+			}
+			else // If no head
+			{
+				position = animator.bodyPosition;
+				Animator.SetLookAtWeight(0.25f);
+			}
+		}
+		else // If not a humanoid
+		{
+			Animator.SetLookAtWeight(0.25f);
+		}
+		Animator.SetLookAtPosition(position);
 	}
 }

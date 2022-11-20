@@ -17,7 +17,7 @@ namespace PirateGame.Crew
 		private Transform PathfindGoal => (_pathfindGoal != null) ? _pathfindGoal : CreatePathfindGoal();
 		[SerializeField, ReadOnly] private Transform _pathfindGoal;
 
-		private AIHumanoid Humanoid => this.GetComponent<AIHumanoid>();
+		public AIHumanoid Humanoid => this.GetComponent<AIHumanoid>();
 
 		void Start()
 		{
@@ -29,17 +29,17 @@ namespace PirateGame.Crew
 		/// </summary>
 		public void Raid(Ship ship, Crewmate enemy)
 		{
-			throw new System.NotImplementedException();
+			Humanoid.Standby();
+			Humanoid.Attack(enemy.Humanoid);
 		}
 
 		/// <summary>
 		/// Support the specified ship, at the specified supportObject.
 		/// </summary>
-		public void Support(Ship ship, GameObject supportObject)
+		public void Support(Ship ship, Component supportObject)
 		{
-			PathfindGoal.SetParent(ship.transform);
-			PathfindGoal.position = supportObject.transform.position;
-			Humanoid.Goal = PathfindGoal;
+			Humanoid.Standby();
+			Humanoid.Goal = supportObject;
 		}
 
 		/// <summary>
@@ -47,7 +47,8 @@ namespace PirateGame.Crew
 		/// </summary>
 		public void Defend(Ship ship, Crewmate enemy)
 		{
-			throw new System.NotImplementedException();
+			Humanoid.Standby();
+			Humanoid.Defend(enemy.Humanoid);
 		}
 
 		/// <summary>
@@ -55,32 +56,50 @@ namespace PirateGame.Crew
 		/// </summary>
 		public void Board(Ship ship)
 		{
-			Board(ship, ship.gameObject);
-			if (NavMesh.FindClosestEdge(ship.NavMeshSurface.navMeshData.position, out NavMeshHit hit, Humanoid.Agent.areaMask))
-			{
-				PathfindGoal.position = hit.position;
-			}
-			else
-			{
-				PathfindGoal.position = ship.transform.position;
-			}
+			PathfindGoal.parent = ship.transform;
+			PathfindGoal.position = GetRandomNavPointOnShip(ship);
+			Board(ship, PathfindGoal);
 		}
 
 		/// <summary>
 		/// Board the specified ship, and wait at the specified standbyObject
 		/// </summary>
-		public void Board(Ship ship, GameObject standbyObject)
+		public void Board(Ship ship, Component standbyObject)
 		{
-			PathfindGoal.SetParent(ship.transform, true);
-			PathfindGoal.position = standbyObject.transform.position;
-			Humanoid.Goal = PathfindGoal;
-			Humanoid.Agent.Warp(PathfindGoal.position);
+			Humanoid.Standby();
+			//PathfindGoal.SetParent(ship.transform, true);
+			Humanoid.Goal = standbyObject;
+			//Humanoid.Agent.Warp(PathfindGoal.position);
 		}
 
 		private Transform CreatePathfindGoal()
 		{
 			_pathfindGoal = new GameObject("PathfindGoal").transform;
 			return _pathfindGoal;
+		}
+
+		private Vector3 GetRandomNavPointOnShip(Ship ship)
+		{
+			Vector3 randomPos = new Vector3(Random.value, 0.5f, Random.value);
+			randomPos -= Vector3.one * 0.5f;
+			Bounds bounds = ship.NavMeshSurface.navMeshData.sourceBounds;
+			randomPos = Vector3.Scale(randomPos, bounds.size);
+			randomPos = ship.transform.TransformPoint(randomPos);
+
+			NavMeshQueryFilter filter = new NavMeshQueryFilter()
+			{
+				agentTypeID = Humanoid.Agent.agentTypeID,
+				areaMask = Humanoid.Agent.areaMask,
+			};
+
+			if (NavMesh.SamplePosition(randomPos, out NavMeshHit hit, Humanoid.Agent.height * 2, filter))
+			{
+				return hit.position;
+			}
+			else
+			{
+				return ship.transform.position;
+			}
 		}
 	}
 }

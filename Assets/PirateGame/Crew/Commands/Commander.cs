@@ -13,7 +13,8 @@ namespace PirateGame.Crew
 		public CrewDirector Crew => Player.Crew;
 		public Ships.Ship Target => Player.Target;
 
-		[SerializeField] List<Command> m_Command = new List<Command>();
+		[SerializeField] List<Command> m_CommandPrefabs = new List<Command>();
+		[SerializeField, ReadOnly] List<Command> m_Commands = new List<Command>();
 
 		private GameObject CommandBG;
 
@@ -23,9 +24,10 @@ namespace PirateGame.Crew
 			FindPlayer();
 
 			CommandBG = transform.GetChild(0).gameObject;
-			for (int i = 0; i < m_Command.Count; i++)
+			for (int i = 0; i < m_CommandPrefabs.Count; i++)
 			{
-				Button.Instantiate(m_Command[i], CommandBG.transform);
+				var newCommand = Object.Instantiate(m_CommandPrefabs[i], CommandBG.transform);
+				m_Commands.Add(newCommand);
 			}
 		}
 

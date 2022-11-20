@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace PirateGame.Ships
 {
+	[SelectionBase]
 	public class Cannon : MonoBehaviour
 	{
 		public Vector2 Angle = new Vector2(90, 30);

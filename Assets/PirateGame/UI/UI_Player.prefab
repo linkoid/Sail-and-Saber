@@ -2115,7 +2115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1554038903897684936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2636,6 +2636,7 @@ MonoBehaviour:
   Loot_Text: {fileID: 1554038904828369339}
   Crew_Text: {fileID: 1554038902798112430}
   Error_Text: {fileID: 4260823946617109268}
+  Error_timer: 5
   Ship: {fileID: 8090241698980888342, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
 --- !u!223 &1554038904392111145
 Canvas:
@@ -3420,9 +3421,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  m_Command:
+  m_CommandPrefabs:
   - {fileID: 5097189657246239446, guid: 41c67a470fb8c424fa3c40acbfbdd5c5, type: 3}
-  - {fileID: 5097189657246239446, guid: 480c1a2ca9ac597418ea7178e4bec3ad, type: 3}
+  - {fileID: 3231022270938431815, guid: 480c1a2ca9ac597418ea7178e4bec3ad, type: 3}
+  m_Commands: []
 --- !u!1 &3443711299730438788
 GameObject:
   m_ObjectHideFlags: 0

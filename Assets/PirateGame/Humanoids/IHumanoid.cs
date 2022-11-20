@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.CustomUtils;
 
-public interface IHumanoid
+public interface IHumanoid : IBehavior
 {
 	bool IsJumping { get; }
 	bool IsGrounded { get; }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.CustomUtils;
 using UnityEngine.Rendering;
 using StackTrace = System.Diagnostics.StackTrace;
 
@@ -117,7 +118,7 @@ namespace PirateGame.Ships
 		[System.Serializable]
 		public class ShipCollidersDictionary : UnityDictionary<Ship, List<Collider>> { }
 
-		[SerializeField, UnityDictionary("Ship", "Colliders")]
+		[SerializeField, UnityDictionary("Ship", "Colliders"), ReadOnly]
 		private ShipCollidersDictionary m_RaidableShips = new ShipCollidersDictionary();
 
 		void OnTriggerEnter(Collider other)
@@ -158,7 +159,7 @@ namespace PirateGame.Ships
 
 		protected override void OnShipCollisionEnter(Collision collision)
 		{
-			Debug.Log("RAM!", this);
+			//Debug.Log("RAM!", this);
 		}
 
 		private bool CheckHasValidTarget()
