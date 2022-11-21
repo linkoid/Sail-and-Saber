@@ -1,4 +1,5 @@
 using PirateGame.Crew;
+using PirateGame.Ships;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

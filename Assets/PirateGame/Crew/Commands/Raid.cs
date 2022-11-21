@@ -14,10 +14,10 @@ namespace PirateGame.Crew.Commands
 
 		public override bool Poll()
 		{
-			// Cannot target nothing
+			// Cannot raid nothing
 			if (Commander.Target == null) return false;
 
-			// Cannot target yourself
+			// Cannot raid yourself
 			if (Commander.Target == Commander.Player.Ship) return false;
 
 			// Must be close enough
@@ -60,7 +60,7 @@ namespace PirateGame.Crew.Commands
 			yield return new WaitForSeconds(3);
 
 			// Sink the raided ship
-			target.TakeDamage(Mathf.Infinity);
+			target.Sink();
 		}
 
 		protected override void Update()

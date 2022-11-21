@@ -177,7 +177,7 @@ namespace PirateGame.Humanoids
 			{
 				attack = true;
 			}
-			else if (distance <= Agent.radius * 1.1)
+			else if (distance <= Agent.radius * 2.1)
 			{
 				attack = true;
 			}

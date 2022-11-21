@@ -13,11 +13,11 @@ namespace PirateGame.Crew
 		public bool IsActive { get => _isActive; private set => _isActive = value; }
 		[SerializeField, ReadOnly] private bool _isActive = false;
 
-        public Button ButtonObject;
+		public Button ButtonObject;
 
 		protected Coroutine ActiveExecution;
 
-        public Commander Commander
+		public Commander Commander
 		{
 			get
 			{
