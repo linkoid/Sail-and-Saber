@@ -46,16 +46,22 @@ namespace PirateGame.Ships
 
 		void FixedUpdate()
 		{
+			if (Ship.IsRaided || Ship.IsPlundered) return;
+
 			if (!Aggro())
 			{
 				Patrol();
 			}
+
+			Ship.Internal.Combat.FireBroadsideCannons();
+			Ship.Internal.Combat.FireDeckCannons();
 		}
 
 		protected override void OnRaided()
 		{
 			base.OnRaided();
 			CreateCrew();
+			Ship.Internal.Physics.Stop();
 		}
 
 		protected override void OnSink()

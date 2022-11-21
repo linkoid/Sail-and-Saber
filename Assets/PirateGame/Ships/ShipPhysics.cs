@@ -29,6 +29,15 @@ namespace PirateGame.Ships
 		}
 
 		/// <summary>
+		/// Stops the ship
+		/// </summary>
+		public void Stop()
+		{
+			Steering = 0;
+			Throttle = 0;
+		}
+
+		/// <summary>
 		/// Adjusts steering and throttle to move to the position.
 		/// Must be called repeatedly.
 		/// </summary>
