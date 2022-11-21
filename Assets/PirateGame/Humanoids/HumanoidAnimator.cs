@@ -82,7 +82,7 @@ public class HumanoidAnimator : MonoBehaviour
 
 	private void LookAt(Component target)
 	{
-		Vector3 position = target.transform.position;
+		Vector3 targetPosition = target.transform.position;
 		if (target is Transform transform)
 		{
 			// Don't look at pure transform objects
@@ -93,19 +93,24 @@ public class HumanoidAnimator : MonoBehaviour
 			Transform head = animator.GetBoneTransform(HumanBodyBones.Head);
 			if (head != null)
 			{
-				position = head.position;
-				Animator.SetLookAtWeight(1, 0.25f, 0.75f, 1.0f, 0.5f);
+				targetPosition = head.position;
+				Animator.SetLookAtWeight(1, 0.5f, 0.75f, 1.0f, 0.5f);
 			}
 			else // If no head
 			{
-				position = animator.bodyPosition;
+				targetPosition = animator.bodyPosition;
 				Animator.SetLookAtWeight(0.25f);
 			}
 		}
-		else // If not a humanoid
+		else if (target is Cannon cannon)
+		{
+			targetPosition = cannon.LookTarget.position;
+			Animator.SetLookAtWeight(1, 0.25f, 0.75f, 1.0f, 0.5f);
+		}
+		else // If not a recognized type
 		{
 			Animator.SetLookAtWeight(0.25f);
 		}
-		Animator.SetLookAtPosition(position);
+		Animator.SetLookAtPosition(targetPosition);
 	}
 }

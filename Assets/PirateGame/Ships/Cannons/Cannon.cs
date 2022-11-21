@@ -7,6 +7,8 @@ namespace PirateGame.Ships
 	[SelectionBase]
 	public class Cannon : MonoBehaviour
 	{
+		public Transform LookTarget => m_LookTarget;
+
 		public Vector2 Angle = new Vector2(90, 30);
 		public float Range = 50;
 
@@ -19,6 +21,8 @@ namespace PirateGame.Ships
 		[SerializeField] private GameObject m_CannonBall;
 
 		[SerializeField] private bool m_FireButton = false;
+
+		[SerializeField] private Transform m_LookTarget;
 
 		void Start()
 		{

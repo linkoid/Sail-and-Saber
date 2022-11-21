@@ -2,6 +2,7 @@ using PirateGame.Crew;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -30,6 +31,11 @@ namespace PirateGame.Humanoids
 			Agent.updateUpAxis = true;
 		}
 
+		void Update()
+		{
+			AntiSlide(Time.deltaTime);
+		}
+
 		// Update is called once per frame
 		void FixedUpdate()
 		{
@@ -52,6 +58,9 @@ namespace PirateGame.Humanoids
 			{
 				Agent.updateRotation = true;
 			}
+
+
+			//AntiSlide(Time.fixedDeltaTime);
 		}
 
 		/// <summary>
@@ -176,6 +185,40 @@ namespace PirateGame.Humanoids
 			this.SendMessage("OnAttack", attack);
 
 			return attack;
+		}
+
+		[SerializeField, ReadOnly] private Vector3 m_AntiSlide;
+		private void AntiSlide(float deltaTime)
+		{
+			if (!Agent.isOnNavMesh) return;
+			if (!TryGetNavMeshOwner(out Component component)) return;
+			if (!component.TryGetComponent(out Rigidbody ground)) return;
+
+			Vector3 currentPosition = Agent.nextPosition;
+			Vector3 groundVelocity = ground.GetPointVelocity(currentPosition);
+
+			m_AntiSlide = groundVelocity * deltaTime;
+			Vector3 newPosition = currentPosition + m_AntiSlide;
+
+			Agent.nextPosition = newPosition;
+		}
+
+		private bool TryGetNavMeshOwner(out Component owner)
+		{
+			owner = null;
+			if (Agent.navMeshOwner is GameObject gameObject)
+			{
+				owner = gameObject.transform;
+				return true;
+			}
+			
+			if (Agent.navMeshOwner is Component component)
+			{
+				owner = component;
+				return true;
+			}
+
+			return false;
 		}
 	}
 }
