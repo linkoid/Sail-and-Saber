@@ -18,6 +18,7 @@ namespace PirateGame.Ships
 		[SerializeField] private Transform m_AimTarget;
 		[SerializeField] private Transform m_RestTarget;
 		[SerializeField] private ParticleSystem m_Emitter;
+		[SerializeField] private SoundEffect m_SoundEffect;
 		[SerializeField] private GameObject m_CannonBall;
 
 		[SerializeField] private bool m_FireButton = false;
@@ -74,7 +75,7 @@ namespace PirateGame.Ships
 		{
 			float startTime = Time.time;
 
-			Debug.Log("Firing!");
+			//Debug.Log("Firing!");
 
 			// Aim the cannon
 			for (float elapsed = 0; elapsed < delay; elapsed = Time.time - startTime)
@@ -88,6 +89,7 @@ namespace PirateGame.Ships
 			// Fire the cannon
 			m_Emitter.gameObject.SetActive(true);
 			m_Emitter.Play(true);
+			m_SoundEffect.Play();
 			yield return new WaitForSeconds(m_Emitter.main.duration);
 			//m_Emitter.Stop(true);
 			m_FireGizmoTarget = Vector3.positiveInfinity;

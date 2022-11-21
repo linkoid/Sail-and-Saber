@@ -22,15 +22,16 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: WaterMaterial
   m_Shader: {fileID: -6465566751694194690, guid: 3f10f4732afbcbe4dbe90e5086f1829f, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _ALPHAPREMULTIPLY_ON
+  m_ValidKeywords:
+  - _SPECULAR_SETUP
   - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords: []
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap: {}
+  m_CustomRenderQueue: 2950
+  stringTagMap:
+    RenderType: Transparent
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -108,14 +109,14 @@ Material:
     - Vector1_6269b1025b26473ca8bc61634f34b537: 0.95
     - Vector1_687f54e8c371429f86b9eaab0e7dfe3e: 0.12
     - Vector1_6c82dffdd68049bcb019d3a9c64c92a0: 0.2
-    - Vector1_6f56a0970372485390c6587863c2374e: 2
+    - Vector1_6f56a0970372485390c6587863c2374e: 0.5
     - Vector1_7273530c27a34c9f8ee5723b84f96baa: 0.2
     - Vector1_dada42ebfac44076897b6de67441ba32: 0.3
-    - _AlphaClip: 1
-    - _Blend: 1
+    - _AlphaClip: 0
+    - _Blend: 0
     - _BumpScale: 1
     - _CastShadows: 1
-    - _Cull: 2
+    - _Cull: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
@@ -127,11 +128,11 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueControl: 0
-    - _QueueOffset: 0
+    - _QueueOffset: -50
     - _ReceiveShadows: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _Surface: 1
     - _UVSec: 0
     - _WorkflowMode: 0
