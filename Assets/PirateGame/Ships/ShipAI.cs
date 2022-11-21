@@ -51,7 +51,7 @@ namespace PirateGame.Ships
 		{
 			if (m_Crew != null)
 			{
-				Object.Destroy(m_Crew);
+				Object.Destroy(m_Crew.gameObject);
 			}
 		}
 	}
