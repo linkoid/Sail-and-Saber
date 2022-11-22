@@ -43,7 +43,17 @@ namespace PirateGame.Humanoids
 			if (!Goal.gameObject.activeInHierarchy) return;
 
 			if (!m_IsStationary)
-				Agent.SetDestination(Goal.transform.position);
+			{
+				bool succeded = false; 
+				if (Agent.isOnNavMesh)
+				{
+					succeded = Agent.SetDestination(Goal.transform.position);
+				}
+				if (!succeded)
+				{
+					Agent.Warp(Goal.transform.position);
+				}
+			}
 
 			if (m_IsInCombat && TryAttack())
 			{

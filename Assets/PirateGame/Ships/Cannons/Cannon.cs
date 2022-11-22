@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace PirateGame.Ships
@@ -42,18 +43,30 @@ namespace PirateGame.Ships
 
 		public bool CheckInRange(Vector3 target)
 		{
-			// XXX : Probably broken
+			Vector3 localDirection = m_RangeOrigin.InverseTransformPoint(target).normalized;
+			Vector3 rotation = Quaternion.LookRotation(localDirection, Vector3.up).eulerAngles;
+			for (int i = 0; i < 3; i++)
+			{
+				if (rotation[i] > 180)
+				{
+					rotation[i] -= 360;
+				}
+			}
 
-			Vector3 xzTarget = Vector3.ProjectOnPlane(target, m_RangeOrigin.up   );
-			Vector3 xyTarget = Vector3.ProjectOnPlane(target, m_RangeOrigin.right);
-			float xzAngle = Vector3.Angle(xzTarget - m_RangeOrigin.position, m_RangeOrigin.forward);
-			float xyAngle = Vector3.Angle(xyTarget - m_RangeOrigin.position, m_RangeOrigin.forward);
-
-			if (xzAngle > Angle.x) return false;
-			if (xyAngle > Angle.y) return false;
+			if (Mathf.Abs(rotation.y) > Angle.x / 2)
+			{
+				return false;
+			}
+			if (Mathf.Abs(rotation.x) > Angle.y / 2)
+			{
+				return false;
+			}
 
 			float distSqrd = (target - m_RangeOrigin.position).sqrMagnitude;
-			if (distSqrd > RangeSqrd) return false;
+			if (distSqrd > RangeSqrd)
+			{
+				return false;
+			}
 
 			return true;
 		}
@@ -120,16 +133,16 @@ namespace PirateGame.Ships
 		Vector3 m_FireGizmoTarget = Vector3.positiveInfinity;
 		void OnDrawGizmos()
 		{
-			if (m_FireGizmoTarget == Vector3.positiveInfinity) return;
 
-			Gizmos.color = Color.red;
-			Gizmos.DrawLine(m_RangeOrigin.position, m_FireGizmoTarget);
+			if (m_FireGizmoTarget != Vector3.positiveInfinity)
+			{
+				Gizmos.color = Color.red;
+				float dist = Vector3.Distance(m_FireGizmoTarget, m_RangeOrigin.position);
+				Gizmos.matrix = Matrix4x4.LookAt(m_RangeOrigin.position, m_FireGizmoTarget, m_RangeOrigin.up);
+				Gizmos.DrawFrustum(Vector3.zero, Angle.x / 10, dist, 0, Angle.x / Angle.y);
 
-			float dist = Vector3.Distance(m_FireGizmoTarget, m_RangeOrigin.position);
-			Gizmos.matrix = Matrix4x4.LookAt(m_RangeOrigin.position, m_FireGizmoTarget, m_RangeOrigin.up);
-			Gizmos.DrawFrustum(Vector3.zero, Angle.x / 10, dist, 0, Angle.x / Angle.y);
-
-			Gizmos.matrix = Matrix4x4.identity;
+				Gizmos.matrix = Matrix4x4.identity;
+			}
 		}
 	}
 }
