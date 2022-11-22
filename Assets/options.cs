@@ -7,18 +7,29 @@ using UnityEngine.InputSystem;
 public class options : MonoBehaviour
 {
     public Slider VolumeSlider;
-    public AudioSource musicSource => GameObject.Find("Music_Player").GetComponent<AudioSource>();
+    public AudioSource musicSource;
+    //public AudioSource SPX => GameObject.Find("SoundEffect").GetComponent<AudioSource>();
 
     [SerializeField] bool isPaused =false;
     [SerializeField] GameObject Target;
 
     private void Start()
     {
+        if(!musicSource){
+        try {
+
+            musicSource = GameObject.Find("Music_Player").GetComponent<AudioSource>();
+        } catch(UnityException e) {
+            Debug.Log(e.StackTrace);
+        }
+        }
     }
 
     private void Update()
     {
-        musicSource.volume = VolumeSlider.value;
+        if(musicSource != null){
+            musicSource.volume = VolumeSlider.value;
+        }
     }
     public void Resume(){
             isPaused = !isPaused;
