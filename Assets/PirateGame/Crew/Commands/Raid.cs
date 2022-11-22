@@ -30,9 +30,12 @@ namespace PirateGame.Crew.Commands
 
 		protected override IEnumerable OnExecute()
 		{
-			// Save target in local variable
-			// so even if target changes, we are still raiding the same ship.
-			var target = Commander.Target;
+            Commander.isRaiding = true;
+            Commander.isRepairing = false;
+
+            // Save target in local variable
+            // so even if target changes, we are still raiding the same ship.
+            var target = Commander.Target;
 
 			// Notify the target that it is being raided
 			target.Raid();
@@ -45,8 +48,12 @@ namespace PirateGame.Crew.Commands
 			float loopStep = 0.8f; // how often is the code in the loop run?
 			for (float loopTime = 0; loopTime < loopDuration; loopTime += loopStep)
 			{
-				yield return new WaitForSeconds(loopStep);
+                if (!Commander.isRaiding)
+                {
+                    loopTime = loopDuration;
+                }
 
+                yield return new WaitForSeconds(loopStep);
 				// TODO : Maybe do dice-rolls to decide which crewmate & enemy dies or something?
 			}
 
@@ -61,6 +68,7 @@ namespace PirateGame.Crew.Commands
 
 			// Sink the raided ship
 			target.Sink();
+            Commander.isRaiding = false;
 		}
 
 		protected override void Update()
@@ -70,7 +78,8 @@ namespace PirateGame.Crew.Commands
 
 		protected override void OnCancel()
 		{
-			throw new System.NotImplementedException();
+            Commander.isRaiding = false;
+            throw new System.NotImplementedException();
 		}
 	}
 }

@@ -12,15 +12,49 @@ namespace PirateGame.Crew.Commands
 
 		public override bool Poll()
 		{
-			throw new System.NotImplementedException();
-		}
+            // Cannot target nothing
+            if (Commander.Target == null) return false;
+
+            // Must have a ship
+            if (Ship == null) return false;
+
+            // Can target yourself
+            if (Commander.Target == Commander.Player.Ship) return true;
+
+            // else
+            return true;
+        }
 
 		protected override IEnumerable OnExecute()
         {
-            throw new System.NotImplementedException();
+            //Set the state of the crew
+            Commander.isRaiding = false;
+            Commander.isRepairing = true;
+
+            // Save target in local variable
+            // so even if target changes, we are still repairing the same ship.
+            var target = Commander.Target;
+            
+            Crew.Support();
+
+            yield return new WaitForSeconds(3);
+
+            // Loop to do stuff during the repair
+            float loopStep = 0.5f; // how often is the code in the loop run?
+
+            //Can we parameterize this to make ship repairs faster?
+            int repairAmount = 1;
+
+            while(Ship.Health < Ship.MaxHealth && Commander.isRepairing)
+            {
+                Ship.Repair(repairAmount);
+                yield return new WaitForSeconds(loopStep);
+            }
+
+            Crew.Board(Ship);
         }
 
-		protected override void Update()
+        protected override void Update()
         {
             base.Update();
             // run command logic here
@@ -28,6 +62,7 @@ namespace PirateGame.Crew.Commands
 
         protected override void OnCancel()
         {
+            Commander.isRepairing = false;
             throw new System.NotImplementedException();
         }
     }

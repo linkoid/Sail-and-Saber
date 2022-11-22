@@ -3421,9 +3421,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
+  _isRaiding: 0
+  _isRepairing: 0
   m_CommandPrefabs:
   - {fileID: 5097189657246239446, guid: 41c67a470fb8c424fa3c40acbfbdd5c5, type: 3}
   - {fileID: 3231022270938431815, guid: 480c1a2ca9ac597418ea7178e4bec3ad, type: 3}
+  - {fileID: 1751743207145721150, guid: 20520739d6c047441a4b372fb3eccc89, type: 3}
+  - {fileID: 2459812179460939031, guid: 0bde70e1331d7bc4789257d10155d70f, type: 3}
   m_Commands: []
 --- !u!1 &3443711299730438788
 GameObject:
@@ -4114,7 +4118,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 20, y: 20}
-  m_SizeDelta: {x: 301.865, y: 204.1743}
+  m_SizeDelta: {x: 301.865, y: 125}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &2630152336497085859
 CanvasRenderer:
