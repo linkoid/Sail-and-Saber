@@ -11,10 +11,10 @@ namespace PirateGame.UI
 		public Player Player { get => m_Player; private set => m_Player = value; }
 
 		[SerializeField] private Player m_Player;
-		public Slider HealthBar;
-		public TMP_Text Loot_Text, Crew_Text, Error_Text;
+		public Slider HealthBar,Target_Health;
+		public TMP_Text Loot_Text, Crew_Text, Error_Text,Target_Title;
 		[SerializeField] float Error_timer = 5f;
-		public GameObject Ship;
+		public GameObject Ship,TargetUI;
 		bool isBuying, isError;
 
 		public bool CanBuy(int cost)
@@ -78,6 +78,21 @@ namespace PirateGame.UI
 		// Update is called once per frame
 		void Update()
 		{
+			if(m_Player.Target){
+				Target_Title.text =m_Player.Target.name;
+				TargetUI.SetActive(true);
+
+				if (Target_Health.maxValue != m_Player.Target.MaxHealth)
+				{
+					Target_Health.maxValue = Player.Target.MaxHealth;
+				}
+				float valueDif = Player.Target.Health - Target_Health.value;
+				Target_Health.value += valueDif * .01f;
+				
+			}else {
+				TargetUI.SetActive(false);
+
+			}
 
 			Loot_Text.text = Player.Gold.ToString();
 
