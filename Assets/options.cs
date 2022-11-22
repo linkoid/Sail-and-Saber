@@ -7,14 +7,13 @@ using UnityEngine.InputSystem;
 public class options : MonoBehaviour
 {
     public Slider VolumeSlider;
-    public AudioSource musicSource;
+    public AudioSource musicSource => GameObject.Find("Music_Player").GetComponent<AudioSource>();
 
     [SerializeField] bool isPaused =false;
     [SerializeField] GameObject Target;
 
     private void Start()
     {
-        musicSource= GameObject.Find("Music_Player").GetComponent<AudioSource>();
     }
 
     private void Update()
