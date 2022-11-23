@@ -48,11 +48,6 @@ namespace PirateGame.Crew.Commands
 			float loopStep = 0.8f; // how often is the code in the loop run?
 			for (float loopTime = 0; loopTime < loopDuration; loopTime += loopStep)
 			{
-                if (!Commander.isRaiding)
-                {
-                    loopTime = loopDuration;
-                }
-
                 yield return new WaitForSeconds(loopStep);
 				// TODO : Maybe do dice-rolls to decide which crewmate & enemy dies or something?
 			}
@@ -78,8 +73,9 @@ namespace PirateGame.Crew.Commands
 
 		protected override void OnCancel()
 		{
+			// Stop running OnExecute
+			StopCoroutine(this.ActiveExecution);
             Commander.isRaiding = false;
-            throw new System.NotImplementedException();
 		}
 	}
 }
