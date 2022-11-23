@@ -27,6 +27,7 @@ public class Weather_Changer : MonoBehaviour
     {
         Debug.Log("hit");
         Weather.Instance.TransitionWeather(WP);
+        GameObject.Destroy(gameObject);
     }
 }
 }

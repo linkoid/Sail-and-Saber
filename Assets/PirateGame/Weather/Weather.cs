@@ -17,15 +17,26 @@ namespace PirateGame.Weather
 
 		private BuoyancyEffector Sea => Object.FindObjectOfType<BuoyancyEffector>(false);
 
-
+		[SerializeField] float Transitiontimer,transitionDuration=5f;
+		[SerializeField] bool transitionSet = false;
 
 		public void TransitionWeather(WeatherParams newWeather)
 		{
+			transitionSet = true;
+			Transitiontimer = 0f;
 			NewWeather = newWeather;
 		}
 
 		void Update()
 		{
+			if(transitionSet){
+				Transitiontimer += Time.deltaTime;
+			}
+
+			if(Transitiontimer >=transitionDuration){
+				transitionSet = false;
+				Transitiontimer = 0;
+			}
 			UpdateWeather();
 			UpdateTransition();
 		}
@@ -47,7 +58,7 @@ namespace PirateGame.Weather
 		void UpdateTransition()
 		{
 			float time = Time.time;
-			float lerpFactor = time %100; // Some equation based on time
+			float lerpFactor = transitionDuration/Transitiontimer; // Some equation based on time
 			CurrentWeather = WeatherParams.Lerp(OldWeather, NewWeather, lerpFactor);
 
 		}
