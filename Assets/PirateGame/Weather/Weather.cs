@@ -17,6 +17,8 @@ namespace PirateGame.Weather
 
 		private BuoyancyEffector Sea => Object.FindObjectOfType<BuoyancyEffector>(false);
 
+
+
 		public void TransitionWeather(WeatherParams newWeather)
 		{
 			NewWeather = newWeather;
@@ -25,6 +27,7 @@ namespace PirateGame.Weather
 		void Update()
 		{
 			UpdateWeather();
+			UpdateTransition();
 		}
 
 		/// <summary>
@@ -32,7 +35,10 @@ namespace PirateGame.Weather
 		/// </summary>
 		void UpdateWeather()
 		{
-			// Sea.something = something;
+			Sea.WaveAmplitude = CurrentWeather.WaveAmplitude;
+			Sea.WaveDistance = CurrentWeather.WaveDistance;
+			Sea.WaveSpeed = CurrentWeather.WaveSpeed;
+
 		}
 
 		/// <summary>
@@ -41,8 +47,9 @@ namespace PirateGame.Weather
 		void UpdateTransition()
 		{
 			float time = Time.time;
-			float lerpFactor = time; // Some equation based on time
+			float lerpFactor = time %100; // Some equation based on time
 			CurrentWeather = WeatherParams.Lerp(OldWeather, NewWeather, lerpFactor);
+
 		}
 	}
 }

@@ -12,9 +12,9 @@ namespace PirateGame.Sea
 {
 	public class BuoyancyEffector : MonoBehaviour
 	{
-		[SerializeField] private float WaveAmplitude = 1;
-		[SerializeField] private float WaveDistance  = 10;
-		[SerializeField] private float WaveSpeed     = 5;
+		[SerializeField] public float WaveAmplitude = 1;
+		[SerializeField] public float WaveDistance  = 10;
+		[SerializeField] public float WaveSpeed     = 5;
 
 		[Tooltip("Density of the fluid in kg/m³")]
 		[SerializeField] private float m_FluidDensity = 1000f;
@@ -113,7 +113,7 @@ namespace PirateGame.Sea
 				Vector3 center1 = capsuleCollider.center + Vector3.down * centerOffset;
 
 				float sphereVolume = GetSphereVolume(capsuleCollider.transform, center0, capsuleCollider.radius, out VolumeTensor[] points0);
-				                     GetSphereVolume(capsuleCollider.transform, center1, capsuleCollider.radius, out VolumeTensor[] points1);
+				GetSphereVolume(capsuleCollider.transform, center1, capsuleCollider.radius, out VolumeTensor[] points1);
 
 				tensors = new VolumeTensor[points0.Length + points1.Length];
 				points0.CopyTo(tensors, 0);
