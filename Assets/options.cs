@@ -29,7 +29,6 @@ public class options : MonoBehaviour
 
     private void Update()
     {
-        
         if(musicSource != null){
             musicSource.volume = VolumeSlider.value;
         }
