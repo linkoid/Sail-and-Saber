@@ -40,16 +40,16 @@ namespace PirateGame.UI
 			}
 			if (CanBuy(3))
 			{
-				Player.Ship.Repair(Mathf.Infinity);
+				Player.Ship.Repair(Player.Ship.MaxHealth);
 			}
 		}
 
 		
-		public void BuyShipType(int cost,GameObject ShipType)
+		public void BuyShipType(int cost)
 		{
 			if (CanBuy(cost))
 			{
-				Instantiate(ShipType,Player.transform);
+				Instantiate(Ship,Player.transform);
 			}
 		}
 
