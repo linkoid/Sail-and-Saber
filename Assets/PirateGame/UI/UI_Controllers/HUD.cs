@@ -79,7 +79,7 @@ namespace PirateGame.UI
 		void Update()
 		{
 			if(m_Player.Target){
-				Target_Title.text =m_Player.Target.name;
+				Target_Title.text = m_Player.Target.name;
 				TargetUI.SetActive(true);
 
 				if (Target_Health.maxValue != m_Player.Target.MaxHealth)

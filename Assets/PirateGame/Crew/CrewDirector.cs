@@ -36,6 +36,35 @@ namespace PirateGame.Crew
 			}
 		}
 
+        /// <summary>
+        /// Attack the targeted enemy human
+        /// </summary>
+        public void Attack(Ships.Ship ship, int damage)
+        {
+            var iter = m_Crewmates.Zip(ship.Crew, (a, b) => new { crewmate = a, enemy = b });
+            int i = 0;
+            foreach (var pair in iter)
+            {
+                pair.crewmate.TakeDamage(damage);
+                pair.enemy.TakeDamage(damage);
+                i++;
+                if (pair.crewmate.health <= 0 || pair.enemy.health <= 0)
+                {
+                    i--;
+                    if (pair.crewmate.health <= 0)
+                    {
+                        m_Crewmates.RemoveAt(i);
+                    }
+                        
+                    if (pair.enemy.health <= 0)
+                    {
+                        ship.Crew.RemoveAt(i);
+                    }  
+                    //Debug.Log("DED");
+                }
+            }
+        }
+
 		/// <summary>
 		/// Support the ship assigned to this crew
 		/// </summary>

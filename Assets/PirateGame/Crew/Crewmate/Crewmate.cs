@@ -19,10 +19,19 @@ namespace PirateGame.Crew
 
 		public AIHumanoid Humanoid => this.GetComponent<AIHumanoid>();
 
+        public int health = 10;
+        public int strength = 1;
+
 		void Start()
 		{
 			_pathfindGoal = CreatePathfindGoal();
 		}
+
+        public void TakeDamage(int damage)
+        {
+            health -= damage;
+            Debug.Log("Took damage! This one has " + health + " health left");
+        }
 
 		/// <summary>
 		/// Raid the specified ship, attacking the specified enemy

@@ -49,7 +49,8 @@ namespace PirateGame.Crew.Commands
 			for (float loopTime = 0; loopTime < loopDuration; loopTime += loopStep)
 			{
                 yield return new WaitForSeconds(loopStep);
-				// TODO : Maybe do dice-rolls to decide which crewmate & enemy dies or something?
+                // TODO : Maybe do dice-rolls to decide which crewmate & enemy dies or something?
+                Crew.Attack(target, 1);
 			}
 
 			// Call crewmates back
