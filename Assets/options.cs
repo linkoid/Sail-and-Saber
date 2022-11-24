@@ -13,8 +13,10 @@ public class options : MonoBehaviour
     [SerializeField] bool isPaused =false;
     [SerializeField] GameObject Target;
 
-    private void Start()
+    private void Awake()
     {
+        
+            musicSource = GameObject.Find("Music_Player").GetComponent<AudioSource>();
         if(!musicSource){
         try {
 
@@ -27,6 +29,7 @@ public class options : MonoBehaviour
 
     private void Update()
     {
+        
         if(musicSource != null){
             musicSource.volume = VolumeSlider.value;
         }
