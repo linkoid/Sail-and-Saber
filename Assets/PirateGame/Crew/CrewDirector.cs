@@ -20,21 +20,29 @@ namespace PirateGame.Crew
 		[SerializeField] private Ships.Ship _ship;
 		[SerializeField] private PrefabList _crewmateVariants;
 
+        //TEST
+        public Object objectRemove;
+        public int i;
+
 
 		[SerializeField] List<Crewmate> m_Crewmates = new List<Crewmate>();
+        [SerializeField] List<Crewmate> m_TEST = new List<Crewmate>();
 
-		/// <summary>
-		/// Raid the specified ship
-		/// </summary>
-		public void Raid(Ships.Ship ship)
+        /// <summary>
+        /// Raid the specified ship
+        /// </summary>
+        public void Raid(Ships.Ship ship)
 		{
 			var iter = m_Crewmates.Zip(ship.Crew, (a, b) => new { crewmate = a, enemy = b });
-			foreach (var pair in iter)
+            m_TEST.Clear();
+            foreach (var pair in iter)
 			{
 				pair.crewmate.Raid(ship, pair.enemy);
 				pair.enemy.Defend(ship, pair.crewmate);
+                m_TEST.Add(pair.crewmate);
 			}
-		}
+
+        }
 
         /// <summary>
         /// Attack the targeted enemy human
@@ -42,26 +50,18 @@ namespace PirateGame.Crew
         public void Attack(Ships.Ship ship, int damage)
         {
             var iter = m_Crewmates.Zip(ship.Crew, (a, b) => new { crewmate = a, enemy = b });
-            int i = 0;
-            foreach (var pair in iter)
+            i = 0;
+            foreach (var C in iter)
             {
-                pair.crewmate.TakeDamage(damage);
-                pair.enemy.TakeDamage(damage);
-                i++;
-                if (pair.crewmate.health <= 0 || pair.enemy.health <= 0)
+                C.crewmate.TakeDamage(1);
+                if(C.crewmate.health <= 0)
                 {
+                    Destroy(C.crewmate.gameObject);
+                    m_Crewmates.RemoveAt(i);
+                    m_TEST.RemoveAt(i);
                     i--;
-                    if (pair.crewmate.health <= 0)
-                    {
-                        m_Crewmates.RemoveAt(i);
-                    }
-                        
-                    if (pair.enemy.health <= 0)
-                    {
-                        ship.Crew.RemoveAt(i);
-                    }  
-                    //Debug.Log("DED");
                 }
+                i++;
             }
         }
 
@@ -150,6 +150,10 @@ namespace PirateGame.Crew
 		public void RemoveAt(int index)
 		{
 			var toRemove = m_Crewmates[index];
+
+            //TEST
+            objectRemove = toRemove;
+
 			m_Crewmates.Remove(toRemove);
 			Object.Destroy(toRemove.gameObject);
 		}

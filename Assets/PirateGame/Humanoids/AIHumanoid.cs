@@ -36,6 +36,11 @@ namespace PirateGame.Humanoids
 			AntiSlide(Time.deltaTime);
 		}
 
+        public bool GetCombat()
+        {
+            return m_IsInCombat;
+        }
+
 		// Update is called once per frame
 		void FixedUpdate()
 		{

@@ -45,7 +45,7 @@ namespace PirateGame.Crew.Commands
 
 			// Loop to do stuff during the raid
 			float loopDuration = 30; // how long does the raid last?
-			float loopStep = 0.8f; // how often is the code in the loop run?
+			float loopStep = 1f; // how often is the code in the loop run?
 			for (float loopTime = 0; loopTime < loopDuration; loopTime += loopStep)
 			{
                 yield return new WaitForSeconds(loopStep);
