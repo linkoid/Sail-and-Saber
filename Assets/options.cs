@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using PirateGame;
 
 public class options : MonoBehaviour
 {
-    public Slider VolumeSlider;
+    public Slider VolumeSlider,SFX_Slider;
     public AudioSource musicSource;
     //public AudioSource SPX => GameObject.Find("SoundEffect").GetComponent<AudioSource>();
 
@@ -16,7 +17,7 @@ public class options : MonoBehaviour
     private void Awake()
     {
         
-            musicSource = GameObject.Find("Music_Player").GetComponent<AudioSource>();
+        musicSource = GameObject.Find("Music_Player").GetComponent<AudioSource>();
         if(!musicSource){
         try {
 
@@ -32,7 +33,16 @@ public class options : MonoBehaviour
         if(musicSource != null){
             musicSource.volume = VolumeSlider.value;
         }
-    }
+	}
+	
+	// Invoked when the value of the slider changes.
+	public void SetAllSFX_Values()
+	{
+        var allSFX_Objects = FindObjectsOfType<SoundEffect>();
+        foreach(SoundEffect se in allSFX_Objects){
+            se.AudioSource.volume = SFX_Slider.value;
+        }
+	}
     public void Resume(){
             isPaused = !isPaused;
             Time.timeScale = (isPaused) ? 0 : 1;

@@ -78,7 +78,7 @@ namespace PirateGame.UI
 		// Update is called once per frame
 		void Update()
 		{
-			if(m_Player.Target){
+			if(m_Player.Target != null){
 				Target_Title.text = m_Player.Target.name;
 				TargetUI.SetActive(true);
 

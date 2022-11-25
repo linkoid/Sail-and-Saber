@@ -29,6 +29,8 @@ public class Music : MonoBehaviour
 
     private void Update()
     {
+        
+
         if(Tracks.Length < 1){
             gameObject.SetActive(false);
         }
