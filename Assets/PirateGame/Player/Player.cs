@@ -48,6 +48,7 @@ namespace PirateGame
 				Initialize();
 				m_DoInitialize = false;
 			}
+
 		}
 
 		private bool m_DoInitialize = false;

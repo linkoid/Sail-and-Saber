@@ -14,7 +14,7 @@ namespace PirateGame.UI
 		public Slider HealthBar,Target_Health;
 		public TMP_Text Loot_Text, Crew_Text, Error_Text,Target_Title;
 		[SerializeField] float Error_timer = 5f;
-		public GameObject Ship,TargetUI;
+		public GameObject Ship,TargetUI,DeathPanel;
 		bool isBuying, isError;
 
 		public bool CanBuy(int cost)
@@ -111,9 +111,9 @@ namespace PirateGame.UI
 				isError = false;
 				Error_timer = 5f;
 			}
-			
-		}
 
+			DeathPanel.SetActive(Player.Ship.Health <= 0);
+		}
 		void Error(string error){
 			Error_Text.text = error;
 			Error_timer = 5f;

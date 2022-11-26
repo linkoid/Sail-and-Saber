@@ -869,10 +869,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ship: {fileID: 0}
   _crewmateVariants: {fileID: 0}
-  objectRemove: {fileID: 0}
-  i: 0
   m_Crewmates: []
-  m_TEST: []
+  m_CrewRaid: []
 --- !u!4 &1284392239
 Transform:
   m_ObjectHideFlags: 0

@@ -12,14 +12,13 @@ public class Scene_Transfer : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void Q()
     {
         Application.Quit();
+    }
+
+    public void Reset(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void TransferTo(string scene) {
