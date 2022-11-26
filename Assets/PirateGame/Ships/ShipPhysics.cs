@@ -115,6 +115,31 @@ namespace PirateGame.Ships
 
 			Rigidbody.AddForce(addVel, ForceMode.VelocityChange);
 		}
+
+		protected override void OnSink()
+		{
+			base.OnSink();
+			this.StartCoroutine(DoSink());
+		}
+
+		private IEnumerator DoSink()
+		{
+			float baseMass = Rigidbody.mass;
+			float sinkMass = Rigidbody.mass * 3f;
+
+			float maxTimer = 5;
+			float timer = 5;
+			while (timer < maxTimer)
+			{
+				Rigidbody.mass = Mathf.Lerp(baseMass, sinkMass, timer / maxTimer);
+				yield return new WaitForSeconds(0.2f);
+				timer += 0.2f;
+			}
+
+			float extraTime = 5;
+			Object.Destroy(Ship.gameObject, extraTime);
+			Object.Destroy(Ship);
+		}
 	}
 }
 
