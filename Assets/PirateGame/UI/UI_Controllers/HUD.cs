@@ -112,6 +112,9 @@ namespace PirateGame.UI
 				Error_timer = 5f;
 			}
 
+			if(Player.Ship == null){
+				return;
+			}
 			DeathPanel.SetActive(Player.Ship.Health <= 0);
 		}
 		void Error(string error){
