@@ -21,12 +21,12 @@ namespace PirateGame.Crew
 		[SerializeField] private PrefabList _crewmateVariants;
 
         //TEST
-        public Object objectRemove;
-        public int i;
+        //public Object objectRemove;
+        //public int i;
 
 
 		[SerializeField] List<Crewmate> m_Crewmates = new List<Crewmate>();
-        [SerializeField] List<Crewmate> m_TEST = new List<Crewmate>();
+        [SerializeField] List<Crewmate> m_CrewRaid = new List<Crewmate>();
 
         /// <summary>
         /// Raid the specified ship
@@ -34,12 +34,12 @@ namespace PirateGame.Crew
         public void Raid(Ships.Ship ship)
 		{
 			var iter = m_Crewmates.Zip(ship.Crew, (a, b) => new { crewmate = a, enemy = b });
-            m_TEST.Clear();
+            m_CrewRaid.Clear();
             foreach (var pair in iter)
 			{
 				pair.crewmate.Raid(ship, pair.enemy);
 				pair.enemy.Defend(ship, pair.crewmate);
-                m_TEST.Add(pair.crewmate);
+                m_CrewRaid.Add(pair.crewmate);
 			}
 
         }
@@ -47,21 +47,15 @@ namespace PirateGame.Crew
         /// <summary>
         /// Attack the targeted enemy human
         /// </summary>
-        public void Attack(Ships.Ship ship, int damage)
+        public void Attack(int damage)
         {
-            var iter = m_Crewmates.Zip(ship.Crew, (a, b) => new { crewmate = a, enemy = b });
-            i = 0;
-            foreach (var C in iter)
+            foreach (var C in m_CrewRaid)
             {
-                C.crewmate.TakeDamage(1);
-                if(C.crewmate.health <= 0)
+                C.TakeDamage(1);
+                if(C.health <= 0)
                 {
-                    Destroy(C.crewmate.gameObject);
-                    m_Crewmates.RemoveAt(i);
-                    m_TEST.RemoveAt(i);
-                    i--;
+                    RemoveThis(m_Crewmates, C);
                 }
-                i++;
             }
         }
 
@@ -150,12 +144,23 @@ namespace PirateGame.Crew
 		public void RemoveAt(int index)
 		{
 			var toRemove = m_Crewmates[index];
-
-            //TEST
-            objectRemove = toRemove;
-
 			m_Crewmates.Remove(toRemove);
 			Object.Destroy(toRemove.gameObject);
 		}
+
+        public void RemoveThis(List<Crewmate> Crewmate, Crewmate Object)
+        {
+            int i = 0;
+            foreach(var C in Crewmate)
+            {
+                if(Object == C)
+                {
+                    RemoveAt(i);
+                    return;
+                }
+                i++;
+            }
+            return;
+        }
 	}
 }

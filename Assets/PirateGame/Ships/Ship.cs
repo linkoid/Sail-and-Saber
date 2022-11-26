@@ -87,12 +87,14 @@ namespace PirateGame.Ships
 		/// </summary>
 		public virtual void Raid()
 		{
+            /*
 			if (IsRaided)
 			{
 				Debug.LogWarning($"{this} has already been raided", this);
 				return;
 			}
 			IsRaided = true;
+            */
 
 			// send callback to internal components
 			SendInternalCallback((component) => component.OnRaid());

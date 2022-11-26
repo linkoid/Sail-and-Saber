@@ -44,28 +44,39 @@ namespace PirateGame.Crew.Commands
 			Crew.Raid(target);
 
 			// Loop to do stuff during the raid
-			float loopDuration = 30; // how long does the raid last?
+			float loopDuration = 11; // how long does the raid last?
 			float loopStep = 1f; // how often is the code in the loop run?
 			for (float loopTime = 0; loopTime < loopDuration; loopTime += loopStep)
 			{
                 yield return new WaitForSeconds(loopStep);
                 // TODO : Maybe do dice-rolls to decide which crewmate & enemy dies or something?
-                Crew.Attack(target, 1);
+
+                //Do Damage to Player Crew
+                Crew.Attack(1);
+
+                //Do Damage to Enemy Crew
+                target.Crew.Attack(2);
 			}
 
 			// Call crewmates back
 			Crew.Board(Ship);
 
-			// Obtain rewards from the ship
-			target.Plunder(Commander.Player);
+            //If all the enemy crewmates die
+            if(target.Crew.Count == 0)
+            {
+                // Obtain rewards from the ship
+                target.Plunder(Commander.Player);
+                
+                // Sink the raided ship
+                target.Sink();
+                
+            }
 
-			// Give them time to walk back
-			yield return new WaitForSeconds(3);
+            // Give them time to walk back
+            yield return new WaitForSeconds(3);
 
-			// Sink the raided ship
-			target.Sink();
             Commander.isRaiding = false;
-		}
+        }
 
 		protected override void Update()
 		{
