@@ -16,16 +16,12 @@ public class options : MonoBehaviour
 
     private void Awake()
     {
-        
-        musicSource = GameObject.Find("Music_Player").GetComponent<AudioSource>();
-        if(!musicSource){
         try {
-
             musicSource = GameObject.Find("Music_Player").GetComponent<AudioSource>();
         } catch(UnityException e) {
             Debug.Log(e.StackTrace);
         }
-        }
+        
     }
 
     private void Update()
