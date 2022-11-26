@@ -29,12 +29,12 @@ namespace PirateGame.Ships
 
 		void FixedUpdate()
 		{
-			TargetNearestShip();
+			//TargetNearestShip();
 			CheckCanRaid();
 		}
 
 
-		public void TargetNearestShip()
+		public Ship TargetNearestShip()
 		{
 			FindNearbyShips();
 			Target = null;
@@ -54,6 +54,7 @@ namespace PirateGame.Ships
 					minDistSqr = distSqr;
 				}
 			}
+			return Target;
 		}
 
 		private void FindNearbyShips()

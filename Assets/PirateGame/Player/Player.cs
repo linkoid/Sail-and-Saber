@@ -21,7 +21,7 @@ namespace PirateGame
 
 		[SerializeField] private PlayerStats m_Stats;
 
-		[SerializeField] private Ship m_Ship  ;
+		[SerializeField] private Ship m_Ship ;
 		[SerializeField] private Ship m_Target;
 
 		[SerializeField] private CrewDirector m_Crew;
@@ -39,6 +39,7 @@ namespace PirateGame
 
 			didStart = true;
 		}
+		
 
 		// Update is called once per frame
 		void Update()
@@ -48,7 +49,7 @@ namespace PirateGame
 				Initialize();
 				m_DoInitialize = false;
 			}
-
+			Target = Ship.Internal.Combat.TargetNearestShip();
 		}
 
 		private bool m_DoInitialize = false;
@@ -103,7 +104,8 @@ namespace PirateGame
 		/// <returns>true if the field was changed</returns>
 		private bool FieldChangedCheck<T>(ref T field, T value, System.Action<T> onChanged)
 		{
-			if (field.Equals(value)) return false;
+			if(field == null && value == null) return false;
+			if (field != null && field.Equals(value)) return false;
 
 			T oldValue = field;
 			field = value;
@@ -142,6 +144,7 @@ namespace PirateGame
 		}
 		private void OnTargetChanged(Ship oldTarget)
 		{
+			Ship.Internal.Combat.Target = Target;
 		}
 	}
 

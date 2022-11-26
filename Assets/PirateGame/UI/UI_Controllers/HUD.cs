@@ -81,14 +81,13 @@ namespace PirateGame.UI
 			if(m_Player.Target != null){
 				Target_Title.text = m_Player.Target.name;
 				TargetUI.SetActive(true);
-
 				if (Target_Health.maxValue != m_Player.Target.MaxHealth)
 				{
 					Target_Health.maxValue = Player.Target.MaxHealth;
 				}
 				float valueDif = Player.Target.Health - Target_Health.value;
 				Target_Health.value += valueDif * .01f;
-				
+				Debug.Log(Target_Health.value);
 			}else {
 				TargetUI.SetActive(false);
 
