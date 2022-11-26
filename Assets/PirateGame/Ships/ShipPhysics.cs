@@ -125,10 +125,10 @@ namespace PirateGame.Ships
 		private IEnumerator DoSink()
 		{
 			float baseMass = Rigidbody.mass;
-			float sinkMass = Rigidbody.mass * 3f;
+			float sinkMass = Rigidbody.mass * 4f;
 
 			float maxTimer = 5;
-			float timer = 5;
+			float timer = 0;
 			while (timer < maxTimer)
 			{
 				Rigidbody.mass = Mathf.Lerp(baseMass, sinkMass, timer / maxTimer);
@@ -137,8 +137,7 @@ namespace PirateGame.Ships
 			}
 
 			float extraTime = 5;
-			Object.Destroy(Ship.gameObject, extraTime);
-			Object.Destroy(Ship);
+			Object.Destroy(Ship.gameObject);
 		}
 	}
 }
