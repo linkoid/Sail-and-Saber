@@ -5,7 +5,6 @@ using UnityEngine;
 public class Toggler : MonoBehaviour
 {
 
-
     public void Toggle(GameObject TargetObject){
         TargetObject.SetActive(!TargetObject.activeSelf);
     }
