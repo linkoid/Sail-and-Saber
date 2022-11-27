@@ -24,6 +24,8 @@ namespace PirateGame.Sea
 
 		[SerializeField, ReadOnly] private int m_ColliderID;
 		[SerializeField, ReadOnly] private float m_FixedTime;
+	
+		[SerializeField] private Vector3 m_BoundsSize;
 
 		public void OnEnable()
 		{
@@ -65,7 +67,7 @@ namespace PirateGame.Sea
 			var pos = this.transform.position;
 			pos.y = 0;
 			var rot = this.transform.rotation;
-			Collider[] colliders = Physics.OverlapBox(pos, new Vector3(1000, 10, 1000), rot, GetIgnoreLayerCollisionMask());
+			Collider[] colliders = Physics.OverlapBox(pos, m_BoundsSize, rot, GetIgnoreLayerCollisionMask());
 			foreach (Collider collider in colliders)
 			{
 				if (collider.attachedRigidbody == null) continue;
@@ -387,6 +389,18 @@ namespace PirateGame.Sea
 				pos.y = GetWaterHeight(pos);
 				Gizmos.DrawWireSphere(pos, 0.1f * this.transform.lossyScale.magnitude);
 			}
+		}
+
+		void OnDrawGizmosSelected()
+		{
+			Gizmos.color = Color.green;
+			Gizmos.DrawWireCube(this.transform.position, m_BoundsSize);
+			//Gizmos.DrawWireCube(this.transform.position, Vector3.Scale(m_BoundsSize, Vector3.up));
+			//Gizmos.DrawWireCube(this.transform.position, Vector3.Scale(m_BoundsSize, Vector3.right));
+			//Gizmos.DrawWireCube(this.transform.position, Vector3.Scale(m_BoundsSize, Vector3.forward));
+			Gizmos.DrawWireCube(this.transform.position, Vector3.Scale(m_BoundsSize, Vector3.up + Vector3.right));
+			Gizmos.DrawWireCube(this.transform.position, Vector3.Scale(m_BoundsSize, Vector3.right + Vector3.forward));
+			Gizmos.DrawWireCube(this.transform.position, Vector3.Scale(m_BoundsSize, Vector3.forward + Vector3.up));
 		}
 	}
 }
