@@ -54,7 +54,7 @@ namespace PirateGame.Crew
 				crewmate.TakeDamage(1);
 				if (crewmate.health <= 0)
 				{
-					Remove(crewmate);
+					Remove(crewmate, 4);
 				}
 			}
 		}
