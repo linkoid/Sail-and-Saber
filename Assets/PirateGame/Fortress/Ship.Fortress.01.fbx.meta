@@ -3,7 +3,42 @@ guid: 6083b30f730bdaa4bbbaf951133fa106
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ground
+    second: {fileID: 2100000, guid: 4e85b0d25e3ffc3409db3f0eee923ba8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: 79f15007ecaad4143b2972f47ee2ea81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PaintedBeam2
+    second: {fileID: 2100000, guid: 4cf2f7f8a31ea6748aebe0dd9d387f92, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sail
+    second: {fileID: 2100000, guid: fe941a85ee5a5e342bfc290aed20b3f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ShipWoodAI
+    second: {fileID: 2100000, guid: b73dde4159e24c549a67ff95d710885a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StoneBricks
+    second: {fileID: 2100000, guid: e63c2ed6f353af740a6d522dc61f4a82, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: 0c1450d486333814186282a956f7a82f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
