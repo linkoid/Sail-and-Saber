@@ -21,6 +21,18 @@ namespace PirateGame.Ships
 		public CannonGroup DeckCannons { get => _deckCannons; private set => _deckCannons = value; }
 		[SerializeField] private CannonGroup _deckCannons;
 
+		[SerializeField] private Transform m_TargetPointsParent;
+		public IEnumerable<Transform> TargetPoints
+		{ 
+			get 
+			{
+				for (int i = 0; i < m_TargetPointsParent.childCount; i++)
+				{
+					yield return m_TargetPointsParent.GetChild(i).transform;
+				}
+			} 
+		} 
+
 
 		[ReadOnly] public Ship Target;
 
@@ -73,15 +85,20 @@ namespace PirateGame.Ships
 			}
 		}
 
+		private void FindNearestTargetPoint()
+		{
+
+		}
+
 		private void FireCannons(CannonGroup cannonGroup)
 		{
 			if (!CheckHasValidTarget()) return;
 
 			if (cannonGroup.IsReloading) return; // Can't fire because not done reloading
 
-			foreach (var cannon in cannonGroup.GetAllInRange(Target.Rigidbody.position))
+			foreach (var cannon in cannonGroup.GetAllInRange(Target.Internal.Combat.TargetPoints))
 			{
-				cannon.Fire(Target.Rigidbody.position);
+				cannon.Fire(Target.Internal.Combat.TargetPoints);
 				// Deal damage based on how many cannons fired
 				Target.TakeDamage(DamagePerCannon);
 			}

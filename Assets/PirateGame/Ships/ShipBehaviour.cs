@@ -20,7 +20,16 @@ namespace PirateGame.Ships
 
 		public abstract class ShipBehaviour : MonoBehaviour, IShipBehaviourInternal
 		{
-			protected Ship Ship => this.GetComponentInParent<Ship>();
+			protected Ship Ship
+			{
+				get
+				{
+					var ship = this.GetComponentInParent<Ship>();
+					if (ship != null) return ship;
+					var fortress = this.GetComponentInParent<Fortress>();
+					return fortress;
+				}
+			}
 
 			protected virtual void OnShipCollisionEnter(Collision collision) { }
 			protected virtual void OnShipCollisionExit (Collision collision) { }

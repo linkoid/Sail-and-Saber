@@ -38,12 +38,12 @@ namespace PirateGame.Ships
 		public Rigidbody Rigidbody => this.GetComponent<Rigidbody>();
 		internal ShipInternal Internal => this.GetComponent<ShipInternal>();
 
-		void Awake()
+		protected void Awake()
 		{
 			this.gameObject.AddComponent<ShipInternal>();
 		}
 
-		void Start()
+		protected void Start()
 		{
 			Health = MaxHealth;
 		}
