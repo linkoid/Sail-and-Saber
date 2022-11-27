@@ -19,7 +19,7 @@ namespace PirateGame.Crew
 
 		[SerializeField] private Ships.Ship _ship;
 		[SerializeField] private PrefabList _crewmateVariants;
-
+		[SerializeField] private SoundEffect arrg_sound;
 		//TEST
 		//public Object objectRemove;
 		//public int i;
@@ -50,7 +50,6 @@ namespace PirateGame.Crew
 		public void Attack(int damage)
 		{
 			var toRemove = new List<Crewmate>();
-
 			foreach (var crewmate in m_CrewRaid)
 			{
 				crewmate.TakeDamage(1);
@@ -88,7 +87,7 @@ namespace PirateGame.Crew
 		{
 			// TODO : Find better support objects
 			GameObject supportObject = Ship.gameObject;
-
+			arrg_sound.Play();
 			var iter = m_Crewmates.Zip(cannons, (a, b) => new { crewmate = a, cannon = b });
 			foreach (var pair in iter)
 			{
