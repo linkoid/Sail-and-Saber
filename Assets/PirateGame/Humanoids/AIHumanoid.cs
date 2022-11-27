@@ -56,9 +56,12 @@ namespace PirateGame.Humanoids
 				}
 				if (!succeded)
 				{
-					Agent.Warp(Goal.transform.position);
+					bool _ = TryGetNearestPointOnNavMesh(Goal.transform.position, out Vector3 point);
+					Agent.Warp(point);
 				}
 			}
+
+			Agent.enabled = true;
 
 			if (m_IsInCombat && TryAttack())
 			{
@@ -76,6 +79,30 @@ namespace PirateGame.Humanoids
 
 
 			//AntiSlide(Time.fixedDeltaTime);
+		}
+
+		public bool TryGetNearestPointOnNavMesh(in Vector3 target, out Vector3 point)
+		{
+			point = target;
+			NavMeshQueryFilter filter = new NavMeshQueryFilter()
+			{
+				agentTypeID = Agent.agentTypeID,
+				areaMask = Agent.areaMask,
+			};
+
+			float maxMultiplier = 10;
+
+			for (float multiplier = 2; multiplier <= maxMultiplier; multiplier += 2)
+			{
+				if (NavMesh.SamplePosition(target, out NavMeshHit hit, Agent.height * multiplier, filter))
+				{
+					point = hit.position;
+					return true;
+				}
+			}
+			
+
+			return false;
 		}
 
 		/// <summary>

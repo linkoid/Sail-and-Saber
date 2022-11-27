@@ -197,6 +197,7 @@ MonoBehaviour:
   Goal: {fileID: 0}
   m_IsInCombat: 0
   m_IsStationary: 0
+  m_AntiSlide: {x: 0, y: 0, z: 0}
 --- !u!195 &2137331006773663695
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -204,7 +205,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7342238437241510648}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.25
   m_Speed: 3.5
@@ -232,6 +233,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pathfindGoal: {fileID: 0}
+  Health: 10
+  Strength: 1
 --- !u!137 &7501780304420924413 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 3278405134919424922, guid: e05903b0f966f984b92801b8b768f969, type: 3}

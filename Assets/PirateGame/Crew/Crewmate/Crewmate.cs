@@ -97,18 +97,16 @@ namespace PirateGame.Crew
 			Vector3 randomPos = new Vector3(Random.value, 0.5f, Random.value);
 			randomPos -= Vector3.one * 0.5f;
 			Bounds bounds = ship.NavMeshSurface.navMeshData.sourceBounds;
+			if (ship is Fortress fort)
+			{
+				bounds.size *= 0.5f;
+			}
 			randomPos = Vector3.Scale(randomPos, bounds.size);
 			randomPos = ship.transform.TransformPoint(randomPos);
 
-			NavMeshQueryFilter filter = new NavMeshQueryFilter()
+			if (Humanoid.TryGetNearestPointOnNavMesh(randomPos, out Vector3 point))
 			{
-				agentTypeID = Humanoid.Agent.agentTypeID,
-				areaMask = Humanoid.Agent.areaMask,
-			};
-
-			if (NavMesh.SamplePosition(randomPos, out NavMeshHit hit, Humanoid.Agent.height * 2, filter))
-			{
-				return hit.position;
+				return point;
 			}
 			else
 			{
