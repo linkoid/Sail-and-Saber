@@ -5,6 +5,7 @@ using PirateGame.Humanoids;
 using UnityEngine.AI;
 using Unity.AI.Navigation;
 using UnityEngine.Experimental.AI;
+using UnityEditor;
 
 namespace PirateGame.Crew
 {
@@ -19,8 +20,8 @@ namespace PirateGame.Crew
 
 		public AIHumanoid Humanoid => this.GetComponent<AIHumanoid>();
 
-        public int health = 10;
-        public int strength = 1;
+        public int Health = 10;
+        public int Strength = 1;
 
 		void Start()
 		{
@@ -29,8 +30,12 @@ namespace PirateGame.Crew
 
         public void TakeDamage(int damage)
         {
-            health -= damage;
-            Debug.Log("Took damage! This one has " + health + " health left");
+            Health -= damage;
+            //Debug.Log("Took damage! This one has " + Health + " health left");
+			if (Health <= 0)
+			{
+				Humanoid.SendMessage("OnDie", true);
+			}
         }
 
 		/// <summary>
@@ -109,6 +114,21 @@ namespace PirateGame.Crew
 			{
 				return ship.transform.position;
 			}
+		}
+
+
+		void OnDrawGizmos()
+		{
+			Handles.Label(this.transform.position, $"{Health}", new GUIStyle()
+			{
+				alignment = TextAnchor.MiddleCenter,
+				fontStyle = FontStyle.Bold,
+				fontSize = 20,
+				normal = new GUIStyleState()
+				{
+					textColor = Color.red,
+				},
+			});
 		}
 	}
 }

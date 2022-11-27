@@ -31,8 +31,14 @@ public class HumanoidAnimator : MonoBehaviour
 	}
 	public void OnDie(InputValue input)
 	{
-		Animator.SetTrigger("Die");
-		Animator.SetBool("IsDead", true);
+		OnDie(input.isPressed);
+	}
+
+	public void OnDie(bool value)
+	{
+		if (value)
+			Animator.SetTrigger("Die");
+		Animator.SetBool("IsDead", value);
 	}
 
 	// Update is called once per frame
