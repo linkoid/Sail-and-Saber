@@ -27,6 +27,9 @@ namespace PirateGame.Crew.Commands
 			if (Combat.BroadsideCannons.IsReloading) return false;
 			if (Combat.DeckCannons.IsReloading) return false;
 
+			// Can't have no cannons in range
+			if (!Combat.HasCannonsInRange()) return false;
+
 			// else
 			return true;
 		}

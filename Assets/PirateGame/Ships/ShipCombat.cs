@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.CustomUtils;
 using UnityEngine.Rendering;
@@ -85,11 +86,6 @@ namespace PirateGame.Ships
 			}
 		}
 
-		private void FindNearestTargetPoint()
-		{
-
-		}
-
 		private void FireCannons(CannonGroup cannonGroup)
 		{
 			if (!CheckHasValidTarget()) return;
@@ -129,7 +125,24 @@ namespace PirateGame.Ships
 		/// </summary>
 		public IEnumerable<Cannon> GetDeckCannonsInRange()
 		{
-			return DeckCannons.GetAllInRange(Target.Rigidbody.position);
+			return DeckCannons.GetAllInRange(Target.Internal.Combat.TargetPoints);
+		}
+
+		public bool HasCannonsInRange()
+		{
+			foreach (var _ in DeckCannons.GetAllInRange(Target.Internal.Combat.TargetPoints))
+			{
+				// Return true for the first cannon found
+				return true;
+			}
+
+			foreach (var _ in BroadsideCannons.GetAllInRange(Target.Internal.Combat.TargetPoints))
+			{
+				// Return true for the first cannon found
+				return true;
+			}
+
+			return false;
 		}
 
 		#region Track Radiable Ships

@@ -9,6 +9,7 @@ namespace PirateGame.Crew.Commands
 	[System.Serializable]
 	public class Raid : Command
 	{
+		[SerializeField] private Ships.Ship m_RaidTarget;
 
 		public override string DisplayName => throw new System.NotImplementedException();
 
@@ -33,15 +34,15 @@ namespace PirateGame.Crew.Commands
             Commander.isRaiding = true;
             Commander.isRepairing = false;
 
-            // Save target in local variable
-            // so even if target changes, we are still raiding the same ship.
-            var target = Commander.Target;
+			// Save target in local variable
+			// so even if Commander's target changes, we are still raiding the same ship.
+			m_RaidTarget = Commander.Target;
 
 			// Notify the target that it is being raided
-			target.Raid();
+			m_RaidTarget.Raid();
 
 			// Tell crew to conduct the raid
-			Crew.Raid(target);
+			Crew.Raid(m_RaidTarget);
 
 			// Loop to do stuff during the raid
 			float loopDuration = 11; // how long does the raid last?
@@ -54,22 +55,21 @@ namespace PirateGame.Crew.Commands
                 //Do Damage to Player Crew
                 Crew.Attack(1);
 
-                //Do Damage to Enemy Crew
-                target.Crew.Attack(2);
+				//Do Damage to Enemy Crew
+				m_RaidTarget.Crew.Attack(2);
 			}
 
 			// Call crewmates back
 			Crew.Board(Ship);
 
             //If all the enemy crewmates die
-            if(target.Crew.Count == 0)
+            if(m_RaidTarget.Crew.Count == 0)
             {
-                // Obtain rewards from the ship
-                target.Plunder(Commander.Player);
-                
-                // Sink the raided ship
-                target.Sink();
-                
+				// Obtain rewards from the ship
+				m_RaidTarget.Plunder(Commander.Player);
+
+				// Sink the raided ship
+				m_RaidTarget.Sink();
             }
 
             // Give them time to walk back
@@ -88,6 +88,7 @@ namespace PirateGame.Crew.Commands
 			// Stop running OnExecute
 			StopCoroutine(this.ActiveExecution);
             Commander.isRaiding = false;
+			m_RaidTarget.RaidCancel();
 		}
 	}
 }

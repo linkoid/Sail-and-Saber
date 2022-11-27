@@ -46,7 +46,7 @@ namespace PirateGame.Ships
 
 		void FixedUpdate()
 		{
-			if (Ship.IsRaided || Ship.IsPlundered) return;
+			if (Ship.IsRaided || Ship.IsPlundered || Ship.Health <= 0) return;
 
 			if (!Aggro())
 			{
