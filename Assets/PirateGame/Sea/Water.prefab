@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3779756735601585142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -5, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3779756735601585142}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -462981019419857548, guid: 300cbefb38004174ba1d51d916530aef, type: 3}
 --- !u!23 &3779756735601585128
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -103,10 +103,9 @@ MonoBehaviour:
   m_FluidDensity: 1000
   m_DefaultSubmersionDepth: 1
   m_MinimumDrag: 0.01
-  m_FloatForce: 15
   m_ColliderID: 0
   m_FixedTime: 0
-  m_FixedDeltaTime: 0
+  m_BoundsSize: {x: 2000, y: 100, z: 2000}
   m_IgnoredPoints: []
   m_Positions: []
   m_OtherPositions: []
