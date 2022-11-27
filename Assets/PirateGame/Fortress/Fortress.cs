@@ -10,18 +10,26 @@ namespace PirateGame
 		[SerializeField] private bool _isCaptured = false;
 
 		public string fortName;
-		private void Awake(){
-			_isCaptured = PlayerPrefs.GetString(fortName) == "Captured" ? true : false;
-			Debug.Log(_isCaptured);
+
+		protected void OnEnable()
+		{
+			IsCaptured = (PlayerPrefs.GetString(fortName) == "Captured");
 		}
 
-		public void Update(){
-			if(IsCaptured){
-				Capture();
+		public void Capture()
+		{
+			if (!IsPlundered)
+			{
+				Debug.LogWarning($"Capture(): {this} has not been plundered", this);
+				return;
 			}
-		}
+			if (IsCaptured)
+			{
+				Debug.LogWarning($"Capture(): {this} has already been captured", this);
+				return;
+			}
 
-		public void Capture(){
+			IsCaptured = true;
 			PlayerPrefs.SetString(fortName,"Captured");
 		}
 	}

@@ -71,6 +71,36 @@ namespace PirateGame.Ships
 			return true;
 		}
 
+		public bool CheckInRange(IEnumerable<Transform> targets)
+		{
+			foreach (var target in targets)
+			{
+				if (CheckInRange(target.position))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public void Fire(IEnumerable<Transform> targets)
+		{
+			Transform nearest = null;
+			float minDistance = Mathf.Infinity;
+			foreach (var target in targets)
+			{
+				float distance = Vector3.Distance(m_RangeOrigin.position, target.position);
+				if (distance < minDistance)
+				{
+					nearest = target;
+					minDistance = distance;
+				}
+			}
+
+			Fire(nearest.position);
+		}
+
 		public void Fire(Vector3 target)
 		{
 			m_FireGizmoTarget = target;

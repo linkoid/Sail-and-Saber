@@ -65,6 +65,17 @@ namespace PirateGame.Ships
 			}
 		}
 
+		public IEnumerable<Cannon> GetAllInRange(IEnumerable<Transform> targets)
+		{
+			foreach (var cannon in m_CannonList)
+			{
+				if (cannon.CheckInRange(targets))
+				{
+					yield return cannon;
+				}
+			}
+		}
+
 		public Cannon GetFirstInRange(Vector3 target)
 		{
 			foreach (var cannon in GetAllInRange(target))
