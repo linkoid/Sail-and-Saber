@@ -53,16 +53,16 @@ namespace PirateGame.Ships
 				Patrol();
 			}
 
-			if (Ship.Internal.Combat.Target != null)
+			if (Ship.Internal.Combat.Target != null && !Ship.IsRaided)
 			{
 				Ship.Internal.Combat.FireBroadsideCannons();
 				Ship.Internal.Combat.FireDeckCannons();
 			}
 		}
 
-		protected override void OnRaided()
+		protected override void OnRaid()
 		{
-			base.OnRaided();
+			base.OnRaid();
 			CreateCrew();
 			Ship.Internal.Physics.Stop();
 		}

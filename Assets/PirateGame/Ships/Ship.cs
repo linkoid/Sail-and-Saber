@@ -87,17 +87,42 @@ namespace PirateGame.Ships
 		/// </summary>
 		public virtual void Raid()
 		{
-            /*
 			if (IsRaided)
 			{
-				Debug.LogWarning($"{this} has already been raided", this);
+				Debug.LogWarning($"Raid(): {this} has already been raided", this);
+				return;
+			}
+			if (IsRaided)
+			{
+				Debug.LogWarning($"Raid(): {this} has already been plundered", this);
 				return;
 			}
 			IsRaided = true;
-            */
 
 			// send callback to internal components
 			SendInternalCallback((component) => component.OnRaid());
+		}
+
+		/// <summary>
+		/// Call this function when this ship is being raided.
+		/// Should prevent the ship from moving and spawn enemy crew.
+		/// </summary>
+		public virtual void RaidCancel()
+		{
+			if (!IsRaided)
+			{
+				Debug.LogWarning($"RaidCancel(): {this} is not being raided", this);
+				return;
+			}
+			if (IsPlundered)
+			{
+				Debug.LogWarning($"RaidCancel(): {this} has been plundered", this);
+				return;
+			}
+			IsRaided = false;
+
+			// send callback to internal components
+			SendInternalCallback((component) => component.OnRaidCancel());
 		}
 
 		/// <summary>
@@ -108,13 +133,13 @@ namespace PirateGame.Ships
 		{
 			if (!IsRaided)
 			{
-				Debug.LogWarning($"{this} is not being raided, and cannot be plundered", this);
+				Debug.LogWarning($"Plunder(): {this} is not being raided, and cannot be plundered", this);
 				return;
 			}
 
 			if (IsPlundered)
 			{
-				Debug.LogWarning($"{this} has already been plundered", this);
+				Debug.LogWarning($"Plunder(): {this} has already been plundered", this);
 				return;
 			}
 

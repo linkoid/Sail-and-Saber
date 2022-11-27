@@ -49,14 +49,22 @@ namespace PirateGame.Crew
 		/// </summary>
 		public void Attack(int damage)
 		{
+			var toRemove = new List<Crewmate>();
+
 			foreach (var crewmate in m_CrewRaid)
 			{
 				crewmate.TakeDamage(1);
-				if (crewmate.health <= 0)
+				if (crewmate.Health <= 0)
 				{
-					Remove(crewmate, 4);
+					toRemove.Add(crewmate);
 				}
 			}
+
+			foreach (var crewmate in toRemove)
+			{
+				Remove(crewmate, 4);
+			}
+			
 		}
 
 		/// <summary>
