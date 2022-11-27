@@ -1,5 +1,6 @@
 // source : https://stewmcc.com/post/unity-property-drawers-scene-enum/
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.CustomUtils;
 
@@ -25,7 +26,7 @@ public class SceneDrawer : PropertyDrawer
 		if (property.propertyType == SerializedPropertyType.String)
 		{
 			// Get currently selected object (generated from previous string value).
-			SceneAsset sceneObject = GetSceneObject(property.stringValue);
+			SceneAsset sceneObject = GetSceneObject(property.stringValue, out string _);
 			// Render a SceneAsset object field, with the previous string value, shown as a SceneAsset.
 			Object scene = EditorGUI.ObjectField(position, label, sceneObject, typeof(SceneAsset), true);
 
@@ -39,12 +40,11 @@ public class SceneDrawer : PropertyDrawer
 			}
 			else if (scene.name != property.stringValue)
 			{
-				// Convert the Object to a SceneAsset.
-				SceneAsset sceneObj = GetSceneObject(scene.name);
+				GetSceneObject(scene.name, out string scenePath);
 				// If its a valid scene asset we use it, otherwise assume select invalid and ignore.
-				if (sceneObj != null)
+				if (scenePath != null)
 				{
-					property.stringValue = scene.name;
+					property.stringValue = scenePath;
 				}
 			}
 		}
@@ -58,11 +58,12 @@ public class SceneDrawer : PropertyDrawer
 	/// Retrieve the scene string from the editor build settings, returns null if not found.
 	/// 
 	/// </summary>
-	/// <param name="sceneObjectName"> The asset name path of the scene object. </param>
+	/// <param name="sceneName"> The asset name path of the scene object. </param>
 	/// <returns> The SceneAsset or null if not found. </returns>
-	protected SceneAsset GetSceneObject(string sceneObjectName)
+	protected SceneAsset GetSceneObject(string sceneName, out string scenePath)
 	{
-		if (string.IsNullOrEmpty(sceneObjectName))
+		scenePath = null;
+		if (string.IsNullOrEmpty(sceneName))
 		{
 			// Early exit as know it will return null when string null or empty.
 			return null;
@@ -72,13 +73,14 @@ public class SceneDrawer : PropertyDrawer
 		{
 			// We found the scene object's name in the editor scene's path.
 			// This assumes that a scene will not be named exactly the same as a parent folder & a duplicate of another scene.
-			if (editorScene.path.IndexOf(sceneObjectName) != -1)
+			if (editorScene.path.IndexOf(sceneName) != -1)
 			{
+				scenePath = editorScene.path;
 				return AssetDatabase.LoadAssetAtPath(editorScene.path, typeof(SceneAsset)) as SceneAsset;
 			}
 		}
 		// Scene not found, assume it isn't in the build settings.
-		Debug.LogWarning("Scene [" + sceneObjectName + "] cannot be used. Add this scene to the 'Scenes in the Build' in build settings.");
+		Debug.LogWarning("Scene [" + sceneName + "] cannot be used. Add this scene to the 'Scenes in the Build' in build settings.");
 		return null;
 	}
 }

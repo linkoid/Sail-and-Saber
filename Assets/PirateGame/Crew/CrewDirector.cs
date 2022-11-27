@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PirateGame.Crew
 {
-	public class CrewDirector : MonoBehaviour, IReadOnlyCollection<Crewmate>
+	public class CrewDirector : MonoBehaviour, IReadOnlyCollection<Crewmate>, ICollection<Crewmate>
 	{
 		public PrefabList CrewmateVariants 
 		{
@@ -20,44 +20,44 @@ namespace PirateGame.Crew
 		[SerializeField] private Ships.Ship _ship;
 		[SerializeField] private PrefabList _crewmateVariants;
 
-        //TEST
-        //public Object objectRemove;
-        //public int i;
+		//TEST
+		//public Object objectRemove;
+		//public int i;
 
 
 		[SerializeField] List<Crewmate> m_Crewmates = new List<Crewmate>();
-        [SerializeField] List<Crewmate> m_CrewRaid = new List<Crewmate>();
+		[SerializeField] List<Crewmate> m_CrewRaid = new List<Crewmate>();
 
-        /// <summary>
-        /// Raid the specified ship
-        /// </summary>
-        public void Raid(Ships.Ship ship)
+		/// <summary>
+		/// Raid the specified ship
+		/// </summary>
+		public void Raid(Ships.Ship ship)
 		{
 			var iter = m_Crewmates.Zip(ship.Crew, (a, b) => new { crewmate = a, enemy = b });
-            m_CrewRaid.Clear();
-            foreach (var pair in iter)
+			m_CrewRaid.Clear();
+			foreach (var pair in iter)
 			{
 				pair.crewmate.Raid(ship, pair.enemy);
 				pair.enemy.Defend(ship, pair.crewmate);
-                m_CrewRaid.Add(pair.crewmate);
+				m_CrewRaid.Add(pair.crewmate);
 			}
 
-        }
+		}
 
-        /// <summary>
-        /// Attack the targeted enemy human
-        /// </summary>
-        public void Attack(int damage)
-        {
-            foreach (var C in m_CrewRaid)
-            {
-                C.TakeDamage(1);
-                if(C.health <= 0)
-                {
-                    RemoveThis(m_Crewmates, C);
-                }
-            }
-        }
+		/// <summary>
+		/// Attack the targeted enemy human
+		/// </summary>
+		public void Attack(int damage)
+		{
+			foreach (var crewmate in m_CrewRaid)
+			{
+				crewmate.TakeDamage(1);
+				if (crewmate.health <= 0)
+				{
+					Remove(crewmate);
+				}
+			}
+		}
 
 		/// <summary>
 		/// Support the ship assigned to this crew
@@ -102,9 +102,27 @@ namespace PirateGame.Crew
 				crewmate.Board(Ship);
 			}
 		}
+		
 
-		public IEnumerator<Crewmate> GetEnumerator() => ((IEnumerable<Crewmate>)m_Crewmates).GetEnumerator();
-		IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)m_Crewmates).GetEnumerator();
+
+		/// <summary>
+		/// Adds a random crewmate variant to the crew
+		/// </summary>
+		public void Add()
+		{
+			var prefab = CrewmateVariants[Random.Range(0, CrewmateVariants.Count)];
+			var newCrewmate = Object.Instantiate(prefab, this.transform).GetComponent<Crewmate>();
+			this.Add(newCrewmate);
+		}
+
+		/// <summary>
+		/// Removes the most recent crewmate from the crew
+		/// </summary>
+		public void Remove()
+		{
+			RemoveAt(m_Crewmates.Count - 1);
+		}
+
 
 		private void SetCount(int newCount)
 		{
@@ -118,49 +136,71 @@ namespace PirateGame.Crew
 			}
 		}
 
-		/// <summary>
-		/// Adds a random crewmate variant to the crew
-		/// </summary>
-		public void Add()
+
+
+		#region ICollection<Crewmate> Implementation
+
+		bool ICollection<Crewmate>.IsReadOnly => false;
+		
+		public bool Contains(Crewmate crewmate) => m_Crewmates.Contains(crewmate);
+		public void CopyTo(Crewmate[] array, int arrayIndex) => m_Crewmates.CopyTo(array, arrayIndex);
+		public IEnumerator<Crewmate> GetEnumerator() => ((IEnumerable<Crewmate>)m_Crewmates).GetEnumerator();
+		IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)m_Crewmates).GetEnumerator();
+
+		public void Add(Crewmate crewmate)
 		{
-			var prefab = CrewmateVariants[Random.Range(0, CrewmateVariants.Count)];
-			var newCrewmate = Object.Instantiate(prefab, this.transform).GetComponent<Crewmate>();
-			m_Crewmates.Add(newCrewmate);
+			if (m_Crewmates.Contains(crewmate))
+			{
+				Debug.LogWarning($"{this} already contains crewmate {crewmate}", this);
+				return;
+			}
+
+			m_Crewmates.Add(crewmate);
 
 			if (Ship != null)
 			{
-				newCrewmate.Board(Ship);
+				crewmate.Board(Ship);
 			}
 		}
 
 		/// <summary>
-		/// Removes the most recent crewmate from the crew
+		/// Remove the crewmate at the specified index from the crew
 		/// </summary>
-		public void Remove()
-		{
-			RemoveAt(m_Crewmates.Count - 1);
-		}
-
 		public void RemoveAt(int index)
 		{
 			var toRemove = m_Crewmates[index];
-			m_Crewmates.Remove(toRemove);
-			Object.Destroy(toRemove.gameObject);
+			Remove(toRemove);
 		}
 
-        public void RemoveThis(List<Crewmate> Crewmate, Crewmate Object)
-        {
-            int i = 0;
-            foreach(var C in Crewmate)
-            {
-                if(Object == C)
-                {
-                    RemoveAt(i);
-                    return;
-                }
-                i++;
-            }
-            return;
-        }
+		/// <summary>
+		/// Remove the specified crewmate from the crew
+		/// </summary>
+		/// <returns><c>true</c> if the crewmate was successfully removed from the crew</returns>
+		public bool Remove(Crewmate crewmate)
+		{
+			return Remove(crewmate, 0);
+		}
+
+		/// <inheritdoc cref="Remove(Crewmate)"/>
+		/// <param name="delay">An optional delay for destroying the gameObject</param>
+		public bool Remove(Crewmate crewmate, float delay)
+		{
+			Object.Destroy(crewmate.gameObject, delay);
+			if (m_CrewRaid.Contains(crewmate)) 
+			{
+				m_CrewRaid.Remove(crewmate);
+			}
+			return m_Crewmates.Remove(crewmate);
+		}
+
+		public void Clear()
+		{
+			while (m_Crewmates.Count > 0)
+			{
+				Remove();
+			}
+		}
+
+		#endregion // ICollection<Crewmate> Implementation
 	}
 }

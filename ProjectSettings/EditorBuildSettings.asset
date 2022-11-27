@@ -11,5 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/PirateGame/Scenes/Sandbox/DemoScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/PirateGame/Scenes/Sandbox/LoadingZoneTestA.unity
+    guid: d55c2b3bfea90244da03c5c53e840921
+  - enabled: 1
+    path: Assets/PirateGame/Scenes/Sandbox/LoadingZoneTestB.unity
+    guid: 6c4f675f50659464aa3d8e8ea33efb0b
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4c4de47fe59dc1848bc66113ce2f32e8, type: 2}

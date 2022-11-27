@@ -26,7 +26,7 @@ public class Weather_Changer : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("hit");
-        Weather.Instance.TransitionWeather(WP);
+        WeatherManager.Instance.TransitionWeather(WP);
         GameObject.Destroy(gameObject);
     }
 }
