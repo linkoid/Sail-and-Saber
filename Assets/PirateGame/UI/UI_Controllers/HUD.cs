@@ -15,6 +15,9 @@ namespace PirateGame.UI
 		public TMP_Text Loot_Text, Crew_Text, Error_Text,Target_Title;
 		[SerializeField] float Error_timer = 5f;
 		public GameObject Ship,TargetUI,DeathPanel,winScreen;
+
+		
+		[SerializeField] private SoundEffect buySound,WinSound,LoseSound;
 		bool isBuying, isError;
 
 		public bool CanBuy(int cost)
@@ -24,6 +27,7 @@ namespace PirateGame.UI
 			if(value >= cost == false){
 				Error("Too Poor Need " + (cost - Player.Gold)+ " More Gold");
 			}else{
+				buySound.Play();
 				isError = false;
 			}
 
@@ -113,10 +117,16 @@ namespace PirateGame.UI
 			if(Player.Ship == null){
 				return;
 			}
+			
+			if(Player.Ship.Health <= 0){
+				LoseSound.Play();
+			}
+			
 			DeathPanel.SetActive(Player.Ship.Health <= 0);
 
 			if(PlayerPrefs.GetString("Fort1") == "Captured" && PlayerPrefs.GetString("Fort2") == "Captured" &&PlayerPrefs.GetString("Fort3") == "Captured" ){
 				winScreen.SetActive(true);
+				WinSound.Play();
 			}
 		}
 		void Error(string error){

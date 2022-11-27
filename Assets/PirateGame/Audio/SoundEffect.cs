@@ -13,18 +13,18 @@ namespace PirateGame
 
 		public AudioSource AudioSource => this.GetComponent<AudioSource>();
 
-		[SpanRange( 0, 1)] public Span VolumeRange = new Span(0.1f, .4f);
+		[SpanRange( 0, 0.1f)] public Span VolumeRange = new Span(0.01f, .04f);
 		[SpanRange(-3, 3)] public Span PitchRange = new Span(0.9f, 1.1f);
 
 		public List<AudioClip> Sounds = new List<AudioClip>();
 
+
+
 		public void Play()
 		{
 			AudioClip clip = Sounds[Random.Range(0, Sounds.Count)];
-			//AudioSource.volume = VolumeRange.RandomRange();
-			if(AudioSource.volume > 0){
-				AudioSource.volume += VolumeRange.RandomRange();
-			}
+			AudioSource.volume = PlayerPrefs.GetFloat("SFX_Volume");;
+
 			AudioSource.pitch = PitchRange.RandomRange();
 			AudioSource.clip = clip;
 			AudioSource.Play();

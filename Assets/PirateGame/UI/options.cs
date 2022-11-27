@@ -21,7 +21,11 @@ public class options : MonoBehaviour
         } catch(UnityException e) {
             Debug.Log(e.StackTrace);
         }
-        
+    }
+
+    private void Start()
+    {
+        SFX_Slider.value = PlayerPrefs.GetFloat("SFX_Volume");
     }
 
     private void Update()
@@ -34,6 +38,8 @@ public class options : MonoBehaviour
 	// Invoked when the value of the slider changes.
 	public void SetAllSFX_Values()
 	{
+        
+        PlayerPrefs.SetFloat("SFX_Volume",SFX_Slider.value);
         var allSFX_Objects = FindObjectsOfType<SoundEffect>();
         foreach(SoundEffect se in allSFX_Objects){
             se.AudioSource.volume = SFX_Slider.value;
