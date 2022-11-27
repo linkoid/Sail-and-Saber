@@ -25,7 +25,7 @@ public class options : MonoBehaviour
 
     private void Start()
     {
-        PlayerPrefs.SetFloat("SFX_Volume",SFX_Slider.value);
+        SFX_Slider.value = PlayerPrefs.GetFloat("SFX_Volume");
     }
 
     private void Update()

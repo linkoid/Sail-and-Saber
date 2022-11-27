@@ -17,7 +17,7 @@ namespace PirateGame.UI
 		public GameObject Ship,TargetUI,DeathPanel,winScreen;
 
 		
-		[SerializeField] private SoundEffect buySound;
+		[SerializeField] private SoundEffect buySound,WinSound,LoseSound;
 		bool isBuying, isError;
 
 		public bool CanBuy(int cost)
@@ -117,10 +117,16 @@ namespace PirateGame.UI
 			if(Player.Ship == null){
 				return;
 			}
+			
+			if(Player.Ship.Health <= 0){
+				LoseSound.Play();
+			}
+			
 			DeathPanel.SetActive(Player.Ship.Health <= 0);
 
 			if(PlayerPrefs.GetString("Fort1") == "Captured" && PlayerPrefs.GetString("Fort2") == "Captured" &&PlayerPrefs.GetString("Fort3") == "Captured" ){
 				winScreen.SetActive(true);
+				WinSound.Play();
 			}
 		}
 		void Error(string error){
