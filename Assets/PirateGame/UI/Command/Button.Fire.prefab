@@ -7,9 +7,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1724760942702355042, guid: 75771eda03de8984e90c67ceebc9654f, type: 3}
+      propertyPath: m_text
+      value: 'Fire
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 1961527283667490728, guid: 75771eda03de8984e90c67ceebc9654f, type: 3}
       propertyPath: m_Name
-      value: CommandBase (1)
+      value: Button.Fire
       objectReference: {fileID: 0}
     - target: {fileID: 6507863078139430761, guid: 75771eda03de8984e90c67ceebc9654f, type: 3}
       propertyPath: m_Pivot.x
