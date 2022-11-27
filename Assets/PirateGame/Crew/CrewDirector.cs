@@ -19,11 +19,9 @@ namespace PirateGame.Crew
 
 		[SerializeField] private Ships.Ship _ship;
 		[SerializeField] private PrefabList _crewmateVariants;
-		[SerializeField] private SoundEffect m_ArrgSound;
 		//TEST
 		//public Object objectRemove;
 		//public int i;
-
 
 		[SerializeField] List<Crewmate> m_Crewmates = new List<Crewmate>();
 		[SerializeField] List<Crewmate> m_CrewRaid = new List<Crewmate>();
@@ -85,16 +83,7 @@ namespace PirateGame.Crew
 		/// </summary>
 		public void ManCannons(IEnumerable<Ships.Cannon> cannons)
 		{
-			// TODO : Find better support objects
 			GameObject supportObject = Ship.gameObject;
-			if (m_ArrgSound != null)
-			{
-				m_ArrgSound.Play();
-			}
-			else
-			{
-				Debug.LogWarning($"ManCannons(): m_ArrgSound has not been assigned", this);
-			}
 			var iter = m_Crewmates.Zip(cannons, (a, b) => new { crewmate = a, cannon = b });
 			foreach (var pair in iter)
 			{

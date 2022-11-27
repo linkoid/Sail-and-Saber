@@ -15,13 +15,16 @@ namespace PirateGame.Crew
 	[RequireComponent(typeof(AIHumanoid))]
 	public class Crewmate : MonoBehaviour
 	{
+		public int Health = 10;
+		public int Strength = 1;
+		
+		[SerializeField] private SoundEffect m_YarrSound;
+		[SerializeField] private SoundEffect m_ArrgSound;
+
 		private Transform PathfindGoal => (_pathfindGoal != null) ? _pathfindGoal : CreatePathfindGoal();
 		[SerializeField, ReadOnly] private Transform _pathfindGoal;
 
 		public AIHumanoid Humanoid => this.GetComponent<AIHumanoid>();
-
-        public int Health = 10;
-        public int Strength = 1;
 
 		void Start()
 		{
@@ -45,6 +48,7 @@ namespace PirateGame.Crew
 		{
 			Humanoid.Standby();
 			Humanoid.Attack(enemy.Humanoid);
+			TryPlaySound(m_ArrgSound, nameof(m_ArrgSound));
 		}
 
 		/// <summary>
@@ -54,6 +58,7 @@ namespace PirateGame.Crew
 		{
 			Humanoid.Standby();
 			Humanoid.Goal = supportObject;
+			TryPlaySound(m_YarrSound, nameof(m_YarrSound));
 		}
 
 		/// <summary>
@@ -63,6 +68,7 @@ namespace PirateGame.Crew
 		{
 			Humanoid.Standby();
 			Humanoid.Defend(enemy.Humanoid);
+			TryPlaySound(m_ArrgSound, nameof(m_ArrgSound));
 		}
 
 		/// <summary>
@@ -127,6 +133,18 @@ namespace PirateGame.Crew
 					textColor = Color.red,
 				},
 			});
+		}
+		
+		void TryPlaySound(SoundEffect sound, string name)
+		{
+			if (sound != null)
+			{
+				sound.Play();
+			}
+			else
+			{
+				Debug.LogWarning($"Crewmate: {name} has not been assigned", this);
+			}
 		}
 	}
 }

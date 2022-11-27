@@ -237,7 +237,7 @@ namespace UnityEngine.CustomUtils
 
 	public static class SpanExtensions
 	{
-		public static float RandomRange(this Span span)
+		public static float RandomInRange(this Span span)
 		{
 			return Random.RandomRange(span.Min, span.Max);
 		}
