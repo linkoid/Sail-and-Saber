@@ -42,7 +42,7 @@ namespace PirateGame.Sea
 		/// <summary>
 		/// Updates parameters in shader
 		/// </summary>
-		void UpdateWaveParameters()
+		public void UpdateWaveParameters()
 		{
 			Shader.SetGlobalFloat("WaveAmplitude", WaveAmplitude);
 			Shader.SetGlobalFloat("WaveDistance" , WaveDistance );

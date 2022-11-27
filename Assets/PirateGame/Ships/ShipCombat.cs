@@ -30,7 +30,7 @@ namespace PirateGame.Ships
 		void FixedUpdate()
 		{
 			//TargetNearestShip();
-			CheckCanRaid();
+			//CheckCanRaid();
 		}
 
 
