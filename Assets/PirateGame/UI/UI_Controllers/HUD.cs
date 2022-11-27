@@ -14,7 +14,7 @@ namespace PirateGame.UI
 		public Slider HealthBar,Target_Health;
 		public TMP_Text Loot_Text, Crew_Text, Error_Text,Target_Title;
 		[SerializeField] float Error_timer = 5f;
-		public GameObject Ship,TargetUI,DeathPanel;
+		public GameObject Ship,TargetUI,DeathPanel,winScreen;
 		bool isBuying, isError;
 
 		public bool CanBuy(int cost)
@@ -115,6 +115,10 @@ namespace PirateGame.UI
 				return;
 			}
 			DeathPanel.SetActive(Player.Ship.Health <= 0);
+
+			if(PlayerPrefs.GetString("Fort1") == "Captured" && PlayerPrefs.GetString("Fort2") == "Captured" &&PlayerPrefs.GetString("Fort3") == "Captured" ){
+				winScreen.SetActive(true);
+			}
 		}
 		void Error(string error){
 			Error_Text.text = error;
