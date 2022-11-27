@@ -87,7 +87,6 @@ namespace PirateGame.UI
 				}
 				float valueDif = Player.Target.Health - Target_Health.value;
 				Target_Health.value += valueDif * .01f;
-				Debug.Log(Target_Health.value);
 			}else {
 				TargetUI.SetActive(false);
 

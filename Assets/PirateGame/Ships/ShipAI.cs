@@ -53,8 +53,11 @@ namespace PirateGame.Ships
 				Patrol();
 			}
 
-			Ship.Internal.Combat.FireBroadsideCannons();
-			Ship.Internal.Combat.FireDeckCannons();
+			if (Ship.Internal.Combat.Target != null)
+			{
+				Ship.Internal.Combat.FireBroadsideCannons();
+				Ship.Internal.Combat.FireDeckCannons();
+			}
 		}
 
 		protected override void OnRaided()
@@ -80,6 +83,8 @@ namespace PirateGame.Ships
 		{
 			Ship target = FindNearestPlayerShip();
 			if (target == null) return false;
+
+			Ship.Internal.Combat.Target = target;
 
 			float distance = Vector3.Distance(target.Rigidbody.position, Ship.Rigidbody.position);
 			if (distance > m_AggroRadius) return false;
