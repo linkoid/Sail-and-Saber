@@ -45,8 +45,8 @@ Rigidbody:
   m_GameObject: {fileID: 6012291125749595456}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0.5
-  m_AngularDrag: 0.5
+  m_Drag: 0.1
+  m_AngularDrag: 0.1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -79,13 +79,13 @@ GameObject:
   - component: {fileID: 3829864954518899031}
   - component: {fileID: 5625366103007451898}
   - component: {fileID: 839740774185922650}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8811405001350369691
 Transform:
   m_ObjectHideFlags: 0
@@ -94,7 +94,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7279152482422346578}
   m_LocalRotation: {x: -0, y: 0.27948862, z: -0, w: 0.96014905}
-  m_LocalPosition: {x: 8.2108, y: -13.0352, z: 8.040798}
+  m_LocalPosition: {x: 8.2108, y: -1.3752003, z: 8.040798}
   m_LocalScale: {x: 34.37558, y: 4.070508, z: 45.221245}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -193,7 +193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a0409fa2dcf8a494595c356cb3efe829, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 11.66
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a0409fa2dcf8a494595c356cb3efe829, type: 3}
       propertyPath: m_LocalPosition.z
@@ -267,7 +267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cfb0804d80e48614e92aec08e0051ce7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 11.66
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cfb0804d80e48614e92aec08e0051ce7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -309,6 +309,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Environment.Icebergs.BergLargeCol.01
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cfb0804d80e48614e92aec08e0051ce7, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3451118302482216456, guid: cfb0804d80e48614e92aec08e0051ce7, type: 3}
       propertyPath: m_Convex
       value: 1
@@ -339,3 +343,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AutoInitialize: 1
   Volume: 12933.753
+  ManualCenter: 0
+  Center: {x: 0, y: 0, z: 0}
+  m_DebugGizmos: 0
