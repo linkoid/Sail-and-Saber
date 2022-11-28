@@ -35,10 +35,31 @@ public class DensityHelper : MonoBehaviour
 	{
 		if (!this.TryGetComponent(out Rigidbody rigidbody)) return;
 
+		List<MeshCollider> wasEnabled = new List<MeshCollider>();
+		foreach (var mc in this.GetComponentsInChildren<MeshCollider>(true))
+		{
+			if (mc.attachedRigidbody != rigidbody) continue;
+			if (!mc.enabled) continue;
+			if (!mc.gameObject.activeInHierarchy) continue;
+			if (!mc.convex) continue;
+			if (mc.isTrigger) continue;
+			if (!mc.TryGetComponent(out MeshVolume _)) continue;
+
+			mc.enabled = false;
+			wasEnabled.Add(mc);
+		}
+
 		rigidbody.SetDensity(Density);
-        m_Mass = rigidbody.mass;
+		m_Mass = rigidbody.mass;
+
+		foreach (var mc in wasEnabled)
+		{
+			m_Mass += mc.GetComponent<MeshVolume>().Volume * Density;
+			mc.enabled = true;
+		}
+
 		rigidbody.mass = m_Mass;
-		
+
 		if (CenterOfMass != null)
 		{
 			rigidbody.centerOfMass = rigidbody.transform.InverseTransformPoint(CenterOfMass.position);
