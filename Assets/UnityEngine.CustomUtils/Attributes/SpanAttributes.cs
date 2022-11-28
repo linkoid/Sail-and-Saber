@@ -36,3 +36,8 @@ public sealed class SpanRangeAttribute : PropertyAttribute
 
 
 }
+
+public sealed class SpanIntAttribute : PropertyAttribute
+{
+	public SpanIntAttribute() { }
+}

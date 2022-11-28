@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.CustomUtils;
+using Unity.VisualScripting;
 
 [CustomPropertyDrawer(typeof(Span))]
 public class SpanDrawer : PropertyDrawer
@@ -47,7 +48,8 @@ public class SpanDrawer : PropertyDrawer
 		return SpanField(position, newLabel, span);
 	}
 
-	public virtual void ValidateSpan(in Span oldSpan, ref Span newSpan) { 
+	public virtual void ValidateSpan(in Span oldSpan, ref Span newSpan) 
+	{ 
 		if (oldSpan.Min != newSpan.Min)
 		{
 			newSpan.Truncate(true);
@@ -55,6 +57,12 @@ public class SpanDrawer : PropertyDrawer
 		else if (oldSpan.Max != newSpan.Max)
 		{
 			newSpan.Truncate(false);
+		}
+
+		if (this.fieldInfo.GetCustomAttributes(typeof(SpanIntAttribute), true).Length > 0)
+		{
+			newSpan.Min = Mathf.Round(newSpan.Min);
+			newSpan.Max = Mathf.Round(newSpan.Max);
 		}
 	}
 }

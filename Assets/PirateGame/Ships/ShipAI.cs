@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.CustomUtils;
 using PirateGame.Crew;
 
 namespace PirateGame.Ships
 {
 	public class ShipAI : Ship.ShipBehaviour
 	{
+		[Header("Config")]
 		[SerializeField]
 		private int m_CrewCount = 5;
 
@@ -19,6 +21,18 @@ namespace PirateGame.Ships
 		[SerializeField, Min(0)]
 		private float m_AttackRadius = 20;
 
+		[Header("Rewards")]
+		[SerializeField, SpanRange(0, 50), SpanInt]
+		private Span m_SinkGoldReward = new Span(0, 3);
+
+		[SerializeField, Range(0, 20)]
+		private int m_PlunderGoldBonus = 3;
+
+		[SerializeField, SpanRange(0, 10), SpanInt]
+		private Span m_PlunderCrewReward = new Span(0, 1);
+
+
+		[Header("Info")]
 		[SerializeField, ReadOnly]
 		private bool m_RaidCrewSpawned = false;
 
@@ -80,6 +94,18 @@ namespace PirateGame.Ships
 			{
 				Object.Destroy(m_Crew.gameObject);
 			}
+
+			Player player = FindNearestPlayer();
+			player.Gold += Mathf.RoundToInt(m_SinkGoldReward.RandomInRange());
+		}
+
+		protected override void OnPlunder()
+		{
+			base.OnPlunder();
+
+			Player player = FindNearestPlayer();
+			player.Gold += m_PlunderGoldBonus;
+			player.CrewCount += Mathf.RoundToInt(m_PlunderCrewReward.RandomInRange());
 		}
 
 		/// <summary>
@@ -162,6 +188,26 @@ namespace PirateGame.Ships
 			}
 
 			return nearestShip;
+		}
+
+		private Player FindNearestPlayer()
+		{
+			// XXX For now only gets first player
+
+			Player nearestPlayer = null;
+			foreach (var player in Object.FindObjectsOfType<Player>())
+			{
+				if (nearestPlayer == null)
+				{
+					nearestPlayer = player;
+				}
+				else
+				{
+					Debug.LogError("Found multiple players!", this);
+				}
+			}
+
+			return nearestPlayer;
 		}
 
 		void OnDrawGizmosSelected()
