@@ -33,11 +33,13 @@ namespace PirateGame.Crew
 		{
 			var iter = m_Crewmates.Zip(ship.Crew, (a, b) => new { crewmate = a, enemy = b });
 			m_CrewRaid.Clear();
-			foreach (var pair in iter)
+            ship.Crew.m_CrewRaid.Clear();
+            foreach (var pair in iter)
 			{
 				pair.crewmate.Raid(ship, pair.enemy);
 				pair.enemy.Defend(ship, pair.crewmate);
 				m_CrewRaid.Add(pair.crewmate);
+                ship.Crew.m_CrewRaid.Add(pair.enemy);
 			}
 
 		}
@@ -50,7 +52,7 @@ namespace PirateGame.Crew
 			var toRemove = new List<Crewmate>();
 			foreach (var crewmate in m_CrewRaid)
 			{
-				crewmate.TakeDamage(1);
+				crewmate.TakeDamage(damage);
 				if (crewmate.Health <= 0)
 				{
 					toRemove.Add(crewmate);
