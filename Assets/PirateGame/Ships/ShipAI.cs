@@ -19,6 +19,9 @@ namespace PirateGame.Ships
 		[SerializeField, Min(0)]
 		private float m_AttackRadius = 20;
 
+		[SerializeField, ReadOnly]
+		private bool m_RaidCrewSpawned = false;
+
 
 		// Start is called before the first frame update
 		void Start()
@@ -63,9 +66,10 @@ namespace PirateGame.Ships
 		protected override void OnRaid()
 		{
 			base.OnRaid();
-			if (m_Crew == null)
+			if (!m_RaidCrewSpawned)
 			{
 				CreateCrew();
+				m_RaidCrewSpawned = true;
 			}
 			Ship.Internal.Physics.Stop();
 		}
