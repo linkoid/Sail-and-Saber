@@ -13,7 +13,8 @@ public class Shop : MonoBehaviour
     /// <param name="other">The other Collider involved in this collision.</param>
     private void OnTriggerStay(Collider other)
     {
-        ShopMenu.SetActive(true);
+            ShopMenu.SetActive(true);
+        
     }
 
     /// <summary>
