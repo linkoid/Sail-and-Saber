@@ -72,6 +72,7 @@ namespace PirateGame.Sea
 			Collider[] colliders = Physics.OverlapBox(pos, m_BoundsSize, rot, GetIgnoreLayerCollisionMask());
 			foreach (Collider collider in colliders)
 			{
+				if (collider.isTrigger) continue;
 				if (collider.attachedRigidbody == null) continue;
 				if (collider.attachedRigidbody.isKinematic) continue;
 				if (collider.attachedRigidbody.isKinematic) continue;

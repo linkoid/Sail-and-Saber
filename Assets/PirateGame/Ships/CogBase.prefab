@@ -491,9 +491,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c875b62419eb245b40719eede567a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 200
+  m_Speed: 400
   m_ReverseFactor: 0.5
-  m_Acceleration: 5
+  m_Acceleration: 10
   m_SpinSpeed: 1
   m_SpinAcceleration: 0.5
   Steering: 0
@@ -1965,7 +1965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CenterOfMass: {fileID: 6857494341586506667}
-  Density: 300
+  Density: 500
   m_Mass: 1
 --- !u!114 &8873269267604673351
 MonoBehaviour:
@@ -2238,6 +2238,13 @@ MonoBehaviour:
   m_Crew: {fileID: 2938815246739676079}
   m_AggroRadius: 50
   m_AttackRadius: 20
+  m_SinkGoldReward:
+    Min: 0
+    Max: 3
+  m_PlunderGoldBonus: 3
+  m_PlunderCrewReward:
+    Min: 0
+    Max: 1
   m_RaidCrewSpawned: 0
 --- !u!1 &8435140355623566380
 GameObject:

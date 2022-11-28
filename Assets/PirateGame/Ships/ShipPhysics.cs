@@ -83,11 +83,11 @@ namespace PirateGame.Ships
 		void AddSteerForce()
 		{
 			Vector3 currentSpin = Rigidbody.angularVelocity;
-			Vector3 targetSpin = new Vector3(0f, Steering, 0f).normalized * m_SpinSpeed;
+			Vector3 targetSpin = new Vector3(0f, Steering, 0f).normalized * m_SpinSpeed * Ship.SpeedModifier;
 			Vector3 deltaSpin = targetSpin - currentSpin;
 			deltaSpin = Vector3.Scale(deltaSpin, -Physics.gravity.normalized);
 
-			Vector3 addSpin = deltaSpin.normalized * m_SpinAcceleration * Time.fixedDeltaTime;
+			Vector3 addSpin = deltaSpin.normalized * m_SpinAcceleration * Time.fixedDeltaTime * (Mathf.Log(Ship.SpeedModifier) + 1);
 			if (addSpin.magnitude > deltaSpin.magnitude)
 			{
 				addSpin = deltaSpin;
@@ -103,11 +103,11 @@ namespace PirateGame.Ships
 				speed *= m_ReverseFactor;
 			}
 			Vector3 currentVelocity = Rigidbody.velocity;
-			Vector3 targetVel = transform.forward * speed * Time.fixedDeltaTime;
+			Vector3 targetVel = transform.forward * speed * Time.fixedDeltaTime * Ship.SpeedModifier;
 			Vector3 deltaVel = targetVel - currentVelocity;
 			deltaVel = Vector3.ProjectOnPlane(deltaVel, -Physics.gravity.normalized);
 
-			Vector3 addVel = deltaVel.normalized * m_Acceleration * Time.fixedDeltaTime;
+			Vector3 addVel = deltaVel.normalized * m_Acceleration * Time.fixedDeltaTime * (Mathf.Log(Ship.SpeedModifier) + 1);
 			if (addVel.magnitude > deltaVel.magnitude)
 			{
 				addVel = deltaVel;
