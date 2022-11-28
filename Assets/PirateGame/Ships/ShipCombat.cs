@@ -11,10 +11,10 @@ namespace PirateGame.Ships
 	public class ShipCombat : Ship.ShipBehaviour
 	{
 		public float DamagePerCannon = 10;
-		public float TargetRange = 100;
+		//public float TargetRange = 100;
 		public float ReloadDelay = 2;
 
-		private float TargetRangeSqr => TargetRange * TargetRange;
+		private float TargetRangeSqr => Mathf.Infinity;
 
 		public CannonGroup BroadsideCannons { get => _BroadsideCannons; private set => _BroadsideCannons = value; }
 		[SerializeField] private CannonGroup _BroadsideCannons;
