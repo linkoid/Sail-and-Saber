@@ -1369,6 +1369,9 @@ MonoBehaviour:
   PitchRange:
     Min: 0.9
     Max: 1.1
+  DelayRange:
+    Min: 0
+    Max: 0
   Sounds:
   - {fileID: 8300000, guid: 74ac2f9a81249ba4fb5b6ca9d6a119d3, type: 3}
 --- !u!1 &871451937552056845
@@ -3823,6 +3826,9 @@ MonoBehaviour:
   PitchRange:
     Min: 0.9
     Max: 1.1
+  DelayRange:
+    Min: 0
+    Max: 0
   Sounds:
   - {fileID: 8300000, guid: f50f7ea219dd27a46b230895a64a1b2f, type: 3}
 --- !u!1 &3220989784423378267
@@ -4327,6 +4333,9 @@ MonoBehaviour:
   PitchRange:
     Min: 0.9
     Max: 1.1
+  DelayRange:
+    Min: 0
+    Max: 0
   Sounds:
   - {fileID: 8300000, guid: f50f7ea219dd27a46b230895a64a1b2f, type: 3}
 --- !u!1 &3816907839727053495
@@ -5470,6 +5479,9 @@ MonoBehaviour:
   PitchRange:
     Min: 0.9
     Max: 1.1
+  DelayRange:
+    Min: 0
+    Max: 0
   Sounds:
   - {fileID: 8300000, guid: 1a1e5bc95700c0a48ab57058aca37a7b, type: 3}
 --- !u!1 &5818639604189106719
@@ -7148,6 +7160,14 @@ PrefabInstance:
     - target: {fileID: 1863078627139828630, guid: e85d2d0423f934d41a96a60da46e0103, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980905177471692593, guid: e85d2d0423f934d41a96a60da46e0103, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980905177471692593, guid: e85d2d0423f934d41a96a60da46e0103, type: 3}
+      propertyPath: m_FillCenter
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e85d2d0423f934d41a96a60da46e0103, type: 3}
