@@ -23,7 +23,7 @@ namespace PirateGame.Ships
 		public float SpeedModifier { get => _speedModifier; protected set => _speedModifier = value; }
 		public CrewDirector Crew { get => _crew; protected set => _crew = value; }
 		public bool IsRaided { get => _isRaided; protected set => _isRaided = value; }
-		public bool IsPlundered { get => _isRaided; protected set => _isRaided = value; }
+		public bool IsPlundered { get => _isPlundered; protected set => _isPlundered = value; }
 
 		[SerializeField] private float _health = 100;
 		[SerializeField] private float _maxHealth = 100;

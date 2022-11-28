@@ -49,6 +49,8 @@ namespace PirateGame.Crew.Commands
 			float loopStep = 1f; // how often is the code in the loop run?
 			for (float loopTime = 0; loopTime < loopDuration; loopTime += loopStep)
 			{
+                if (m_RaidTarget.Crew.CrewRaid.Count == 0 || Crew.CrewRaid.Count == 0)
+                    break;
                 yield return new WaitForSeconds(loopStep);
                 // TODO : Maybe do dice-rolls to decide which crewmate & enemy dies or something?
 
@@ -70,6 +72,18 @@ namespace PirateGame.Crew.Commands
 
 				// Sink the raided ship
 				m_RaidTarget.Sink();
+            }
+            else if(Crew.Count != 0)
+            {
+                m_RaidTarget.RaidCancel();
+                foreach(var result in OnExecute())
+                {
+                    yield return result;
+                }
+            }
+            else
+            {
+                m_RaidTarget.RaidCancel();
             }
 
             // Give them time to walk back
