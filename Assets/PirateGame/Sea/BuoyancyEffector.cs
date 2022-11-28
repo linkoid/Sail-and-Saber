@@ -12,6 +12,8 @@ namespace PirateGame.Sea
 {
 	public class BuoyancyEffector : MonoBehaviour
 	{
+		[SerializeField] public MeshRenderer WaterMesh;
+
 		[SerializeField] public float WaveAmplitude = 1;
 		[SerializeField] public float WaveDistance  = 10;
 		[SerializeField] public float WaveSpeed     = 5;

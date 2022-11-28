@@ -83,6 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e977d09df7a384ba43ee59fd1c59e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Camera: {fileID: 897732462117576411}
   m_Stats:
     Gold: 0
     CrewCount: 0
@@ -562,7 +563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -56.447876
+      value: -19.745882
       objectReference: {fileID: 0}
     - target: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}
       propertyPath: m_LocalPosition.y
@@ -570,23 +571,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 26.73015
+      value: 43.52489
       objectReference: {fileID: 0}
     - target: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6803887
+      value: -0.2988335
       objectReference: {fileID: 0}
     - target: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.07196995
+      value: -0.03122407
       objectReference: {fileID: 0}
     - target: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7252629
+      value: 0.9486301
       objectReference: {fileID: 0}
     - target: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.07671663
+      value: -0.09911905
       objectReference: {fileID: 0}
     - target: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -602,6 +603,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adb840de47c5b9847a00b50271862d94, type: 3}
+--- !u!20 &897732462117576411 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6518375500559906419, guid: adb840de47c5b9847a00b50271862d94, type: 3}
+  m_PrefabInstance: {fileID: 6197103796131309736}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &897732462117576415 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}

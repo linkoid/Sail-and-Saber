@@ -4,12 +4,17 @@ using System.ComponentModel.Design;
 using UnityEngine;
 using PirateGame.Crew;
 using PirateGame.Ships;
-
+using PirateGame.Sea;
+using UnityEngine.Animations;
+using Unity.VisualScripting;
 
 namespace PirateGame
 {
 	public class Player : MonoBehaviour
 	{
+		[Header("Required")]
+		[SerializeField] private Camera m_Camera;
+		
 		public long Gold      { get => m_Stats.Gold  ; set => FieldChangedCheck(ref m_Stats.Gold     , value, OnGoldChanged     ); }
 		public int  CrewCount { get => GetCrewCount(); set => FieldChangedCheck(ref m_Stats.CrewCount, value, OnCrewCountChanged); }
 		
@@ -19,6 +24,7 @@ namespace PirateGame
 		public CrewDirector Crew { get => (m_Crew != null) ? m_Crew : CreateCrew(); }
 		public Commander Commander { get => m_Commander; private set => m_Commander = value; }
 
+		[Header("Dynamic")]
 		[SerializeField] private PlayerStats m_Stats;
 
 		[SerializeField] private Ship m_Ship ;
@@ -27,8 +33,7 @@ namespace PirateGame
 		[SerializeField] private CrewDirector m_Crew;
 		[SerializeField] private Commander m_Commander;
 
-		[SerializeField, ReadOnly]
-		// Available in Unity 2023.1
+		[SerializeField, ReadOnly, Tooltip("Available in Unity 2023.1")]
 		protected bool didStart = false;
 
 		// Start is called before the first frame update
@@ -141,10 +146,40 @@ namespace PirateGame
 			{
 				Crew.Board(Ship);
 			}
+			ConstrainSeaToShip();
 		}
 		private void OnTargetChanged(Ship oldTarget)
 		{
 			Ship.Internal.Combat.Target = Target;
+		}
+		
+		public void ConstrainSeaToShip()
+		{
+			var sea = Object.FindObjectOfType<BuoyancyEffector>();
+			if (sea != null)
+			{
+				var constraint = sea.WaterMesh.GetComponent<PositionConstraint>();
+				if (constraint == null)
+				{
+					constraint = sea.WaterMesh.gameObject.AddComponent<PositionConstraint>();
+				}
+				constraint.constraintActive = true;
+				constraint.translationAxis = Axis.X | Axis.Z;
+				constraint.weight = 1;
+				constraint.SetSources(new List<ConstraintSource> 
+				{ 
+					new ConstraintSource 
+					{ 
+						sourceTransform = Ship.transform,
+						weight = 0.5f,
+					},
+					new ConstraintSource
+					{
+						sourceTransform = m_Camera.transform,
+						weight = 0.5f,
+					},
+				});
+			}
 		}
 	}
 

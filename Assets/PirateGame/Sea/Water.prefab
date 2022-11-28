@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3779756735601585130}
-  - component: {fileID: 3779756735601585131}
-  - component: {fileID: 3779756735601585128}
   - component: {fileID: 3779756735601585133}
   - component: {fileID: 3779756735601585135}
   m_Layer: 4
@@ -31,25 +29,100 @@ Transform:
   m_LocalPosition: {x: 0, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 393676468688859792}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3779756735601585131
+--- !u!114 &3779756735601585133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3779756735601585142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885e842ce2f33114193fe08e88f90cae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WaterMesh: {fileID: 4201161718864223855}
+  WaveAmplitude: 1
+  WaveDistance: 10
+  WaveSpeed: 5
+  m_FluidDensity: 1000
+  m_DefaultSubmersionDepth: 1
+  m_MinimumDrag: 0.01
+  m_ColliderID: 0
+  m_FixedTime: 0
+  m_BoundsSize: {x: 2000, y: 100, z: 2000}
+  m_IgnoredPoints: []
+  m_Positions: []
+  m_OtherPositions: []
+--- !u!54 &3779756735601585135
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3779756735601585142}
+  serializedVersion: 2
+  m_Mass: 1000
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!1 &7463711954119495928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 393676468688859792}
+  - component: {fileID: 1098438180668152650}
+  - component: {fileID: 4201161718864223855}
+  m_Layer: 4
+  m_Name: WaterMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &393676468688859792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7463711954119495928}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3779756735601585130}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1098438180668152650
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3779756735601585142}
+  m_GameObject: {fileID: 7463711954119495928}
   m_Mesh: {fileID: -462981019419857548, guid: 300cbefb38004174ba1d51d916530aef, type: 3}
---- !u!23 &3779756735601585128
+--- !u!23 &4201161718864223855
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3779756735601585142}
+  m_GameObject: {fileID: 7463711954119495928}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,43 +158,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3779756735601585133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3779756735601585142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 885e842ce2f33114193fe08e88f90cae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WaveAmplitude: 1
-  WaveDistance: 10
-  WaveSpeed: 5
-  m_FluidDensity: 1000
-  m_DefaultSubmersionDepth: 1
-  m_MinimumDrag: 0.01
-  m_ColliderID: 0
-  m_FixedTime: 0
-  m_BoundsSize: {x: 2000, y: 100, z: 2000}
-  m_IgnoredPoints: []
-  m_Positions: []
-  m_OtherPositions: []
---- !u!54 &3779756735601585135
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3779756735601585142}
-  serializedVersion: 2
-  m_Mass: 1000
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
