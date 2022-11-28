@@ -14,6 +14,9 @@ public class MeshVolume : MonoBehaviour
 	public bool ManualCenter = false;
 	public Vector3 Center = Vector3.zero;
 
+	[SerializeField]
+	private bool m_DebugGizmos = false;
+
 	void Start()
 	{
 		Init();
@@ -88,6 +91,8 @@ public class MeshVolume : MonoBehaviour
 
 	private void OnDrawGizmosSelected()
 	{
+		if (!m_DebugGizmos) return;
+
 		Mesh mesh = MeshCollider.sharedMesh;
 		Matrix4x4 transform = this.transform.localToWorldMatrix;
 

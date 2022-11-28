@@ -132,15 +132,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1367028831126845235, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: Volume
-      value: 59.49084
+      value: 109.49447
       objectReference: {fileID: 0}
     - target: {fileID: 1367028831126845235, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1367028831126845235, guid: 8074020296342854d90a49df3661b97c, type: 3}
-      propertyPath: AutoInitialize
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1619953951983679739, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -184,7 +180,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2040466696454481123, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_Mass
-      value: 29746.42
+      value: 54748.234
+      objectReference: {fileID: 0}
+    - target: {fileID: 2040466696454481123, guid: 8074020296342854d90a49df3661b97c, type: 3}
+      propertyPath: Density
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2280490008652310398, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -244,7 +244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3028831654680920310, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_Mass
-      value: 29746.42
+      value: 54748.234
       objectReference: {fileID: 0}
     - target: {fileID: 3028831654680920313, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_RootOrder
