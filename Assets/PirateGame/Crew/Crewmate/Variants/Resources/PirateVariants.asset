@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3af545627dfde458c849891749e921, type: 3}
   m_Name: PirateVariants
   m_EditorClassIdentifier: 
-  m_Prefabs: []
+  m_Prefabs:
+  - {fileID: 5916843505873408388, guid: bcb997be6da13c34d908548fe5ec07b3, type: 3}
+  - {fileID: 5916843505873408388, guid: 094c06c58b3337646bb22f7fcc3e6b35, type: 3}
