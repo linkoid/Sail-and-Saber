@@ -17,6 +17,11 @@ namespace PirateGame.Crew
 
 		public int Count { get => m_Crewmates.Count; set => SetCount(value); }
 
+		/// <summary>
+		/// A read-only list of crewmates currently participating in a raid
+		/// </summary>
+		public IReadOnlyCollection<Crewmate> CrewRaid => m_CrewRaid.AsReadOnly();
+
 		[SerializeField] private Ships.Ship _ship;
 		[SerializeField] private PrefabList _crewmateVariants;
 		//TEST
@@ -39,7 +44,6 @@ namespace PirateGame.Crew
 				pair.enemy.Defend(ship, pair.crewmate);
 				m_CrewRaid.Add(pair.crewmate);
 			}
-
 		}
 
 		/// <summary>
