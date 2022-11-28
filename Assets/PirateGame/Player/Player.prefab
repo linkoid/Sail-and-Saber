@@ -85,8 +85,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 897732462117576411}
   m_Stats:
-    Gold: 0
-    CrewCount: 0
+    Gold: 10
+    CrewCount: 4
   m_Ship: {fileID: 0}
   m_Target: {fileID: 0}
   m_Crew: {fileID: 0}
@@ -563,31 +563,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.745882
+      value: -46.594368
       objectReference: {fileID: 0}
     - target: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.489194
+      value: -2.3891935
       objectReference: {fileID: 0}
     - target: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 43.52489
+      value: 18.38107
       objectReference: {fileID: 0}
     - target: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.2988335
+      value: 0.99402463
       objectReference: {fileID: 0}
     - target: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.03122407
+      value: 0.10696926
       objectReference: {fileID: 0}
     - target: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9486301
+      value: 0.021615656
       objectReference: {fileID: 0}
     - target: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.09911905
+      value: -0.0023261101
       objectReference: {fileID: 0}
     - target: {fileID: 6518375500559906423, guid: adb840de47c5b9847a00b50271862d94, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
