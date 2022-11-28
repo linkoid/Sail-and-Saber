@@ -5,47 +5,12 @@ using PirateGame.Crew;
 
 namespace PirateGame.Ships
 {
-	public class FortressAI : Ship.ShipBehaviour
+	public class FortressAI : ShipAIBase
 	{
-		[SerializeField]
-		private int m_CrewCount = 5;
-
-		[SerializeField]
-		private int m_RaidCrewCount = 10;
-
-		[SerializeField]
-		private CrewDirector m_Crew;
-
-		[SerializeField, Min(0)]
-		private float m_AttackRadius = 20;
-
-		[SerializeField, ReadOnly]
-		private bool m_RaidCrewSpawned = false;
-
-
 		// Start is called before the first frame update
 		void Start()
 		{
 			CreateCrew();
-		}
-
-		private CrewDirector CreateCrew()
-		{
-			if (m_Crew == null)
-			{
-				m_Crew = new GameObject("EnemyCrew", typeof(CrewDirector)).GetComponent<CrewDirector>();
-				m_Crew.transform.parent = this.transform;
-			}
-			m_Crew.Count = m_CrewCount;
-			this.Ship.AssignCrew(m_Crew);
-			m_Crew.Board(this.Ship);
-			return m_Crew;
-		}
-
-		// Update is called once per frame
-		void Update()
-		{
-
 		}
 
 		void FixedUpdate()
@@ -73,6 +38,8 @@ namespace PirateGame.Ships
 
 		protected override void OnSink()
 		{
+			base.OnSink();
+			(Ship as Fortress).Capture();
 		}
 
 		/// <summary>
@@ -83,10 +50,6 @@ namespace PirateGame.Ships
 		{
 			Ship target = FindNearestPlayerShip();
 			if (target == null) return false;
-
-			var shipInternal = Ship.Internal;
-			var combat = shipInternal.Combat;
-			var combatTarget = Ship.Internal;
 
 			Ship.Internal.Combat.Target = target;
 

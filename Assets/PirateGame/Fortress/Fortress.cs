@@ -6,14 +6,25 @@ namespace PirateGame
 {
 	public class Fortress : Ship
 	{
-		public bool IsCaptured { get => _isCaptured; set => _isCaptured = value; }
+		public bool IsCaptured { get => _isCaptured; private set => _isCaptured = value; }
 		[SerializeField] private bool _isCaptured = false;
 
-		public string fortName;
+		[SerializeField]
+		private string m_FortName;
 
 		protected void OnEnable()
 		{
-			IsCaptured = (PlayerPrefs.GetString(fortName) == "Captured");
+			IsCaptured = (PlayerPrefs.GetString(m_FortName) == "Captured");
+		}
+
+		public override void TakeDamage(float damage)
+		{
+			Health -= damage;
+			if (Health < 0)
+			{
+				Health = 0;
+				//Sink(); // Don't call this until plundered!
+			}
 		}
 
 		public void Capture()
@@ -30,7 +41,7 @@ namespace PirateGame
 			}
 
 			IsCaptured = true;
-			PlayerPrefs.SetString(fortName,"Captured");
+			PlayerPrefs.SetString(m_FortName,"Captured");
 		}
 	}
 }

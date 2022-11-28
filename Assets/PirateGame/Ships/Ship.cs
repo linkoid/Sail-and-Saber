@@ -48,7 +48,7 @@ namespace PirateGame.Ships
 			Health = MaxHealth;
 		}
 
-		public void TakeDamage(float damage)
+		public virtual void TakeDamage(float damage)
 		{
 			Health -= damage;
 			if (Health < 0)
