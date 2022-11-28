@@ -235,6 +235,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2938815246739676079, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
+      propertyPath: _crewmateVariants
+      value: 
+      objectReference: {fileID: 11400000, guid: 0a6cea02626dd1a4bab5b1d4d683beb7, type: 2}
     - target: {fileID: 2972108865279681992, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0000011622906
@@ -685,7 +689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8090241698980888342, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
       propertyPath: m_Name
-      value: BaseEnemyShip
+      value: CogEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 8090241698980888349, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
       propertyPath: m_Mass
