@@ -63,7 +63,10 @@ namespace PirateGame.Ships
 		protected override void OnRaid()
 		{
 			base.OnRaid();
-			CreateCrew();
+			if (m_Crew == null)
+			{
+				CreateCrew();
+			}
 			Ship.Internal.Physics.Stop();
 		}
 
