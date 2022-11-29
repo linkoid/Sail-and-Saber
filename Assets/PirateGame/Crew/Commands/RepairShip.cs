@@ -40,12 +40,13 @@ namespace PirateGame.Crew.Commands
             yield return new WaitForSeconds(3);
 
             // Loop to do stuff during the repair
-            float loopStep = 1f - target.Crew.Count; // how often is the code in the loop run?
-            if (loopStep <= 0.1)
-                loopStep = 0.1f;
+            float loopStep = 0.5f; // how often is the code in the loop run?
 
-            //Can we parameterize this to make ship repairs faster?
-            int repairAmount = 1;
+
+            //The ship will be repaired at a maximum of 6 HP/sec
+            int repairAmount = 1 * Crew.Count;
+            if (repairAmount >= 4)
+                repairAmount = 4;
 
             while(Ship.Health < Ship.MaxHealth && Commander.isRepairing)
             {
