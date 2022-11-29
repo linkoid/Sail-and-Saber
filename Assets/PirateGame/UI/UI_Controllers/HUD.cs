@@ -11,16 +11,17 @@ namespace PirateGame.UI
 		public Player Player { get => m_Player; private set => m_Player = value; }
 
 		[SerializeField] private Player m_Player;
-		public Slider HealthBar,Target_Health;
-		public TMP_Text Loot_Text, Crew_Text, Error_Text,Target_Title;
+		public Slider HealthBar, Target_Health;
+		public TMP_Text Loot_Text, Crew_Text, Error_Text, Target_Title;
 		[SerializeField] float Error_timer = 5f;
-		public GameObject Ship,TargetUI,DeathPanel,winScreen;
+		public GameObject Ship, TargetUI, DeathPanel, winScreen;
 
 		[SerializeField] private bool NotToggled = true;
-		[SerializeField] private SoundEffect buySound,WinSound,LoseSound;
+		[SerializeField] private SoundEffect buySound, WinSound, LoseSound;
 		bool isBuying, isError;
 
-		public void Toggle(){
+		public void Toggle()
+		{
 			NotToggled = false;
 		}
 
@@ -28,9 +29,12 @@ namespace PirateGame.UI
 		{
 			var value = Player.Gold;
 			Player.Gold = Player.Gold >= cost ? Player.Gold - cost : Player.Gold;
-			if(value >= cost == false){
-				Error("Too Poor Need " + (cost - Player.Gold)+ " More Gold");
-			}else{
+			if (value >= cost == false)
+			{
+				Error("Too Poor Need " + (cost - Player.Gold) + " More Gold");
+			}
+			else
+			{
 				buySound.Play();
 				isError = false;
 			}
@@ -52,12 +56,12 @@ namespace PirateGame.UI
 			}
 		}
 
-		
+
 		public void BuyShipType(int cost)
 		{
 			if (CanBuy(cost))
 			{
-				Instantiate(Ship,Player.transform);
+				Instantiate(Ship, Player.transform);
 			}
 		}
 
@@ -87,7 +91,7 @@ namespace PirateGame.UI
 		// Update is called once per frame
 		void Update()
 		{
-			
+
 			Loot_Text.text = Player.Gold.ToString();
 
 			Crew_Text.text = Player.CrewCount.ToString();
@@ -97,30 +101,42 @@ namespace PirateGame.UI
 
 			Error_Text.gameObject.SetActive(isError);
 			//change opasity with time 
-			if(isError ){
+			if (isError)
+			{
 				Error_timer -= Time.deltaTime;
 			}
 
-			if(Error_timer <= 0){
+			if (Error_timer <= 0)
+			{
 				isError = false;
 				Error_timer = 5f;
 			}
 
-			if(Player.Ship == null){
+			if (Player.Ship == null)
+			{
 				return;
 			}
-			
-			if(Player.Ship.Health <= 0){
+
+			if (Player.Ship.Health <= 0)
+			{
 				LoseSound.Play();
 			}
-			
+
 			DeathPanel.SetActive(Player.Ship.Health <= 0);
+
+			CheckWinCondition();
+		}
+
+		private void CheckWinCondition()
+		{
 			//Debug.Log(PlayerPrefs.GetString("Fort1") + " " + PlayerPrefs.GetString("Fort2") + " " + PlayerPrefs.GetString("Fort3"));
-				if(PlayerPrefs.GetString("Fort1") == "Captured" && PlayerPrefs.GetString("Fort2") == "Captured" &&PlayerPrefs.GetString("Fort3") == "Captured" ){
-					winScreen.SetActive(true && NotToggled);
-					WinSound.Play();
-				}
-					if(m_Player.Target != null){
+			if (PlayerPrefs.GetString("Fort1") == "Captured" && PlayerPrefs.GetString("Fort2") == "Captured" && PlayerPrefs.GetString("Fort3") == "Captured")
+			{
+				winScreen.SetActive(true && NotToggled);
+				WinSound.Play();
+			}
+			if (m_Player.Target != null)
+			{
 				Target_Title.text = m_Player.Target.name;
 				TargetUI.SetActive(true);
 				if (Target_Health.maxValue != m_Player.Target.MaxHealth)
@@ -129,13 +145,16 @@ namespace PirateGame.UI
 				}
 				float valueDif = Player.Target.Health - Target_Health.value;
 				Target_Health.value += valueDif * .01f;
-			}else {
+			}
+			else
+			{
 				TargetUI.SetActive(false);
 
 			}
-
 		}
-		void Error(string error){
+
+		void Error(string error)
+		{
 			Error_Text.text = error;
 			Error_timer = 5f;
 			isError = true;
@@ -155,7 +174,7 @@ namespace PirateGame.UI
 			}
 			float valueDif = Player.Ship.Health - HealthBar.value;
 			HealthBar.value += valueDif * .01f;
-			
+
 		}
 
 		private bool ShipCheck()

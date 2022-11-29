@@ -56,6 +56,8 @@ namespace PirateGame.Ships
 
 		public IEnumerable<Cannon> GetAllInRange(Vector3 target)
 		{
+			if (!this.isActiveAndEnabled) yield break;
+
 			foreach (var cannon in m_CannonList)
 			{
 				if (cannon.CheckInRange(target))
@@ -67,6 +69,8 @@ namespace PirateGame.Ships
 
 		public IEnumerable<Cannon> GetAllInRange(IEnumerable<Transform> targets)
 		{
+			if (!this.isActiveAndEnabled) yield break;
+
 			foreach (var cannon in m_CannonList)
 			{
 				if (cannon.CheckInRange(targets))
@@ -78,6 +82,8 @@ namespace PirateGame.Ships
 
 		public Cannon GetFirstInRange(Vector3 target)
 		{
+			if (!this.isActiveAndEnabled) return null;
+
 			foreach (var cannon in GetAllInRange(target))
 			{
 				return cannon;

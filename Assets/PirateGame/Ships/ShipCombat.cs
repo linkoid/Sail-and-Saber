@@ -61,7 +61,7 @@ namespace PirateGame.Ships
 				}
 
 				float distSqr = (Target.Rigidbody.position - Ship.Rigidbody.position).sqrMagnitude;
-				if (minDistSqr < distSqr)
+				if (minDistSqr > distSqr)
 				{
 					Target = ship;
 					minDistSqr = distSqr;

@@ -43,6 +43,8 @@ namespace PirateGame.Ships
 
 		public bool CheckInRange(Vector3 target)
 		{
+			if (!this.isActiveAndEnabled) return false;
+
 			Vector3 localDirection = m_RangeOrigin.InverseTransformPoint(target).normalized;
 			Vector3 rotation = Quaternion.LookRotation(localDirection, Vector3.up).eulerAngles;
 			for (int i = 0; i < 3; i++)
@@ -73,6 +75,8 @@ namespace PirateGame.Ships
 
 		public bool CheckInRange(IEnumerable<Transform> targets)
 		{
+			if (!this.isActiveAndEnabled) return false;
+
 			foreach (var target in targets)
 			{
 				if (CheckInRange(target.position))
@@ -86,6 +90,8 @@ namespace PirateGame.Ships
 
 		public void Fire(IEnumerable<Transform> targets)
 		{
+			if (!this.isActiveAndEnabled) return;
+
 			Transform nearest = null;
 			float minDistance = Mathf.Infinity;
 			foreach (var target in targets)
@@ -103,6 +109,8 @@ namespace PirateGame.Ships
 
 		public void Fire(Vector3 target)
 		{
+			if (!this.isActiveAndEnabled) return;
+
 			m_FireGizmoTarget = target;
 
 			// stop any existing fire animations
