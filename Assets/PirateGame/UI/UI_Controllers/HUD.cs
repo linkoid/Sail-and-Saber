@@ -135,6 +135,8 @@ namespace PirateGame.UI
 
 			CheckWinCondition();
 
+			UpdateTargetInfo();
+
 			UpdateShopVisibility();
 
 			UpdateMiniMapCamera();
@@ -148,22 +150,25 @@ namespace PirateGame.UI
 				winScreen.SetActive(true && NotToggled);
 				WinSound.Play();
 			}
-			if (m_Player.Target != null)
-			{
-				Target_Title.text = m_Player.Target.name;
-				TargetUI.SetActive(true);
-				if (Target_Health.maxValue != m_Player.Target.MaxHealth)
-				{
-					Target_Health.maxValue = Player.Target.MaxHealth;
-				}
-				float valueDif = Player.Target.Health - Target_Health.value;
-				Target_Health.value += valueDif * .01f;
-			}
-			else
+		}
+
+		private void UpdateTargetInfo()
+		{
+			if (m_Player.Target == null)
 			{
 				TargetUI.SetActive(false);
-
+				return;
 			}
+
+			Target_Title.text = m_Player.Target.Nickname;
+			TargetUI.SetActive(true);
+
+			if (Target_Health.maxValue != m_Player.Target.MaxHealth)
+			{
+				Target_Health.maxValue = Player.Target.MaxHealth;
+			}
+			float valueDif = Player.Target.Health - Target_Health.value;
+			Target_Health.value += valueDif * .01f;
 		}
 
 		void Error(string error)

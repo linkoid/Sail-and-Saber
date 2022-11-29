@@ -73,9 +73,9 @@ namespace PirateGame.Ships
 			}
 		}
 
-		public void IncreaseSpeedModifier(float factor)
+		public void IncreaseSpeedModifier(float amount)
 		{
-			SpeedModifier += factor;
+			SpeedModifier += amount;
 		}
 
 		/// <summary>
