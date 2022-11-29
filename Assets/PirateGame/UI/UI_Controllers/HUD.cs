@@ -115,7 +115,7 @@ namespace PirateGame.UI
 			}
 			
 			DeathPanel.SetActive(Player.Ship.Health <= 0);
-			Debug.Log(PlayerPrefs.GetString("Fort1") + " " + PlayerPrefs.GetString("Fort2") + " " + PlayerPrefs.GetString("Fort3"));
+			//Debug.Log(PlayerPrefs.GetString("Fort1") + " " + PlayerPrefs.GetString("Fort2") + " " + PlayerPrefs.GetString("Fort3"));
 				if(PlayerPrefs.GetString("Fort1") == "Captured" && PlayerPrefs.GetString("Fort2") == "Captured" &&PlayerPrefs.GetString("Fort3") == "Captured" ){
 					winScreen.SetActive(true && NotToggled);
 					WinSound.Play();
