@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camera_Follow : MonoBehaviour
+public class MiniMapCamera : MonoBehaviour
 {
     public Transform ToFollow;
 

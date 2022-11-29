@@ -13,8 +13,9 @@ namespace PirateGame.Ships
 		public float DamagePerCannon = 10;
 		//public float TargetRange = 100;
 		public float ReloadDelay = 2;
+		public float TargetRange = 20;
 
-		private float TargetRangeSqr => Mathf.Infinity;
+		private float TargetRangeSqr => TargetRange * TargetRange;
 
 		public CannonGroup BroadsideCannons { get => _BroadsideCannons; private set => _BroadsideCannons = value; }
 		[SerializeField] private CannonGroup _BroadsideCannons;
@@ -213,6 +214,9 @@ namespace PirateGame.Ships
 			{
 				Gizmos.DrawRay(cannon.transform.position, Target.Rigidbody.position - cannon.transform.position);
 			}
+
+			Gizmos.color = Color.magenta;
+			Gizmos.DrawWireSphere(Ship.Rigidbody.position, TargetRange);
 		}
 	}
 }

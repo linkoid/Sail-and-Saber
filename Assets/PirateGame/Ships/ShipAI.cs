@@ -98,6 +98,20 @@ namespace PirateGame.Ships
 			return nearestPlayer;
 		}
 
+		protected virtual void FireAllCannons()
+		{
+
+			if (Ship.Internal.Combat.Target != null && !Ship.IsRaided)
+			{
+				var cannons = Ship.Internal.Combat.GetDeckCannonsInRange();
+
+				m_Crew.ManCannons(cannons);
+
+				Ship.Internal.Combat.FireBroadsideCannons();
+				Ship.Internal.Combat.FireDeckCannons();
+			}
+		}
+
 		void OnDrawGizmosSelected()
 		{
 			Gizmos.color = Color.magenta;
@@ -113,6 +127,8 @@ namespace PirateGame.Ships
 
 		protected void FixedUpdate()
 		{
+			Ship.Internal.Combat.TargetRange = m_AggroRadius;
+
 			if (Ship.IsRaided || Ship.IsPlundered || Ship.Health <= 0) return;
 
 			if (!Aggro())
@@ -120,11 +136,7 @@ namespace PirateGame.Ships
 				Patrol();
 			}
 
-			if (Ship.Internal.Combat.Target != null && !Ship.IsRaided)
-			{
-				Ship.Internal.Combat.FireBroadsideCannons();
-				Ship.Internal.Combat.FireDeckCannons();
-			}
+			FireAllCannons();
 		}
 
 		protected override void OnRaid()

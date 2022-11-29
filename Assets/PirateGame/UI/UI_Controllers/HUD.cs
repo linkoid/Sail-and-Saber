@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 namespace PirateGame.UI
 {
@@ -19,6 +20,14 @@ namespace PirateGame.UI
 		[SerializeField] private bool NotToggled = true;
 		[SerializeField] private SoundEffect buySound, WinSound, LoseSound;
 		bool isBuying, isError;
+
+
+		[SerializeField] private GameObject m_ShopButton;
+		[SerializeField] private GameObject m_ShopPanel;
+
+
+		[SerializeField] private MiniMapCamera m_MiniMapCamera;
+
 
 		public void Toggle()
 		{
@@ -125,6 +134,10 @@ namespace PirateGame.UI
 			DeathPanel.SetActive(Player.Ship.Health <= 0);
 
 			CheckWinCondition();
+
+			UpdateShopVisibility();
+
+			UpdateMiniMapCamera();
 		}
 
 		private void CheckWinCondition()
@@ -185,6 +198,27 @@ namespace PirateGame.UI
 				return false;
 			}
 			return true;
+		}
+
+		private void UpdateShopVisibility()
+		{
+			if (!Player.Ship) return;
+
+			if (Player.Ship.Internal.Combat.NearbyShips.Count >= 0)
+			{
+				m_ShopButton.SetActive(false);
+				m_ShopPanel.SetActive(false);
+			}
+			else
+			{
+				m_ShopButton.SetActive(true);
+			}
+		}
+
+		private void UpdateMiniMapCamera()
+		{
+			if (!Player.Ship) return;
+			m_MiniMapCamera.ToFollow = Player.Ship.transform;
 		}
 	}
 }
