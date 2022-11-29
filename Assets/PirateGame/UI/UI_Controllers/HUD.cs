@@ -13,7 +13,7 @@ namespace PirateGame.UI
 
 		[SerializeField] private Player m_Player;
 		public Slider HealthBar, Target_Health;
-		public TMP_Text Loot_Text, Crew_Text, Error_Text, Target_Title;
+		public TMP_Text Loot_Text, Crew_Text, Error_Text, Target_Title,Target_Crew_Text;
 		[SerializeField] float Error_timer = 5f;
 		public GameObject Ship, TargetUI, DeathPanel, winScreen;
 
@@ -161,7 +161,7 @@ namespace PirateGame.UI
 				return;
 			}
 
-
+			Target_Crew_Text.text = m_Player.Target.Crew.Count.ToString();
 			Target_Title.text = m_Player.Target.Nickname;
 
 
