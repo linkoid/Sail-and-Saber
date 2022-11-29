@@ -16,9 +16,13 @@ namespace PirateGame.UI
 		[SerializeField] float Error_timer = 5f;
 		public GameObject Ship,TargetUI,DeathPanel,winScreen;
 
-		
+		[SerializeField] private bool NotToggled = true;
 		[SerializeField] private SoundEffect buySound,WinSound,LoseSound;
 		bool isBuying, isError;
+
+		public void Toggle(){
+			NotToggled = false;
+		}
 
 		public bool CanBuy(int cost)
 		{
@@ -112,10 +116,10 @@ namespace PirateGame.UI
 			
 			DeathPanel.SetActive(Player.Ship.Health <= 0);
 			Debug.Log(PlayerPrefs.GetString("Fort1") + " " + PlayerPrefs.GetString("Fort2") + " " + PlayerPrefs.GetString("Fort3"));
-			if(PlayerPrefs.GetString("Fort1") == "Captured" && PlayerPrefs.GetString("Fort2") == "Captured" &&PlayerPrefs.GetString("Fort3") == "Captured" ){
-				winScreen.SetActive(true);
-				WinSound.Play();
-			}
+				if(PlayerPrefs.GetString("Fort1") == "Captured" && PlayerPrefs.GetString("Fort2") == "Captured" &&PlayerPrefs.GetString("Fort3") == "Captured" ){
+					winScreen.SetActive(true && NotToggled);
+					WinSound.Play();
+				}
 					if(m_Player.Target != null){
 				Target_Title.text = m_Player.Target.name;
 				TargetUI.SetActive(true);

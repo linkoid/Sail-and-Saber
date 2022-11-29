@@ -7,12 +7,6 @@ namespace PirateGame.Ships
 {
 	public class FortressAI : ShipAIBase
 	{
-		// Start is called before the first frame update
-		void Start()
-		{
-			CreateCrew();
-		}
-
 		void FixedUpdate()
 		{
 			if (Ship.IsRaided || Ship.IsPlundered || Ship.Health <= 0) return;
