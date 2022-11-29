@@ -25,8 +25,9 @@ namespace PirateGame.UI
 		[SerializeField] private GameObject m_ShopButton;
 		[SerializeField] private GameObject m_ShopPanel;
 
-
 		[SerializeField] private MiniMapCamera m_MiniMapCamera;
+
+		[SerializeField, ReadOnly] private Ships.Ship m_PreviousTarget;
 
 
 		public void Toggle()
@@ -160,15 +161,29 @@ namespace PirateGame.UI
 				return;
 			}
 
+
 			Target_Title.text = m_Player.Target.Nickname;
+
+
 			TargetUI.SetActive(true);
 
 			if (Target_Health.maxValue != m_Player.Target.MaxHealth)
 			{
 				Target_Health.maxValue = Player.Target.MaxHealth;
 			}
-			float valueDif = Player.Target.Health - Target_Health.value;
-			Target_Health.value += valueDif * .01f;
+
+
+			if (m_PreviousTarget != m_Player.Target)
+			{
+				// Don't animate when switching targets
+				Target_Health.value = Player.Target.Health;
+				m_PreviousTarget = m_Player.Target;
+			}
+			else
+			{
+				float valueDif = Player.Target.Health - Target_Health.value;
+				Target_Health.value += valueDif * .05f;
+			}
 		}
 
 		void Error(string error)

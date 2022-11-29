@@ -282,7 +282,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1367028831126845235, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: Volume
-      value: 109.49447
+      value: 109.49459
       objectReference: {fileID: 0}
     - target: {fileID: 1367028831126845235, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_Enabled
@@ -306,15 +306,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1619953951983679739, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.11686024
+      value: -0.116860256
       objectReference: {fileID: 0}
     - target: {fileID: 1619953951983679739, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0664991
+      value: -0.06649912
       objectReference: {fileID: 0}
     - target: {fileID: 1619953951983679739, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.028249498
+      value: 0.028249508
       objectReference: {fileID: 0}
     - target: {fileID: 1958251984882469686, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -330,7 +330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2040466696454481123, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_Mass
-      value: 54748.234
+      value: 54748.297
       objectReference: {fileID: 0}
     - target: {fileID: 2040466696454481123, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: Density
@@ -394,7 +394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3028831654680920310, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_Mass
-      value: 54748.234
+      value: 54748.297
       objectReference: {fileID: 0}
     - target: {fileID: 3028831654680920313, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_RootOrder
@@ -642,11 +642,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7491881224589061176, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.068301916
+      value: -0.06830193
       objectReference: {fileID: 0}
     - target: {fileID: 7491881224589061176, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.023558658
+      value: 0.023558661
       objectReference: {fileID: 0}
     - target: {fileID: 8160572798925105238, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -876,7 +876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eba96b9790e7d042ac511bdb4a7d65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Scene: Assets/PirateGame/Scenes/Sandbox/LoadingZoneTestB.unity
+  m_Scene: Assets/PirateGame/Scenes/TutorialCanal.unity
 --- !u!65 &527812878
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -898,8 +898,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 527812876}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -42.2, y: 9.2, z: 312}
-  m_LocalScale: {x: 1000, y: 100, z: 10}
+  m_LocalPosition: {x: -17, y: 9.2, z: -54}
+  m_LocalScale: {x: 685.99, y: 100, z: 906.34985}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
