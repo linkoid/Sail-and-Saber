@@ -27,6 +27,8 @@ namespace PirateGame.Ships
 		public bool IsSunk { get => _isSunk; private set => _isSunk = value; }
 		public bool IsPlayerShip => this.GetComponentInChildren<ShipController>(false) != null;
 
+		public string Nickname = "Scallywag Cog";
+
 		[SerializeField] private float _health = 100;
 		[SerializeField] private float _maxHealth = 100;
 		[SerializeField] private float _speedModifier = 1;
