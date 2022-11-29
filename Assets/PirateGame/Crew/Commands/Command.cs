@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace PirateGame.Crew
 {
@@ -14,6 +15,7 @@ namespace PirateGame.Crew
 		[SerializeField, ReadOnly] private bool _isActive = false;
 
 		public Button ButtonObject;
+        public TMP_Text TextObject => ButtonObject.GetComponentInChildren<TMP_Text>();
 
 		protected Coroutine ActiveExecution;
 

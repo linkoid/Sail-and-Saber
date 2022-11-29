@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using PirateGame.Crew;
 
 namespace PirateGame.Crew.Commands
@@ -13,7 +14,7 @@ namespace PirateGame.Crew.Commands
 
 		public override string DisplayName => throw new System.NotImplementedException();
 
-		public override bool Poll()
+        public override bool Poll()
 		{
 			// Cannot raid nothing
 			if (Commander.Target == null) return false;
@@ -47,7 +48,10 @@ namespace PirateGame.Crew.Commands
                 Crew.Raid(m_RaidTarget);
 
                 //Delay Damage Phase
-                yield return new WaitForSeconds(3);
+                if (m_RaidTarget is Fortress)
+                    yield return new WaitForSeconds(10);
+                else
+                    yield return new WaitForSeconds(3);
 
                 // Loop to do stuff during the raid
                 float loopDuration = 11; // how long does the raid last?
@@ -100,7 +104,16 @@ namespace PirateGame.Crew.Commands
 		protected override void Update()
 		{
 			base.Update();
-		}
+            
+            //Change the text of the button to match the context
+            if (Commander.Target.name == "0.Base")
+                TextObject.SetText("Rescue");
+            else if (Commander.Target is Fortress)
+                TextObject.SetText("Siege");
+            else
+                TextObject.SetText("Raid");
+
+        }
 
 		protected override void OnCancel()
 		{
