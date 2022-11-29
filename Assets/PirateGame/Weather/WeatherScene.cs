@@ -10,9 +10,17 @@ namespace PirateGame.Weather
 		[SerializeField] 
 		private WeatherParams m_Parameters = new WeatherParams()
 		{
+			Waves0 = new WaveParams()
+			{
+				Amplitude = 0.5f,
+				Distance = 5,
+				Speed = 5,
+				Direction = new Vector3(1, 1).normalized,
+			},
 			WaveAmplitude = 1,
 			WaveDistance = 5,
 			WaveSpeed = 5,
+			WaveDirection = new Vector2(-1,-1).normalized,
 		};
 
 		void Start()

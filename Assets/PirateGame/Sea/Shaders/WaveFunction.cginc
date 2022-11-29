@@ -11,7 +11,7 @@ CBUFFER_START(PirateGameWaves)
 float WaveAmplitude = 1; 
 float WaveDistance = 10;
 float WaveSpeed = 5;
-//float2 WaveDirection = new float2(1, 1);
+float2 WaveDirection = float2(1, 1);
 
 CBUFFER_END
 
@@ -20,23 +20,26 @@ void WavePosition_float(in float time, in float3 worldPos,
 {
     // Position p = [x, y, z] = [x, f(t,x,z), z]
     // p_y = f(t,x,z)
-    newPos.y = sin((worldPos.x + worldPos.z + time * WaveSpeed) / WaveDistance) * WaveAmplitude;
+    float2 direction = normalize(WaveDirection);
+    newPos.y = sin((worldPos.x * direction.x + worldPos.z * direction.y + time * WaveSpeed) / WaveDistance) * WaveAmplitude;
     newPos.xz = worldPos.xz;
 }
 
 void WaveTangents_float(in float time, in float3 worldPos,
     out half3x3 tangents)
 {   
+    float2 direction = normalize(WaveDirection);
+
     // Tangent U = [ ?p_x, ?p_y, ?p_z ]
     
     // Tangent ?p_x = [?x, ?y, 0] = [?x, ?f/?x ?x, 0] = ?x[1, ?f_x(t,x,z), 0]
-    tangents[0] = float3(1, cos((worldPos.x + worldPos.z + time * WaveSpeed) / WaveDistance) * WaveAmplitude, 0);
+    tangents[0] = float3(1, cos((worldPos.x * direction.x + worldPos.z * direction.y + time * WaveSpeed) / WaveDistance) * WaveAmplitude, 0);
     
     // Tangent ?p_y = [0, 0, 0]
     tangents[1] = float3(0, 1, 0);
 
     // Tangent ?p_z = [0, ?y, ?z] = [0, ?f/?z ?z, ?z] = ?z[0, ?f_z(t,x,z), 1]
-    tangents[2] = float3(0, cos((worldPos.x + worldPos.z + time * WaveSpeed) / WaveDistance) * WaveAmplitude, 1);
+    tangents[2] = float3(0, cos((worldPos.x * direction.x + worldPos.z * direction.y + time * WaveSpeed) / WaveDistance) * WaveAmplitude, 1);
 }
 void WaveTangents_half(in float time, in half3 worldPos,
     out half3x3 tangents) 
@@ -52,6 +55,7 @@ void WaveNormal_float(in float time, in float3 worldPos,
     WaveTangents_float(time, worldPos, tangents);
 
     normal = cross(normalize(tangents[2]), normalize(tangents[0]));
+    normal = normalize(normal);
 }
 void WaveNormal_half(in float time, in half3 worldPos,
     out half3 normal)

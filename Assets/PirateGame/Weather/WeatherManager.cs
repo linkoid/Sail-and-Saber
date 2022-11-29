@@ -80,9 +80,7 @@ namespace PirateGame.Weather
 		{
 			if (Sea != null)
 			{
-				Sea.WaveAmplitude = weatherParams.WaveAmplitude;
-				Sea.WaveDistance = weatherParams.WaveDistance;
-				Sea.WaveSpeed = weatherParams.WaveSpeed;
+				Sea.Waves0 = weatherParams.Waves0;
 				Sea.UpdateWaveParameters();
 			}
 		}

@@ -1239,6 +1239,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.007039991
       objectReference: {fileID: 0}
+    - target: {fileID: 2456633484352884718, guid: d816b98519f5d9a49b420175e98c5f7e, type: 3}
+      propertyPath: m_FortName
+      value: Fort2
+      objectReference: {fileID: 0}
     - target: {fileID: 2532225720374648644, guid: d816b98519f5d9a49b420175e98c5f7e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.000009536743
@@ -2131,6 +2135,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8481229744780602010, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}
       propertyPath: m_Parameters.WaveAmplitude
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481229744780602010, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}
+      propertyPath: m_Parameters.Waves0.Distance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481229744780602010, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}
+      propertyPath: m_Parameters.Waves0.Amplitude
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8481229744780602011, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}

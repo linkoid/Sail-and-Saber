@@ -1,4 +1,5 @@
 ﻿using Mono.Cecil.Cil;
+using PirateGame.Weather;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,9 +15,13 @@ namespace PirateGame.Sea
 	{
 		[SerializeField] public MeshRenderer WaterMesh;
 
-		[SerializeField] public float WaveAmplitude = 1;
-		[SerializeField] public float WaveDistance  = 10;
-		[SerializeField] public float WaveSpeed     = 5;
+		[SerializeField] public WaveParams Waves0 = new WaveParams()
+		{
+			Amplitude = 0.5f,
+			Distance = 5,
+			Speed = 5,
+			Direction = new Vector3(1, 1).normalized,
+		};
 
 		[Tooltip("Density of the fluid in kg/m³")]
 		[SerializeField] private float m_FluidDensity = 1000f;
@@ -48,9 +53,10 @@ namespace PirateGame.Sea
 		/// </summary>
 		public void UpdateWaveParameters()
 		{
-			Shader.SetGlobalFloat("WaveAmplitude", WaveAmplitude);
-			Shader.SetGlobalFloat("WaveDistance" , WaveDistance );
-			Shader.SetGlobalFloat("WaveSpeed"    , WaveSpeed    );
+			Shader.SetGlobalFloat("WaveAmplitude", Waves0.Amplitude);
+			Shader.SetGlobalFloat("WaveDistance" , Waves0.Distance );
+			Shader.SetGlobalFloat("WaveSpeed"    , Waves0.Speed    );
+			Shader.SetGlobalVector("WaveDirection", Waves0.Direction);
 		}
 
 
@@ -330,13 +336,15 @@ namespace PirateGame.Sea
 
 		float GetWaterHeight(Vector3 pos)
 		{
-			return Mathf.Sin((pos.x + pos.z + m_FixedTime * WaveSpeed) / WaveDistance) * WaveAmplitude;
+			Vector2 dir = Waves0.Direction.normalized;
+			return Mathf.Sin((pos.x * dir.x + pos.z * dir.y + m_FixedTime * Waves0.Speed) / Waves0.Distance) * Waves0.Amplitude;
 		}
 
 		Vector3 GetWaterNormal(Vector3 pos)
 		{
-			Vector3 xTangent = new Vector3(1, Mathf.Cos((pos.x + pos.z + m_FixedTime * WaveSpeed) / WaveDistance) * WaveAmplitude, 0);
-			Vector3 zTangent = new Vector3(0, Mathf.Cos((pos.x + pos.z + m_FixedTime * WaveSpeed) / WaveDistance) * WaveAmplitude, 1);
+			Vector2 dir = Waves0.Direction.normalized;
+			Vector3 xTangent = new Vector3(1, Mathf.Cos((pos.x * dir.x + pos.z * dir.y + m_FixedTime * Waves0.Speed) / Waves0.Distance) * Waves0.Amplitude, 0);
+			Vector3 zTangent = new Vector3(0, Mathf.Cos((pos.x * dir.x + pos.z * dir.y + m_FixedTime * Waves0.Speed) / Waves0.Distance) * Waves0.Amplitude, 1);
 			return Vector3.Cross(zTangent.normalized, xTangent.normalized);
 		}
 

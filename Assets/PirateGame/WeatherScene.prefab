@@ -49,9 +49,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Parameters:
+    Waves0:
+      Amplitude: 1
+      Distance: 10
+      Speed: 5
+      Direction: {x: -0.7071068, y: -0.7071068}
     WaveAmplitude: 1
     WaveDistance: 10
     WaveSpeed: 5
+    WaveDirection: {x: -0.70710677, y: -0.70710677}
 --- !u!114 &8481229744780602008
 MonoBehaviour:
   m_ObjectHideFlags: 0
