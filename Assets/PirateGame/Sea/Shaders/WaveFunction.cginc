@@ -11,6 +11,7 @@ CBUFFER_START(PirateGameWaves)
 float WaveAmplitude = 1; 
 float WaveDistance = 10;
 float WaveSpeed = 5;
+//float2 WaveDirection = new float2(1, 1);
 
 CBUFFER_END
 
