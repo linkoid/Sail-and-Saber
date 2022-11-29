@@ -26,6 +26,5 @@ public class Save_Manager : MonoBehaviour
         PlayerPrefs.SetString("Fort2","unCaptured");
         PlayerPrefs.SetString("Fort3","unCaptured");
         PlayerPrefs.SetInt("PlayerHealth",100);
-
     }
 }

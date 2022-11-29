@@ -2641,6 +2641,7 @@ MonoBehaviour:
   TargetUI: {fileID: 6909625998452863582}
   DeathPanel: {fileID: 4252502893745980073}
   winScreen: {fileID: 3404453288380076342}
+  NotToggled: 1
   buySound: {fileID: 1177077369891412152}
   WinSound: {fileID: 5787755944813657642}
   LoseSound: {fileID: 4676085597383458317}
@@ -6471,13 +6472,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5805227373762536735}
-        m_TargetAssemblyTypeName: Toggler, Assembly-CSharp
+      - m_Target: {fileID: 1554038904392111144}
+        m_TargetAssemblyTypeName: PirateGame.UI.HUD, Assembly-CSharp
         m_MethodName: Toggle
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 3404453288380076342}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
