@@ -183,6 +183,22 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a54d1d6c78336b1479e6f2026ff8301e, type: 2}
+    - target: {fileID: 4204906178892141555, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
+      propertyPath: ReloadDelay
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223376156613411066, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
+      propertyPath: _health
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223376156613411066, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
+      propertyPath: _maxHealth
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223376156613411066, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
+      propertyPath: _speedModifier
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 5384668323320404590, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7660444
@@ -214,6 +230,10 @@ PrefabInstance:
     - target: {fileID: 6416244035545555668, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_AttackRadius
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416244035545555668, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
+      propertyPath: m_RaidCrewCount
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6529983392928033476, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_LocalPosition.x

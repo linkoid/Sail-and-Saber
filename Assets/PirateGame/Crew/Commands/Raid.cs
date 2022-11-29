@@ -29,40 +29,42 @@ namespace PirateGame.Crew.Commands
 			return true;
 		}
 
-		protected override IEnumerable OnExecute()
-		{
+        protected override IEnumerable OnExecute()
+        {
             Commander.isRaiding = true;
             Commander.isRepairing = false;
 
-			// Save target in local variable
-			// so even if Commander's target changes, we are still raiding the same ship.
-			m_RaidTarget = Commander.Target;
+            // Save target in local variable
+            // so even if Commander's target changes, we are still raiding the same ship.
+            m_RaidTarget = Commander.Target;
 
-			// Notify the target that it is being raided
-			m_RaidTarget.Raid();
+            // Notify the target that it is being raided
+            m_RaidTarget.Raid();
 
-			// Tell crew to conduct the raid
-			Crew.Raid(m_RaidTarget);
+            if (!(m_RaidTarget.Crew?.Count == 0))
+            {
+                // Tell crew to conduct the raid
+                Crew.Raid(m_RaidTarget);
 
-			// Loop to do stuff during the raid
-			float loopDuration = 11; // how long does the raid last?
-			float loopStep = 1f; // how often is the code in the loop run?
-			for (float loopTime = 0; loopTime < loopDuration; loopTime += loopStep)
-			{
-                if (m_RaidTarget.Crew.CrewRaid.Count == 0 || Crew.CrewRaid.Count == 0)
-                    break;
-                yield return new WaitForSeconds(loopStep);
-                // TODO : Maybe do dice-rolls to decide which crewmate & enemy dies or something?
+                // Loop to do stuff during the raid
+                float loopDuration = 11; // how long does the raid last?
+                float loopStep = 1f; // how often is the code in the loop run?
+                for (float loopTime = 0; loopTime < loopDuration; loopTime += loopStep)
+                {
+                    if (m_RaidTarget.Crew.CrewRaid.Count == 0 || Crew.CrewRaid.Count == 0)
+                        break;
+                    yield return new WaitForSeconds(loopStep);
+                    // TODO : Maybe do dice-rolls to decide which crewmate & enemy dies or something?
 
-                //Do Damage to Player Crew
-                Crew.Attack(1);
+                    //Do Damage to Player Crew
+                    Crew.Attack(1);
 
-				//Do Damage to Enemy Crew
-				m_RaidTarget.Crew.Attack(2);
-			}
-
-			// Call crewmates back
-			Crew.Board(Ship);
+                    //Do Damage to Enemy Crew
+                    m_RaidTarget.Crew.Attack(2);
+                }
+                // Call crewmates back
+                Crew.Board(Ship);
+            }
 
             //If all the enemy crewmates die
             if(m_RaidTarget.Crew.Count == 0)
