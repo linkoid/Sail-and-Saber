@@ -46,6 +46,9 @@ namespace PirateGame.Crew.Commands
                 // Tell crew to conduct the raid
                 Crew.Raid(m_RaidTarget);
 
+                //Delay Damage Phase
+                yield return new WaitForSeconds(3);
+
                 // Loop to do stuff during the raid
                 float loopDuration = 11; // how long does the raid last?
                 float loopStep = 1f; // how often is the code in the loop run?
@@ -60,7 +63,7 @@ namespace PirateGame.Crew.Commands
                     Crew.Attack(1);
 
                     //Do Damage to Enemy Crew
-                    m_RaidTarget.Crew.Attack(2);
+                    m_RaidTarget.Crew.Attack(4);
                 }
                 // Call crewmates back
                 Crew.Board(Ship);

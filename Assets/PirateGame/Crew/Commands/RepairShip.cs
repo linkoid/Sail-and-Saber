@@ -40,7 +40,9 @@ namespace PirateGame.Crew.Commands
             yield return new WaitForSeconds(3);
 
             // Loop to do stuff during the repair
-            float loopStep = 0.5f; // how often is the code in the loop run?
+            float loopStep = 1f - target.Crew.Count; // how often is the code in the loop run?
+            if (loopStep <= 0.1)
+                loopStep = 0.1f;
 
             //Can we parameterize this to make ship repairs faster?
             int repairAmount = 1;
