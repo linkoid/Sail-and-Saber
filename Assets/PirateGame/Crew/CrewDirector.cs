@@ -36,9 +36,20 @@ namespace PirateGame.Crew
 		/// </summary>
 		public void Raid(Ships.Ship ship)
 		{
+            if(Ship.Crew == null || Ship.Crew.Count == 0)
+            {
+                throw new System.Exception("Player crew is NULL");
+            }
+
+            if(ship.Crew == null || ship.Crew.Count == 0)
+            {
+                throw new System.Exception("ENEMY crew is NULL");
+            }
+
 			var iter = m_Crewmates.Zip(ship.Crew, (a, b) => new { crewmate = a, enemy = b });
 			m_CrewRaid.Clear();
             ship.Crew.m_CrewRaid.Clear();
+
             foreach (var pair in iter)
 			{
 				pair.crewmate.Raid(ship, pair.enemy);
