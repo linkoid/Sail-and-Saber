@@ -82,20 +82,7 @@ namespace PirateGame.UI
 		// Update is called once per frame
 		void Update()
 		{
-			if(m_Player.Target != null){
-				Target_Title.text = m_Player.Target.name;
-				TargetUI.SetActive(true);
-				if (Target_Health.maxValue != m_Player.Target.MaxHealth)
-				{
-					Target_Health.maxValue = Player.Target.MaxHealth;
-				}
-				float valueDif = Player.Target.Health - Target_Health.value;
-				Target_Health.value += valueDif * .01f;
-			}else {
-				TargetUI.SetActive(false);
-
-			}
-
+			
 			Loot_Text.text = Player.Gold.ToString();
 
 			Crew_Text.text = Player.CrewCount.ToString();
@@ -123,11 +110,25 @@ namespace PirateGame.UI
 			}
 			
 			DeathPanel.SetActive(Player.Ship.Health <= 0);
-
+			Debug.Log(PlayerPrefs.GetString("Fort1") + " " + PlayerPrefs.GetString("Fort2") + " " + PlayerPrefs.GetString("Fort3"));
 			if(PlayerPrefs.GetString("Fort1") == "Captured" && PlayerPrefs.GetString("Fort2") == "Captured" &&PlayerPrefs.GetString("Fort3") == "Captured" ){
 				winScreen.SetActive(true);
 				WinSound.Play();
 			}
+					if(m_Player.Target != null){
+				Target_Title.text = m_Player.Target.name;
+				TargetUI.SetActive(true);
+				if (Target_Health.maxValue != m_Player.Target.MaxHealth)
+				{
+					Target_Health.maxValue = Player.Target.MaxHealth;
+				}
+				float valueDif = Player.Target.Health - Target_Health.value;
+				Target_Health.value += valueDif * .01f;
+			}else {
+				TargetUI.SetActive(false);
+
+			}
+
 		}
 		void Error(string error){
 			Error_Text.text = error;

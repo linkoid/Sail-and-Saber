@@ -2875,7 +2875,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -101.897705, y: -14.0900345}
+  m_AnchoredPosition: {x: -101.897705, y: -9}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1554038904577703484
@@ -3083,7 +3083,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -128.22949, y: -14.0900345}
+  m_AnchoredPosition: {x: -38.4, y: -14}
   m_SizeDelta: {x: 106.2705, y: 50.3079}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1554038904828369338
@@ -3218,7 +3218,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 138, y: -5}
+  m_AnchoredPosition: {x: 52.8, y: -9}
   m_SizeDelta: {x: 50.308, y: 50.308}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1554038904910349305
@@ -7528,7 +7528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5279827762830876664, guid: c6aeac28d997ecc43b8b0f9a894f4f61, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 5279827762830876664, guid: c6aeac28d997ecc43b8b0f9a894f4f61, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7562,6 +7562,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5279827762830876665, guid: c6aeac28d997ecc43b8b0f9a894f4f61, type: 3}
+      propertyPath: ToFollow
+      value: 
+      objectReference: {fileID: 1554038903688787858}
     - target: {fileID: 5279827762830876669, guid: c6aeac28d997ecc43b8b0f9a894f4f61, type: 3}
       propertyPath: m_Name
       value: MiniMap_Camera
