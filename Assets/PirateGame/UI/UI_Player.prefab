@@ -2645,6 +2645,9 @@ MonoBehaviour:
   buySound: {fileID: 1177077369891412152}
   WinSound: {fileID: 5787755944813657642}
   LoseSound: {fileID: 4676085597383458317}
+  m_ShopButton: {fileID: 445559543453294843}
+  m_ShopPanel: {fileID: 1554038903897684937}
+  m_MiniMapCamera: {fileID: 8846218498472662559}
 --- !u!223 &1554038904392111145
 Canvas:
   m_ObjectHideFlags: 0
@@ -7578,6 +7581,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5279827762830876664, guid: c6aeac28d997ecc43b8b0f9a894f4f61, type: 3}
   m_PrefabInstance: {fileID: 3711427589340154342}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8846218498472662559 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5279827762830876665, guid: c6aeac28d997ecc43b8b0f9a894f4f61, type: 3}
+  m_PrefabInstance: {fileID: 3711427589340154342}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 293aeb1f6adedde4f9da305d47792ab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5060093381850777520
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,11 +13,7 @@ namespace PirateGame.Ships
 
 			Aggro();
 
-			if (Ship.Internal.Combat.Target != null && !Ship.IsRaided)
-			{
-				Ship.Internal.Combat.FireBroadsideCannons();
-				Ship.Internal.Combat.FireDeckCannons();
-			}
+			FireAllCannons();
 		}
 
 		protected override void OnRaid()
