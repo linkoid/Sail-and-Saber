@@ -75,9 +75,12 @@ namespace PirateGame.Ships
 				if (ship.IsPlayerShip == Ship.IsPlayerShip) continue;
 				if (ship.IsSunk) continue;
 
-				if ((ship.Rigidbody.position - Ship.Rigidbody.position).sqrMagnitude <= TargetRangeSqr)
+				foreach (var targetPoint in ship.Internal.Combat.TargetPoints)
 				{
-					NearbyShips.Add(ship);
+					if ((targetPoint.position - Ship.Rigidbody.position).sqrMagnitude <= TargetRangeSqr)
+					{
+						NearbyShips.Add(ship);
+					}
 				}
 			}
 		}
@@ -205,6 +208,9 @@ namespace PirateGame.Ships
 
 		void OnDrawGizmosSelected()
 		{
+			Gizmos.color = Color.magenta;
+			Gizmos.DrawWireSphere(Ship.Rigidbody.position, TargetRange);
+
 			if (Target == null) return;
 			
 			Gizmos.DrawRay(Ship.Rigidbody.position, Target.Rigidbody.position);
@@ -214,9 +220,6 @@ namespace PirateGame.Ships
 			{
 				Gizmos.DrawRay(cannon.transform.position, Target.Rigidbody.position - cannon.transform.position);
 			}
-
-			Gizmos.color = Color.magenta;
-			Gizmos.DrawWireSphere(Ship.Rigidbody.position, TargetRange);
 		}
 	}
 }

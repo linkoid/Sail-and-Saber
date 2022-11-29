@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamagePerCannon: 2
   ReloadDelay: 2
+  TargetRange: 50
   _BroadsideCannons: {fileID: 7026996614437448451}
   _deckCannons: {fileID: 6240154537321673456}
   m_TargetPointsParent: {fileID: 1783010003308235918}
@@ -1946,12 +1947,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126a3791df2458c47b8f33c0a4f9acd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Nickname: Scallywag Cog
   _health: 100
   _maxHealth: 100
   _speedModifier: 1
   _crew: {fileID: 0}
   _isRaided: 0
   _isPlundered: 0
+  _isSunk: 0
 --- !u!114 &5053016825790913288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2512,6 +2515,7 @@ MonoBehaviour:
   Volume: 109.494514
   ManualCenter: 1
   Center: {x: 0, y: 0, z: 0.028}
+  m_DebugGizmos: 0
 --- !u!1 &9202933362180235051
 GameObject:
   m_ObjectHideFlags: 0

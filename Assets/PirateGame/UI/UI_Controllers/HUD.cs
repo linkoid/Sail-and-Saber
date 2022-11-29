@@ -209,7 +209,7 @@ namespace PirateGame.UI
 		{
 			if (!Player.Ship) return;
 
-			if (Player.Ship.Internal.Combat.NearbyShips.Count >= 0)
+			if (Player.Ship.Internal.Combat.NearbyShips.Count > 0)
 			{
 				m_ShopButton.SetActive(false);
 				m_ShopPanel.SetActive(false);
