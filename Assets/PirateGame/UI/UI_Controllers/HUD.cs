@@ -76,6 +76,7 @@ namespace PirateGame.UI
 		// Start is called before the first frame update
 		void Start()
 		{
+			m_Player = FindObjectOfType<Player>();
 			HealthBar.minValue = 0;
 		}
 
