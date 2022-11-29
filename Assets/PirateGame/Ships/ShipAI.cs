@@ -8,6 +8,11 @@ namespace PirateGame.Ships
 {
 	public abstract class ShipAIBase : Ship.ShipBehaviour
 	{
+		protected virtual void Start()
+		{
+			CreateCrew();
+		}
+
 		[Header("Config")]
 		[SerializeField] protected int m_CrewCount = 5;
 		[SerializeField] protected int m_RaidCrewCount = 10;
@@ -105,6 +110,7 @@ namespace PirateGame.Ships
 
 	public class ShipAI : ShipAIBase
 	{
+
 		protected void FixedUpdate()
 		{
 			if (Ship.IsRaided || Ship.IsPlundered || Ship.Health <= 0) return;
