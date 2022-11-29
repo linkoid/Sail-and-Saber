@@ -52,16 +52,11 @@ namespace PirateGame.Ships
 			FindNearbyShips();
 			Target = null;
 			float minDistSqr = Mathf.Infinity;
-			foreach (var ship in NearbyShips)
+			var ships = NearbyShips;
+			foreach (var ship in ships)
 			{
-				if (Target == null)
-				{
-					Target = ship;
-					continue;
-				}
-
-				float distSqr = (Target.Rigidbody.position - Ship.Rigidbody.position).sqrMagnitude;
-				if (minDistSqr > distSqr)
+				float distSqr = (ship.Rigidbody.position - Ship.Rigidbody.position).sqrMagnitude;
+				if (distSqr < minDistSqr)
 				{
 					Target = ship;
 					minDistSqr = distSqr;
@@ -73,11 +68,11 @@ namespace PirateGame.Ships
 		private void FindNearbyShips()
 		{
 			NearbyShips.Clear();
-			foreach (var ship in GameObject.FindObjectsOfType<Ship>())
+			foreach (var ship in Object.FindObjectsOfType<Ship>())
 			{
 				if (ship == Ship) continue;
-
-				// TODO Also check to make sure the ship isn't a friendly or already sunk
+				if (ship.IsPlayerShip == Ship.IsPlayerShip) continue;
+				if (ship.IsSunk) continue;
 
 				if ((ship.Rigidbody.position - Ship.Rigidbody.position).sqrMagnitude <= TargetRangeSqr)
 				{

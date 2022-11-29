@@ -24,6 +24,8 @@ namespace PirateGame.Ships
 		public CrewDirector Crew { get => _crew; protected set => _crew = value; }
 		public bool IsRaided { get => _isRaided; protected set => _isRaided = value; }
 		public bool IsPlundered { get => _isPlundered; protected set => _isPlundered = value; }
+		public bool IsSunk { get => _isSunk; private set => _isSunk = value; }
+		public bool IsPlayerShip => this.GetComponentInChildren<ShipController>(false) != null;
 
 		[SerializeField] private float _health = 100;
 		[SerializeField] private float _maxHealth = 100;
@@ -33,10 +35,12 @@ namespace PirateGame.Ships
 
 		[SerializeField, ReadOnly] private bool _isRaided;
 		[SerializeField, ReadOnly] private bool _isPlundered;
+		[SerializeField, ReadOnly] private bool _isSunk;
 
 
 		public Rigidbody Rigidbody => this.GetComponent<Rigidbody>();
 		internal ShipInternal Internal => this.GetComponent<ShipInternal>();
+
 
 		protected void Awake()
 		{
@@ -159,6 +163,7 @@ namespace PirateGame.Ships
 				Debug.LogWarning($"{this} cannot be sunk. It is still being raided, but has not been plundered.", this);
 				return;
 			}
+			IsSunk = true;
 
 			// send callback to internal components
 			SendInternalCallback((component) => component.OnSink());
