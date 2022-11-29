@@ -280,6 +280,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 803b5751c53ae974cb4d57d24aa1ad1f, type: 2}
     - target: {fileID: 6416244035545555668, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
+      propertyPath: m_CrewCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416244035545555668, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
+      propertyPath: m_AggroRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416244035545555668, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
+      propertyPath: m_AttackRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416244035545555668, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
+      propertyPath: m_RaidCrewCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416244035545555668, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_PlunderGoldBonus
       value: 2
       objectReference: {fileID: 0}
