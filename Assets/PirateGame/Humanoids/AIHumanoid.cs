@@ -41,6 +41,7 @@ namespace PirateGame.Humanoids
 		[SerializeField, ReadOnly] private NavMeshPathStatus m_PathStatus;
 		[SerializeField, ReadOnly] private PathfindResult m_PathfindResult;
 		[SerializeField, ReadOnly] private Vector3 m_WarpPoint;
+		[SerializeField, ReadOnly] private bool m_DidWarp;
 		[SerializeField, ReadOnly] private bool m_HasPath;
 		[SerializeField, ReadOnly] private bool m_PathPending;
 		[SerializeField, ReadOnly] private bool m_IsPathStale;
@@ -89,14 +90,17 @@ namespace PirateGame.Humanoids
 					m_WarpPoint = Vector3.Lerp(m_WarpPoint, Goal.transform.position, 0.2f);
 					bool _ = TryGetNearestPointOnNavMesh(m_WarpPoint, out Vector3 point);
 					Agent.Warp(point);
+					m_DidWarp = true;
 				}
 				else if (m_PathfindResult == PathfindResult.Success)
 				{
+					m_DidWarp = false;
 					m_WarpPoint = this.transform.position;
 				}
 			}
 			else
 			{
+				m_DidWarp = false;
 				m_WarpPoint = this.transform.position;
 			}
 
@@ -314,7 +318,19 @@ namespace PirateGame.Humanoids
 		/// <returns><c>false</c> if, and only if, the agent cannot navigate to the destination</returns>
 		PathfindResult UpdateDestination()
 		{
-			if (m_Path != null && m_Path.corners.Length > 0 && Vector3.Distance(Goal.transform.position, m_Path.corners.Last()) < Agent.stoppingDistance)
+			if (Agent.isOnOffMeshLink)
+			{
+				m_PathfindResult = PathfindResult.Success;
+				goto returnResult;
+			} 
+
+			if (!Agent.isOnNavMesh && !Agent.isOnOffMeshLink)
+			{
+				m_PathfindResult = PathfindResult.RequestFail;
+				goto returnResult;
+			}
+
+			if (false && !m_DidWarp && m_Path != null && m_Path.corners.Length > 0 && Vector3.Distance(Goal.transform.position, m_Path.corners.Last()) < Agent.stoppingDistance)
 			{
 				// No need to update the path
 			}
@@ -323,11 +339,14 @@ namespace PirateGame.Humanoids
 			{
 				NavMeshPath newPath = new NavMeshPath();
 				if (!Agent.CalculatePath(Goal.transform.position, newPath))
+				//if (!Agent.SetDestination(Goal.transform.position))
 				{
 					m_PathfindResult = PathfindResult.RequestFail;
 					goto returnResult;
 				}
 				m_Path = newPath;
+				Agent.path = m_Path;
+				m_Path = Agent.path;
 			}
 
 			if (m_Path.status == NavMeshPathStatus.PathComplete)
