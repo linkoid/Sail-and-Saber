@@ -47,7 +47,7 @@ namespace PirateGame.Weather
 			newParams.Amplitude = Mathf.Lerp   (from.Amplitude, to.Amplitude, factor);
 			newParams.Distance  = Mathf.Lerp   (from.Distance , to.Distance , factor);
 			newParams.Speed     = Mathf.Lerp   (from.Speed    , to.Speed    , factor);
-			newParams.Direction = Vector3.Slerp(from.Direction, to.Direction, factor);
+			newParams.Direction = Vector3.Lerp(from.Direction, to.Direction, factor);
 
 			return newParams;
 		}
