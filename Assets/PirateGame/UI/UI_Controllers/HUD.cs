@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using PirateGame.Ships;
 
 namespace PirateGame.UI
 {
@@ -71,7 +72,10 @@ namespace PirateGame.UI
 		{
 			if (CanBuy(cost))
 			{
-				Instantiate(Ship, Player.transform);
+				Transform tempTransform = Player.Ship.gameObject.transform;
+				GameObject G = Instantiate(Ship, tempTransform);
+				Player.Ship = G.GetComponent<Ship>();
+				GameObject.Destroy(Player.Ship.gameObject);
 			}
 		}
 
