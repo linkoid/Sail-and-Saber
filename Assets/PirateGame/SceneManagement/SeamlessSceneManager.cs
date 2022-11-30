@@ -80,6 +80,8 @@ namespace PirateGame
 			// Unload old scene
 			SceneManager.UnloadSceneAsync(m_LastScene);
 
+
+
 			m_IsLoadingScene = false;
 		}
 

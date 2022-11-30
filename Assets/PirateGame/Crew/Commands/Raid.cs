@@ -26,6 +26,9 @@ namespace PirateGame.Crew.Commands
 			Combat.Target = Commander.Target;
 			if (!Combat.CheckCanRaid()) return false;
 
+            //Target Health must be 25% of max health or lower
+            if (!(Combat.Target.Health <= Combat.Target.MaxHealth * 0.25)) return false;
+
 			// else
 			return true;
 		}

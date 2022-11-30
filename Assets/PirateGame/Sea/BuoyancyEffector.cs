@@ -30,9 +30,15 @@ namespace PirateGame.Sea
 		[SerializeField] private float m_MinimumDrag = 0.01f;
 
 		[SerializeField, ReadOnly] private int m_ColliderID;
-		[SerializeField, ReadOnly] private float m_FixedTime;
 	
 		[SerializeField] private Vector3 m_BoundsSize;
+
+		[Header("Cached Values")]
+		[SerializeField, ReadOnly] Vector3 m_Gravity;
+		[SerializeField, ReadOnly] Vector3 m_GravityNormalized;
+		[SerializeField, ReadOnly] float m_GravityMagnitude;
+		[SerializeField, ReadOnly] float m_FixedTime;
+		[SerializeField, ReadOnly] float m_FixedDeltaTime;
 
 		public void OnEnable()
 		{
@@ -62,6 +68,15 @@ namespace PirateGame.Sea
 
 		void FixedUpdate()
 		{
+			// Cache values
+			m_Gravity = Physics.gravity;
+			m_GravityMagnitude = Physics.gravity.magnitude;
+			m_GravityNormalized = Physics.gravity.normalized;
+			m_FixedTime = Time.fixedTime;
+			m_FixedDeltaTime = Time.fixedDeltaTime;
+			Waves0.Direction = Waves0.Direction.normalized;
+
+
 			// debug stuff
 			m_RawContacts.Clear();
 			m_Contacts.Clear();
@@ -70,7 +85,6 @@ namespace PirateGame.Sea
 			m_OtherPositions.Clear();
 
 
-			m_FixedTime = Time.fixedTime;
 
 			var pos = this.transform.position;
 			pos.y = 0;
@@ -198,8 +212,8 @@ namespace PirateGame.Sea
 
 			float pointVolume = volume / tensors.Length;
 			float pointAreaFactor = 1.0f / tensors.Length;
-			float minHeight = tensors.Min((t) => Vector3.Dot(t.point, -Physics.gravity.normalized));
-			float maxHeight = tensors.Max((t) => Vector3.Dot(t.point, -Physics.gravity.normalized));
+			float minHeight = tensors.Min((t) => Vector3.Dot(t.point, -m_GravityNormalized));
+			float maxHeight = tensors.Max((t) => Vector3.Dot(t.point, -m_GravityNormalized));
 			float submersionDepth = maxHeight - minHeight;
 			
 			if (submersionDepth <= 0)
@@ -214,11 +228,39 @@ namespace PirateGame.Sea
 				tensors[i].weight = depth <= 0.5f ? 1 : depth * 2;
 			}
 
+			RigidbodyInfo rigidbodyInfo = new RigidbodyInfo(rigidbody);
+
 			float weightsSum = tensors.Sum((t) => t.weight);
 			foreach (var tensor in tensors)
 			{
 				float pointVolumeFactor = tensor.weight / weightsSum;
-				AddWaterForceAtPoint(rigidbody, tensor, volume * pointVolumeFactor, pointAreaFactor, submersionDepth);
+				AddWaterForceAtPoint(rigidbody, tensor, volume * pointVolumeFactor, pointAreaFactor, submersionDepth, rigidbodyInfo);
+			}
+		}
+
+		struct RigidbodyInfo
+		{
+			public Rigidbody rigidbody;
+			public Matrix4x4 transform;
+			public Matrix4x4 inverseTransform;
+			public Quaternion inertiaTensorRotation;
+			public Vector3 inertiaTensor;
+			public float mass;
+			public Vector3 centerOfMass;
+			public float drag;
+			public float angularDrag;
+
+			public RigidbodyInfo(Rigidbody r)
+			{
+				rigidbody = r;
+				transform = r.transform.localToWorldMatrix;
+				inverseTransform = r.transform.worldToLocalMatrix;
+				inertiaTensorRotation = r.inertiaTensorRotation;
+				inertiaTensor = r.inertiaTensor;
+				mass = r.mass;
+				centerOfMass = r.centerOfMass;
+				drag = r.drag;
+				angularDrag = r.angularDrag;
 			}
 		}
 
@@ -245,13 +287,14 @@ namespace PirateGame.Sea
 		}
 
 
-		void AddWaterForceAtPoint(Rigidbody rigidbody, VolumeTensor tensor, float pointVolume, float pointAreaFactor, float submersionDepth)
+
+		void AddWaterForceAtPoint(Rigidbody rigidbody, VolumeTensor tensor, float pointVolume, float pointAreaFactor, float submersionDepth, RigidbodyInfo rigidbodyInfo)
 		{
 			Vector3 point = tensor.point;
 			float waterHeight = GetWaterHeight(point);
 			if (waterHeight < point.y)
 			{
-				m_IgnoredPoints.Add(point); // for debug
+				//m_IgnoredPoints.Add(point); // for debug
 				return;
 			}
 
@@ -259,19 +302,23 @@ namespace PirateGame.Sea
 			float submersionFactor = Mathf.Clamp01(submersion / submersionDepth);
 
 			float displacedVolume = submersionFactor * pointVolume;
-			Vector3 buoyancy = AddBuoyancyAtPoint(rigidbody, tensor, displacedVolume);
-			Vector3 drag = AddDragAtPoint(rigidbody, point, pointAreaFactor);
+			Vector3 buoyancy = GetBuoyancyAtPoint(tensor, displacedVolume);
+			Vector3 drag = GetDragAtPoint(rigidbodyInfo, point, pointAreaFactor);
 
-			m_Contacts.Add(new Ray(point, buoyancy));
+			rigidbody.AddForceAtPosition(buoyancy, tensor.point, ForceMode.Force);
+			rigidbody.AddForceAtPosition(drag, point, ForceMode.VelocityChange);
+			//m_Contacts.Add(new Ray(point, buoyancy));
 		}
 
-		Vector3 AddBuoyancyAtPoint(Rigidbody rigidbody, VolumeTensor tensor, float displacedVolume)
+
+		
+		Vector3 GetBuoyancyAtPoint(VolumeTensor tensor, float displacedVolume)
 		{
 			Vector3 waveNormal = GetWaterNormal(tensor.point);
 
 			// Buoyancy B = ρ_f * V_disp * -g
-			float adjust = Physics.gravity.magnitude - 1;
-			Vector3 buoyancy = m_FluidDensity * displacedVolume * (-Physics.gravity * adjust + waveNormal);
+			float adjust = m_GravityMagnitude - 1;
+			Vector3 buoyancy = m_FluidDensity * displacedVolume * (-m_Gravity * adjust + waveNormal);
 			Vector3 buoyantForce = Vector3.zero;
 			if (tensor.normal.sqrMagnitude == 0)
 			{
@@ -281,25 +328,24 @@ namespace PirateGame.Sea
 			{
 				buoyantForce = Vector3.Project(buoyancy, -tensor.normal);
 			}
-			rigidbody.AddForceAtPosition(buoyantForce, tensor.point, ForceMode.Force);
 			return buoyantForce;
 		}
 
 		const float k_AirDensity = 1.204f; // kg/m³
-		Vector3 AddDragAtPoint(Rigidbody rigidbody, Vector3 point, float pointAreaFactor)
+		Vector3 GetDragAtPoint(RigidbodyInfo rigidbodyInfo, Vector3 point, float pointAreaFactor)
 		{
 			// Drag D = C_d * ρ_fluid * A * 0.5 * v²
 			// Drag (N/s²) = (1) * (kg/m³) * (m²) * 0.5 * (m²/s²)
 
-			Vector3 centerOffset = rigidbody.transform.InverseTransformPoint(point) - rigidbody.centerOfMass;
-			Vector3 tensorSpaceOffset = Quaternion.Inverse(rigidbody.inertiaTensorRotation) * centerOffset;
-			float momentArm = Vector3.Scale(tensorSpaceOffset.normalized, rigidbody.inertiaTensor).magnitude / rigidbody.mass;
+			Vector3 centerOffset = rigidbodyInfo.inverseTransform.MultiplyPoint(point) - rigidbodyInfo.centerOfMass;
+			Vector3 tensorSpaceOffset = Quaternion.Inverse(rigidbodyInfo.inertiaTensorRotation) * centerOffset;
+			float momentArm = Vector3.Scale(tensorSpaceOffset.normalized, rigidbodyInfo.inertiaTensor).magnitude / rigidbodyInfo.mass;
 			float momentFactor = tensorSpaceOffset.sqrMagnitude / momentArm;
 
-			float dragCo = Mathf.Lerp(rigidbody.drag, rigidbody.angularDrag, momentFactor);
+			float dragCo = Mathf.Lerp(rigidbodyInfo.drag, rigidbodyInfo.angularDrag, momentFactor);
 			dragCo = Mathf.Max(dragCo, m_MinimumDrag);
 
-			Vector3 velocity = rigidbody.GetPointVelocity(point);
+			Vector3 velocity = rigidbodyInfo.rigidbody.GetPointVelocity(point);
 
 			// The drag applied by Unity (so we don't re-apply it)
 			// Δv_unity = -v * C_dUnity * Δt
@@ -319,12 +365,11 @@ namespace PirateGame.Sea
 			// dragFactor = C_d * A * 0.5
 
 
-			float unityDragFactor = Mathf.Clamp01(dragCo * Time.fixedDeltaTime);
-			float waterDragFactor = Mathf.Clamp01(dragCo * Mathf.Sqrt(m_FluidDensity / k_AirDensity) * Time.fixedDeltaTime);
+			float unityDragFactor = Mathf.Clamp01(dragCo * m_FixedDeltaTime);
+			float waterDragFactor = Mathf.Clamp01(dragCo * Mathf.Sqrt(m_FluidDensity / k_AirDensity) * m_FixedDeltaTime);
 			float newDragFactor = Mathf.Clamp01(waterDragFactor);// - unityDragFactor);
 			Vector3 dragDeltaV = newDragFactor * pointAreaFactor * -velocity;
 
-			rigidbody.AddForceAtPosition(dragDeltaV, point, ForceMode.VelocityChange);
 			return dragDeltaV;
 		}
 
@@ -336,13 +381,13 @@ namespace PirateGame.Sea
 
 		float GetWaterHeight(Vector3 pos)
 		{
-			Vector2 dir = Waves0.Direction.normalized;
+			Vector2 dir = Waves0.Direction;
 			return Mathf.Sin((pos.x * dir.x + pos.z * dir.y + m_FixedTime * Waves0.Speed) / Waves0.Distance) * Waves0.Amplitude;
 		}
 
 		Vector3 GetWaterNormal(Vector3 pos)
 		{
-			Vector2 dir = Waves0.Direction.normalized;
+			Vector2 dir = Waves0.Direction;
 			Vector3 xTangent = new Vector3(1, Mathf.Cos((pos.x * dir.x + pos.z * dir.y + m_FixedTime * Waves0.Speed) / Waves0.Distance) * Waves0.Amplitude, 0);
 			Vector3 zTangent = new Vector3(0, Mathf.Cos((pos.x * dir.x + pos.z * dir.y + m_FixedTime * Waves0.Speed) / Waves0.Distance) * Waves0.Amplitude, 1);
 			return Vector3.Cross(zTangent.normalized, xTangent.normalized);
@@ -413,6 +458,11 @@ namespace PirateGame.Sea
 			Gizmos.DrawWireCube(this.transform.position, Vector3.Scale(m_BoundsSize, Vector3.right + Vector3.forward));
 			Gizmos.DrawWireCube(this.transform.position, Vector3.Scale(m_BoundsSize, Vector3.forward + Vector3.up));
 		}
+	
+		
 	}
+
+
+
 }
 
