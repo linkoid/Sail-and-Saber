@@ -1,13 +1,12 @@
-﻿using Mono.Cecil.Cil;
-using PirateGame.Weather;
-using System;
-using System.Collections;
+﻿using PirateGame.Weather;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Burst;
 using Unity.Collections;
+using Unity.Jobs;
 using UnityEngine;
-using UnityEngine.Rendering;
-using static UnityEngine.UI.GridLayoutGroup;
+using UnityEngine.InputSystem;
+using static UnityEditor.PlayerSettings;
 
 namespace PirateGame.Sea
 {
@@ -15,7 +14,8 @@ namespace PirateGame.Sea
 	{
 		[SerializeField] public MeshRenderer WaterMesh;
 
-		[SerializeField] public WaveParams Waves0 = new WaveParams()
+		[SerializeField]
+		public WaveParams Waves0 = new WaveParams()
 		{
 			Amplitude = 0.5f,
 			Distance = 5,
@@ -30,15 +30,11 @@ namespace PirateGame.Sea
 		[SerializeField] private float m_MinimumDrag = 0.01f;
 
 		[SerializeField, ReadOnly] private int m_ColliderID;
-	
+
 		[SerializeField] private Vector3 m_BoundsSize;
 
 		[Header("Cached Values")]
-		[SerializeField, ReadOnly] Vector3 m_Gravity;
-		[SerializeField, ReadOnly] Vector3 m_GravityNormalized;
-		[SerializeField, ReadOnly] float m_GravityMagnitude;
-		[SerializeField, ReadOnly] float m_FixedTime;
-		[SerializeField, ReadOnly] float m_FixedDeltaTime;
+		WaterForceJob.FrameInput m_FrameInput;
 
 		public void OnEnable()
 		{
@@ -60,21 +56,28 @@ namespace PirateGame.Sea
 		public void UpdateWaveParameters()
 		{
 			Shader.SetGlobalFloat("WaveAmplitude", Waves0.Amplitude);
-			Shader.SetGlobalFloat("WaveDistance" , Waves0.Distance );
-			Shader.SetGlobalFloat("WaveSpeed"    , Waves0.Speed    );
+			Shader.SetGlobalFloat("WaveDistance", Waves0.Distance);
+			Shader.SetGlobalFloat("WaveSpeed", Waves0.Speed);
 			Shader.SetGlobalVector("WaveDirection", Waves0.Direction);
 		}
-
+		
+		void UpdateFrameInput()
+		{
+			m_FrameInput.gravity = Physics.gravity;
+			m_FrameInput.gravityMagnitude = Physics.gravity.magnitude;
+			m_FrameInput.gravityNormalized = Physics.gravity.normalized;
+			m_FrameInput.fixedTime = Time.fixedTime;
+			m_FrameInput.fixedDeltaTime = Time.fixedDeltaTime;
+			m_FrameInput.Waves0 = Waves0;
+			m_FrameInput.Waves0.Direction = Waves0.Direction.normalized;
+			m_FrameInput.fluidDensity = m_FluidDensity;
+			m_FrameInput.minimumDrag = m_MinimumDrag;
+		}
 
 		void FixedUpdate()
 		{
 			// Cache values
-			m_Gravity = Physics.gravity;
-			m_GravityMagnitude = Physics.gravity.magnitude;
-			m_GravityNormalized = Physics.gravity.normalized;
-			m_FixedTime = Time.fixedTime;
-			m_FixedDeltaTime = Time.fixedDeltaTime;
-			Waves0.Direction = Waves0.Direction.normalized;
+			UpdateFrameInput();
 
 
 			// debug stuff
@@ -104,7 +107,7 @@ namespace PirateGame.Sea
 		private int GetIgnoreLayerCollisionMask()
 		{
 			int layerMask = int.MaxValue;
-			for (int i=0; i < 32; i++)
+			for (int i = 0; i < 32; i++)
 			{
 				if (Physics.GetIgnoreLayerCollision(this.gameObject.layer, i))
 				{
@@ -114,15 +117,16 @@ namespace PirateGame.Sea
 			return layerMask;
 		}
 
-		struct VolumeTensor
+		public struct VolumeTensor
 		{
 			public Vector3 point;
 			public Vector3 normal;
-			public float   weight;
+			public float weight;
 		}
-		
+
 		private void AddWaterForceAtCollider(Rigidbody rigidbody, Collider collider)
 		{
+
 			VolumeTensor[] tensors = new VolumeTensor[0];
 			float volume = collider.transform.lossyScale.x * collider.transform.lossyScale.y * collider.transform.lossyScale.z;
 			//var submersionDepth = m_DefaultSubmersionDepth;
@@ -134,7 +138,7 @@ namespace PirateGame.Sea
 			{
 				float centerOffset = Mathf.Max(0, capsuleCollider.height - capsuleCollider.radius) / 2;
 
-				Vector3 center0 = capsuleCollider.center + Vector3.up   * centerOffset;
+				Vector3 center0 = capsuleCollider.center + Vector3.up * centerOffset;
 				Vector3 center1 = capsuleCollider.center + Vector3.down * centerOffset;
 
 				float sphereVolume = GetSphereVolume(capsuleCollider.transform, center0, capsuleCollider.radius, out VolumeTensor[] points0);
@@ -163,7 +167,7 @@ namespace PirateGame.Sea
 					corners[i].normal = boxCollider.transform.TransformDirection(cornerPolarity);
 				}
 				float length = (corners[0].point - corners[1].point).magnitude;
-				float width  = (corners[0].point - corners[2].point).magnitude;
+				float width = (corners[0].point - corners[2].point).magnitude;
 				float height = (corners[0].point - corners[4].point).magnitude;
 				volume = length * width * height;
 
@@ -171,7 +175,7 @@ namespace PirateGame.Sea
 				for (int i = 0; i < faces.Length; i++)
 				{
 					Vector3 facePolarity = Vector3.zero;
-					facePolarity[i/2] = (i % 2 < 1) ? 1 : -1;
+					facePolarity[i / 2] = (i % 2 < 1) ? 1 : -1;
 
 					faces[i].point = boxCollider.transform.TransformPoint(
 						boxCollider.center + Vector3.Scale(boxCollider.size, facePolarity) * 0.5f);
@@ -179,10 +183,10 @@ namespace PirateGame.Sea
 					faces[i].normal = boxCollider.transform.TransformDirection(facePolarity);
 				}
 
-				tensors = new VolumeTensor[1+8+6];
+				tensors = new VolumeTensor[1 + 8 + 6];
 				tensors[0].point = boxCollider.transform.TransformPoint(boxCollider.center);
 				corners.CopyTo(tensors, 1);
-				faces  .CopyTo(tensors, 1+8);
+				faces.CopyTo(tensors, 1 + 8);
 			}
 			else if (collider is MeshCollider meshCollider)
 			{
@@ -208,59 +212,93 @@ namespace PirateGame.Sea
 				}
 			}
 
+			//Debug.Log("AddWaterForceAtCollider", collider);
+
 			if (tensors.Length <= 0) return;
 
 			float pointVolume = volume / tensors.Length;
 			float pointAreaFactor = 1.0f / tensors.Length;
-			float minHeight = tensors.Min((t) => Vector3.Dot(t.point, -m_GravityNormalized));
-			float maxHeight = tensors.Max((t) => Vector3.Dot(t.point, -m_GravityNormalized));
+			float minHeight = tensors.Min((t) => Vector3.Dot(t.point, -m_FrameInput.gravityNormalized));
+			float maxHeight = tensors.Max((t) => Vector3.Dot(t.point, -m_FrameInput.gravityNormalized));
 			float submersionDepth = maxHeight - minHeight;
-			
+
 			if (submersionDepth <= 0)
 			{
 				Debug.LogWarning($"submersion depth is <= 0 for {collider}", collider);
 				return;
 			}
 
-			for (int i=0; i < tensors.Length; i++)
+			for (int i = 0; i < tensors.Length; i++)
 			{
 				float depth = (maxHeight - tensors[i].point.y) / submersionDepth;
 				tensors[i].weight = depth <= 0.5f ? 1 : depth * 2;
 			}
 
-			RigidbodyInfo rigidbodyInfo = new RigidbodyInfo(rigidbody);
+			WaterForceJob.RigidbodyInput rigidbodyInput = new WaterForceJob.RigidbodyInput(rigidbody);
+
+			WaterForceJob.ColliderInput colliderInput = new WaterForceJob.ColliderInput()
+			{
+				rigidbodyInput = rigidbodyInput,
+			};
+
+
+			List<WaterForceJob> jobs = new List<WaterForceJob>();
+			List<JobHandle> jobHandles = new List<JobHandle>();
 
 			float weightsSum = tensors.Sum((t) => t.weight);
 			foreach (var tensor in tensors)
 			{
 				float pointVolumeFactor = tensor.weight / weightsSum;
-				AddWaterForceAtPoint(rigidbody, tensor, volume * pointVolumeFactor, pointAreaFactor, submersionDepth, rigidbodyInfo);
+				WaterForceJob.PointInput pointInput = new WaterForceJob.PointInput
+				{
+					velocity = rigidbody.GetPointVelocity(tensor.point),
+					tensor = tensor,
+					pointVolume = volume * pointVolumeFactor,
+					pointAreaFactor = pointAreaFactor,
+					submersionDepth = submersionDepth, 
+				};
+
+
+
+				WaterForceJob job = new WaterForceJob()
+				{
+					frameInput = m_FrameInput,
+					colliderInput = colliderInput,
+					pointInput = pointInput,
+					//waterPointsInput = new NativeArray<Vector3>(0, Allocator.Persistent),
+					//waterPointsOutput = new NativeArray<Vector3>(0, Allocator.Persistent),
+					waterHeightOnly = false,
+				};
+
+
+				//job.Schedule().Complete();
+				job.Execute();
+				job.ApplyForcesToRigidbody(rigidbody);
+
+				if (job.pointOutput == WaterForceJob.PointOutput.zero)
+				{
+					m_IgnoredPoints.Add(job.pointInput.tensor.point);
+				}
+				else
+				{
+					m_Contacts.Add(new Ray(job.pointInput.tensor.point, job.pointOutput.drag + job.pointOutput.buoyancy));
+				}
+
+				//job.waterPointsInput.Dispose();
+				//job.waterPointsOutput.Dispose();
+
+				//jobs.Add(job);
+				//jobHandles.Add(job.Schedule());
 			}
-		}
 
-		struct RigidbodyInfo
-		{
-			public Rigidbody rigidbody;
-			public Matrix4x4 transform;
-			public Matrix4x4 inverseTransform;
-			public Quaternion inertiaTensorRotation;
-			public Vector3 inertiaTensor;
-			public float mass;
-			public Vector3 centerOfMass;
-			public float drag;
-			public float angularDrag;
-
-			public RigidbodyInfo(Rigidbody r)
+			foreach (var jobHandle in jobHandles)
 			{
-				rigidbody = r;
-				transform = r.transform.localToWorldMatrix;
-				inverseTransform = r.transform.worldToLocalMatrix;
-				inertiaTensorRotation = r.inertiaTensorRotation;
-				inertiaTensor = r.inertiaTensor;
-				mass = r.mass;
-				centerOfMass = r.centerOfMass;
-				drag = r.drag;
-				angularDrag = r.angularDrag;
+				jobHandle.Complete();
+			}
+
+			foreach (var job in jobs)
+			{
+				job.ApplyForcesToRigidbody(rigidbody);
 			}
 		}
 
@@ -286,113 +324,20 @@ namespace PirateGame.Sea
 			return volume;
 		}
 
-
-
-		void AddWaterForceAtPoint(Rigidbody rigidbody, VolumeTensor tensor, float pointVolume, float pointAreaFactor, float submersionDepth, RigidbodyInfo rigidbodyInfo)
-		{
-			Vector3 point = tensor.point;
-			float waterHeight = GetWaterHeight(point);
-			if (waterHeight < point.y)
-			{
-				//m_IgnoredPoints.Add(point); // for debug
-				return;
-			}
-
-			float submersion = waterHeight - point.y;
-			float submersionFactor = Mathf.Clamp01(submersion / submersionDepth);
-
-			float displacedVolume = submersionFactor * pointVolume;
-			Vector3 buoyancy = GetBuoyancyAtPoint(tensor, displacedVolume);
-			Vector3 drag = GetDragAtPoint(rigidbodyInfo, point, pointAreaFactor);
-
-			rigidbody.AddForceAtPosition(buoyancy, tensor.point, ForceMode.Force);
-			rigidbody.AddForceAtPosition(drag, point, ForceMode.VelocityChange);
-			//m_Contacts.Add(new Ray(point, buoyancy));
-		}
-
-
-		
-		Vector3 GetBuoyancyAtPoint(VolumeTensor tensor, float displacedVolume)
-		{
-			Vector3 waveNormal = GetWaterNormal(tensor.point);
-
-			// Buoyancy B = ρ_f * V_disp * -g
-			float adjust = m_GravityMagnitude - 1;
-			Vector3 buoyancy = m_FluidDensity * displacedVolume * (-m_Gravity * adjust + waveNormal);
-			Vector3 buoyantForce = Vector3.zero;
-			if (tensor.normal.sqrMagnitude == 0)
-			{
-				buoyantForce = buoyancy;
-			}
-			else if (Vector3.Dot(buoyancy.normalized, -tensor.normal.normalized) > 0)
-			{
-				buoyantForce = Vector3.Project(buoyancy, -tensor.normal);
-			}
-			return buoyantForce;
-		}
-
-		const float k_AirDensity = 1.204f; // kg/m³
-		Vector3 GetDragAtPoint(RigidbodyInfo rigidbodyInfo, Vector3 point, float pointAreaFactor)
-		{
-			// Drag D = C_d * ρ_fluid * A * 0.5 * v²
-			// Drag (N/s²) = (1) * (kg/m³) * (m²) * 0.5 * (m²/s²)
-
-			Vector3 centerOffset = rigidbodyInfo.inverseTransform.MultiplyPoint(point) - rigidbodyInfo.centerOfMass;
-			Vector3 tensorSpaceOffset = Quaternion.Inverse(rigidbodyInfo.inertiaTensorRotation) * centerOffset;
-			float momentArm = Vector3.Scale(tensorSpaceOffset.normalized, rigidbodyInfo.inertiaTensor).magnitude / rigidbodyInfo.mass;
-			float momentFactor = tensorSpaceOffset.sqrMagnitude / momentArm;
-
-			float dragCo = Mathf.Lerp(rigidbodyInfo.drag, rigidbodyInfo.angularDrag, momentFactor);
-			dragCo = Mathf.Max(dragCo, m_MinimumDrag);
-
-			Vector3 velocity = rigidbodyInfo.rigidbody.GetPointVelocity(point);
-
-			// The drag applied by Unity (so we don't re-apply it)
-			// Δv_unity = -v * C_dUnity * Δt
-			// (m/s) = (m/s) * (1/s) * (s)
-			// v' = v - v * C_dUnity * (t' - t) 
-			// v = e^[t - C_dUnity * (-0.5t² + t) + v_0]
-
-			// Δv_unity = -v * C_dUnity * ρ_air / 1 kg * Δt
-			// (m/s) = (m/s) * (1/s) * (kg/m³) (s)
-
-			// f = ma
-			// a = f/m
-			// Δv = at
-			// Δv = at 
-
-			// rigidbody.drag = C_d * ρ_air * A * 0.5
-			// dragFactor = C_d * A * 0.5
-
-
-			float unityDragFactor = Mathf.Clamp01(dragCo * m_FixedDeltaTime);
-			float waterDragFactor = Mathf.Clamp01(dragCo * Mathf.Sqrt(m_FluidDensity / k_AirDensity) * m_FixedDeltaTime);
-			float newDragFactor = Mathf.Clamp01(waterDragFactor);// - unityDragFactor);
-			Vector3 dragDeltaV = newDragFactor * pointAreaFactor * -velocity;
-
-			return dragDeltaV;
-		}
-
-		[SerializeField, ReadOnly] private List<Ray> m_Contacts  = new List<Ray>();
+		[SerializeField, ReadOnly] private List<Ray> m_Contacts = new List<Ray>();
 		[SerializeField, ReadOnly] private List<Ray> m_RawContacts = new List<Ray>();
-		[SerializeField, ReadOnly] private List<Vector3> m_IgnoredPoints  = new List<Vector3>();
+		[SerializeField, ReadOnly] private List<Vector3> m_IgnoredPoints = new List<Vector3>();
 		[SerializeField, ReadOnly] private List<Vector3> m_Positions = new List<Vector3>();
 		[SerializeField, ReadOnly] private List<Vector3> m_OtherPositions = new List<Vector3>();
 
+
+
 		float GetWaterHeight(Vector3 pos)
 		{
-			Vector2 dir = Waves0.Direction;
-			return Mathf.Sin((pos.x * dir.x + pos.z * dir.y + m_FixedTime * Waves0.Speed) / Waves0.Distance) * Waves0.Amplitude;
+			var frameInput = m_FrameInput;
+			Vector2 dir = frameInput.Waves0.Direction;
+			return Mathf.Sin((pos.x * dir.x + pos.z * dir.y + frameInput.fixedTime * frameInput.Waves0.Speed) / frameInput.Waves0.Distance) * frameInput.Waves0.Amplitude;
 		}
-
-		Vector3 GetWaterNormal(Vector3 pos)
-		{
-			Vector2 dir = Waves0.Direction;
-			Vector3 xTangent = new Vector3(1, Mathf.Cos((pos.x * dir.x + pos.z * dir.y + m_FixedTime * Waves0.Speed) / Waves0.Distance) * Waves0.Amplitude, 0);
-			Vector3 zTangent = new Vector3(0, Mathf.Cos((pos.x * dir.x + pos.z * dir.y + m_FixedTime * Waves0.Speed) / Waves0.Distance) * Waves0.Amplitude, 1);
-			return Vector3.Cross(zTangent.normalized, xTangent.normalized);
-		}
-
 
 
 		private static Mesh s_GizmoMesh;
@@ -433,18 +378,45 @@ namespace PirateGame.Sea
 
 			Gizmos.color = Color.blue;
 			//var collider = m_Collider != null ? m_Collider : this.GetComponent<Collider>();
-			Vector3 scale = this.transform.lossyScale * 10;
-			int resolution = 20;
+			Vector3 scale = m_BoundsSize / 10;
+			int resolution = 50;
 			int size = resolution * resolution;
+
+
+			UpdateFrameInput();
+			m_FrameInput.fixedTime = Time.time;
+
+			WaterForceJob job = new WaterForceJob()
+			{
+				waterHeightOnly = true,
+				frameInput = m_FrameInput,
+				waterPointsInput = new NativeArray<Vector3>(size, Allocator.Persistent),
+				waterPointsOutput = new NativeArray<Vector3>(size, Allocator.Persistent),
+			};
+
+
 			//var verts = new Vector3[size];
 			for (int i = 0; i < size; i++)
 			{
 				float x = ((i % resolution) / (float)resolution - 0.5f) * scale.x;
 				float z = ((i / resolution) / (float)resolution - 0.5f) * scale.z;
 				Vector3 pos = new Vector3(x, 0, z);
+				job.waterPointsInput[i] = pos;
 				pos.y = GetWaterHeight(pos);
-				Gizmos.DrawWireSphere(pos, 0.1f * this.transform.lossyScale.magnitude);
+				//Gizmos.DrawWireSphere(pos, 0.003f * scale.magnitude);
 			}
+
+			job.Schedule().Complete();
+
+
+			Gizmos.color = Color.green;
+			foreach (var point in job.waterPointsOutput)
+			{
+				Gizmos.DrawWireSphere(point, 0.0031f * scale.magnitude);
+			}
+
+			job.waterPointsInput.Dispose();
+			job.waterPointsOutput.Dispose();
 		}
 
 		void OnDrawGizmosSelected()
@@ -458,11 +430,257 @@ namespace PirateGame.Sea
 			Gizmos.DrawWireCube(this.transform.position, Vector3.Scale(m_BoundsSize, Vector3.right + Vector3.forward));
 			Gizmos.DrawWireCube(this.transform.position, Vector3.Scale(m_BoundsSize, Vector3.forward + Vector3.up));
 		}
-	
-		
+
+
+
+
+		[BurstCompile]
+		public struct WaterForceJob : IJob
+		{
+			public struct FrameInput
+			{
+				public WaveParams Waves0;
+				public Vector3 gravity;
+				public Vector3 gravityNormalized;
+				public float gravityMagnitude;
+				public float fixedTime;
+				public float fixedDeltaTime;
+				public float fluidDensity;
+				public float minimumDrag;
+
+				public override string ToString()
+				{
+					return $"Waves0 = {Waves0}\n"
+						 + $"gravity = {gravity}\n"
+						 + $"gravityNormalized = {gravityNormalized}\n"
+						 + $"gravityMagnitude = {gravityMagnitude}\n"
+						 + $"fixedTime = {fixedTime}\n"
+						 + $"fixedDeltaTime = {fixedDeltaTime}\n"
+						 + $"fluidDensity = {fluidDensity}\n"
+						 + $"minimumDrag = {minimumDrag}\n";
+				}
+			}
+
+			public struct RigidbodyInput
+			{
+				public int instanceID;
+				public Matrix4x4 transform;
+				public Matrix4x4 inverseTransform;
+				public Quaternion inertiaTensorRotation;
+				public Vector3 inertiaTensor;
+				public float mass;
+				public Vector3 centerOfMass;
+				public float drag;
+				public float angularDrag;
+
+				public RigidbodyInput(Rigidbody r)
+				{
+					instanceID = r.GetInstanceID();
+					transform = r.transform.localToWorldMatrix;
+					inverseTransform = r.transform.worldToLocalMatrix;
+					inertiaTensorRotation = r.inertiaTensorRotation;
+					inertiaTensor = r.inertiaTensor;
+					mass = r.mass;
+					centerOfMass = r.centerOfMass;
+					drag = r.drag;
+					angularDrag = r.angularDrag;
+				}
+
+				public override string ToString()
+				{
+					return $"instanceID = {instanceID}\n"
+					     + $"transform = {transform}\n"
+					     + $"inverseTransform = {inverseTransform}\n"
+					     + $"inertiaTensorRotation = {inertiaTensorRotation}\n"
+					     + $"inertiaTensor = {inertiaTensor}\n"
+					     + $"mass = {mass}\n"
+					     + $"centerOfMass = {centerOfMass}\n"
+					     + $"drag = {drag}\n"
+					     + $"angularDrag = {angularDrag}\n";
+				}
+			}
+
+			public struct ColliderInput
+			{
+				public RigidbodyInput rigidbodyInput;
+			}
+
+			public struct PointInput
+			{
+				public Vector3 velocity;
+				public VolumeTensor tensor;
+				public float pointVolume;
+				public float pointAreaFactor;
+				public float submersionDepth;
+
+
+				public override string ToString()
+				{
+					return $"velocity = {velocity}\n"
+						 + $"tensor = {tensor}\n"
+						 + $"pointVolume = {pointVolume}\n"
+						 + $"pointAreaFactor = {pointAreaFactor}\n"
+						 + $"submersionDepth = {submersionDepth}\n";
+				}
+			}
+
+			public struct PointOutput
+			{
+				public Vector3 buoyancy;
+				public Vector3 drag;
+
+				public readonly static PointOutput zero = new PointOutput
+				{
+					buoyancy = Vector3.zero,
+					drag = Vector3.zero,
+				};
+
+				public static bool operator ==(PointOutput a, PointOutput b)
+				{
+					return a.buoyancy == b.buoyancy && a.drag == b.drag;
+				}
+				public static bool operator !=(PointOutput a, PointOutput b)
+				{
+					return a.buoyancy != b.buoyancy || a.drag != b.drag;
+				}
+			}
+
+			[Unity.Collections.ReadOnly] public FrameInput frameInput;
+			[Unity.Collections.ReadOnly] public ColliderInput colliderInput;
+			[Unity.Collections.ReadOnly] public PointInput pointInput;
+			[WriteOnly] public PointOutput pointOutput;
+
+
+			[Unity.Collections.ReadOnly] public bool waterHeightOnly;
+			[Unity.Collections.ReadOnly] public NativeArray<Vector3> waterPointsInput;
+			[WriteOnly] public NativeArray<Vector3> waterPointsOutput;
+
+			public void Execute()
+			{
+				if (waterHeightOnly)
+				{
+					for (int i=0; i<waterPointsInput.Length; i++)
+					{
+						var point = waterPointsInput[i];
+						float height = GetWaterHeight(point);
+						waterPointsOutput[i] = new Vector3(point.x, height, point.z);
+					}
+				}
+				else
+				{
+					pointOutput = GetWaterForceAtPoint();
+				}
+			}
+
+			PointOutput GetWaterForceAtPoint()
+			{
+				Vector3 point = pointInput.tensor.point;
+				float waterHeight = GetWaterHeight(point);
+				if (waterHeight < point.y)
+				{
+					return PointOutput.zero;
+				}
+
+				float submersion = waterHeight - point.y;
+				float submersionFactor = Mathf.Clamp01(submersion / pointInput.submersionDepth);
+
+
+				float displacedVolume = submersionFactor * pointInput.pointVolume;
+
+				Vector3 buoyancy = GetBuoyancyAtPoint(pointInput.tensor, displacedVolume);
+				Vector3 drag = GetDragAtPoint(colliderInput.rigidbodyInput, point, pointInput.pointAreaFactor);
+
+				return new PointOutput()
+				{
+					buoyancy = buoyancy,
+					drag = drag,
+				};
+			}
+
+			Vector3 GetBuoyancyAtPoint(VolumeTensor tensor, float displacedVolume)
+			{
+				Vector3 waveNormal = GetWaterNormal(tensor.point);
+
+				// Buoyancy B = ρ_f * V_disp * -g
+				float adjust = frameInput.gravityMagnitude - 1;
+				Vector3 buoyancy = frameInput.fluidDensity * displacedVolume * (-frameInput.gravity * adjust + waveNormal);
+				Vector3 buoyantForce = Vector3.zero;
+				if (tensor.normal.sqrMagnitude == 0)
+				{
+					buoyantForce = buoyancy;
+				}
+				else if (Vector3.Dot(buoyancy.normalized, -tensor.normal.normalized) > 0)
+				{
+					buoyantForce = Vector3.Project(buoyancy, -tensor.normal);
+				}
+				return buoyantForce;
+			}
+
+			const float k_AirDensity = 1.204f; // kg/m³
+			Vector3 GetDragAtPoint(RigidbodyInput rigidbodyInput, Vector3 point, float pointAreaFactor)
+			{
+				// Drag D = C_d * ρ_fluid * A * 0.5 * v²
+				// Drag (N/s²) = (1) * (kg/m³) * (m²) * 0.5 * (m²/s²)
+
+				Vector3 centerOffset = rigidbodyInput.inverseTransform.MultiplyPoint(point) - rigidbodyInput.centerOfMass;
+				Vector3 tensorSpaceOffset = Quaternion.Inverse(rigidbodyInput.inertiaTensorRotation) * centerOffset;
+				float momentArm = Vector3.Scale(tensorSpaceOffset.normalized, rigidbodyInput.inertiaTensor).magnitude / rigidbodyInput.mass;
+				float momentFactor = tensorSpaceOffset.sqrMagnitude / momentArm;
+
+				float dragCo = Mathf.Lerp(rigidbodyInput.drag, rigidbodyInput.angularDrag, momentFactor);
+				dragCo = Mathf.Max(dragCo, frameInput.minimumDrag);
+
+				Vector3 velocity = pointInput.velocity;
+
+				// The drag applied by Unity (so we don't re-apply it)
+				// Δv_unity = -v * C_dUnity * Δt
+				// (m/s) = (m/s) * (1/s) * (s)
+				// v' = v - v * C_dUnity * (t' - t) 
+				// v = e^[t - C_dUnity * (-0.5t² + t) + v_0]
+
+				// Δv_unity = -v * C_dUnity * ρ_air / 1 kg * Δt
+				// (m/s) = (m/s) * (1/s) * (kg/m³) (s)
+
+				// f = ma
+				// a = f/m
+				// Δv = at
+				// Δv = at 
+
+				// rigidbody.drag = C_d * ρ_air * A * 0.5
+				// dragFactor = C_d * A * 0.5
+
+
+				float unityDragFactor = Mathf.Clamp01(dragCo * frameInput.fixedDeltaTime);
+				float waterDragFactor = Mathf.Clamp01(dragCo * Mathf.Sqrt(frameInput.fluidDensity / k_AirDensity) * frameInput.fixedDeltaTime);
+				float newDragFactor = Mathf.Clamp01(waterDragFactor);// - unityDragFactor);
+				Vector3 dragDeltaV = newDragFactor * pointAreaFactor * -velocity;
+
+				return dragDeltaV;
+			}
+
+			float GetWaterHeight(Vector3 pos)
+			{
+				Vector2 dir = frameInput.Waves0.Direction;
+				return Mathf.Sin((pos.x * dir.x + pos.z * dir.y + frameInput.fixedTime * frameInput.Waves0.Speed) / frameInput.Waves0.Distance) * frameInput.Waves0.Amplitude;
+			}
+
+			Vector3 GetWaterNormal(Vector3 pos)
+			{
+				Vector2 dir = frameInput.Waves0.Direction;
+				Vector3 xTangent = new Vector3(1, Mathf.Cos((pos.x * dir.x + pos.z * dir.y + frameInput.fixedTime * frameInput.Waves0.Speed) / frameInput.Waves0.Distance) * frameInput.Waves0.Amplitude, 0);
+				Vector3 zTangent = new Vector3(0, Mathf.Cos((pos.x * dir.x + pos.z * dir.y + frameInput.fixedTime * frameInput.Waves0.Speed) / frameInput.Waves0.Distance) * frameInput.Waves0.Amplitude, 1);
+				return Vector3.Cross(zTangent.normalized, xTangent.normalized);
+			}
+			public void ApplyForcesToRigidbody(Rigidbody rigidbody)
+			{
+				if (rigidbody.GetInstanceID() != colliderInput.rigidbodyInput.instanceID)
+				{
+					throw new System.InvalidOperationException("Rigidbody instance ID does not match");
+				}
+				rigidbody.AddForceAtPosition(pointOutput.buoyancy, pointInput.tensor.point, ForceMode.Force);
+				rigidbody.AddForceAtPosition(pointOutput.drag, pointInput.tensor.point, ForceMode.VelocityChange);
+			}
+		}
 	}
-
-
-
 }
 
