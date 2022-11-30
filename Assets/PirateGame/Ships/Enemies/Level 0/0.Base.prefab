@@ -51,6 +51,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: 0.6426556
       objectReference: {fileID: 0}
+    - target: {fileID: 513632942090892195, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b8fa11f9d4855434694eee5bdfaf4e25, type: 3}
     - target: {fileID: 535538737610300498, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_Name
       value: 0.Base
@@ -233,7 +237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4584284582110981020, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: Volume
-      value: 109.494514
+      value: 104.526436
       objectReference: {fileID: 0}
     - target: {fileID: 5384668323320404590, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_LocalPosition.x

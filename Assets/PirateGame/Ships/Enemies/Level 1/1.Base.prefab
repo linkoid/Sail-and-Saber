@@ -185,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a54d1d6c78336b1479e6f2026ff8301e, type: 2}
     - target: {fileID: 4204906178892141555, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: ReloadDelay
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4223376156613411066, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: _health
@@ -234,6 +234,10 @@ PrefabInstance:
     - target: {fileID: 6416244035545555668, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_RaidCrewCount
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416244035545555668, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
+      propertyPath: m_SinkGoldReward.Max
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6529983392928033476, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_LocalPosition.x

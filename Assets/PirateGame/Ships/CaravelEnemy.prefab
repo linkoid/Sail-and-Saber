@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5178569396880145428
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 148329103694119668, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249880689256452683, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2883791116840031604, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981538400562869841, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981538400562869841, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981538400562869841, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981538400562869841, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981538400562869841, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981538400562869841, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981538400562869841, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981538400562869841, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981538400562869841, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981538400562869841, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981538400562869841, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981538400562869845, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_Name
+      value: CaravelEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981538400562869854, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981538400839831941, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225880305256242942, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.36079097
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225880305256242942, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.056492783
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225880305256242942, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.8699969
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225880305256242942, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.33127594
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 642fef6d26914624e9f16068c42cb533, type: 3}
