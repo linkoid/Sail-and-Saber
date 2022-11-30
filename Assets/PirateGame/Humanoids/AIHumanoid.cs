@@ -1,6 +1,8 @@
 using PirateGame.Crew;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml;
 using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,6 +10,16 @@ using UnityEngine.AI;
 
 namespace PirateGame.Humanoids
 {
+	[System.Serializable]
+	public enum PathfindResult
+	{
+		Invalid = -3,
+		RequestFail = -2,
+		Fail = -1,
+		Pending = 0,
+		Success = 1,
+	}
+
 	[SelectionBase]
 	[RequireComponent(typeof(NavMeshAgent))]
 	public class AIHumanoid : MonoBehaviour, IHumanoid
@@ -25,6 +37,18 @@ namespace PirateGame.Humanoids
 
 		[SerializeField] private bool m_IsInCombat = false;
 		[SerializeField] private bool m_IsStationary = false;
+
+		[SerializeField, ReadOnly] private NavMeshPathStatus m_PathStatus;
+		[SerializeField, ReadOnly] private PathfindResult m_PathfindResult;
+		[SerializeField, ReadOnly] private Vector3 m_WarpPoint;
+		[SerializeField, ReadOnly] private bool m_HasPath;
+		[SerializeField, ReadOnly] private bool m_PathPending;
+		[SerializeField, ReadOnly] private bool m_IsPathStale;
+		[SerializeField, ReadOnly] private NavMeshPath m_Path;
+
+
+		[SerializeField, ReadOnly] private bool m_WillTeleport = false;
+		[SerializeField, ReadOnly] private Vector3 m_TeleportTo;
 
 		void Start()
 		{
@@ -44,21 +68,36 @@ namespace PirateGame.Humanoids
 		// Update is called once per frame
 		void FixedUpdate()
 		{
+			if (m_WillTeleport)
+			{
+				m_WillTeleport = false;
+				Agent.Warp(m_TeleportTo);
+				Agent.nextPosition = m_TeleportTo;
+				Rigidbody.MovePosition(m_TeleportTo);
+				this.transform.position = m_TeleportTo;
+				m_WarpPoint = m_TeleportTo;
+			}
+
 			if (Goal == null) return;
 			if (!Goal.gameObject.activeInHierarchy) return;
 
 			if (!m_IsStationary)
 			{
-				bool succeded = false; 
-				if (Agent.isOnNavMesh)
+				m_PathfindResult = UpdateDestination(); 
+				if ((int)m_PathfindResult < 0)
 				{
-					succeded = Agent.SetDestination(Goal.transform.position);
-				}
-				if (!succeded)
-				{
-					bool _ = TryGetNearestPointOnNavMesh(Goal.transform.position, out Vector3 point);
+					m_WarpPoint = Vector3.Lerp(m_WarpPoint, Goal.transform.position, 0.2f);
+					bool _ = TryGetNearestPointOnNavMesh(m_WarpPoint, out Vector3 point);
 					Agent.Warp(point);
 				}
+				else if (m_PathfindResult == PathfindResult.Success)
+				{
+					m_WarpPoint = this.transform.position;
+				}
+			}
+			else
+			{
+				m_WarpPoint = this.transform.position;
 			}
 
 			Agent.enabled = true;
@@ -76,7 +115,6 @@ namespace PirateGame.Humanoids
 			{
 				Agent.updateRotation = true;
 			}
-
 
 			//AntiSlide(Time.fixedDeltaTime);
 		}
@@ -135,6 +173,13 @@ namespace PirateGame.Humanoids
 			m_IsStationary = false;
 			TryAttack();
 			Goal = null;
+		}
+
+		public void Teleport(Vector3 position)
+		{
+			m_WillTeleport = true;
+			m_TeleportTo = position;
+			m_WarpPoint = position;
 		}
 
 		private bool CheckIsJumping()
@@ -261,6 +306,74 @@ namespace PirateGame.Humanoids
 			}
 
 			return false;
+		}
+
+		/// <summary>
+		/// Update the agent's destination to navigate to the goal.
+		/// </summary>
+		/// <returns><c>false</c> if, and only if, the agent cannot navigate to the destination</returns>
+		PathfindResult UpdateDestination()
+		{
+			if (m_Path != null && m_Path.corners.Length > 0 && Vector3.Distance(Goal.transform.position, m_Path.corners.Last()) < Agent.stoppingDistance)
+			{
+				// No need to update the path
+			}
+			//else if (!Agent.SetDestination(Goal.transform.position))
+			else 
+			{
+				NavMeshPath newPath = new NavMeshPath();
+				if (!Agent.CalculatePath(Goal.transform.position, newPath))
+				{
+					m_PathfindResult = PathfindResult.RequestFail;
+					goto returnResult;
+				}
+				m_Path = newPath;
+			}
+
+			if (m_Path.status == NavMeshPathStatus.PathComplete)
+				m_PathfindResult = PathfindResult.Success;
+			else if (m_Path.status == NavMeshPathStatus.PathPartial)
+				m_PathfindResult = PathfindResult.Fail;
+			else if (m_Path.status == NavMeshPathStatus.PathInvalid)
+				m_PathfindResult = PathfindResult.Invalid;
+
+			if (m_Path.status != NavMeshPathStatus.PathInvalid)
+			{
+				Agent.path = m_Path;
+			}
+
+			returnResult:
+
+			if (m_Path != null)
+			{
+				m_PathStatus = m_Path.status;
+			}
+			m_HasPath = Agent.hasPath;
+			m_PathPending = Agent.pathPending;
+			m_IsPathStale = Agent.isPathStale;
+
+			return m_PathfindResult;
+		}
+
+
+		void OnDrawGizmosSelected()
+		{
+			Gizmos.color = Color.green;
+			Gizmos.DrawWireSphere(Goal.transform.position, 1);
+			Gizmos.DrawLine(Goal.transform.position, this.transform.position);
+
+			Gizmos.color = Color.yellow;
+			Gizmos.DrawWireSphere(Agent.pathEndPosition, 1.2f);
+			Vector3 lastPoint = this.transform.position;
+			foreach (var point in Agent.path.corners)
+			{
+				Gizmos.DrawLine(lastPoint, point);
+				lastPoint = point;
+			}
+
+			Gizmos.color = Color.magenta;
+			Gizmos.DrawWireSphere(m_WarpPoint, 1);
+			Gizmos.DrawLine(m_WarpPoint, this.transform.position);
 		}
 	}
 }

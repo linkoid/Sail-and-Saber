@@ -133,6 +133,10 @@ namespace PirateGame.Crew
 			var prefab = CrewmateVariants[Random.Range(0, CrewmateVariants.Count)];
 			var newCrewmate = Object.Instantiate(prefab, this.transform).GetComponent<Crewmate>();
 			this.Add(newCrewmate);
+			if (this.Ship != null)
+			{
+				newCrewmate.Humanoid.Teleport(Ship.Rigidbody.position);
+			}
 		}
 
 		/// <summary>

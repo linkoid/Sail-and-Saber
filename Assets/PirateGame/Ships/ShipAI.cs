@@ -42,9 +42,9 @@ namespace PirateGame.Ships
 				m_Crew = new GameObject("EnemyCrew", typeof(CrewDirector)).GetComponent<CrewDirector>();
 				m_Crew.transform.parent = this.transform;
 			}
-			m_Crew.Count = m_CrewCount;
 			this.Ship.AssignCrew(m_Crew);
 			m_Crew.Board(this.Ship);
+			m_Crew.Count = m_CrewCount;
 			return m_Crew;
 		}
 
