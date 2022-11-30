@@ -7,6 +7,7 @@ using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEditor.PlayerSettings;
+using static UnityEngine.InputManagerEntry;
 
 namespace PirateGame.Sea
 {
@@ -245,6 +246,10 @@ namespace PirateGame.Sea
 			List<WaterForceJob> jobs = new List<WaterForceJob>();
 			List<JobHandle> jobHandles = new List<JobHandle>();
 
+
+			var waterPointsInput = new NativeArray<Vector3>(0, Allocator.Persistent);
+			var waterPointsOutput = new NativeArray<Vector3>(0, Allocator.Persistent);
+
 			float weightsSum = tensors.Sum((t) => t.weight);
 			foreach (var tensor in tensors)
 			{
@@ -258,22 +263,23 @@ namespace PirateGame.Sea
 					submersionDepth = submersionDepth, 
 				};
 
-
-
 				WaterForceJob job = new WaterForceJob()
 				{
 					frameInput = m_FrameInput,
 					colliderInput = colliderInput,
 					pointInput = pointInput,
-					//waterPointsInput = new NativeArray<Vector3>(0, Allocator.Persistent),
-					//waterPointsOutput = new NativeArray<Vector3>(0, Allocator.Persistent),
+					waterPointsInput = waterPointsInput,
+					waterPointsOutput = waterPointsOutput,
 					waterHeightOnly = false,
 				};
 
 
-				//job.Schedule().Complete();
-				job.Execute();
+				job.Schedule().Complete();
+				job.Run();
+				//job.Execute();
 				job.ApplyForcesToRigidbody(rigidbody);
+
+				
 
 				if (job.pointOutput == WaterForceJob.PointOutput.zero)
 				{
@@ -284,12 +290,12 @@ namespace PirateGame.Sea
 					m_Contacts.Add(new Ray(job.pointInput.tensor.point, job.pointOutput.drag + job.pointOutput.buoyancy));
 				}
 
-				//job.waterPointsInput.Dispose();
-				//job.waterPointsOutput.Dispose();
-
 				//jobs.Add(job);
 				//jobHandles.Add(job.Schedule());
 			}
+
+			waterPointsInput.Dispose();
+			waterPointsOutput.Dispose();
 
 			foreach (var jobHandle in jobHandles)
 			{
@@ -545,15 +551,15 @@ namespace PirateGame.Sea
 				}
 			}
 
-			[Unity.Collections.ReadOnly] public FrameInput frameInput;
-			[Unity.Collections.ReadOnly] public ColliderInput colliderInput;
-			[Unity.Collections.ReadOnly] public PointInput pointInput;
-			[WriteOnly] public PointOutput pointOutput;
+			public FrameInput frameInput;
+			public ColliderInput colliderInput;
+			public PointInput pointInput;
+			public PointOutput pointOutput;
 
 
-			[Unity.Collections.ReadOnly] public bool waterHeightOnly;
-			[Unity.Collections.ReadOnly] public NativeArray<Vector3> waterPointsInput;
-			[WriteOnly] public NativeArray<Vector3> waterPointsOutput;
+			public bool waterHeightOnly;
+			public NativeArray<Vector3> waterPointsInput;
+			public NativeArray<Vector3> waterPointsOutput;
 
 			public void Execute()
 			{
