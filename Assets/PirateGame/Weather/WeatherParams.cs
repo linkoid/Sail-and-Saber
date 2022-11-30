@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Unity.Burst;
 using UnityEngine;
 
 namespace PirateGame.Weather
@@ -38,6 +39,7 @@ namespace PirateGame.Weather
 		public float Speed;
 		public Vector2 Direction;
 
+		[BurstDiscard]
 		public static WaveParams Lerp(WaveParams from, WaveParams to, float factor)
 		{
 			var newParams = new WaveParams();
