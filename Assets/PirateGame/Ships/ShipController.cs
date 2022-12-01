@@ -25,9 +25,18 @@ namespace PirateGame.Ships
 		[SerializeField, ReadOnly] private float m_Throttle;
 
 
-        void Awake()
+		[SerializeField, ReadOnly] private bool m_WasInCombat;
+		[SerializeField, ReadOnly] private float m_OutOfCombatSpeedBonus = 0.5f;
+
+
+		void Awake()
 		{
 			PlayerInput.enabled = this.enabled;
+		}
+
+		void Start()
+		{
+			m_WasInCombat = true;
 		}
 
 		void OnEnable()
@@ -63,6 +72,24 @@ namespace PirateGame.Ships
 			Ship.Internal.Physics.Throttle = input.Get<float>();
 		}
 
+
+		void FixedUpdate()
+		{
+			bool isInCombat = Ship.Internal.Combat.NearbyShips.Count > 0;
+			if (isInCombat == m_WasInCombat)
+			{
+				// Do nothing
+			}
+			else if (isInCombat)
+			{
+				Ship.IncreaseSpeedModifier(-m_OutOfCombatSpeedBonus);
+			}
+			else
+			{
+				Ship.IncreaseSpeedModifier(+m_OutOfCombatSpeedBonus);
+			}
+			m_WasInCombat = isInCombat;
+		}
 
 
 

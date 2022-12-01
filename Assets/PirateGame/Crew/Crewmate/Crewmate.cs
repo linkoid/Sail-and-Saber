@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using PirateGame.Ships;
 using PirateGame.Humanoids;
@@ -6,6 +7,7 @@ using UnityEngine.AI;
 using Unity.AI.Navigation;
 using UnityEngine.Experimental.AI;
 using UnityEditor;
+using System.Net;
 
 namespace PirateGame.Crew
 {
@@ -134,17 +136,31 @@ namespace PirateGame.Crew
 				},
 			});
 		}
-		
+
+		static int s_SoundsPlaying = 0;
 		void TryPlaySound(SoundEffect sound, string name)
 		{
 			if (sound != null)
 			{
+				if (s_SoundsPlaying > 10)
+				{
+					// Don't play more sounds
+					return;
+				}
 				sound.Play();
+				StartCoroutine(WaitPlaySound());
 			}
 			else
 			{
 				Debug.LogWarning($"Crewmate: {name} has not been assigned", this);
 			}
+		}
+
+		IEnumerator WaitPlaySound()
+		{
+			s_SoundsPlaying += 1;
+			yield return new WaitForSecondsRealtime(1);
+			s_SoundsPlaying -= 1;
 		}
 	}
 }

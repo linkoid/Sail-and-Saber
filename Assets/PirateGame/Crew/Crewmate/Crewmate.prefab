@@ -113,10 +113,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8e5c74b2c6b3fdd46ae05669d0f555f3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 94c7b97d7512b9f4b948b635d37c14d2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2619803
-  m_Pitch: 0.8971126
+  m_Volume: 0.24094318
+  m_Pitch: 0.90192115
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -159,7 +159,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -220,7 +220,7 @@ MonoBehaviour:
     Max: 1
   DelayRange:
     Min: 0
-    Max: 0.5
+    Max: 0.55978274
   Sounds:
   - {fileID: 8300000, guid: 94c7b97d7512b9f4b948b635d37c14d2, type: 3}
 --- !u!1 &7697887025802778832
@@ -268,8 +268,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8e5c74b2c6b3fdd46ae05669d0f555f3, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2619803
-  m_Pitch: 0.8971126
+  m_Volume: 0.1938206
+  m_Pitch: 0.8842286
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -312,7 +312,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -393,15 +393,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2341959339264731795, guid: e05903b0f966f984b92801b8b768f969, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.8378325
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2341959339264731795, guid: e05903b0f966f984b92801b8b768f969, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2341959339264731795, guid: e05903b0f966f984b92801b8b768f969, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.4095955
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2341959339264731795, guid: e05903b0f966f984b92801b8b768f969, type: 3}
       propertyPath: m_LocalRotation.w
@@ -450,6 +450,30 @@ PrefabInstance:
     - target: {fileID: 6339581465415456991, guid: e05903b0f966f984b92801b8b768f969, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.33830944
+      objectReference: {fileID: 0}
+    - target: {fileID: 7090250167696078604, guid: e05903b0f966f984b92801b8b768f969, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.7701214
+      objectReference: {fileID: 0}
+    - target: {fileID: 7090250167696078604, guid: e05903b0f966f984b92801b8b768f969, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.458144
+      objectReference: {fileID: 0}
+    - target: {fileID: 7090250167696078604, guid: e05903b0f966f984b92801b8b768f969, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.029368306
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118221438956207493, guid: e05903b0f966f984b92801b8b768f969, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.7925219
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118221438956207493, guid: e05903b0f966f984b92801b8b768f969, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4561437
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118221438956207493, guid: e05903b0f966f984b92801b8b768f969, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.030367682
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e05903b0f966f984b92801b8b768f969, type: 3}
@@ -503,6 +527,15 @@ MonoBehaviour:
   Goal: {fileID: 0}
   m_IsInCombat: 0
   m_IsStationary: 0
+  m_PathStatus: 0
+  m_PathfindResult: 0
+  m_WarpPoint: {x: 0, y: 0, z: 0}
+  m_DidWarp: 0
+  m_HasPath: 0
+  m_PathPending: 0
+  m_IsPathStale: 0
+  m_WillTeleport: 0
+  m_TeleportTo: {x: 0, y: 0, z: 0}
   m_AntiSlide: {x: 0, y: 0, z: 0}
 --- !u!195 &2137331006773663695
 NavMeshAgent:

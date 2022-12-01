@@ -100,9 +100,12 @@ namespace PirateGame.Ships
 
 		protected virtual void FireAllCannons()
 		{
+			if (Ship.Internal.Combat.DeckCannons.IsReloading && Ship.Internal.Combat.BroadsideCannons.IsReloading) return;
 
 			if (Ship.Internal.Combat.Target != null && !Ship.IsRaided)
 			{
+
+
 				var cannons = Ship.Internal.Combat.GetDeckCannonsInRange();
 
 				m_Crew.ManCannons(cannons);
