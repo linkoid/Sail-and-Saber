@@ -28,6 +28,9 @@ namespace PirateGame.Crew
 		//public Object objectRemove;
 		//public int i;
 
+
+		[SerializeField] private SoundEffect m_YarrSound;
+		[SerializeField] private SoundEffect m_ArrgSound;
 		[SerializeField] List<Crewmate> m_Crewmates = new List<Crewmate>();
 		[SerializeField] List<Crewmate> m_CrewRaid = new List<Crewmate>();
 
@@ -57,6 +60,8 @@ namespace PirateGame.Crew
 				m_CrewRaid.Add(pair.crewmate);
                 ship.Crew.m_CrewRaid.Add(pair.enemy);
 			}
+			
+			TryPlaySound(m_ArrgSound, nameof(m_ArrgSound));
 		}
 
 		/// <summary>
@@ -79,8 +84,22 @@ namespace PirateGame.Crew
 				Remove(crewmate, 4);
 			}
 			
+			TryPlaySound(m_ArrgSound, nameof(m_ArrgSound));
 		}
-
+		void TryPlaySound(SoundEffect sound, string name)
+			{
+				if (sound != null)
+				{
+					int count = Random.Range(1,Count/2 > 0? Count/2 : 1);
+					for(int i =0; i < count; i++){
+						sound.Play();
+					}
+				}
+				else
+				{
+					Debug.LogWarning($"Crewmate Sound: {name} has not been assigned", this);
+				}
+			}
 		/// <summary>
 		/// Support the ship assigned to this crew
 		/// </summary>
@@ -93,6 +112,8 @@ namespace PirateGame.Crew
 			{
 				crewmate.Support(Ship, supportObject);
 			}
+			
+			TryPlaySound(m_ArrgSound, nameof(m_ArrgSound));
 		}
 
 		/// <summary>
@@ -106,6 +127,8 @@ namespace PirateGame.Crew
 			{
 				pair.crewmate.Support(Ship, pair.cannon);
 			}
+			
+			TryPlaySound(m_ArrgSound, nameof(m_ArrgSound));
 		}
 
 		/// <summary>
@@ -121,6 +144,8 @@ namespace PirateGame.Crew
 				// XXX : could find better standby objects
 				crewmate.Board(Ship);
 			}
+			
+			TryPlaySound(m_ArrgSound, nameof(m_ArrgSound));
 		}
 		
 
