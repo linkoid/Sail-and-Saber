@@ -2177,7 +2177,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1554038903897684936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4254,7 +4254,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Buy New Ship 20
+  m_text: Upgrade Ship 20
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -4817,7 +4817,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 86b358b548d0bd7409a17f565e545ba6, type: 3}
+  m_Texture: {fileID: 2800000, guid: dd0612ae7fe506a4db6d7ba1fc854345, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -5272,7 +5272,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 86b358b548d0bd7409a17f565e545ba6, type: 3}
+  m_Texture: {fileID: 2800000, guid: 19918c7e7dc41674cb8288641e728419, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
