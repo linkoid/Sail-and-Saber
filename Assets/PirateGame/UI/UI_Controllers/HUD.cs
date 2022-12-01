@@ -23,7 +23,7 @@ namespace PirateGame.UI
 		bool isBuying, isError;
 
 
-		[SerializeField] private GameObject m_ShopButton;
+		[SerializeField] private Button m_ShopButton;
 		[SerializeField] private GameObject m_ShopPanel;
 
 		[SerializeField] private MiniMapCamera m_MiniMapCamera;
@@ -227,16 +227,10 @@ namespace PirateGame.UI
 		private void UpdateShopVisibility()
 		{
 			if (!Player.Ship) return;
+			Debug.Log(Player.Ship.Internal.Combat.NearbyShips.Count );
+			m_ShopButton.interactable = Player.Ship.Internal.Combat.NearbyShips.Count == 0;
+			m_ShopPanel.SetActive(Player.Ship.Internal.Combat.NearbyShips.Count > 0 ? false : m_ShopPanel.activeSelf);
 
-			if (Player.Ship.Internal.Combat.NearbyShips.Count > 0)
-			{
-				m_ShopButton.SetActive(false);
-				m_ShopPanel.SetActive(false);
-			}
-			else
-			{
-				m_ShopButton.SetActive(true);
-			}
 		}
 
 		private void UpdateMiniMapCamera()
