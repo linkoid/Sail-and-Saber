@@ -260,15 +260,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 395739420635385851, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
       propertyPath: m_Mass
-      value: 54748.24
+      value: 52264.22
       objectReference: {fileID: 0}
     - target: {fileID: 3685159566687824878, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
       propertyPath: m_Mass
-      value: 54748.258
+      value: 52264.22
       objectReference: {fileID: 0}
     - target: {fileID: 4075508555000730456, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
       propertyPath: Nickname
       value: Lvl. 0 - Severed Kidney
+      objectReference: {fileID: 0}
+    - target: {fileID: 4435423056213063742, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
+      propertyPath: Volume
+      value: 104.52641
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
@@ -2802,11 +2806,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1619953951983679739, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.06649912
+      value: -0.06649908
       objectReference: {fileID: 0}
     - target: {fileID: 1619953951983679739, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.028249508
+      value: 0.028249484
       objectReference: {fileID: 0}
     - target: {fileID: 1953173158703558858, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_FollowOffset.y
@@ -3226,11 +3230,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7491881224589061176, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.068301916
+      value: -0.06830192
       objectReference: {fileID: 0}
     - target: {fileID: 7491881224589061176, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.023558658
+      value: 0.02355866
       objectReference: {fileID: 0}
     - target: {fileID: 7753720984334175488, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_FollowOffset.y
@@ -3346,7 +3350,11 @@ PrefabInstance:
       objectReference: {fileID: 355516972}
     - target: {fileID: -5022705380035265577, guid: f4e7b231e7c7cfc4a879a18b01cdea52, type: 3}
       propertyPath: m_Stats.Gold
-      value: 100000000000000
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: -5022705380035265577, guid: f4e7b231e7c7cfc4a879a18b01cdea52, type: 3}
+      propertyPath: m_Stats.CrewCount
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 897732462117576414, guid: f4e7b231e7c7cfc4a879a18b01cdea52, type: 3}
       propertyPath: m_Enabled
@@ -8899,8 +8907,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8481229744780602014, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: -1668.1876
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481229744780602014, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 6.42e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481229744780602014, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: NaN
+      value: -820.5786
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481229744780602014, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 6.42e-43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}

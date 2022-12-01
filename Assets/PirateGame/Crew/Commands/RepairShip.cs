@@ -21,6 +21,9 @@ namespace PirateGame.Crew.Commands
             // Can target yourself
             if (Commander.Target == Commander.Player.Ship) return true;
 
+            //Cannot Repair if no crew
+            if (Crew.Count < 1) return false;
+
             // else
             return true;
         }

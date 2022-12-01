@@ -7,6 +7,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2810582202945505131, guid: debd15e598a86f64797d47a68ac17335, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.7701216
+      objectReference: {fileID: 0}
+    - target: {fileID: 2810582202945505131, guid: debd15e598a86f64797d47a68ac17335, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4581442
+      objectReference: {fileID: 0}
+    - target: {fileID: 2810582202945505131, guid: debd15e598a86f64797d47a68ac17335, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0293684
+      objectReference: {fileID: 0}
+    - target: {fileID: 3499601363337821570, guid: debd15e598a86f64797d47a68ac17335, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 266c1976593d004489044780b9370a0e, type: 2}
+    - target: {fileID: 3876796685477105122, guid: debd15e598a86f64797d47a68ac17335, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.79252195
+      objectReference: {fileID: 0}
+    - target: {fileID: 3876796685477105122, guid: debd15e598a86f64797d47a68ac17335, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4561436
+      objectReference: {fileID: 0}
+    - target: {fileID: 3876796685477105122, guid: debd15e598a86f64797d47a68ac17335, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.030367613
+      objectReference: {fileID: 0}
     - target: {fileID: 7342238437241510644, guid: debd15e598a86f64797d47a68ac17335, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -53,7 +81,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7342238437241510648, guid: debd15e598a86f64797d47a68ac17335, type: 3}
       propertyPath: m_Name
-      value: NormalCrewmate
+      value: NormalCrewmate Variant 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: debd15e598a86f64797d47a68ac17335, type: 3}

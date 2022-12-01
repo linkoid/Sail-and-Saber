@@ -29,6 +29,9 @@ namespace PirateGame.Crew.Commands
             //Target Health must be 25% of max health or lower
             if (!(Combat.Target.Health <= Combat.Target.MaxHealth * 0.25)) return false;
 
+            //Cannot Raid if no crew
+            if (Crew.Count < 1) return false;
+
 			// else
 			return true;
 		}

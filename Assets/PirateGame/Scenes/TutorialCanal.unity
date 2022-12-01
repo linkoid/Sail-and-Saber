@@ -7416,7 +7416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5022705380035265577, guid: f4e7b231e7c7cfc4a879a18b01cdea52, type: 3}
       propertyPath: m_Stats.CrewCount
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 897732462117576415, guid: f4e7b231e7c7cfc4a879a18b01cdea52, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8446,7 +8446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4075508555000730456, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
       propertyPath: Nickname
-      value: RECRUIT DAMGED SHIPS WITH RAID/RESCUE
+      value: DAMAGED SHIPS CAN BE RAIDED/RESCUED
       objectReference: {fileID: 0}
     - target: {fileID: 4267241457912241954, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
       propertyPath: m_LocalPosition.x

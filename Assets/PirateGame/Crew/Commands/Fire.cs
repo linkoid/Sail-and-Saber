@@ -30,8 +30,11 @@ namespace PirateGame.Crew.Commands
 			// Can't have no cannons in range
 			if (!Combat.HasCannonsInRange()) return false;
 
-			// else
-			return true;
+            //Cannot Fire if no crew
+            if (Crew.Count < 1) return false;
+
+            // else
+            return true;
 		}
 
 		protected override IEnumerable OnExecute()
