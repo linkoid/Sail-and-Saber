@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
 using PirateGame.Ships;
 
 namespace PirateGame.UI
@@ -16,7 +15,10 @@ namespace PirateGame.UI
 		public Slider HealthBar, Target_Health;
 		public TMP_Text Loot_Text, Crew_Text, Error_Text, Target_Title,Target_Crew_Text;
 		[SerializeField] float Error_timer = 5f;
-		public GameObject Ship, TargetUI, DeathPanel, winScreen;
+		public GameObject TargetUI, DeathPanel, winScreen;
+
+		[SerializeField]
+		private Ship m_ShipPrefab;
 
 		[SerializeField] private bool NotToggled = true;
 		[SerializeField] private SoundEffect buySound, WinSound, LoseSound;
@@ -77,10 +79,11 @@ namespace PirateGame.UI
 		{
 			if (CanBuy(cost))
 			{
-				Transform tempTransform = Player.Ship.gameObject.transform;
-				GameObject G = Instantiate(Ship, tempTransform);
-				GameObject.Destroy(Player.Ship.gameObject);
-				Player.Ship = G.GetComponent<Ship>();
+				Ship oldShip = Player.Ship;
+				Ship newShip = Object.Instantiate(m_ShipPrefab, oldShip.transform.position, oldShip.transform.rotation);
+				Player.Ship = newShip;
+				//Player.Crew.Board(newShip); // Automatically called by Player.set_Ship()
+				Object.Destroy(oldShip.gameObject);
 			}
 		}
 
@@ -249,7 +252,7 @@ namespace PirateGame.UI
 		private void UpdateShopVisibility()
 		{
 			if (!Player.Ship) return;
-			Debug.Log(Player.Ship.Internal.Combat.NearbyShips.Count );
+			//Debug.Log(Player.Ship.Internal.Combat.NearbyShips.Count);
 			m_ShopButton.interactable = Player.Ship.Internal.Combat.NearbyShips.Count == 0;
 			m_ShopPanel.SetActive(Player.Ship.Internal.Combat.NearbyShips.Count > 0 ? false : m_ShopPanel.activeSelf);
 

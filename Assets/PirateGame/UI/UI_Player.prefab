@@ -2639,10 +2639,10 @@ MonoBehaviour:
   Target_Title: {fileID: 8801478451640768431}
   Target_Crew_Text: {fileID: 3530611946518229788}
   Error_timer: 5
-  Ship: {fileID: 3028831654680920317, guid: 8074020296342854d90a49df3661b97c, type: 3}
   TargetUI: {fileID: 6909625998452863582}
   DeathPanel: {fileID: 4252502893745980073}
   winScreen: {fileID: 3404453288380076342}
+  m_ShipPrefab: {fileID: 326173693185379332, guid: 343158223f06b5448b3789d189c4c66e, type: 3}
   NotToggled: 1
   buySound: {fileID: 1177077369891412152}
   WinSound: {fileID: 5787755944813657642}
