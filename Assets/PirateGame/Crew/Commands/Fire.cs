@@ -36,7 +36,9 @@ namespace PirateGame.Crew.Commands
 
 		protected override IEnumerable OnExecute()
 		{
-			Combat.Target = Commander.Target;
+            Commander.isRepairing = false;
+
+            Combat.Target = Commander.Target;
 			Combat.FireBroadsideCannons();
 
 			var cannons = Combat.GetDeckCannonsInRange();
