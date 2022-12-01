@@ -28,8 +28,6 @@ namespace PirateGame.Crew
 		//public Object objectRemove;
 		//public int i;
 
-
-		[SerializeField] private SoundEffect m_YarrSound;
 		[SerializeField] private SoundEffect m_ArrgSound;
 		[SerializeField] List<Crewmate> m_Crewmates = new List<Crewmate>();
 		[SerializeField] List<Crewmate> m_CrewRaid = new List<Crewmate>();

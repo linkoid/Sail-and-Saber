@@ -12,7 +12,7 @@ namespace PirateGame.UI
 	{
 		public Player Player { get => m_Player; private set => m_Player = value; }
 
-		[SerializeField] private Player m_Player;
+		[SerializeField] private Player m_Player = GameObject.FindObjectOfType<Player>();
 		public Slider HealthBar, Target_Health;
 		public TMP_Text Loot_Text, Crew_Text, Error_Text, Target_Title,Target_Crew_Text;
 		[SerializeField] float Error_timer = 5f;
