@@ -38,7 +38,6 @@ namespace PirateGame
 			m_LastScene = activeScene;
 			m_LastWeatherScene = Object.FindObjectOfType<WeatherScene>();
 
-
 			// Start loading the next scene
 			AsyncOperation loading = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
 			loading.allowSceneActivation = true;
@@ -80,7 +79,8 @@ namespace PirateGame
 			// Unload old scene
 			SceneManager.UnloadSceneAsync(m_LastScene);
 
-
+			var player = Object.FindObjectOfType<Player>();
+			player.ConstrainSeaToShip();
 
 			m_IsLoadingScene = false;
 		}

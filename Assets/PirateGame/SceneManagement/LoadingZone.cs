@@ -42,7 +42,6 @@ namespace PirateGame
 			{
 				player.gameObject,
 				ship.gameObject,
-				Object.FindObjectOfType<BuoyancyEffector>().gameObject,
 			};
 
 			SeamlessSceneManager.Instance.LoadSceneSeamless(m_Scene, keepObjects);
