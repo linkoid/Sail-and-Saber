@@ -8,6 +8,9 @@ namespace PirateGame
 	[RequireComponent(typeof(AudioSource))]
 	public class SoundEffect : MonoBehaviour
 	{
+		public static float GlobalVolume { get => _globalVolume; set => _globalVolume = Mathf.Clamp01(value); }
+		private static float _globalVolume = 1;
+
 		[SerializeField]
 		private bool m_PreviewButton = false;
 
@@ -27,7 +30,7 @@ namespace PirateGame
 		public void Play()
 		{
 			AudioClip clip = Sounds[Random.Range(0, Sounds.Count)];
-			AudioSource.volume = VolumeRange.RandomInRange() * PlayerPrefs.GetFloat("SFX_Volume");
+			AudioSource.volume = VolumeRange.RandomInRange() * GlobalVolume;
 
 			AudioSource.pitch = PitchRange.RandomInRange();
 			AudioSource.clip = clip;

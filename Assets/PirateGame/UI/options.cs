@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using PirateGame;
 
-public class options : MonoBehaviour
+public class Options : MonoBehaviour
 {
     public Slider VolumeSlider,SFX_Slider;
     public AudioSource musicSource;
@@ -16,30 +16,35 @@ public class options : MonoBehaviour
 
     private void Awake()
     {
-            musicSource = GameObject.Find("Music_Player").GetComponent<AudioSource>();
+        // Fixes NullReferenceException
+        musicSource = GameObject.Find("Music_Player")?.GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        SFX_Slider.value = PlayerPrefs.GetFloat("SFX_Volume");
-    }
+		// Fixes volume defaulting to 0
+		VolumeSlider.value = PlayerPrefs.GetFloat("Music_Volume", 0.8f);
+		SFX_Slider.value   = PlayerPrefs.GetFloat("SFX_Volume"  , 0.8f);
+
+        // Fixes settings not applying until volume sliders were moved
+        SetAllSFX_Values();
+	}
 
     private void Update()
     {
         if(musicSource != null){
             musicSource.volume = VolumeSlider.value;
-        }
+			// Fixes music volume not being saved
+			PlayerPrefs.SetFloat("Music_Volume", VolumeSlider.value);
+		}
 	}
 	
 	// Invoked when the value of the slider changes.
 	public void SetAllSFX_Values()
 	{
-        
         PlayerPrefs.SetFloat("SFX_Volume",SFX_Slider.value);
-        var allSFX_Objects = FindObjectsOfType<SoundEffect>();
-        foreach(SoundEffect se in allSFX_Objects){
-            se.AudioSource.volume = SFX_Slider.value;
-        }
+        // Fixes settings not applying to newly generated SoundEffects
+        SoundEffect.GlobalVolume = SFX_Slider.value;
 	}
     public void Resume(){
             isPaused = !isPaused;
