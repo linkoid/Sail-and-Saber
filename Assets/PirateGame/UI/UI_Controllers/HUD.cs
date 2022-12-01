@@ -74,8 +74,8 @@ namespace PirateGame.UI
 			{
 				Transform tempTransform = Player.Ship.gameObject.transform;
 				GameObject G = Instantiate(Ship, tempTransform);
-				Player.Ship = G.GetComponent<Ship>();
 				GameObject.Destroy(Player.Ship.gameObject);
+				Player.Ship = G.GetComponent<Ship>();
 			}
 		}
 
