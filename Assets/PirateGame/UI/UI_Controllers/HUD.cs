@@ -68,6 +68,8 @@ namespace PirateGame.UI
 		}
 
 
+
+
 		public void BuyShipType(int cost)
 		{
 			if (CanBuy(cost))
