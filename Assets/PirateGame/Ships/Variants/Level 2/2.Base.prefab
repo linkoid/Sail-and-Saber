@@ -159,6 +159,10 @@ PrefabInstance:
       propertyPath: m_CannonList.Array.data[2]
       value: 
       objectReference: {fileID: 686140766603464932}
+    - target: {fileID: 3104636844104652003, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.08715578
+      objectReference: {fileID: 0}
     - target: {fileID: 3546371766859413580, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_Mass
       value: 1
@@ -189,11 +193,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3ab17093439cea94bacbf3ccc47f8022, type: 2}
     - target: {fileID: 4204906178892141555, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: ReloadDelay
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4204906178892141555, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: DamagePerCannon
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4223376156613411066, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: _health
