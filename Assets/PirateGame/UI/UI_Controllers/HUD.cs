@@ -152,8 +152,12 @@ namespace PirateGame.UI
 			//Debug.Log(PlayerPrefs.GetString("Fort1") + " " + PlayerPrefs.GetString("Fort2") + " " + PlayerPrefs.GetString("Fort3"));
 			if (PlayerPrefs.GetString("Fort1") == "Captured" && PlayerPrefs.GetString("Fort2") == "Captured" && PlayerPrefs.GetString("Fort3") == "Captured")
 			{
+				PlayerPrefs.SetString("Fort1","unCaptured");
+				PlayerPrefs.SetString("Fort2","unCaptured");
+				PlayerPrefs.SetString("Fort3","unCaptured");
 				winScreen.SetActive(true && NotToggled);
 				WinSound.Play();
+				
 			}
 		}
 
