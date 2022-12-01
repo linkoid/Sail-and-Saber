@@ -266,6 +266,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 54748.258
       objectReference: {fileID: 0}
+    - target: {fileID: 4075508555000730456, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 0 - Severed Kidney
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
 --- !u!1001 &250677321
@@ -278,6 +282,10 @@ PrefabInstance:
     - target: {fileID: 78708453140022108, guid: 4da8c72a1c0207d41afb7554fa3af99e, type: 3}
       propertyPath: Volume
       value: 109.494514
+      objectReference: {fileID: 0}
+    - target: {fileID: 294269301294180410, guid: 4da8c72a1c0207d41afb7554fa3af99e, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 1 - Fate
       objectReference: {fileID: 0}
     - target: {fileID: 1134405965573787788, guid: 4da8c72a1c0207d41afb7554fa3af99e, type: 3}
       propertyPath: m_Mass
@@ -2790,15 +2798,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1619953951983679739, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.11686024
+      value: -0.116860256
       objectReference: {fileID: 0}
     - target: {fileID: 1619953951983679739, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0664991
+      value: -0.06649912
       objectReference: {fileID: 0}
     - target: {fileID: 1619953951983679739, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.028249498
+      value: 0.028249508
       objectReference: {fileID: 0}
     - target: {fileID: 1953173158703558858, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_FollowOffset.y
@@ -3218,11 +3226,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7491881224589061176, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.06830192
+      value: -0.068301916
       objectReference: {fileID: 0}
     - target: {fileID: 7491881224589061176, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.02355866
+      value: 0.023558658
       objectReference: {fileID: 0}
     - target: {fileID: 7753720984334175488, guid: 8074020296342854d90a49df3661b97c, type: 3}
       propertyPath: m_FollowOffset.y
@@ -3568,6 +3576,10 @@ PrefabInstance:
     - target: {fileID: 78708453140022108, guid: 4da8c72a1c0207d41afb7554fa3af99e, type: 3}
       propertyPath: Volume
       value: 109.49441
+      objectReference: {fileID: 0}
+    - target: {fileID: 294269301294180410, guid: 4da8c72a1c0207d41afb7554fa3af99e, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 1 - Destiny
       objectReference: {fileID: 0}
     - target: {fileID: 1134405965573787788, guid: 4da8c72a1c0207d41afb7554fa3af99e, type: 3}
       propertyPath: m_Mass
@@ -3943,6 +3955,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6041950433068373062, guid: 6026e2903abf1094488babdf37e723e4, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 3 - Bloody Hangman
+      objectReference: {fileID: 0}
     - target: {fileID: 6249243959491704381, guid: 6026e2903abf1094488babdf37e723e4, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
@@ -4315,6 +4331,10 @@ PrefabInstance:
     - target: {fileID: 1066119428644759178, guid: c9458ad9c55b63a4da654cc572406917, type: 3}
       propertyPath: m_Mass
       value: 54748.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 3691107129973176873, guid: c9458ad9c55b63a4da654cc572406917, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 2 -Deadly Bones
       objectReference: {fileID: 0}
     - target: {fileID: 4076388821889663647, guid: c9458ad9c55b63a4da654cc572406917, type: 3}
       propertyPath: m_Mass
@@ -4788,6 +4808,10 @@ PrefabInstance:
     - target: {fileID: 2344996504453049577, guid: d816b98519f5d9a49b420175e98c5f7e, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.08715578
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456633484352884718, guid: d816b98519f5d9a49b420175e98c5f7e, type: 3}
+      propertyPath: Nickname
+      value: Fortress - Ft. Envy
       objectReference: {fileID: 0}
     - target: {fileID: 2456633484352884718, guid: d816b98519f5d9a49b420175e98c5f7e, type: 3}
       propertyPath: m_FortName
@@ -8382,6 +8406,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: -0.08715578
       objectReference: {fileID: 0}
+    - target: {fileID: 5360485247409576610, guid: f71f20bf66c91ee4cb4de97de94bb2d7, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 2 - Cursed Fire
+      objectReference: {fileID: 0}
     - target: {fileID: 6624183792740290235, guid: f71f20bf66c91ee4cb4de97de94bb2d7, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.08715578
@@ -8869,6 +8897,10 @@ PrefabInstance:
     - target: {fileID: 8481229744780602011, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481229744780602014, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: NaN
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}

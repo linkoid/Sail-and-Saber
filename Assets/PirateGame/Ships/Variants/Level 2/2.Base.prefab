@@ -197,7 +197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4204906178892141555, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: DamagePerCannon
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4223376156613411066, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: _health
@@ -206,6 +206,10 @@ PrefabInstance:
     - target: {fileID: 4223376156613411066, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: _maxHealth
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223376156613411066, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
+      propertyPath: _speedModifier
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4434857142347877439, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_Materials.Array.data[1]

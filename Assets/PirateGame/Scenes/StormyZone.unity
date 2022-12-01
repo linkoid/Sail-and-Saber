@@ -4645,6 +4645,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 52264.26
       objectReference: {fileID: 0}
+    - target: {fileID: 4075508555000730456, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 0 - Timeout
+      objectReference: {fileID: 0}
     - target: {fileID: 4435423056213063742, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
       propertyPath: Volume
       value: 104.52652
@@ -4776,6 +4780,10 @@ PrefabInstance:
     - target: {fileID: 4778531505262575711, guid: 6026e2903abf1094488babdf37e723e4, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.08715578
+      objectReference: {fileID: 0}
+    - target: {fileID: 6041950433068373062, guid: 6026e2903abf1094488babdf37e723e4, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 3 - Backdoor
       objectReference: {fileID: 0}
     - target: {fileID: 6258742743187898144, guid: 6026e2903abf1094488babdf37e723e4, type: 3}
       propertyPath: Volume
@@ -5009,6 +5017,10 @@ PrefabInstance:
     - target: {fileID: 3685159566687824878, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
       propertyPath: m_Mass
       value: 52264.184
+      objectReference: {fileID: 0}
+    - target: {fileID: 4075508555000730456, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 0 - Torn Dreams
       objectReference: {fileID: 0}
     - target: {fileID: 4435423056213063742, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
       propertyPath: Volume
@@ -7662,6 +7674,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6041950433068373062, guid: 6026e2903abf1094488babdf37e723e4, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 3 - Golden Chariot
+      objectReference: {fileID: 0}
     - target: {fileID: 6249243959491704381, guid: 6026e2903abf1094488babdf37e723e4, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
@@ -8051,6 +8067,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: -0.08715578
       objectReference: {fileID: 0}
+    - target: {fileID: 6041950433068373062, guid: 6026e2903abf1094488babdf37e723e4, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 3 - Lemon Demon
+      objectReference: {fileID: 0}
     - target: {fileID: 6258742743187898144, guid: 6026e2903abf1094488babdf37e723e4, type: 3}
       propertyPath: Volume
       value: 104.5266
@@ -8283,6 +8303,10 @@ PrefabInstance:
     - target: {fileID: 3685159566687824878, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
       propertyPath: m_Mass
       value: 52264.273
+      objectReference: {fileID: 0}
+    - target: {fileID: 4075508555000730456, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 0 - Fallen Angel
       objectReference: {fileID: 0}
     - target: {fileID: 4435423056213063742, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
       propertyPath: Volume
@@ -8587,7 +8611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4575140073738245600, guid: 8dff8c9a4e816824092ef98ad7c90836, type: 3}
       propertyPath: Nickname
-      value: Storm Flag
+      value: Lvl. 4 - Storm Flag
       objectReference: {fileID: 0}
     - target: {fileID: 5463009841981350716, guid: 8dff8c9a4e816824092ef98ad7c90836, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9160,6 +9184,10 @@ PrefabInstance:
     - target: {fileID: 4778531505262575711, guid: 6026e2903abf1094488babdf37e723e4, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6041950433068373062, guid: 6026e2903abf1094488babdf37e723e4, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 3 - Secret Dagger
       objectReference: {fileID: 0}
     - target: {fileID: 6249243959491704381, guid: 6026e2903abf1094488babdf37e723e4, type: 3}
       propertyPath: m_LocalRotation.x
