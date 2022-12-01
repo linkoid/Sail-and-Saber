@@ -5282,7 +5282,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2600289299211612810
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5542,8 +5542,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4508800086432628989}
         m_TargetAssemblyTypeName: Scene_Transfer, Assembly-CSharp
-        m_MethodName: Q
-        m_Mode: 1
+        m_MethodName: TransferTo
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7595,7 +7595,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

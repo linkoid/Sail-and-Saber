@@ -22,11 +22,11 @@ public class Scene_Transfer : MonoBehaviour
     }
 
     public void TransferTo(string scene) {
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(scene));
+        SceneManager.LoadScene(scene);
     }
 
     public void TransferTo(int scene) {
-        SceneManager.SetActiveScene(SceneManager.GetSceneAt(scene));
+        SceneManager.LoadScene(scene);
     }
 
 
