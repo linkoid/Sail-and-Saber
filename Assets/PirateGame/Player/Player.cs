@@ -33,6 +33,8 @@ namespace PirateGame
 		[SerializeField] private CrewDirector m_Crew;
 		[SerializeField] private Commander m_Commander;
 
+		[SerializeField] private SoundEffect m_GoldSound;
+
 		[SerializeField, ReadOnly, Tooltip("Available in Unity 2023.1")]
 		protected bool didStart = false;
 
@@ -131,7 +133,19 @@ namespace PirateGame
 
 		private void OnGoldChanged(long oldGold)
 		{
-
+			if (oldGold < Gold)
+			{
+				IEnumerator RepeatGoldSound()
+				{
+					var newGold = Gold;
+					for (long i = oldGold; i < newGold; i++)
+					{
+						m_GoldSound.Play();
+						yield return new WaitForSecondsRealtime(0.05f);
+					}
+				}
+				StartCoroutine(RepeatGoldSound());
+			}
 		}
 		private void OnCrewCountChanged(int oldCrewCount)
 		{
