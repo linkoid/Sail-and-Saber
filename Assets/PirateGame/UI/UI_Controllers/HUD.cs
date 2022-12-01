@@ -30,6 +30,9 @@ namespace PirateGame.UI
 
 		[SerializeField, ReadOnly] private Ships.Ship m_PreviousTarget;
 
+		[SerializeField] private TMP_Text m_HealthWarningText;
+		[SerializeField] private TMP_Text m_CrewWarningText;
+
 
 		public void Toggle()
 		{
@@ -61,7 +64,7 @@ namespace PirateGame.UI
 			{
 				return;
 			}
-			if (CanBuy(3))
+			if (CanBuy(5))
 			{
 				Player.Ship.Repair(Player.Ship.MaxHealth);
 			}
@@ -81,9 +84,10 @@ namespace PirateGame.UI
 			}
 		}
 
+		const int k_CrewCost = 5;
 		public void AddCrew()
 		{
-			Player.CrewCount += CanBuy(5) ? 1 : 0;
+			Player.CrewCount += CanBuy(k_CrewCost) ? 1 : 0;
 		}
 
 
@@ -133,12 +137,7 @@ namespace PirateGame.UI
 				return;
 			}
 
-			if (Player.Ship.Health <= 0)
-			{
-				LoseSound.Play();
-			}
-
-			DeathPanel.SetActive(Player.Ship.Health <= 0);
+			CheckLooseCondition();
 
 			CheckWinCondition();
 
@@ -147,6 +146,23 @@ namespace PirateGame.UI
 			UpdateShopVisibility();
 
 			UpdateMiniMapCamera();
+
+			UpdateHealthWarning();
+
+			UpdateCrewWarning();
+		}
+
+		private void CheckLooseCondition()
+		{
+			if (Player.Ship == null) goto gameOver;
+			if (Player.Ship.Health <= 0) goto gameOver;
+			if (Player.Ship.Crew.Count <= 0 && Player.Gold < k_CrewCost) goto gameOver;
+			// else
+			return;
+
+		gameOver:
+			LoseSound.Play();
+			DeathPanel.SetActive(true);
 		}
 
 		private void CheckWinCondition()
@@ -216,7 +232,7 @@ namespace PirateGame.UI
 				HealthBar.maxValue = Player.Ship.MaxHealth;
 			}
 			float valueDif = Player.Ship.Health - HealthBar.value;
-			HealthBar.value += valueDif * .01f;
+			HealthBar.value += valueDif * .05f;
 
 		}
 
@@ -243,6 +259,18 @@ namespace PirateGame.UI
 		{
 			if (!Player.Ship) return;
 			m_MiniMapCamera.ToFollow = Player.Ship.transform;
+		}
+
+		private void UpdateHealthWarning()
+		{
+			if (!Player.Ship) return;
+			m_HealthWarningText.gameObject.SetActive(Player.Ship.Health < Player.Ship.MaxHealth * 0.333f);
+		}
+
+		private void UpdateCrewWarning()
+		{
+			if (!Player.Ship) return;
+			m_CrewWarningText.gameObject.SetActive(Player.CrewCount <= 0);
 		}
 	}
 }

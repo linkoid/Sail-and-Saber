@@ -1968,7 +1968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CenterOfMass: {fileID: 6857494341586506667}
-  Density: 500
+  Density: 800
   m_Mass: 1
 --- !u!114 &8873269267604673351
 MonoBehaviour:
@@ -2161,6 +2161,8 @@ MonoBehaviour:
   VirtualCamera: {fileID: 5407800946371343324}
   m_Movement: {x: 0, y: 0, z: 0}
   m_Throttle: 0
+  m_WasInCombat: 0
+  m_OutOfCombatSpeedBonus: 0.5
 --- !u!1 &8100366760573377401
 GameObject:
   m_ObjectHideFlags: 0
