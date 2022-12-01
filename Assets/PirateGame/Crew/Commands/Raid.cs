@@ -57,9 +57,9 @@ namespace PirateGame.Crew.Commands
                     yield return new WaitForSeconds(3);
 
                 // Loop to do stuff during the raid
-                float loopDuration = 11; // how long does the raid last?
+                //float loopDuration = 11; // how long does the raid last?
                 float loopStep = 1f; // how often is the code in the loop run?
-                for (float loopTime = 0; loopTime < loopDuration; loopTime += loopStep)
+                while(m_RaidTarget.Crew.Count > 0 && Crew.Count > 0)
                 {
                     if (m_RaidTarget.Crew.CrewRaid.Count == 0 || Crew.CrewRaid.Count == 0)
                         break;

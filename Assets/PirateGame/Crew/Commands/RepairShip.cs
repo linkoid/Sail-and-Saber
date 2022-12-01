@@ -13,7 +13,7 @@ namespace PirateGame.Crew.Commands
 		public override bool Poll()
 		{
             // Cannot target nothing
-            if (Commander.Target == null) return false;
+            //if (Commander.Target == null) return false;
 
             // Must have a ship
             if (Ship == null) return false;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2585941766761418454}
   - component: {fileID: 4616398326091742488}
   - component: {fileID: 7573460324615309479}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ParticleEmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4847,7 +4847,7 @@ ParticleSystemRenderer:
   m_SortingOrder: 0
   m_RenderMode: 4
   m_MeshDistribution: 0
-  m_SortMode: 0
+  m_SortMode: 4
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
@@ -4887,7 +4887,7 @@ GameObject:
   - component: {fileID: 3501879723245652169}
   - component: {fileID: 2761647787940607768}
   - component: {fileID: 8897357004136298920}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cyclone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4967,10 +4967,10 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6774620583374544712}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 4f930d6605f9cab45b9451800b5f7fad, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
+  m_Radius: 0.83
+  m_Height: 5
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0.000000059604645, y: 2.48, z: -0.00000008940697}
