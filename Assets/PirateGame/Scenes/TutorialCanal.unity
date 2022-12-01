@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 52264.215
       objectReference: {fileID: 0}
+    - target: {fileID: 843004588592656945, guid: b87a9beddaa54324eabb303e99de75c6, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 1 - Wind Raider
+      objectReference: {fileID: 0}
     - target: {fileID: 1058381654795262295, guid: b87a9beddaa54324eabb303e99de75c6, type: 3}
       propertyPath: Volume
       value: 104.52643
@@ -1646,7 +1650,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 843004588592656945, guid: b87a9beddaa54324eabb303e99de75c6, type: 3}
       propertyPath: Nickname
-      value: First Anchor
+      value: Lvl. 1 - First Anchor
       objectReference: {fileID: 0}
     - target: {fileID: 1058381654795262295, guid: b87a9beddaa54324eabb303e99de75c6, type: 3}
       propertyPath: Volume
@@ -6694,6 +6698,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 52264.22
       objectReference: {fileID: 0}
+    - target: {fileID: 4075508555000730456, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 0 - Shiverin' Barnacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
 --- !u!1001 &355516971
@@ -7338,7 +7346,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8447048772140027942, guid: 2f6d48bda2c07e342926448efea7a223, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8447048772140027942, guid: 2f6d48bda2c07e342926448efea7a223, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7408,7 +7416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5022705380035265577, guid: f4e7b231e7c7cfc4a879a18b01cdea52, type: 3}
       propertyPath: m_Stats.CrewCount
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 897732462117576415, guid: f4e7b231e7c7cfc4a879a18b01cdea52, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7687,6 +7695,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 52264.23
       objectReference: {fileID: 0}
+    - target: {fileID: 843004588592656945, guid: b87a9beddaa54324eabb303e99de75c6, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 1 - Shallow Doom
+      objectReference: {fileID: 0}
     - target: {fileID: 1058381654795262295, guid: b87a9beddaa54324eabb303e99de75c6, type: 3}
       propertyPath: Volume
       value: 104.52646
@@ -7831,6 +7843,10 @@ PrefabInstance:
     - target: {fileID: 78708453140022108, guid: 4da8c72a1c0207d41afb7554fa3af99e, type: 3}
       propertyPath: Volume
       value: 104.526436
+      objectReference: {fileID: 0}
+    - target: {fileID: 294269301294180410, guid: 4da8c72a1c0207d41afb7554fa3af99e, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 1 - Dragon Pearl
       objectReference: {fileID: 0}
     - target: {fileID: 1134405965573787788, guid: 4da8c72a1c0207d41afb7554fa3af99e, type: 3}
       propertyPath: m_Mass
@@ -8111,11 +8127,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4742018310730474004, guid: f71f20bf66c91ee4cb4de97de94bb2d7, type: 3}
       propertyPath: m_Mass
-      value: 52264.22
+      value: 52264.234
       objectReference: {fileID: 0}
     - target: {fileID: 5014513321677462078, guid: f71f20bf66c91ee4cb4de97de94bb2d7, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.08715597
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360485247409576610, guid: f71f20bf66c91ee4cb4de97de94bb2d7, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 2 - Cannon Blocker
+      objectReference: {fileID: 0}
+    - target: {fileID: 5721419098988720580, guid: f71f20bf66c91ee4cb4de97de94bb2d7, type: 3}
+      propertyPath: Volume
+      value: 104.52647
       objectReference: {fileID: 0}
     - target: {fileID: 6624183792740290235, guid: f71f20bf66c91ee4cb4de97de94bb2d7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -8251,7 +8275,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8617263462040782337, guid: f71f20bf66c91ee4cb4de97de94bb2d7, type: 3}
       propertyPath: m_Mass
-      value: 52264.22
+      value: 52264.234
       objectReference: {fileID: 0}
     - target: {fileID: 8617263462040782346, guid: f71f20bf66c91ee4cb4de97de94bb2d7, type: 3}
       propertyPath: m_Name
@@ -8417,8 +8441,12 @@ PrefabInstance:
       value: 52264.25
       objectReference: {fileID: 0}
     - target: {fileID: 4075508555000730456, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
+      propertyPath: _health
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4075508555000730456, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
       propertyPath: Nickname
-      value: HELP US!
+      value: RECRUIT DAMGED SHIPS WITH RAID/RESCUE
       objectReference: {fileID: 0}
     - target: {fileID: 4267241457912241954, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8669,6 +8697,10 @@ PrefabInstance:
     - target: {fileID: 1066119428644759178, guid: c9458ad9c55b63a4da654cc572406917, type: 3}
       propertyPath: m_Mass
       value: 52264.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 3691107129973176873, guid: c9458ad9c55b63a4da654cc572406917, type: 3}
+      propertyPath: Nickname
+      value: Lvl 2. - Wind Raider
       objectReference: {fileID: 0}
     - target: {fileID: 3907900538657444175, guid: c9458ad9c55b63a4da654cc572406917, type: 3}
       propertyPath: Volume
@@ -11126,6 +11158,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 52264.203
       objectReference: {fileID: 0}
+    - target: {fileID: 843004588592656945, guid: b87a9beddaa54324eabb303e99de75c6, type: 3}
+      propertyPath: Nickname
+      value: Lvl. 1 - Dusty Mermaid
+      objectReference: {fileID: 0}
     - target: {fileID: 1058381654795262295, guid: b87a9beddaa54324eabb303e99de75c6, type: 3}
       propertyPath: Volume
       value: 104.526405
@@ -11290,7 +11326,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8447048772140027942, guid: 2f6d48bda2c07e342926448efea7a223, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8447048772140027942, guid: 2f6d48bda2c07e342926448efea7a223, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12904,7 +12940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5330454642838317166, guid: f5b8431c16cfa69459f450bd6676e2ad, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5330454642838317166, guid: f5b8431c16cfa69459f450bd6676e2ad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13064,11 +13100,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8469649804689444972, guid: f5b8431c16cfa69459f450bd6676e2ad, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.095916316
+      value: -0.09591626
       objectReference: {fileID: 0}
     - target: {fileID: 8469649804689444972, guid: f5b8431c16cfa69459f450bd6676e2ad, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.011641764
+      value: 0.011641745
       objectReference: {fileID: 0}
     - target: {fileID: 8469649804689444972, guid: f5b8431c16cfa69459f450bd6676e2ad, type: 3}
       propertyPath: m_LocalRotation.y
@@ -13225,8 +13261,12 @@ PrefabInstance:
       value: 52264.234
       objectReference: {fileID: 0}
     - target: {fileID: 4075508555000730456, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
+      propertyPath: _health
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4075508555000730456, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
       propertyPath: Nickname
-      value: RAID US!
+      value: RECRUIT DAMGED SHIPS WITH RAID/RESCUE
       objectReference: {fileID: 0}
     - target: {fileID: 4267241457912241954, guid: 3c6c22265b0a01047a11e79fd529e220, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13323,7 +13363,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8447048772140027942, guid: 2f6d48bda2c07e342926448efea7a223, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8447048772140027942, guid: 2f6d48bda2c07e342926448efea7a223, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13437,7 +13477,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3779756735601585130, guid: b1f363290478c13428beb7c522ddc064, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3779756735601585130, guid: b1f363290478c13428beb7c522ddc064, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13643,19 +13683,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8481229744780602014, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 0
+      value: -10.400001
       objectReference: {fileID: 0}
     - target: {fileID: 8481229744780602014, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 3e-45
+      value: -0.8
       objectReference: {fileID: 0}
     - target: {fileID: 8481229744780602014, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 7.7314e-41
+      value: 9.6
       objectReference: {fileID: 0}
     - target: {fileID: 8481229744780602014, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 1.02e-43
+      value: 10.400001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2df0ba7c0a1ea3040954638738a744cb, type: 3}
