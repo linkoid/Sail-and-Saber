@@ -1,2 +1,2 @@
-# Pirate-Game
+# Sail and Saber: Pirate Lord
  
