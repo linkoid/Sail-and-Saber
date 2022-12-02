@@ -16,7 +16,7 @@ public class Options : MonoBehaviour
 
     private void Awake()
     {
-        // Fixes NullReferenceException
+        // Fixes NullReferenceException s
         musicSource = GameObject.Find("Music_Player")?.GetComponent<AudioSource>();
     }
 

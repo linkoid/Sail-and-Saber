@@ -204,7 +204,7 @@ namespace PirateGame.UI
 
 			if (m_PreviousTarget != m_Player.Target)
 			{
-				// Don't animate when switching targets
+				// Don't animate when switching targetss
 				Target_Health.value = Player.Target.Health;
 				m_PreviousTarget = m_Player.Target;
 			}

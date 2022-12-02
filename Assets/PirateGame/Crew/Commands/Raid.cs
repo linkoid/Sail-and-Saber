@@ -110,15 +110,17 @@ namespace PirateGame.Crew.Commands
 		protected override void Update()
 		{
 			base.Update();
-            
-            //Change the text of the button to match the context
-            if (Commander.Target.name == "0.Base")
-                TextObject.SetText("Rescue");
-            else if (Commander.Target is Fortress)
-                TextObject.SetText("Siege");
-            else
-                TextObject.SetText("Raid");
 
+            //Change the text of the button to match the context
+            if(Commander.Target != null)
+            {
+                if (Commander.Target.name == "0.Base")
+                    TextObject.SetText("Rescue");
+                else if (Commander.Target is Fortress)
+                    TextObject.SetText("Siege");
+                else
+                    TextObject.SetText("Raid");
+            }
         }
 
 		protected override void OnCancel()
