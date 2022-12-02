@@ -8,7 +8,6 @@ using PirateGame;
 public class Options : MonoBehaviour
 {
     public Slider VolumeSlider,SFX_Slider;
-    public AudioSource musicSource;
     //public AudioSource SPX => GameObject.Find("SoundEffect").GetComponent<AudioSource>();
 
     [SerializeField] bool isPaused =false;
@@ -16,27 +15,22 @@ public class Options : MonoBehaviour
 
     private void Awake()
     {
-        // Fixes NullReferenceException s
-        musicSource = GameObject.Find("Music_Player")?.GetComponent<AudioSource>();
     }
 
     private void Start()
     {
 		// Fixes volume defaulting to 0
-		VolumeSlider.value = PlayerPrefs.GetFloat("Music_Volume", 0.8f);
+		VolumeSlider.value = PlayerPrefs.GetFloat("Music_Volume", 0.4f);
 		SFX_Slider.value   = PlayerPrefs.GetFloat("SFX_Volume"  , 0.8f);
 
-        // Fixes settings not applying until volume sliders were moved
-        SetAllSFX_Values();
+		// Fixes settings not applying until volume sliders were moved
+		MusicMaster.MusicController.GlobalVolume = VolumeSlider.value;
+		SetAllSFX_Values();
 	}
 
     private void Update()
     {
-        if(musicSource != null){
-            musicSource.volume = VolumeSlider.value;
-			// Fixes music volume not being saved
-			PlayerPrefs.SetFloat("Music_Volume", VolumeSlider.value);
-		}
+		MusicMaster.MusicController.GlobalVolume = VolumeSlider.value;
 	}
 	
 	// Invoked when the value of the slider changes.
@@ -59,7 +53,12 @@ public class Options : MonoBehaviour
         if(input.isPressed){
             Resume();
         }
-	
     }
 
+	public void ResetData()
+	{
+		PlayerPrefs.SetString("Fort1", "unCaptured");
+		PlayerPrefs.SetString("Fort2", "unCaptured");
+		PlayerPrefs.SetString("Fort3", "unCaptured");
+	}
 }

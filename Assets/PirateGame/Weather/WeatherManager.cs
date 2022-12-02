@@ -75,15 +75,7 @@ namespace PirateGame.Weather
 				float lerpFactor = m_TransitionTimer / m_TransitionDuration;
 				CurrentWeather = WeatherParams.Lerp(OldWeather, NewWeather, lerpFactor, m_TransitionOrigin);
 
-				float fromPhase = OldWeather.Waves0.Phase(Time.timeSinceLevelLoad, m_TransitionOrigin);
-				float newPhase = CurrentWeather.Waves0.Phase(Time.timeSinceLevelLoad, m_TransitionOrigin);
-				if (newPhase != fromPhase)
-				{
-					Debug.LogError($"newPhaseWeatherManager ({newPhase}) != fromPhase ({fromPhase})");
-				}
-
 				ApplyWeather(CurrentWeather);
-
 			}
 
 
