@@ -11,6 +11,7 @@ namespace MusicMaster
 		//public int TrackIndexNumber;
 
 		public ISong Song { get; private set; }
+		public bool IsSyncTrack { get => _isSyncTrack; private set => _isSyncTrack = value; }
 
 
 
@@ -37,6 +38,9 @@ namespace MusicMaster
 
 		[SerializeReference]
 		private SongAsset _songAsset;
+
+		[SerializeField]
+		private bool _isSyncTrack = false;
 
 		[SerializeField]
 		private Sections _musicSection = Sections.Piano;
@@ -136,6 +140,8 @@ namespace MusicMaster
 		public void Play() => PlayScheduled(AudioSettings.dspTime);
 		public void PlayScheduled(double time)
 		{
+			if (!this.isActiveAndEnabled) return;
+
 			//Debug.Log($"Play track {this.name}", this);
 			_audioSource.PlayScheduled(time);
 			_mute = false;

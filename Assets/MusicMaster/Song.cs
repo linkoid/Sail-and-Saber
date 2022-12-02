@@ -38,31 +38,40 @@ namespace MusicMaster
 		{
 			// Make sure that all the tracks are on the same sample. (Syncronized)
 			int sample = -1;
+			Track syncTrack = null;
 			foreach (Track track in _tracks)
 			{
-				if (sample < 0)
-				{
-					// This is the first track. Align all other tracks to this one.
-					sample = track.CurrentSample;
+				// Only track sample of first track, or preferebly first sync track.
+				if (!track.IsSyncTrack && syncTrack != null) continue;
 
-					int samplesPerFrame = (int)(track.Clip.frequency * Time.unscaledDeltaTime);
-					
-					
-					if ((_previousSample > sample && sample < LoopbackPoint) 
-						|| (LoopbackPoint > 0 && sample > track.Clip.samples - samplesPerFrame * 4)) // If likely to loop before next update(), change it now.
-					{
-						// The sound looped, and it did not go back to the LoopbackPoint.
-						// If LoopbackPoint == 0 and it looped naturally (via Unity's loop option)
-						// the sample would not be < LoopbackPoint.
-						// Make sure it goes to the loop-back point.
-						sample = LoopbackPoint - (track.Clip.samples - sample);
-						track.CurrentSample = sample;
-					}
-				}
-				else
+
+				// This is the first track. Align all other tracks to this one.
+				syncTrack = track;
+				sample = track.CurrentSample;
+
+				int samplesPerFrame = (int)(track.Clip.frequency * Time.unscaledDeltaTime);
+
+				if ((_previousSample > sample && sample < LoopbackPoint)
+					|| (LoopbackPoint > 0 && sample > track.Clip.samples - samplesPerFrame * 4)) // If likely to loop before next update(), change it now.
 				{
-					track.CurrentSample = sample;
+					// The sound looped, and it did not go back to the LoopbackPoint.
+					// If LoopbackPoint == 0 and it looped naturally (via Unity's loop option)
+					// the sample would not be < LoopbackPoint.
+					// Make sure it goes to the loop-back point.
+					sample = LoopbackPoint - (track.Clip.samples - sample);
+					//track.CurrentSample = sample;
 				}
+
+				// If this track is the first valid syncTrack, then stop looking.
+				if (track.IsSyncTrack) break;
+			}
+
+			// Set all track's samples to equal to the syncTrack's sample
+			foreach (Track track in _tracks)
+			{
+				if (track == syncTrack) continue;
+
+				track.CurrentSample = sample;
 			}
 			_previousSample = sample;
 		}
