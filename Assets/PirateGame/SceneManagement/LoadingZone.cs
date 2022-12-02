@@ -47,6 +47,7 @@ namespace PirateGame
 			SeamlessSceneManager.Instance.LoadSceneSeamless(m_Scene, keepObjects);
 		}
 
+#if UNITY_EDITOR
 		void OnDrawGizmos()
 		{
 			Gizmos.color = Color.green;
@@ -69,7 +70,7 @@ namespace PirateGame
 					alignment = TextAnchor.LowerLeft,
 				});
 			//Gizmos.DrawIcon(this.transform.position, "LoadingZone Gizmo.png", false);
-			
+
 			if (this.gameObject.layer != LayerMask.NameToLayer("Inter-Ship Collision"))
 			{
 				Handles.Label(this.transform.position + new Vector3(0, -1, 0),
@@ -86,4 +87,5 @@ namespace PirateGame
 			}
 		}
 	}
+#endif
 }

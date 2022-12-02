@@ -8,8 +8,6 @@ using Unity.Collections.LowLevel.Unsafe;
 using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.PlayerSettings;
-using static UnityEngine.InputManagerEntry;
 
 namespace PirateGame.Sea
 {

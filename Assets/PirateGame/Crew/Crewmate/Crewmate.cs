@@ -122,7 +122,7 @@ namespace PirateGame.Crew
 			}
 		}
 
-
+#if UNITY_EDITOR
 		void OnDrawGizmos()
 		{
 			Handles.Label(this.transform.position, $"{Health}", new GUIStyle()
@@ -136,6 +136,7 @@ namespace PirateGame.Crew
 				},
 			});
 		}
+#endif
 
 		static int s_SoundsPlaying = 0;
 		void TryPlaySound(SoundEffect sound, string name)
