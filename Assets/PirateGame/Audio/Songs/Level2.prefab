@@ -493,7 +493,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5927544979591669585}
   m_Layer: 0
-  m_Name: PirateSong
+  m_Name: Level2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b991a22cd699b094eb4c08dca0eda4b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _songAsset: {fileID: 11400000, guid: 9c44549c143460342bfecdf4369306fe, type: 2}
+  _songAsset: {fileID: 11400000, guid: 3eef3901810a3e74696855b2c28fe3dd, type: 2}
   _musicSection: 64
   _musicElement: 1
   _musicArrangementOptions:
