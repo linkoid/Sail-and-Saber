@@ -12,7 +12,7 @@ namespace PirateGame.UI
 		public Player Player { get => m_Player; private set => m_Player = value; }
 
 		[SerializeField] private Player m_Player;
-		public Slider HealthBar, Target_Health;
+        public Slider HealthBar, Target_Health;
 		public TMP_Text Loot_Text, Crew_Text, Error_Text, Target_Title,Target_Crew_Text;
 		[SerializeField] float Error_timer = 5f;
 		public GameObject TargetUI, DeathPanel, winScreen;
@@ -201,8 +201,14 @@ namespace PirateGame.UI
 				Target_Health.maxValue = Player.Target.MaxHealth;
 			}
 
+            //Change the color based on health
+            if (m_Player.Target.Health <= m_Player.Target.MaxHealth * .25)
+                Target_Health.fillRect.GetComponent<Image>().color = new Color32(0, 95, 255, 255);
+            else
+                Target_Health.fillRect.GetComponent<Image>().color = new Color32(31, 255, 0, 255);
 
-			if (m_PreviousTarget != m_Player.Target)
+
+            if (m_PreviousTarget != m_Player.Target)
 			{
 				// Don't animate when switching targetss
 				Target_Health.value = Player.Target.Health;

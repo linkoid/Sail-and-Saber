@@ -18,6 +18,8 @@ namespace PirateGame.Crew
         [SerializeField] bool _isRaiding;
         public bool isRepairing { get => _isRepairing; set => _isRepairing = value; }
         [SerializeField] bool _isRepairing;
+        public bool isFiring { get => _isFiring; set => _isFiring = value; }
+        [SerializeField] bool _isFiring;
 
         [SerializeField] List<Command> m_CommandPrefabs = new List<Command>();
 		[SerializeField, ReadOnly] List<Command> m_Commands = new List<Command>();
