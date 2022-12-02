@@ -73,13 +73,15 @@ namespace PirateGame
 			{
 				m_LastWeatherScene.enabled = false;
 			}
+			
+			var player = Object.FindObjectOfType<Player>();
+
 			WeatherScene newWeatherScene = FindObjectOfTypeInScene<WeatherScene>(scene);
-			WeatherManager.Instance.TransitionWeather(newWeatherScene.Parameters);
+			WeatherManager.Instance.TransitionWeather(newWeatherScene.Parameters, player.Ship.Rigidbody.position);
 
 			// Unload old scene
 			SceneManager.UnloadSceneAsync(m_LastScene);
 
-			var player = Object.FindObjectOfType<Player>();
 			player.ConstrainSeaToShip();
 
 			m_IsLoadingScene = false;

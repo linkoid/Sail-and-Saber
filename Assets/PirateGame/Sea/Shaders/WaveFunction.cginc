@@ -12,8 +12,13 @@ float WaveAmplitude = 1;
 float WaveDistance = 10;
 float WaveSpeed = 5;
 float2 WaveDirection = float2(1, 1);
+float WavePhaseOffset = 0;
 
 CBUFFER_END
+
+#define pi2 6.28318531
+
+//float pi2 = 3.14 * 2; //radians(360);
 
 void WavePosition_float(in float time, in float3 worldPos,
     out float3 newPos) 
@@ -21,7 +26,7 @@ void WavePosition_float(in float time, in float3 worldPos,
     // Position p = [x, y, z] = [x, f(t,x,z), z]
     // p_y = f(t,x,z)
     float2 direction = normalize(WaveDirection);
-    newPos.y = sin((worldPos.x * direction.x + worldPos.z * direction.y + time * WaveSpeed) / WaveDistance) * WaveAmplitude;
+    newPos.y = sin((worldPos.x * direction.x + worldPos.z * direction.y + time * WaveSpeed) / WaveDistance + WavePhaseOffset) * WaveAmplitude;
     newPos.xz = worldPos.xz;
 }
 
@@ -33,16 +38,16 @@ void WaveTangents_float(in float time, in float3 worldPos,
     // Tangent U = [ ?p_x, ?p_y, ?p_z ]
     
     // Tangent ?p_x = [?x, ?y, 0] = [?x, ?f/?x ?x, 0] = ?x[1, ?f_x(t,x,z), 0]
-    tangents[0] = float3(1, cos((worldPos.x * direction.x + worldPos.z * direction.y + time * WaveSpeed) / WaveDistance) * WaveAmplitude, 0);
+    tangents[0] = float3(1, cos((worldPos.x * direction.x + worldPos.z * direction.y + time * WaveSpeed) / WaveDistance + WavePhaseOffset) * WaveAmplitude, 0);
     
     // Tangent ?p_y = [0, 0, 0]
     tangents[1] = float3(0, 1, 0);
 
     // Tangent ?p_z = [0, ?y, ?z] = [0, ?f/?z ?z, ?z] = ?z[0, ?f_z(t,x,z), 1]
-    tangents[2] = float3(0, cos((worldPos.x * direction.x + worldPos.z * direction.y + time * WaveSpeed) / WaveDistance) * WaveAmplitude, 1);
+    tangents[2] = float3(0, cos((worldPos.x * direction.x + worldPos.z * direction.y + time * WaveSpeed) / WaveDistance + WavePhaseOffset) * WaveAmplitude, 1);
 }
 void WaveTangents_half(in float time, in half3 worldPos,
-    out half3x3 tangents) 
+    out half3x3 tangents)
 {
     WaveTangents_float(time, worldPos, tangents);
 }

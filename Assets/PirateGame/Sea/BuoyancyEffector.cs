@@ -62,6 +62,7 @@ namespace PirateGame.Sea
 			Shader.SetGlobalFloat("WaveDistance", Waves0.Distance);
 			Shader.SetGlobalFloat("WaveSpeed", Waves0.Speed);
 			Shader.SetGlobalVector("WaveDirection", Waves0.Direction);
+			Shader.SetGlobalFloat("WavePhaseOffset", Waves0.PhaseOffset);
 		}
 		
 		void UpdateFrameInput()
@@ -668,15 +669,14 @@ namespace PirateGame.Sea
 
 			float GetWaterHeight(Vector3 pos)
 			{
-				Vector2 dir = frameInput.Waves0.Direction;
-				return Mathf.Sin((pos.x * dir.x + pos.z * dir.y + frameInput.fixedTime * frameInput.Waves0.Speed) / frameInput.Waves0.Distance) * frameInput.Waves0.Amplitude;
+				return frameInput.Waves0.Position(frameInput.fixedTime, pos).y;
 			}
 
 			Vector3 GetWaterNormal(Vector3 pos)
 			{
-				Vector2 dir = frameInput.Waves0.Direction;
-				Vector3 xTangent = new Vector3(1, Mathf.Cos((pos.x * dir.x + pos.z * dir.y + frameInput.fixedTime * frameInput.Waves0.Speed) / frameInput.Waves0.Distance) * frameInput.Waves0.Amplitude, 0);
-				Vector3 zTangent = new Vector3(0, Mathf.Cos((pos.x * dir.x + pos.z * dir.y + frameInput.fixedTime * frameInput.Waves0.Speed) / frameInput.Waves0.Distance) * frameInput.Waves0.Amplitude, 1);
+				float phase = frameInput.Waves0.Phase(frameInput.fixedTime, pos);
+				Vector3 xTangent = new Vector3(1, Mathf.Cos(phase) * frameInput.Waves0.Amplitude, 0);
+				Vector3 zTangent = new Vector3(0, Mathf.Cos(phase) * frameInput.Waves0.Amplitude, 1);
 				return Vector3.Cross(zTangent.normalized, xTangent.normalized);
 			}
 

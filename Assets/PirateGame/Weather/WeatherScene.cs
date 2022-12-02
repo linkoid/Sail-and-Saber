@@ -17,10 +17,6 @@ namespace PirateGame.Weather
 				Speed = 5,
 				Direction = new Vector3(1, 1).normalized,
 			},
-			WaveAmplitude = 1,
-			WaveDistance = 5,
-			WaveSpeed = 5,
-			WaveDirection = new Vector2(-1,-1).normalized,
 		};
 
 		void Start()
