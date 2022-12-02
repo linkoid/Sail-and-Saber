@@ -98,7 +98,7 @@ namespace PirateGame.UI
 		{
 			if (!ShipCheck()) return;
 
-			if (CanBuy(20))
+			if (CanBuy(15))
 			{
 				Player.Ship.IncreaseSpeedModifier(0.1f);
 			}

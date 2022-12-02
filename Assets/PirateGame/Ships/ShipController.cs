@@ -15,6 +15,7 @@ namespace PirateGame.Ships
 		public Vector3 Movement => m_Movement;
 		public Rigidbody Rigidbody => Ship.Rigidbody;
 		public PlayerInput PlayerInput => this.GetComponent<PlayerInput>();
+        public float BaseReloadDelay = 2.5f;
 
 
         [SerializeField] public Camera m_Camera;
@@ -75,7 +76,12 @@ namespace PirateGame.Ships
 
 		void FixedUpdate()
 		{
-			bool isInCombat = Ship.Internal.Combat.NearbyShips.Count > 0;
+            //Set reload delay based on crewmate count
+            Ship.Internal.Combat.ReloadDelay = BaseReloadDelay - (Ship.Crew.Count * 0.03f);
+            if (Ship.Internal.Combat.ReloadDelay <= 1)
+                Ship.Internal.Combat.ReloadDelay = 1;
+
+            bool isInCombat = Ship.Internal.Combat.NearbyShips.Count > 0;
 			if (isInCombat == m_WasInCombat)
 			{
 				// Do nothing
