@@ -40,6 +40,7 @@ namespace PirateGame.Crew.Commands
 		protected override IEnumerable OnExecute()
 		{
             Commander.isRepairing = false;
+            Commander.isFiring = true;
 
             Combat.Target = Commander.Target;
 			Combat.FireBroadsideCannons();
@@ -51,6 +52,8 @@ namespace PirateGame.Crew.Commands
 			yield return new WaitForSeconds(1);
 
 			Combat.FireDeckCannons();
+
+            Commander.isFiring = false;
 		}
 
 		protected override void Update()

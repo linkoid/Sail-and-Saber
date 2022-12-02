@@ -13,7 +13,7 @@ namespace PirateGame.UI
 
 		[SerializeField] private Player m_Player;
         public Slider HealthBar, Target_Health;
-		public TMP_Text Loot_Text, Crew_Text, Error_Text, Target_Title,Target_Crew_Text;
+		public TMP_Text Loot_Text, Crew_Text, Speed_Text, Error_Text, Target_Title,Target_Crew_Text;
 		[SerializeField] float Error_timer = 5f;
 		public GameObject TargetUI, DeathPanel, winScreen;
 
@@ -119,7 +119,12 @@ namespace PirateGame.UI
 
 			Crew_Text.text = Player.CrewCount.ToString();
 
-			UpdateHealthBar();
+            if(Player.Ship.Internal.Combat.NearbyShips.Count <= 0)
+                Speed_Text.text = ((Player.Ship.SpeedModifier - 0.5f) * 100).ToString() + "%";
+            else
+                Speed_Text.text = (Player.Ship.SpeedModifier * 100).ToString() + "%";
+
+            UpdateHealthBar();
 
 
 			Error_Text.gameObject.SetActive(isError);

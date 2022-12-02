@@ -24,6 +24,9 @@ namespace PirateGame.Crew.Commands
             //Cannot Repair if no crew
             if (Crew.Count < 1) return false;
 
+            //Cannot Repair if firing
+            if (Commander.isFiring) return false;
+
             // else
             return true;
         }
