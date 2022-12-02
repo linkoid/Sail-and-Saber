@@ -86,6 +86,6 @@ namespace PirateGame
 					});
 			}
 		}
-	}
 #endif
+	}
 }
