@@ -1033,6 +1033,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &2625652285132738179
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6079224976142197301}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02d48a0fa52a05545b8b122cfd421747, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &6424035872142952771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1361,6 +1381,14 @@ PrefabInstance:
       value: -1.1500009
       objectReference: {fileID: 0}
     - target: {fileID: 4114613612963403106, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4114613612963403106, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4114613612963403106, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
@@ -1680,6 +1708,10 @@ PrefabInstance:
       propertyPath: m_CannonList.Array.data[5]
       value: 
       objectReference: {fileID: 3454991975218302862}
+    - target: {fileID: 7033954409502104734, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 6079224976142197301}
     - target: {fileID: 7367560020546717327, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
       propertyPath: m_Width
       value: 2.5

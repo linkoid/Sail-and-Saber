@@ -312,6 +312,14 @@ PrefabInstance:
       value: -1.1500009
       objectReference: {fileID: 0}
     - target: {fileID: 5634804768160118310, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5634804768160118310, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5634804768160118310, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
@@ -341,11 +349,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6416244035545555668, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_PlunderCrewReward.Max
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6416244035545555668, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_PlunderCrewReward.Min
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6428715558741182334, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_LocalRotation.y
