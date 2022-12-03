@@ -171,6 +171,7 @@ namespace PirateGame
 		
 		public void ConstrainSeaToShip()
 		{
+			return;
 			var sea = Object.FindObjectOfType<BuoyancyEffector>();
 			if (sea != null)
 			{
