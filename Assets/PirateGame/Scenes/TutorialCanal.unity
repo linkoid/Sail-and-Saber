@@ -7519,7 +7519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 897732462117576415, guid: f4e7b231e7c7cfc4a879a18b01cdea52, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 44.082916
+      value: 49.147232
       objectReference: {fileID: 0}
     - target: {fileID: 897732462117576415, guid: f4e7b231e7c7cfc4a879a18b01cdea52, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7527,23 +7527,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 897732462117576415, guid: f4e7b231e7c7cfc4a879a18b01cdea52, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -176.095
+      value: -166.27063
       objectReference: {fileID: 0}
     - target: {fileID: 897732462117576415, guid: f4e7b231e7c7cfc4a879a18b01cdea52, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.63205504
+      value: 0.39805868
       objectReference: {fileID: 0}
     - target: {fileID: 897732462117576415, guid: f4e7b231e7c7cfc4a879a18b01cdea52, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.06586726
+      value: 0.041649956
       objectReference: {fileID: 0}
     - target: {fileID: 897732462117576415, guid: f4e7b231e7c7cfc4a879a18b01cdea52, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.76796037
+      value: 0.9114384
       objectReference: {fileID: 0}
     - target: {fileID: 897732462117576415, guid: f4e7b231e7c7cfc4a879a18b01cdea52, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.08003013
+      value: -0.09536627
       objectReference: {fileID: 0}
     - target: {fileID: 1070326666294288217, guid: f4e7b231e7c7cfc4a879a18b01cdea52, type: 3}
       propertyPath: m_AnchorMax.y
@@ -8288,6 +8288,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1742413307}
     m_Modifications:
+    - target: {fileID: 208923653133392171, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
+      propertyPath: m_MinValue
+      value: 0.00001
+      objectReference: {fileID: 0}
     - target: {fileID: 538329322175941251, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -8430,7 +8434,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 9a6560e5bacb40847bb1b879ede354fb, type: 3}
     - target: {fileID: 1362771598962348630, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1362771598962348631, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
       propertyPath: m_SizeDelta.y
@@ -8492,6 +8496,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4878180639178171779, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
+      propertyPath: m_MinValue
+      value: 0.00001
+      objectReference: {fileID: 0}
     - target: {fileID: 6009089766001588284, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -8510,11 +8518,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: a454050719005b444b59a84eaafba779, type: 3}
     - target: {fileID: 9046016469457370174, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
       propertyPath: m_Name
-      value: Options Screen
+      value: PanelController
       objectReference: {fileID: 0}
     - target: {fileID: 9046016469457370174, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9116993661502585609, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
       propertyPath: m_AnchorMax.y
