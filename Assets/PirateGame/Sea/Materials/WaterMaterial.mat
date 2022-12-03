@@ -115,6 +115,8 @@ Material:
     - Vector1_dada42ebfac44076897b6de67441ba32: 0.1
     - _AlphaClip: 0
     - _Blend: 0
+    - _BubbleDensity: 3
+    - _BubbleSpeed: 8
     - _BumpScale: 1
     - _CastShadows: 0
     - _Cull: 0
@@ -122,10 +124,14 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _FoamDensity: 3
-    - _FoamDepth: 0.5
+    - _FoamDepth: 0.25
     - _FoamDistance: 0
+    - _FoamScale: 4
+    - _FoamScale0: 1
+    - _FoamScale1: 1
+    - _FoamSmoothness: 0.2
     - _FoamSpeed: 1
-    - _FoamStrength: 3
+    - _FoamStrength: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -154,5 +160,5 @@ Material:
     - Vector2_4351ac2be1d74054986ec5378db9d578: {r: 50, g: 50, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FoamColor: {r: 0.74300003, g: 0.74300003, b: 0.74300003, a: 0}
+    - _FoamColor: {r: 0.7019608, g: 0.6880386, b: 0.6303608, a: 0}
   m_BuildTextureStacks: []
