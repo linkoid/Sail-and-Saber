@@ -95,6 +95,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4af97e14541793045af942e7456d43fe, type: 3}
+--- !u!1 &240929928670332695 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 516606833274191905, guid: 4af97e14541793045af942e7456d43fe, type: 3}
+  m_PrefabInstance: {fileID: 323326048038995766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2913329970853696506 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3175765062455727308, guid: 4af97e14541793045af942e7456d43fe, type: 3}
+  m_PrefabInstance: {fileID: 323326048038995766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4232005390218264622 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4523783539161909016, guid: 4af97e14541793045af942e7456d43fe, type: 3}
+  m_PrefabInstance: {fileID: 323326048038995766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7048986034296680978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4232005390218264622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b0e7120f3616f41b5433f1ff91034f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Targets:
+  - {fileID: 240929928670332695}
+  - {fileID: 2913329970853696506}
+  - {fileID: 4391862963374021865}
+  - {fileID: 6112528137180822918}
+--- !u!1 &4391862963374021865 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4075660129530584031, guid: 4af97e14541793045af942e7456d43fe, type: 3}
+  m_PrefabInstance: {fileID: 323326048038995766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6112528137180822918 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5812071959713872560, guid: 4af97e14541793045af942e7456d43fe, type: 3}
+  m_PrefabInstance: {fileID: 323326048038995766}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6214529413020180583 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5927544979591669585, guid: 4af97e14541793045af942e7456d43fe, type: 3}

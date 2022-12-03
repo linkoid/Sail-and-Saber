@@ -9,7 +9,7 @@ namespace MusicMaster
 		public static Orchestration CurrentOrchestration => CurrentSong?.Orchestration;
 
 
-		public static float GlobalVolume = 0.4f;
+		public static float GlobalVolume = 0.04f;
 
 		private static List<Song> _songs = new List<Song>();
 		private static bool _hasStarted = false;

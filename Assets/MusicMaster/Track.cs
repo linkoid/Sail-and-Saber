@@ -21,8 +21,8 @@ namespace MusicMaster
 
 		public int CurrentSample
 		{
-			get => _audioSource != null ? _audioSource.timeSamples - _sampleOffset : -1;
-			set { if (_audioSource != null) _audioSource.timeSamples = value + _sampleOffset; }
+			get => _audioSource != null ? _audioSource.timeSamples + _sampleOffset : -1;
+			set { if (_audioSource != null) _audioSource.timeSamples = value - _sampleOffset; }
 		}
 		public float MixVolume { get => _mixVolume; set { _mixVolume = value; UpdateTargetVolume(); } }
 		public float TrueVolume => _audioSource.volume;

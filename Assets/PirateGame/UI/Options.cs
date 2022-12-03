@@ -24,13 +24,14 @@ public class Options : MonoBehaviour
 		SFX_Slider.value   = PlayerPrefs.GetFloat("SFX_Volume"  , 0.8f);
 
 		// Fixes settings not applying until volume sliders were moved
-		MusicMaster.MusicController.GlobalVolume = VolumeSlider.value;
+		MusicMaster.MusicController.GlobalVolume = VolumeSlider.value * 0.1f;
 		SetAllSFX_Values();
 	}
 
     private void Update()
     {
-		MusicMaster.MusicController.GlobalVolume = VolumeSlider.value;
+		PlayerPrefs.SetFloat("Music_Volume", VolumeSlider.value);
+		MusicMaster.MusicController.GlobalVolume = VolumeSlider.value * 0.1f;
 	}
 	
 	// Invoked when the value of the slider changes.

@@ -57,6 +57,8 @@ namespace PirateGame
 				m_DoInitialize = false;
 			}
 			Target = Ship.Internal.Combat.TargetNearestShip();
+
+			ConstrainSeaToShip();
 		}
 
 		private bool m_DoInitialize = false;
@@ -172,8 +174,7 @@ namespace PirateGame
 			var sea = Object.FindObjectOfType<BuoyancyEffector>();
 			if (sea != null)
 			{
-				var constraint = sea.WaterMesh.GetComponent<PositionConstraint>();
-				if (constraint == null)
+				if (!sea.WaterMesh.TryGetComponent<PositionConstraint>(out PositionConstraint constraint))
 				{
 					constraint = sea.WaterMesh.gameObject.AddComponent<PositionConstraint>();
 				}
