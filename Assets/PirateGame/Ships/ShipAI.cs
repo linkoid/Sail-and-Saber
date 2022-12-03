@@ -28,7 +28,7 @@ namespace PirateGame.Ships
 		[SerializeField, Range(0, 20)]
 		protected int m_PlunderGoldBonus = 3;
 
-		[SerializeField, SpanRange(0, 10), SpanInt]
+		[SerializeField, SpanRange(0, 30), SpanInt]
 		protected Span m_PlunderCrewReward = new Span(0, 1);
 
 		[Header("Info")]

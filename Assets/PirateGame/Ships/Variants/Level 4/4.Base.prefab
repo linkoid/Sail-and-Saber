@@ -249,15 +249,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4204906178892141555, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: DamagePerCannon
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4223376156613411066, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: _health
-      value: 250
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 4223376156613411066, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: _maxHealth
-      value: 250
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 4223376156613411066, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: _speedModifier
@@ -333,7 +333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6416244035545555668, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_RaidCrewCount
-      value: 20
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 6416244035545555668, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_PlunderGoldBonus
@@ -353,7 +353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6416244035545555668, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_PlunderCrewReward.Min
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6428715558741182334, guid: 090f293a3ddf9994b97d0a042e313d01, type: 3}
       propertyPath: m_LocalRotation.y
