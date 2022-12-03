@@ -121,6 +121,11 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
+    - _FoamDensity: 3
+    - _FoamDepth: 0.5
+    - _FoamDistance: 0
+    - _FoamSpeed: 1
+    - _FoamStrength: 3
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -149,4 +154,5 @@ Material:
     - Vector2_4351ac2be1d74054986ec5378db9d578: {r: 50, g: 50, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FoamColor: {r: 0.74300003, g: 0.74300003, b: 0.74300003, a: 0}
   m_BuildTextureStacks: []
