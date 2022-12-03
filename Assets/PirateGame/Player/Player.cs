@@ -138,7 +138,7 @@ namespace PirateGame
 				IEnumerator RepeatGoldSound()
 				{
 					var newGold = Gold;
-					for (long i = oldGold; i < newGold; i++)
+					for (long i = oldGold; i < newGold && i < oldGold + 10; i++)
 					{
 						m_GoldSound.Play();
 						yield return new WaitForSecondsRealtime(0.05f);

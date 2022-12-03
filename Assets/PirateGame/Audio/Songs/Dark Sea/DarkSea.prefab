@@ -66,6 +66,11 @@ MonoBehaviour:
   _mixVolume: 1
   _mute: 0
   _fadeSpeed: 1
+  _sampleOffset: 0
+  _randomSampleOffset: 1
+  _randomSampleOffsetRange:
+    Min: -5000
+    Max: 1000
 --- !u!82 &4338478447307493777
 AudioSource:
   m_ObjectHideFlags: 0
@@ -228,6 +233,11 @@ MonoBehaviour:
   _mixVolume: 1
   _mute: 0
   _fadeSpeed: 1
+  _sampleOffset: 0
+  _randomSampleOffset: 1
+  _randomSampleOffsetRange:
+    Min: -5000
+    Max: 1000
 --- !u!82 &2877700616572587816
 AudioSource:
   m_ObjectHideFlags: 0
@@ -427,6 +437,11 @@ MonoBehaviour:
   _mixVolume: 1
   _mute: 0
   _fadeSpeed: 1
+  _sampleOffset: 0
+  _randomSampleOffset: 0
+  _randomSampleOffsetRange:
+    Min: 0
+    Max: 0
 --- !u!82 &8079347444167295558
 AudioSource:
   m_ObjectHideFlags: 0
@@ -589,6 +604,11 @@ MonoBehaviour:
   _mixVolume: 1
   _mute: 0
   _fadeSpeed: 1
+  _sampleOffset: 0
+  _randomSampleOffset: 1
+  _randomSampleOffsetRange:
+    Min: -5000
+    Max: 1000
 --- !u!82 &400240675282220520
 AudioSource:
   m_ObjectHideFlags: 0
@@ -751,6 +771,11 @@ MonoBehaviour:
   _mixVolume: 1
   _mute: 0
   _fadeSpeed: 1
+  _sampleOffset: 0
+  _randomSampleOffset: 1
+  _randomSampleOffsetRange:
+    Min: -5000
+    Max: 1000
 --- !u!82 &2424683845405564914
 AudioSource:
   m_ObjectHideFlags: 0
@@ -913,6 +938,11 @@ MonoBehaviour:
   _mixVolume: 1
   _mute: 0
   _fadeSpeed: 1
+  _sampleOffset: 0
+  _randomSampleOffset: 0
+  _randomSampleOffsetRange:
+    Min: 0
+    Max: 0
 --- !u!82 &8540622382749824886
 AudioSource:
   m_ObjectHideFlags: 0

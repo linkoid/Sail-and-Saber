@@ -43,8 +43,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: DarkSea
       objectReference: {fileID: 0}
+    - target: {fileID: 4891003465954980938, guid: 6efc9b308c9e010449e752a3853e27da, type: 3}
+      propertyPath: _randomSampleOffsetRange.Max
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891003465954980938, guid: 6efc9b308c9e010449e752a3853e27da, type: 3}
+      propertyPath: _randomSampleOffsetRange.Min
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5082843840007191877, guid: 6efc9b308c9e010449e752a3853e27da, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5196663501398308646, guid: 6efc9b308c9e010449e752a3853e27da, type: 3}
+      propertyPath: _randomSampleOffsetRange.Max
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5196663501398308646, guid: 6efc9b308c9e010449e752a3853e27da, type: 3}
+      propertyPath: _randomSampleOffsetRange.Min
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5927544979591669585, guid: 6efc9b308c9e010449e752a3853e27da, type: 3}
@@ -89,6 +105,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5927544979591669585, guid: 6efc9b308c9e010449e752a3853e27da, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7186181943002362927, guid: 6efc9b308c9e010449e752a3853e27da, type: 3}
+      propertyPath: _randomSampleOffsetRange.Max
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7186181943002362927, guid: 6efc9b308c9e010449e752a3853e27da, type: 3}
+      propertyPath: _randomSampleOffsetRange.Min
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8597570074912256294, guid: 6efc9b308c9e010449e752a3853e27da, type: 3}
+      propertyPath: _randomSampleOffsetRange.Max
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8597570074912256294, guid: 6efc9b308c9e010449e752a3853e27da, type: 3}
+      propertyPath: _randomSampleOffsetRange.Min
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

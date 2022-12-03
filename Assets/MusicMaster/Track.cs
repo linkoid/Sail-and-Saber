@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.CustomUtils;
 
@@ -21,8 +22,8 @@ namespace MusicMaster
 
 		public int CurrentSample
 		{
-			get => this._audioSource.timeSamples;
-			set => this._audioSource.timeSamples = value;
+			get => this._audioSource.timeSamples - _sampleOffset;
+			set => this._audioSource.timeSamples = value + _sampleOffset;
 		}
 		public float MixVolume { get => _mixVolume; set { _mixVolume = value; UpdateTargetVolume(); } }
 		public float TrueVolume => _audioSource.volume;
@@ -58,12 +59,21 @@ namespace MusicMaster
 		[SerializeField, Range(0, 1)]
 		private float _mixVolume = 1;
 
+
 		[SerializeField]
 		private bool _mute;
 
 		[SerializeField, Tooltip("In %volume per second.")]
 		private float _fadeSpeed = 1;
-		
+
+		[SerializeField]
+		private int _sampleOffset = 0;
+
+		[SerializeField]
+		private bool _randomSampleOffset = false;
+		[SerializeField, SpanRange(-10000, 10000), SpanInt]
+		private Span _randomSampleOffsetRange = new Span(0, 0);
+
 		private float _orchestratedVolume = 1;
 		private float _targetVolume = 1;
 
@@ -89,6 +99,11 @@ namespace MusicMaster
 			//Object.DontDestroyOnLoad((Object)this);
 			_audioSource.loop = true;
 			MusicController.AddTrack(Song, this);
+
+			if (_randomSampleOffset)
+			{
+				_sampleOffset = (int)_randomSampleOffsetRange.RandomInRange();
+			}
 		}
 
 		void Update()
