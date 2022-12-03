@@ -20,6 +20,22 @@ CBUFFER_END
 
 //float pi2 = 3.14 * 2; //radians(360);
 
+void WaveParams_float(out float amplitude, out float distance, out float speed, out float2 direction, out float phaseOffset) {
+    amplitude = WaveAmplitude;
+    distance = WaveDistance;
+    speed = WaveSpeed;
+    direction = WaveDirection;
+    phaseOffset = WavePhaseOffset;
+}
+
+void WaveParams_half(out half amplitude, out half distance, out half speed, out half2 direction, out half phaseOffset) {
+    amplitude = WaveAmplitude;
+    distance = WaveDistance;
+    speed = WaveSpeed;
+    direction = WaveDirection;
+    phaseOffset = WavePhaseOffset;
+}
+
 void WavePosition_float(in float time, in float3 worldPos,
     out float3 newPos) 
 {
