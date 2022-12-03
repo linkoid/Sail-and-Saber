@@ -126,6 +126,13 @@ namespace MusicMaster
 			}
 		}
 
+		public void RemoveTrack(Track track)
+		{
+			//Debug.Log($"Add track \"{track.name}\" to song \"{Name}\"");
+
+			_tracks.Remove(track);
+		}
+
 		public void ResetOrchestration()
 		{
 			Orchestration.Reset();

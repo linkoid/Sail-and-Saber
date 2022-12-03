@@ -40,8 +40,19 @@ namespace MusicMaster
 			Song song = GetSong(isong);
 			if (song != null)
 			{
-
 				song.AddTrack(track);
+			}
+		}
+
+		public static void RemoveTrack(ISong isong, Track track)
+		{
+			if (!_hasStarted)
+				Start();
+
+			Song song = GetSong(isong);
+			if (song != null)
+			{
+				song.RemoveTrack(track);
 			}
 		}
 

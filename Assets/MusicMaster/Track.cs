@@ -106,6 +106,11 @@ namespace MusicMaster
 			}
 		}
 
+		void OnDestroy()
+		{
+			MusicController.RemoveTrack(Song, this);
+		}
+
 		void Update()
 		{
 			float deltaFade = _fadeSpeed * Time.unscaledDeltaTime;
