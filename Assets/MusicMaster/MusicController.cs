@@ -98,6 +98,8 @@ namespace MusicMaster
 
 		public static void AddSong(Song song)
 		{
+            if (song == null)
+                return;
 			Song found = _songs.Find(MusicManager.SongIdentityMatches(song));
 			if (found == null)
 				_songs.Add(song);
