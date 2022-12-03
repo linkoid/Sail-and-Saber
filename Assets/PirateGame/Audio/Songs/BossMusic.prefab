@@ -511,7 +511,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5927544979591669585}
   m_Layer: 0
-  m_Name: MainMenu
+  m_Name: BossMusic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -582,7 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b991a22cd699b094eb4c08dca0eda4b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _songAsset: {fileID: 11400000, guid: 9c44549c143460342bfecdf4369306fe, type: 2}
+  _songAsset: {fileID: 11400000, guid: 1c606df3b007a27408259704ebbeb272, type: 2}
   _isSyncTrack: 0
   _musicSection: 64
   _musicElement: 1
@@ -618,7 +618,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -8544906305437946438, guid: e924ce088cf1fed46871470923ea0d78, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 9bb1a0a4898605f4bbf4f75a4d28d258, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 3de2099a05d34254f992a49e3c872e6e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
   m_Pitch: 1

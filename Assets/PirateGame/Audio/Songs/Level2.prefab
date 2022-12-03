@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _songAsset: {fileID: 11400000, guid: 5310e67b816ab1044bdf15e02d5e1188, type: 2}
+  _isSyncTrack: 0
   _musicSection: 16
   _musicElement: 32
   _musicArrangementOptions:
@@ -65,6 +66,11 @@ MonoBehaviour:
   _mixVolume: 1
   _mute: 0
   _fadeSpeed: 1
+  _sampleOffset: 0
+  _randomSampleOffset: 0
+  _randomSampleOffsetRange:
+    Min: 0
+    Max: 0
 --- !u!82 &5121887861693508552
 AudioSource:
   m_ObjectHideFlags: 0
@@ -207,6 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _songAsset: {fileID: 11400000, guid: 5310e67b816ab1044bdf15e02d5e1188, type: 2}
+  _isSyncTrack: 0
   _musicSection: 2048
   _musicElement: 8
   _musicArrangementOptions:
@@ -226,6 +233,11 @@ MonoBehaviour:
   _mixVolume: 1
   _mute: 0
   _fadeSpeed: 1
+  _sampleOffset: 0
+  _randomSampleOffset: 0
+  _randomSampleOffsetRange:
+    Min: 0
+    Max: 0
 --- !u!82 &4338478447307493777
 AudioSource:
   m_ObjectHideFlags: 0
@@ -368,6 +380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _songAsset: {fileID: 11400000, guid: 5310e67b816ab1044bdf15e02d5e1188, type: 2}
+  _isSyncTrack: 0
   _musicSection: 1024
   _musicElement: 2
   _musicArrangementOptions:
@@ -387,6 +400,11 @@ MonoBehaviour:
   _mixVolume: 1
   _mute: 0
   _fadeSpeed: 1
+  _sampleOffset: 0
+  _randomSampleOffset: 0
+  _randomSampleOffsetRange:
+    Min: 0
+    Max: 0
 --- !u!82 &898105775571094833
 AudioSource:
   m_ObjectHideFlags: 0
@@ -565,6 +583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _songAsset: {fileID: 11400000, guid: 3eef3901810a3e74696855b2c28fe3dd, type: 2}
+  _isSyncTrack: 0
   _musicSection: 64
   _musicElement: 1
   _musicArrangementOptions:
@@ -584,6 +603,11 @@ MonoBehaviour:
   _mixVolume: 1
   _mute: 0
   _fadeSpeed: 1
+  _sampleOffset: 0
+  _randomSampleOffset: 0
+  _randomSampleOffsetRange:
+    Min: 0
+    Max: 0
 --- !u!82 &8079347444167295558
 AudioSource:
   m_ObjectHideFlags: 0
@@ -594,7 +618,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -8544906305437946438, guid: e924ce088cf1fed46871470923ea0d78, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 7c39bad13dec7184eafdd5c9c6f515f1, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ff7328b9d3f12eb4891296959bc3639e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
   m_Pitch: 1
@@ -726,6 +750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _songAsset: {fileID: 11400000, guid: 5310e67b816ab1044bdf15e02d5e1188, type: 2}
+  _isSyncTrack: 0
   _musicSection: 16384
   _musicElement: 16
   _musicArrangementOptions:
@@ -745,6 +770,11 @@ MonoBehaviour:
   _mixVolume: 1
   _mute: 0
   _fadeSpeed: 1
+  _sampleOffset: 0
+  _randomSampleOffset: 0
+  _randomSampleOffsetRange:
+    Min: 0
+    Max: 0
 --- !u!82 &2791502923314248130
 AudioSource:
   m_ObjectHideFlags: 0
