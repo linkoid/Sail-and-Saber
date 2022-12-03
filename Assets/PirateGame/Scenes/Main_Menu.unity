@@ -160,7 +160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.6253, y: -70.4}
+  m_AnchoredPosition: {x: -2.6253052, y: -70.4}
   m_SizeDelta: {x: 110.35, y: 62.1613}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &102589820
@@ -314,15 +314,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6134127414265315239, guid: fcd6dc9c83d3451409a1ab56e013141d, type: 3}
       propertyPath: Volume
-      value: 6.9226665
+      value: 6.9226694
       objectReference: {fileID: 0}
     - target: {fileID: 7739085197871694953, guid: fcd6dc9c83d3451409a1ab56e013141d, type: 3}
       propertyPath: m_Mass
-      value: 3462.3328
+      value: 3462.3333
       objectReference: {fileID: 0}
     - target: {fileID: 8412928320367260299, guid: fcd6dc9c83d3451409a1ab56e013141d, type: 3}
       propertyPath: m_Mass
-      value: 3462.3328
+      value: 3462.3333
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 851960961885958481, guid: fcd6dc9c83d3451409a1ab56e013141d, type: 3}
@@ -540,7 +540,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.588, y: 0.30900002}
   m_AnchorMax: {x: 0.6742579, y: 0.53632903}
-  m_AnchoredPosition: {x: -1.9317932, y: 4.816696}
+  m_AnchoredPosition: {x: -1.9317932, y: 4.8167114}
   m_SizeDelta: {x: 1.9314995, y: 6.570999}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &196086394
@@ -761,7 +761,7 @@ GameObject:
   - component: {fileID: 636852293}
   - component: {fileID: 636852292}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Credits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -807,9 +807,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "BAR Interactive\n------------------------------\nModels and Environment
-    Textures:\n\tEthan Kohlbacher\n-------------------------------\nProgramming:\n\tBraden
-    Ireland\n\tDavid Korza\n\tAmir Gonzalez\n-------------------------------"
+  m_text: "BAR Interactive\n------------------------------\nProgramming:\n\tBraden
+    Ireland\n\tDavid Korza\n\tAmir Gonzalez\n-------------------------------\n3D
+    Artist:\n\tEthan Kohlbacher\n-------------------------------"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -1203,7 +1203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 221150736931542907, guid: 71e1c36fee6308a46bc90dd15c0cd847, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.10000038
+      value: -0.099998474
       objectReference: {fileID: 0}
     - target: {fileID: 221150736931542907, guid: 71e1c36fee6308a46bc90dd15c0cd847, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1762,7 +1762,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2674319570867019550, guid: c2112832ad65fbd41b6e6c2ded64681b, type: 3}
       propertyPath: Volume
-      value: 3.7846897
+      value: 3.7846901
       objectReference: {fileID: 0}
     - target: {fileID: 3083431846559050065, guid: c2112832ad65fbd41b6e6c2ded64681b, type: 3}
       propertyPath: m_Name
@@ -1814,11 +1814,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5631588106250143349, guid: c2112832ad65fbd41b6e6c2ded64681b, type: 3}
       propertyPath: m_Mass
-      value: 1893.3445
+      value: 1893.3448
       objectReference: {fileID: 0}
     - target: {fileID: 6893728636616038943, guid: c2112832ad65fbd41b6e6c2ded64681b, type: 3}
       propertyPath: m_Mass
-      value: 1893.3445
+      value: 1893.3448
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2112832ad65fbd41b6e6c2ded64681b, type: 3}
@@ -1879,7 +1879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6134127414265315239, guid: fcd6dc9c83d3451409a1ab56e013141d, type: 3}
       propertyPath: Volume
-      value: 6.9226656
+      value: 6.922668
       objectReference: {fileID: 0}
     - target: {fileID: 7739085197871694953, guid: fcd6dc9c83d3451409a1ab56e013141d, type: 3}
       propertyPath: m_Mass
@@ -2423,7 +2423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8090241698980888338, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.71
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 8090241698980888338, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2471,7 +2471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8273610142115180434, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.000000002160313
+      value: -0.0000000022744
       objectReference: {fileID: 0}
     - target: {fileID: 8273610142115180434, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2479,7 +2479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8273610142115180434, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0070400015
+      value: 0.0070399963
       objectReference: {fileID: 0}
     - target: {fileID: 8273610142115180434, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2511,11 +2511,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8527903221808350170, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.000000104272644
+      value: 0.00000011009341
       objectReference: {fileID: 0}
     - target: {fileID: 8527903221808350170, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.000000603497
+      value: -0.00000037252903
       objectReference: {fileID: 0}
     - target: {fileID: 8527903221808350170, guid: ada3690b530290b4f8b7cbd681dbd5fc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3449,6 +3449,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate
       objectReference: {fileID: 0}
+    - target: {fileID: 6134127414265315239, guid: fcd6dc9c83d3451409a1ab56e013141d, type: 3}
+      propertyPath: Volume
+      value: 6.922666
+      objectReference: {fileID: 0}
     - target: {fileID: 7739085197871694953, guid: fcd6dc9c83d3451409a1ab56e013141d, type: 3}
       propertyPath: m_Mass
       value: 3462.3333
@@ -3467,6 +3471,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2674319570867019550, guid: c2112832ad65fbd41b6e6c2ded64681b, type: 3}
+      propertyPath: Volume
+      value: 3.784689
+      objectReference: {fileID: 0}
     - target: {fileID: 3083431846559050065, guid: c2112832ad65fbd41b6e6c2ded64681b, type: 3}
       propertyPath: m_Name
       value: Barrel
