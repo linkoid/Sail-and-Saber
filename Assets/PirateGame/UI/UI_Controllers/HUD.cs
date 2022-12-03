@@ -41,6 +41,11 @@ namespace PirateGame.UI
 			NotToggled = false;
 		}
 
+        public void HideWinScreen()
+        {
+            winScreen.gameObject.SetActive(false);
+        }
+
 		public bool CanBuy(int cost)
 		{
 			var value = Player.Gold;
@@ -98,7 +103,7 @@ namespace PirateGame.UI
 		{
 			if (!ShipCheck()) return;
 
-			if (CanBuy(15))
+			if (CanBuy(10))
 			{
 				Player.Ship.IncreaseSpeedModifier(0.1f);
 			}

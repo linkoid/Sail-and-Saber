@@ -8384,6 +8384,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 926978862971591623, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
+      propertyPath: m_Transition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 926978862971591623, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 926978862971591623, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1411563227}
+    - target: {fileID: 926978862971591623, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HideWinScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 926978862971591623, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PirateGame.UI.HUD, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1362771598962217109, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
       propertyPath: m_fontColor.b
       value: 1
@@ -8452,6 +8472,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: a454050719005b444b59a84eaafba779, type: 3}
+    - target: {fileID: 1578448773675189281, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
+      propertyPath: m_text
+      value: 'Speed up
+
+
+
+        10'
+      objectReference: {fileID: 0}
     - target: {fileID: 2121333795184208046, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
       propertyPath: m_Type
       value: 0
@@ -8480,6 +8508,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: a454050719005b444b59a84eaafba779, type: 3}
+    - target: {fileID: 9046016469457370174, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
+      propertyPath: m_Name
+      value: Options Screen
+      objectReference: {fileID: 0}
+    - target: {fileID: 9046016469457370174, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9116993661502585609, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -11635,6 +11671,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8617263462040782350, guid: f71f20bf66c91ee4cb4de97de94bb2d7, type: 3}
   m_PrefabInstance: {fileID: 626422740}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1411563227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 538329322959024678, guid: 1034fadecd1320d4380baf682a9dd007, type: 3}
+  m_PrefabInstance: {fileID: 570119117}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 249889cbfc02e774f843c1b5df60573c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1454301319
 PrefabInstance:
   m_ObjectHideFlags: 0
